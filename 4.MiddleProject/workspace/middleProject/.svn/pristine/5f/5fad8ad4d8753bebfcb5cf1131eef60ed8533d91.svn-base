@@ -1,0 +1,15 @@
+package test;
+
+import lilys.VO;
+
+public class Hello {
+public static void main(String[] args) {
+	System.out.println("hello ! Nice to be here !");
+	
+	VO vo = new VO();
+	vo.setName("광효");
+	vo.setHeight(200);
+	System.out.println(vo.getHeight()+vo.getName());
+	
+}
+}

@@ -1,0 +1,10 @@
+package kr.or.ddit.kim;
+
+public class Hello {
+	public static void main(String[] args) {
+		System.out.println("안녕asvasv니다.");
+		System.out.println("asfqqqqqqqqqqqqqqqqqqqcacascsafvva");
+		System.err.println("충돌asdasdqwe니다.");
+		System.out.println("asdasdasdasdasdasd");
+	}
+}

@@ -1,0 +1,9 @@
+package lilys;
+
+public class VO {
+
+	private String name = "Lily";
+	private int height= 190;
+	
+	
+}

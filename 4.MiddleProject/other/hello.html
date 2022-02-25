@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/myStyle.css">
+    <script>
+
+        window.onload = () =>{
+            // 구식 vdiv = documentElemntsByTagName('div'[0]);
+            //현재 - 첫번째 것만 검색
+            vdiv = document.querySelector('div');
+            //모든 것 검색
+            vdivs = document.querySelectorAll('div');
+            print();
+        }
+
+        const print = () => {
+        num1 = parseInt(prompt("첫번째 수를 입력하세요."));
+        num2 = parseInt(prompt("두번째 수를 입력하세요."));
+        sum = num1 + num2;
+        vdiv.innerHTML = `첫번째 입력 : ${num1}, 두번째 입력: ${num2}, 합계 : ${sum}`
+        }
+    </script>
+	</head>
+    <body>
+    <pre>
+        prompt를 이용한 입력 결과 리턴값은 문자열이다.
+        두 수를 입력받아서 덧셈 결과를 출력한다.
+    </pre>
+    <br>
+<div>
+
+</div>
+</body>
+</html>
