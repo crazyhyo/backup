@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;loginMember&apos; in &apos;service.MemberService&apos; to &apos;currentMember&apos;&#x0D;&#x0A;- Original project: &apos;yanolza&apos;&#x0D;&#x0A;- Original element: &apos;service.MemberService.loginMember&apos;&#x0D;&#x0A;- Renamed element: &apos;service.MemberService.currentMember&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;loginMember&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;service{MemberService.java[MemberService^loginMember" name="currentMember" references="true" setter="false" stamp="1629180714450" textual="false" version="1.0"/>
+</session>
