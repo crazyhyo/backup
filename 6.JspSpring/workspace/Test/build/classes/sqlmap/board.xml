@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="board">
+	<resultMap id="boardDTO" class="kr.or.ddit.util.vo.BoardDTO">
+		<result property="boardNo" column="BOARD_NO" />
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="memNo" column="MEM_NO" />
+		<result property="hit" column="HIT" />
+		<result property="report" column="REPORT" />		
+	</resultMap>
+	<resultMap id="boardVO" class="kr.or.ddit.util.vo.BoardVO">
+		<result property="boardNo" column="BOARD_NO" />
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="memNm" column="MEM_NM" />
+		<result property="hit" column="HIT" />
+		<result property="report" column="REPORT" />
+		<result property="rnum" column="RNUM" />	
+	</resultMap>
+	
+	<resultMap id="memberDTO" class="kr.or.ddit.util.vo.MemberDTO">
+		<result property="memNo" column="MEM_NO" />
+		<result property="memNm" column="MEM_NM" />		
+	</resultMap>
+	
+	
+	<select id="boardPagingList" parameterClass="kr.or.ddit.util.vo.PagingVO"
+			resultMap="boardVO">
+		SELECT AA.*
+		  FROM (SELECT A.*, ROWNUM AS RNUM
+		          FROM (SELECT  A.BOARD_NO,     A.TITLE,        A.CONTENT,
+		                        A.REG_DATE,     B.MEM_NM,       A.HIT,
+		                        A.REPORT
+		                  FROM BOARD A, MEMBER B
+		                 WHERE A.MEM_NO = B.MEM_NO
+		                 ORDER BY A.BOARD_NO DESC) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#			
+	</select>
+	
+	<select id="getTotalRecord" resultClass="Integer">
+		SELECT COUNT(*)
+		  FROM BOARD	
+	</select>
+	
+	<select id="boardCard" parameterClass="Integer"
+			resultMap="boardVO">
+		SELECT  A.BOARD_NO,     A.TITLE,        A.CONTENT,
+		        A.REG_DATE,     B.MEM_NM,       A.HIT,
+		        A.REPORT
+		  FROM BOARD A, MEMBER B
+		 WHERE A.MEM_NO = B.MEM_NO
+		       AND BOARD_NO = #boardNo#
+	</select>
+	
+	<update id="updateHit" parameterClass="Integer">
+		UPDATE BOARD
+		   SET HIT = HIT + 1
+		 WHERE BOARD_NO = #boardNo#	
+	</update>
+	
+	<update id="updateReport" parameterClass="Integer">
+		UPDATE BOARD
+		   SET REPORT = REPORT + 1
+		 WHERE BOARD_NO = #boardNo#	
+	</update>	
+	
+	<update id="updateBoard" parameterClass="kr.or.ddit.util.vo.BoardDTO">
+		UPDATE BOARD
+		   SET TITLE = #title#,
+		       CONTENT = #content#
+		 WHERE BOARD_NO = #boardNo#	
+	</update>	
+		
+	<delete id="deleteBoard" parameterClass="Integer">
+		DELETE FROM BOARD
+		 WHERE BOARD_NO = #boardNo#	
+	</delete>
+	
+	<insert id="insertBoard" parameterClass="kr.or.ddit.util.vo.BoardDTO">
+		INSERT  INTO BOARD
+		        (BOARD_NO,          TITLE,      CONTENT,
+		        REG_DATE,           MEM_NO,     HIT,
+		        REPORT)
+		VALUES  (BOARD_SEQ.NEXTVAL, ##,         ##,
+		         SYSDATE,           ##,         0,
+		         0)
+		<selectKey keyProperty="boardNo" resultClass="Integer">
+			SELECT BOARD_SEQ.CURRVAL    FROM DUAL
+		</selectKey>	
+	</insert>
+</sqlMap>
+
+
+
+
+
+
+

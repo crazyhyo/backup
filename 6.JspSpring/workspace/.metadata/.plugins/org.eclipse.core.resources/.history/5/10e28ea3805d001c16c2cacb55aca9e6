@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Repository -->
+	<bean id="attachDAO" class="kr.or.ddit.dao.AttachDAOImpl" />
+	<bean id="boardDAO" class="kr.or.ddit.dao.BoardDAOImpl" />
+	<bean id="memberDAO" class="kr.or.ddit.dao.MemberDAOImpl" />
+	<bean id="menuDAO" class="kr.or.ddit.dao.MenuDAOImpl" />
+	<bean id="noticeDAO" class="kr.or.ddit.dao.NoticeDAOImpl" />
+	<bean id="pdsDAO" class="kr.or.ddit.dao.PdsDAOImpl" />
+	<bean id="replyDAO" class="kr.or.ddit.dao.ReplyDAOImpl" />
+	
+s	<!-- Service -->
+
+	<bean id="boardService" class="kr.or.ddit.service.BoardServiceImpl" 
+			p:sqlSessionFactory-ref="sqlSessionFactory"
+			p:boardDAO-ref="boardDAO"
+			p:replyDAO-ref="replyDAO"
+	/>
+	
+	<bean id="memberServiceForModify" class="kr.or.ddit.service.MemberServiceForModifyImpl"
+			p:sqlSessionFactory-ref="sqlSessionFactory"
+			p:memberDAO-ref="memberDAO"
+	/>
+	<bean id="menuService" class="kr.or.ddit.service.MenuServiceImpl"
+			p:sqlSessionFactory-ref="sqlSessionFactory"
+			p:menuDAO-ref="menuDAO"
+	/>
+	<bean id="noticeService" class="kr.or.ddit.service.NoticeServiceImpl"
+			p:sqlSessionFactory-ref="sqlSessionFactory"
+			p:noticeDAO-ref="noticeDAO"
+	/>
+	<bean id="pdsService" class="kr.or.ddit.service.PdsServiceImpl"
+			p:sqlSessionFactory-ref="sqlSessionFactory"
+			p:pdsDAO-ref="pdsDAO"
+			p:attachDAO-ref="attachDAO"
+	/>
+	<bean id="replyService" class="kr.or.ddit.service.ReplyServiceImpl"
+			p:sqlSessionFactory-ref="sqlSessionFactory"
+			p:memberDAO-ref="memberDAO"
+			p:replyDAO-ref="replyDAO"
+	/>
+</beans>

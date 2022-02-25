@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="member">
+
+	<resultMap id="memMap" class="kr.or.ddit.member.vo.MemberDTO">
+		<result property="id" column="ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="picture" column="PICTURE"/>
+		<result property="enabled" column="ENABLED"/>
+		<result property="regdate" column="REGDATE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="name" column="NAME"/>
+		<result property="register" column="REGISTER"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="authority" column="AUTHORITY"/>
+	</resultMap>
+
+	<select id="getMember" parameterClass="String"
+			resultMap="memMap">
+		SELECT *
+		  FROM MEMBER
+		 WHERE ID = #id#			
+	</select>
+	
+	<insert id="registerMember" parameterClass="kr.or.ddit.member.vo.MemberDTO">
+		INSERT  INTO MEMBER
+		        (ID,        PWD,        EMAIL,
+		         PHONE,      NAME,      ADDRESS,
+		         AUTHORITY,		ENABLED,	REGISTER,
+		         REGDATE)
+		VALUES  (#id#,          #pwd#,      #email#,
+		         #phone#,    #name#,        #address#,
+		         #authority#,	#enabled#,	#register#,
+		         #regdate#)		
+	</insert>
+	
+	<update id="updateMember" parameterClass="kr.or.ddit.member.vo.MemberDTO">
+		UPDATE MEMBER
+		   SET PWD      = #pwd#,
+		       EMAIL    = #email#, 
+		       PHONE    = #phone#,
+		       NAME     = #name#,
+		       ADDRESS  = #address#,
+		       AUTHORITY = #authority#,
+		       ENABLED = #enabled#,
+		       REGDATE = #regdate#
+		 WHERE ID = #id#
+	</update>
+	
+	<delete id="deleteMember" parameterClass="String">
+		DELETE FROM MEMBER
+		 WHERE ID = #id#		
+	</delete>
+	
+	<select id="searchMemberList" parameterClass="kr.or.ddit.member.vo.PagingVO" resultMap="memMap">
+		
+		SELECT AA.ID,          AA.PWD,     AA.EMAIL,
+		       AA.PICTURE,     AA.ENABLED, AA.REGDATE,
+		       AA.PHONE,       AA.NAME,    AA.REGISTER,
+		       AA.ADDRESS,     AA.AUTHORITY
+		  FROM (SELECT A.*, ROWNUM AS RNUM
+		  		  FROM (SELECT * 
+		  	 	  		  FROM MEMBER
+		 		 		 WHERE 1 = 1
+		 		<isEqual property="searchKey" compareValue="id">
+		 			AND INSTR(ID, #searchWord#) > 0 
+		 		</isEqual>
+		 		<isEqual property="searchKey" compareValue="name">
+		 			AND INSTR(NAME, #searchWord#) > 0
+		 		</isEqual>
+		 		<isEqual property="searchKey" compareValue="email">
+		 			AND INSTR(EMAIL, #searchWord#) > 0
+		 		</isEqual>
+		 		<isEqual property="searchKey" compareValue="phone">
+		 			AND INSTR(PHONE, #searchWord#) > 0
+		 		</isEqual>
+		        ) A	) AA
+		 WHERE RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+	<select id="getSearchCount" parameterClass="kr.or.ddit.member.vo.PagingVO" resultClass="Integer">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE 1 = 1
+		 		<isEqual property="searchKey" compareValue="id">
+		 			AND INSTR(ID, #searchWord#) > 0 
+		 		</isEqual>
+		 		<isEqual property="searchKey" compareValue="name">
+		 			AND INSTR(NAME, #searchWord#) > 0
+		 		</isEqual>
+		 		<isEqual property="searchKey" compareValue="email">
+		 			AND INSTR(EMAIL, #searchWord#) > 0
+		 		</isEqual>
+		 		<isEqual property="searchKey" compareValue="phone">
+		 			AND INSTR(PHONE, #searchWord#) > 0
+		 		</isEqual>		  
+	</select>
+	
+	<select id="idCheck" parameterClass="String" resultClass="Integer">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE ID = #id#	
+	</select>
+	
+</sqlMap>			
+
+
+
+
+

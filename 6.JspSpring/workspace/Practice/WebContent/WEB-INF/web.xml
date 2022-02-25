@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>MemberListServlet</servlet-name>
+		<servlet-class>com.jsp.controller.MemberListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberListServlet</servlet-name>
+		<url-pattern>/member/list</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MemberMessageServlet</servlet-name>
+		<servlet-class>com.jsp.controller.MemberMessageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberMessageServlet</servlet-name>
+		<url-pattern>/member/message</url-pattern>
+	</servlet-mapping>
+</web-app>

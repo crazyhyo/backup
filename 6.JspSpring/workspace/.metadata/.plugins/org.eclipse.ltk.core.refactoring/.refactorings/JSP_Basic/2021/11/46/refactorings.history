@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.java.dto&apos; to &apos;JSP_JSTL/src&apos;&#x0D;&#x0A;- Original project: &apos;JSP_Basic&apos;&#x0D;&#x0A;- Destination element: &apos;JSP_JSTL/src&apos;&#x0D;&#x0A;- Original element: &apos;JSP_Basic/src/com.java.dto&apos;" description="Copy package" destination="=JSP_JSTL/src" element1="/src&lt;com.java.dto" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1636701058789" version="1.0"/>
+</session>

@@ -1,0 +1,20 @@
+package egovframework.example.util;
+
+import javax.servlet.http.HttpServletRequest;
+
+import egovframework.example.sample.service.vo.LoginVo;
+
+public class SessionUtil {
+
+	public static LoginVo getSession(HttpServletRequest req) {
+		
+		LoginVo loginInfo = (LoginVo)req.getSession().getAttribute("loginInfo");
+		
+		return loginInfo;
+	}
+	public void setSession(HttpServletRequest req, LoginVo loginInfo) {
+		
+		req.getSession().setAttribute("loginInfo", loginInfo);
+		
+	}
+}

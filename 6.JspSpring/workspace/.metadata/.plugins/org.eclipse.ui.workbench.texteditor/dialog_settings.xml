@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.jst.jsp.ui.internal.preferences.ui.JSPTemplatePreferencePage$JSPEditTemplateDialog_dialogBounds">
+		<item value="1560" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="847" key="DIALOG_HEIGHT"/>
+		<item value="-210" key="DIALOG_X_ORIGIN"/>
+		<item value="-146" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="&lt;%=request.getContextPath() %&gt;/resources/bootstrap/plugins" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="../../plugins"/>
+			<item value="이미지"/>
+			<item value="3.5.0"/>
+			<item value="summernote_go"/>
+			<item value=".jsp&quot;;"/>
+			<item value=".jsp"/>
+			<item value="toA"/>
+			<item value="to"/>
+			<item value="toArray"/>
+			<item value="get"/>
+			<item value="class"/>
+			<item value="row"/>
+			<item value="content"/>
+			<item value="main-con"/>
+			<item value="#"/>
+		</list>
+		<list key="replacehistory">
+			<item value="&lt;%=request.getContextPath() %&gt;/resources/bootstrap/plugins"/>
+			<item value="&quot;;"/>
+			<item value=""/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="288" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="452" key="DIALOG_HEIGHT"/>
+		<item value="1368" key="DIALOG_X_ORIGIN"/>
+		<item value="364" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

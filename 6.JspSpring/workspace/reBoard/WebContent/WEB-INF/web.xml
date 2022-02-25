@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+	<servlet>
+		<servlet-name>DeleteMember</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.DeleteMember</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DeleteMember</servlet-name>
+		<url-pattern>/delete</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>IdCheck</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.IdCheck</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>IdCheck</servlet-name>
+		<url-pattern>/idCheck</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DetailMember</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.DetailMember</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DetailMember</servlet-name>
+		<url-pattern>/detail</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ListMember</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.ListMember</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ListMember</servlet-name>
+		<url-pattern>/list</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>RegisterMember</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.RegisterMember</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RegisterMember</servlet-name>
+		<url-pattern>/regist</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateMember</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.UpdateMember</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateMember</servlet-name>
+		<url-pattern>/update</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SendMessage</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.SendMessage</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SendMessage</servlet-name>
+		<url-pattern>/message</url-pattern>
+	</servlet-mapping>
+  <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+</web-app>

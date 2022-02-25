@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="summation1" class="com.spring.sub.SummationImpl" />
+	<bean id="summation2" class="com.spring.sub.SummationImpl2" />
+	
+	<bean id="minus1" class="com.spring.sub.MinusImpl" />
+	<bean id="minus2" class="com.spring.sub.MinusImpl2" />
+	
+	<bean id="multiply1" class="com.spring.sub.MultiplyImpl" />
+	<bean id="multiply2" class="com.spring.sub.MultiplyImpl2" />
+	
+	<bean id="divide1" class="com.spring.sub.DivideImpl" />
+	<bean id="divide2" class="com.spring.sub.DivideImpl2" />
+
+	<bean id="cal2" class="com.spring.main.Calculator"
+		p:divide-ref="divide1"
+		p:minus-ref="minus1"
+		p:multiply-ref="multiply1"
+		p:summation-ref="summation1"
+	/>
+	<bean id="cal3" class="com.spring.main.Calculator"
+		p:divide-ref="divide2"
+		p:minus-ref="minus2"
+		p:multiply-ref="multiply2"
+		p:summation-ref="summation2"
+	/>
+		
+<!-- 		<property name="summation" ref="summation1" />
+		<property name="minus" ref="minus1" />
+		<property name="multiply" ref="multiply1" />
+		<property name="divide" ref="divide1" /> 
+	</bean>				-->
+	
+	<bean id="cal1" class="com.spring.main.Calculator">
+		<property name="summation" ref="summation2" />
+		<property name="minus" ref="minus2" />
+		<property name="multiply" ref="multiply2" />
+		<property name="divide" ref="divide2" />
+	</bean>
+	
+</beans>
