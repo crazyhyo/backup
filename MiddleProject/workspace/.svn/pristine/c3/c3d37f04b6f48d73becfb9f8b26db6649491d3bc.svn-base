@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="jobOpening">
+	
+	<resultMap id="jobOpeningCardMap" class="java.util.HashMap">
+		<result column="RNUM" property="RNUM"/>
+		<result column="COM_NM" property="COM_NM"/>
+		<result column="COM_INTRO" property="COM_INTRO"/>
+		<result column="JO_TITLE" property="JO_TITLE"/>
+		<result column="JO_SDATE" property="JO_SDATE"/>
+		<result column="JO_EDATE" property="JO_EDATE"/>
+		<result column="JO_SAL_TYPE_NM" property="JO_SAL_TYPE_NM"/>
+		<result column="JG_CODE_NM" property="JG_CODE_NM"/>
+	</resultMap>
+	
+	<select id="getTotalJobOpeningCount" resultClass="int">
+		SELECT COUNT(*)
+		  FROM JOB_OPENING
+	</select>
+	
+	<select id="jobOpeningPagingList" parameterClass="kr.or.ddit.cmm.vo.JobOpeningPagingVO"
+			resultClass="kr.or.ddit.jobOpening.vo.JobOpeningVO">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM JOB_OPENING) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+	<select id="jobOpeningCardList" parameterClass="kr.or.ddit.cmm.vo.JobOpeningPagingVO"
+			resultMap="jobOpeningCardMap">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM (SELECT  A.COM_NM,    A.COM_INTRO,    B.JO_TITLE,
+		                                B.JO_SDATE,  B.JO_EDATE,    C.JG_CODE_NM,
+		                                DECODE(FN_GET_SAL_TYPE_JO(B.JO_NO), '0', '정보없음',
+		                                                                    '1', '0-2000만원',
+		                                                                    '2', '2000-2500만원',
+		                                                                    '3', '2500-3000만원',
+		                                                                    '4', '3000-4000만원',
+		                                                                    '5', '4000-5000만원',
+		                                                                    '6', '5000만원 이상') AS JO_SAL_TYPE_NM
+		                                                                    
+		                          FROM COMPANY A
+		                        INNER JOIN JOB_OPENING B ON(A.COM_NO = B.COM_NO)
+		                        INNER JOIN JOB_GROUP C ON(A.JG_CODE_NO = C.JG_CODE_NO)) D) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,28 @@
+<%@page import="kr.or.ddit.cmm.util.SessionCheck"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%
+	if(SessionCheck.isLoginMember(session)){
+		
+		// 로그인 상태인 경우
+		int memCode = SessionCheck.getMemCode(session, request);
+		int memNo = SessionCheck.getMemNo(session, request);
+		if(memCode == 1){
+			// 개인회원인 경우
+			int hrNo = SessionCheck.getHrNo(session, request);
+		}else if(memCode == 2){
+
+			// 기업회원인 경우
+			int cnt = SessionCheck.hasComNo(session, request);
+			if(cnt > 0){
+				// 기업을 등록한 기업회원인 경우
+				int comNo = SessionCheck.getComNo(session, request);
+			}
+		}
+	}else{
+		
+		// 비회원인 경우
+		
+	};
+%>

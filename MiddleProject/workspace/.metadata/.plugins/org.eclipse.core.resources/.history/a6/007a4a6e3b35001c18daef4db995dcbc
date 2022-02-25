@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+    <% 
+    	int result = request.getAttribute("result") == null? 
+    			0 : (Integer)request.getAttribute("result");
+    	int memNo = request.getAttribute("memNo") == null?
+    			0 : (Integer)request.getAttribute("memNo");
+    	int hrNo = request.getAttribute("hrNo") == null?
+    			0 : (Integer)request.getAttribute("hrNo");
+    	int comNo = request.getAttribute("comNo") == null?
+    			0 : (Integer)request.getAttribute("comNo");
+    		System.out.print("js의 " + result);
+    		if(result == 0){
+   
+    %>
+		{ "memCode" : "0" }		
+	<%
+    		}else if(result == 1){
+	%>
+			{ 
+			  "memCode" : "1",
+			  "memNo" : "<%=memNo %>",
+			  "hrNo" : "<%=hrNo %>"
+			 }
+	<%
+    		}else if(result == 2){
+	%>    		
+			{ 
+			  "memCode" : "2",
+			  "memNo" : "<%=memNo %>",
+			  "comNo" : "<%=comNo %>"
+			 }
+	<% 
+			}else if(result == 3){
+	%>
+			{ 
+			  "memCode" : "2",
+			  "memNo" : "<%=memNo %>",
+			  "comNo" : "0"
+			}
+	<%
+			}
+	%>

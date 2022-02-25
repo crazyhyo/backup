@@ -1,0 +1,28 @@
+package kr.or.ddit.schedule.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.edu.vo.EduVO;
+import kr.or.ddit.util.SqlMapClientFactory;
+
+public class ScheduleDaoImpl implements IScheduleDao{
+	
+	private String nameSpace = "edu.";
+	private SqlMapClient smc;
+	private static IScheduleDao dao;
+	private ScheduleDaoImpl() {
+		smc = SqlMapClientFactory.getInstance();
+	}
+	
+	public static IScheduleDao getInstance() {
+		if(dao == null) {
+			dao = new ScheduleDaoImpl();
+		}
+		return dao;
+	}
+
+
+}

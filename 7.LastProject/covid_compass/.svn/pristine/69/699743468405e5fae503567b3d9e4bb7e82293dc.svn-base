@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/task"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- <beans:bean id="inspStatisticsInsertTask"
+				class="com.spring.compass.scheduler.InspStatisticsInsertScheduler"
+				p:inspService-ref="inspService"
+				p:savePath-ref="inspStatisticsFilePath"
+				p:fileName-ref="inspStatisticsFileName"
+	/>
+	
+	<scheduler id="inspStatisticsInsertScheduler"/>
+	<scheduled-tasks scheduler="inspStatisticsInsertScheduler">
+		<scheduled ref="inspStatisticsInsertTask" 
+				   method="registInspStatistics"
+				   cron="*/10 * * * * *"/>
+	</scheduled-tasks> -->
+	
+	<beans:bean id="inspStatisticsUpdateTask"
+				class="com.spring.compass.scheduler.InspStatisticsUpdateScheduler"
+				p:inspService-ref="inspService"
+				p:savePath-ref="inspStatisticsFilePath"
+				p:fileName-ref="inspStatisticsFileName"
+	/>
+	
+	<scheduler id="inspStatisticsUpdateScheduler"/>
+	<scheduled-tasks scheduler="inspStatisticsUpdateScheduler">
+		<scheduled ref="inspStatisticsUpdateTask" 
+				   method="updateInspStatistics"
+				   cron="30 32 21 * * *"/>
+	</scheduled-tasks>
+	
+	 <!-- <beans:bean id="hsptStatisticsInsertTask"
+				class="com.spring.compass.scheduler.HsptStatisticsInsertScheduler"
+				p:hsptService-ref="hsptService"
+	/>
+	
+	<scheduler id="hsptStatisticsInsertScheduler"/>
+	<scheduled-tasks scheduler="hsptStatisticsInsertScheduler">
+		<scheduled ref="hsptStatisticsInsertTask" 
+				   method="registHsptStatistics"
+				   cron="*/10 * * * * *"
+		/>
+	</scheduled-tasks>  -->
+	
+	<!--  <beans:bean id="hsptStatisticsUpdateTask"
+				class="com.spring.compass.scheduler.HsptStatisticsUpdateScheduler"
+				p:hsptService-ref="hsptService"
+	/>
+	<scheduler id="hsptStatisticsUpdateScheduler"/>	
+	<scheduled-tasks scheduler="hsptStatisticsUpdateScheduler">
+		<scheduled ref="hsptStatisticsUpdateTask" 
+				   method="updateHsptStatistics"
+				   cron="*/10 * * * * *"
+		/>
+	</scheduled-tasks>  --> 
+	
+	
+	<!-- <beans:bean id="pbhtStatisticsInsertTask"
+				class="com.spring.compass.scheduler.PbhtStatisticsInsertScheduler"
+				p:pbhtService-ref="pbhtService"
+	/>
+	
+	<scheduler id="pbhtStatisticsInsertScheduler"/>
+	<scheduled-tasks scheduler="pbhtStatisticsInsertScheduler">
+		<scheduled ref="pbhtStatisticsInsertTask" 
+				   method="registPbhtStatistics"
+				   cron="*/10 * * * * *"
+		/>
+	</scheduled-tasks>
+	 -->
+	 
+	<!--  <beans:bean id="pbhtStatisticsUpdateTask"
+	 			class="com.spring.compass.scheduler.PbhtStatisticsUpdateScheduler"
+	 			p:pbhtService-ref="pbhtService"
+	 			p:saveNgtvAgeFileName-ref="pbhtStatisticsNgtvAgeFileName"
+	 			p:saveNgtvAgePath-ref="pbhtStatisticsNgtvAgeFilePath"
+	 			p:saveNgtvGenderName-ref="pbhtStatisticsNgtvGenderFileName"
+	 			p:saveNgtvGenderPath-ref="pbhtStatisticsNgtvGenderFilePath"
+	 			p:savePbhtSmpleCntFileName-ref="pbhtStatisticsSmpleCntFileName"
+	 			p:savePbhtSmpleCntPath-ref="pbhtStatisticsSmpleCntFilePath"
+	 			p:savePstvAgeFileName-ref="pbhtStatisticsPstvAgeFileName"
+	 			p:savePstvAgePath-ref="pbhtStatisticsPstvAgeFilePath"
+	 			p:savePstvGenderName-ref="pbhtStatisticsPstvGenderFileName"
+	 			p:savePstvGenderPath-ref="pbhtStatisticsPstvGenderFilePath"
+	 			
+	 />
+	<scheduler id="pbhtStatisticsUpdateScheduler"/>
+	<scheduled-tasks scheduler="pbhtStatisticsUpdateScheduler">
+		<scheduled ref="pbhtStatisticsUpdateTask" 
+				   method="updatePbhtStatistics"
+				   cron="*/10 * * * * *"
+		/>
+	</scheduled-tasks>  -->
+	
+	<!-- <beans:bean id="ltctModifyBdtempTask"
+				class="com.spring.compass.scheduler.LtctModifyBdtempScheduler"
+				p:ltctService-ref="ltctService"
+	/>
+	<scheduler id="LtctModifyBdtempScheduler"/>
+	<scheduled-tasks scheduler="LtctModifyBdtempScheduler">
+		<scheduled ref="ltctModifyBdtempTask" method="modifyBdtempIsoptnt"
+				   cron="*/30 * * * * *"
+		/>
+	</scheduled-tasks> -->
+	
+</beans:beans> 
+

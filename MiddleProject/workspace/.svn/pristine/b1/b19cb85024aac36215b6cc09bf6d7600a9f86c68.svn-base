@@ -1,0 +1,56 @@
+<%@page import="kr.or.ddit.company.vo.CompanyVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	List<CompanyVO> list = (List<CompanyVO>) request.getAttribute("companyPagingList");
+%>
+
+[
+	
+<%
+	for(int i = 0; i < list.size(); i++){
+		if(i > 0){
+			out.print(",");
+		}
+		CompanyVO vo = list.get(i);
+		
+		Integer prov_code_no = vo.getProv_code_no();
+		Integer city_code_no = vo.getCity_code_no();
+		Integer com_no = vo.getCom_no();
+		Integer mem_no = vo.getMem_no();
+		Integer jg_code_no = vo.getJg_code_no();
+		String com_nm = vo.getCom_nm();
+		Integer com_rev = vo.getCom_rev();
+		String com_date = vo.getCom_date();
+		Integer com_cnt = vo.getCom_cnt();
+		String com_hpg = vo.getCom_hpg();
+		Integer com_fav = vo.getCom_fav();
+		Integer com_sal = vo.getCom_sal();
+		String com_intro = vo.getCom_intro();
+%>
+
+		
+			{	
+				"prov_code_no" : "<%=prov_code_no%>",
+				"city_code_no" : "<%=city_code_no%>",
+				"com_no" : "<%=com_no%>",
+				"mem_no" : "<%=mem_no%>",
+				"jg_code_no" : "<%=jg_code_no%>",
+				"com_nm" : "<%=com_nm%>",
+				"com_rev" : "<%=com_rev%>",
+				"com_date" : "<%=com_date%>",
+				"com_cnt" : "<%=com_cnt%>",
+				"com_hpg" : "<%=com_hpg%>",
+				"com_fav" : "<%=com_fav%>",
+				"com_sal" : "<%=com_sal%>",
+				"com_intro" : "<%=com_intro%>"
+			}
+
+		
+<%		
+		
+	}
+%>
+
+]

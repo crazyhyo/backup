@@ -1,0 +1,105 @@
+package kr.or.ddit.board.vo;
+
+public class BoardVO {
+	
+	private int board_no = 0;
+	private int board_code_no = 0;
+	private String board_title;
+	private String board_cont;
+	private int mem_no = 0;
+	private int board_hit = 0;
+	private int board_rept = 0;
+	private int board_like = 0;
+	private int board_repl = 0;
+	private int board_pop = 0;
+	private String board_date;
+	private int board_active = 0;
+	private String board_head;
+	private int atch_file_id = 0;
+	public int getBoard_no() {
+		return board_no;
+	}
+	public void setBoard_no(int board_no) {
+		this.board_no = board_no;
+	}
+	public int getBoard_code_no() {
+		return board_code_no;
+	}
+	public void setBoard_code_no(int board_code_no) {
+		this.board_code_no = board_code_no;
+	}
+	public String getBoard_title() {
+		return board_title;
+	}
+	public void setBoard_title(String board_title) {
+		this.board_title = board_title;
+	}
+	public String getBoard_cont() {
+		return board_cont;
+	}
+	public void setBoard_cont(String board_cont) {
+		this.board_cont = board_cont;
+	}
+	public int getMem_no() {
+		return mem_no;
+	}
+	public void setMem_no(int mem_no) {
+		this.mem_no = mem_no;
+	}
+	public int getBoard_hit() {
+		return board_hit;
+	}
+	public void setBoard_hit(int board_hit) {
+		this.board_hit = board_hit;
+	}
+	public int getBoard_rept() {
+		return board_rept;
+	}
+	public void setBoard_rept(int board_rept) {
+		this.board_rept = board_rept;
+	}
+	public int getBoard_like() {
+		return board_like;
+	}
+	public void setBoard_like(int board_like) {
+		this.board_like = board_like;
+	}
+	public int getBoard_repl() {
+		return board_repl;
+	}
+	public void setBoard_repl(int board_repl) {
+		this.board_repl = board_repl;
+	}
+	public int getBoard_pop() {
+		return board_pop;
+	}
+	public void setBoard_pop(int board_pop) {
+		this.board_pop = board_pop;
+	}
+	public String getBoard_date() {
+		return board_date;
+	}
+	public void setBoard_date(String board_date) {
+		this.board_date = board_date;
+	}
+	public int getBoard_active() {
+		return board_active;
+	}
+	public void setBoard_active(int board_active) {
+		this.board_active = board_active;
+	}
+	public String getBoard_head() {
+		return board_head;
+	}
+	public void setBoard_head(String board_head) {
+		this.board_head = board_head;
+	}
+	public int getAtch_file_id() {
+		return atch_file_id;
+	}
+	public void setAtch_file_id(int atch_file_id) {
+		this.atch_file_id = atch_file_id;
+	}
+	
+	
+}

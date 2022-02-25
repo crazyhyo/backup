@@ -1,0 +1,50 @@
+package com.spring.compass.service;
+
+import com.spring.compass.dao.MberDAO;
+import com.spring.compass.vo.MberVO;
+
+public class MberServiceImpl implements MberService{
+
+	private MberDAO mberDAO;
+	
+	public void setMberDAO(MberDAO mberDAO) {
+		this.mberDAO = mberDAO;
+	}
+	
+	@Override
+	public MberVO getMember(String id) throws Exception {
+		return mberDAO.selectMberById(id);
+	}
+
+	@Override
+	public MberVO getInfo(MberVO mber) throws Exception {
+		return mberDAO.findByInfo(mber);
+	}
+
+	@Override
+	public void modifyPwd(MberVO mber) throws Exception {
+		mberDAO.updatePwd(mber);
+	}
+
+	@Override
+	public String getMberSeq() throws Exception {
+		return mberDAO.selectMbserSeq();
+	}
+
+	@Override
+	public void registMberRepresent(MberVO mber) throws Exception {
+		mberDAO.insertMberRepresent(mber);
+	}
+	
+	@Override
+	public void modifyInfo(MberVO mber) throws Exception{
+		mberDAO.updateInfo(mber);
+	}
+
+	@Override
+	public MberVO getDetailByMberNo(String mberNo) throws Exception {
+		MberVO mber = mberDAO.selectDetailByMberNo(mberNo);
+		return mber;
+	}
+
+}

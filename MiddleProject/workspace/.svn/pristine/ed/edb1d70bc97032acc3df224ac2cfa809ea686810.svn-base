@@ -1,0 +1,13 @@
+package kr.or.ddit.board.service;
+
+import java.util.List;
+
+import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.cmm.vo.BoardPagingVO;
+
+public interface IBoardService {
+	
+	public int getTotalBoardCount();
+	
+	public List<BoardVO> boardPagingList(BoardPagingVO boardPagingVO);
+}

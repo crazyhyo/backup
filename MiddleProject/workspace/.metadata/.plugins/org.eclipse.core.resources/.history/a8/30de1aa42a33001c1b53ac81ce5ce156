@@ -1,0 +1,69 @@
+function proc(){
+	
+	execDaumPostcode();
+	
+	setTimeout(function(){
+		const cityCodeNo = $('#cityCodeNo').val();
+		const provCodeNo = $('#provCodeNo').val();
+		console.log(cityCodeNo, provCodeNo);
+		alert('asdf');
+	}, 10000)
+	
+	
+}
+
+
+const insertJobOpening = () => {
+	
+	const joInputs = $('#joForm').serializeJSON();
+	
+	console.log(joInputs);
+	
+	$.ajax({
+
+		url: '/CodePeople/ConvertForm.do',
+		type: 'get',
+		data: joInputs,
+		dataType: 'json',
+		success: function(res){
+			cityCodeNo = res.cityCodeNo;
+			provCodeNo = res.provCodeNo;
+			
+			console.log(cityCodeNo, provCodeNo);
+//			$.ajax({
+//				
+//				url: '/CodePeople/InsertJobOpeining.do',
+//				type: 'get',
+//				data: {
+//						"cityCodeNm" : cityCodeNm,
+//						"provCodeNm" : provCodeNm
+//						},
+//				dataType: 'json',
+//				success: function(res){
+//					
+//				},
+//				error: function(err){
+//					alert(`status : ${err.status}`);
+//				}
+//			})
+		},
+		error: function(err){
+			alert(`status : ${err.status}`);
+		}
+	})
+	
+	
+	
+}
+
+function convertProv(){
+	
+	
+	
+}
+
+window.onload = function addCertForm() {
+	
+	
+    
+}

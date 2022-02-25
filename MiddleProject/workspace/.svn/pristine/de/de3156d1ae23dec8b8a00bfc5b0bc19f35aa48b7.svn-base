@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="jobOpening">
+
+	<resultMap class="kr.or.ddit.jobOpening.vo.JobOpeningVO" id="JobOpeningMap">
+		<result column="JO_NO" property="joNo"/>
+		<result column="JO_TITLE" property="joTitle"/>
+		<result column="COM_NO" property="comNo"/>
+		<result column="JO_SDATE" property="joSdate"/>
+		<result column="JO_EDATE" property="joEdate"/>
+		<result column="JG_CODE_NO" property="jgCodeNo"/>
+		<result column="JT_CODE_NO" property="jtCodeNo"/>
+		<result column="JO_SAL" property="joSal"/>
+		<result column="JO_RANK" property="joRank"/>
+		<result column="JO_MTHD" property="joMthd"/>
+		<result column="JO_LINK" property="joLink"/>
+		<result column="JO_CLIP" property="joClip"/>
+		<result column="JO_FILE" property="joFile"/>
+		<result column="PROV_CODE_NO" property="provCodeNo"/>
+		<result column="CITY_CODE_NO" property="cityCodeNo"/>
+		<result column="PL_CODE_NO" property="plCodeNo"/>
+	</resultMap>	
+	
+	<resultMap id="jobOpeningCardMap" class="java.util.HashMap">
+		<result column="RNUM" property="RNUM"/>
+		<result column="COM_NM" property="COM_NM"/>
+		<result column="COM_INTRO" property="COM_INTRO"/>
+		<result column="JO_TITLE" property="JO_TITLE"/>
+		<result column="JO_SDATE" property="JO_SDATE"/>
+		<result column="JO_EDATE" property="JO_EDATE"/>
+		<result column="JG_CODE_NM" property="JG_CODE_NM"/>
+		<result column="JT_CODE_NM" property="JT_CODE_NM"/>
+		<result column="JO_SAL_TYPE_NM" property="JO_SAL_TYPE_NM"/>
+	</resultMap>
+	
+	<select id="getTotalJobOpeningCount" resultClass="int">
+		SELECT COUNT(*)
+		  FROM JOB_OPENING
+	</select>
+	
+	<select id="jobOpeningPagingList" parameterClass="kr.or.ddit.cmm.vo.JobOpeningPagingVO"
+			resultMap="JobOpeningMap">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM JOB_OPENING) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+	<select id="jobOpeningCardList" parameterClass="kr.or.ddit.cmm.vo.JobOpeningPagingVO"
+			resultMap="jobOpeningCardMap">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM (SELECT  A.COM_NM,    A.COM_INTRO,    B.JO_TITLE,
+		                                B.JO_SDATE,  B.JO_EDATE,    C.JG_CODE_NM,
+		                                D.JT_CODE_NM,
+		                                DECODE(FN_GET_SAL_TYPE_JO(B.JO_NO), '0', '정보없음',
+		                                                                    '1', '0-2000만원',
+		                                                                    '2', '2000-2500만원',
+		                                                                    '3', '2500-3000만원',
+		                                                                    '4', '3000-4000만원',
+		                                                                    '5', '4000-5000만원',
+		                                                                    '6', '5000만원 이상') AS JO_SAL_TYPE_NM
+		                                                                    
+		                          FROM COMPANY A
+		                        INNER JOIN JOB_OPENING B ON(A.COM_NO = B.COM_NO)
+		                        INNER JOIN JOB_GROUP C ON(A.JG_CODE_NO = C.JG_CODE_NO)
+		                        INNER JOIN JOB_TITLE D ON(C.JG_CODE_NO = D.JT_CODE_NO)) E) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+		<select id="jobOpeningCardSearchList" parameterClass="java.util.HashMap"
+			resultMap="jobOpeningCardMap">
+				SELECT AA.*
+				  FROM (SELECT ROWNUM AS RNUM, A.*  
+				          FROM (SELECT *
+				                  FROM (SELECT  A.COM_NM,    A.COM_INTRO,    B.JO_TITLE,
+				                                B.JO_SDATE,  B.JO_EDATE,    C.JG_CODE_NM,
+				                                D.JT_CODE_NM,
+				                                DECODE(FN_GET_SAL_TYPE_JO(B.JO_NO), '0', '정보없음',
+				                                                                    '1', '0-2000만원',
+				                                                                    '2', '2000-2500만원',
+				                                                                    '3', '2500-3000만원',
+				                                                                    '4', '3000-4000만원',
+				                                                                    '5', '4000-5000만원',
+				                                                                    '6', '5000만원 이상') AS JO_SAL_TYPE_NM
+				                                                                    
+				                          FROM COMPANY A
+				                        INNER JOIN JOB_OPENING B ON(A.COM_NO = B.COM_NO)
+				                        INNER JOIN JOB_GROUP C ON(A.JG_CODE_NO = C.JG_CODE_NO)
+				                        INNER JOIN JOB_TITLE D ON(C.JG_CODE_NO = D.JT_CODE_NO)
+				                        INNER JOIN V_JO_SEARCH E ON(B.JO_NO = E.JO_NO)
+				                        WHERE 1 = 1
+				                        <isNotEmpty property="JG_CODE_NO">
+									      AND E.JG_CODE_NO = #JG_CODE_NO# 
+									    </isNotEmpty>
+									    <isNotEmpty property="JT_CODE_NO">
+									      AND E.JT_CODE_NO = #JT_CODE_NO# 
+									    </isNotEmpty>
+									    <isNotEmpty property="PL_CODE_NO">
+									      AND E.PL_CODE_NO = #PL_CODE_NO# 
+									    </isNotEmpty>
+									    <isNotEmpty property="SAL_TYPE">
+									      AND E.SAL_TYPE = #SAL_TYPE# 
+									    </isNotEmpty>
+									    <isNotEmpty property="PROV_CODE_NO">
+									      AND E.PROV_CODE_NO = #PROV_CODE_NO# 
+									    </isNotEmpty>
+									    <isNotEmpty property="CITY_CODE_NO">
+									      AND E.CITY_CODE_NO = #CITY_CODE_NO# 
+									    </isNotEmpty>
+									    <isNotEmpty property="STATE">
+									      AND E.STATE = #STATE# 
+									    </isNotEmpty>									    								    
+				                        ) F) A) AA
+				 WHERE AA.RNUM BETWEEN #FIRST_REC_NO# AND #LAST_REC_NO#
+	</select>
+	
+	<select id="getTotalJobOpeningSearchCount" parameterClass="java.util.HashMap" resultClass="int">
+		SELECT COUNT(*)
+          FROM (SELECT  A.COM_NM,    A.COM_INTRO,    B.JO_TITLE,
+                        B.JO_SDATE,  B.JO_EDATE,    C.JG_CODE_NM,
+                        D.JT_CODE_NM,
+                        DECODE(FN_GET_SAL_TYPE_JO(B.JO_NO), '0', '정보없음',
+                                                            '1', '0-2000만원',
+                                                            '2', '2000-2500만원',
+                                                            '3', '2500-3000만원',
+                                                            '4', '3000-4000만원',
+                                                            '5', '4000-5000만원',
+                                                            '6', '5000만원 이상') AS JO_SAL_TYPE_NM
+                                                            
+                  FROM COMPANY A
+	                INNER JOIN JOB_OPENING B ON(A.COM_NO = B.COM_NO)
+	                INNER JOIN JOB_GROUP C ON(A.JG_CODE_NO = C.JG_CODE_NO)
+	                INNER JOIN JOB_TITLE D ON(C.JG_CODE_NO = D.JT_CODE_NO)
+	                INNER JOIN V_JO_SEARCH E ON(B.JO_NO = E.JO_NO)
+	                WHERE 1 = 1
+                    	<isNotEmpty property="JG_CODE_NO">
+					      AND E.JG_CODE_NO = #JG_CODE_NO# 
+					    </isNotEmpty>
+					    <isNotEmpty property="JT_CODE_NO">
+					      AND E.JT_CODE_NO = #JT_CODE_NO# 
+					    </isNotEmpty>
+					    <isNotEmpty property="PL_CODE_NO">
+					      AND E.PL_CODE_NO = #PL_CODE_NO# 
+					    </isNotEmpty>
+					    <isNotEmpty property="SAL_TYPE">
+					      AND E.SAL_TYPE = #SAL_TYPE# 
+					    </isNotEmpty>
+					    <isNotEmpty property="PROV_CODE_NO">
+					      AND E.PROV_CODE_NO = #PROV_CODE_NO# 
+					    </isNotEmpty>
+					    <isNotEmpty property="CITY_CODE_NO">
+					      AND E.CITY_CODE_NO = #CITY_CODE_NO# 
+					    </isNotEmpty>
+					    <isNotEmpty property="STATE">
+					      AND E.STATE = #STATE# 
+					    </isNotEmpty>
+					    )								    								    
+	</select>
+	
+</sqlMap>

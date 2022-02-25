@@ -1,0 +1,290 @@
+package com.spring.compass.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.spring.compass.command.HsptMainSckbdCommand;
+import com.spring.compass.command.InptntListSearchCommand;
+import com.spring.compass.command.InptntListVO;
+import com.spring.compass.service.HsptSerivceLKH;
+import com.spring.compass.service.HsptService;
+import com.spring.compass.service.StatisticsService;
+import com.spring.compass.vo.HsptStatsVO;
+import com.spring.compass.vo.HsptVO;
+import com.spring.compass.vo.InptntVO;
+import com.spring.compass.vo.PbhtVO;
+
+@Controller
+@RequestMapping(value="/hspt")
+public class HsptlController {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(HsptlController.class);	
+	
+	@Resource(name="hsptService")
+	private HsptService hsptService;
+	
+	@Resource(name="hsptServiceLKH")
+	private HsptSerivceLKH hsptServiceLKH;
+
+	@Resource(name="statisticsService")
+	private StatisticsService statsService;
+
+	@RequestMapping(value="main")
+	public void main(HttpSession session,HttpServletRequest request) throws Exception {
+		HsptVO hspt = (HsptVO) session.getAttribute("loginInst");
+		request.setAttribute("hspt", hspt);
+		HsptMainSckbdCommand cmd = statsService.getMainStatsByStatsYmd(hspt.getHsptNo());
+		
+		if(cmd != null) {
+			
+			int curInptntCnt = hspt.getSckbdCnt() - hspt.getRmndSckbdCnt();
+			cmd.setCurInptntCnt(curInptntCnt);
+			request.setAttribute("cmd", cmd);
+		}
+		
+		
+	}
+	
+	@RequestMapping(value="/sckbdreq-inptnt")
+	public ModelAndView sckbdRequest( ModelAndView mnv 
+									 ,String manageNo
+									 ,String pstiNm
+									 ,@RequestParam(defaultValue="A") String type
+									 ,@RequestParam(defaultValue="") String sckbdreqNo
+									 ,HttpSession session) {
+		String url = "hspt/sckbdreq-inptnt-work";
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("manageNo", manageNo);
+		dataMap.put("pstiNm", pstiNm);
+		dataMap.put("type", type);
+		dataMap.put("sckbdreqNo", sckbdreqNo);
+		
+		mnv.addAllObjects(dataMap);
+		
+		LOGGER.debug("{}",dataMap);
+		
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+	@RequestMapping(value="/sckbdreq-isoptnt")
+	public ModelAndView sckbdLtctRequest( ModelAndView mnv 
+										 ,String manageNo
+										 ,String pstiNm
+										 ,@RequestParam(defaultValue="A") String type
+										 ,@RequestParam(defaultValue="") String sckbdreqNo
+										 ,HttpSession session) {
+		String url = "hspt/sckbdreq-isoptnt";
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("manageNo", manageNo);
+		dataMap.put("pstiNm", pstiNm);
+		dataMap.put("type", type);
+		dataMap.put("sckbdreqNo", sckbdreqNo);
+		
+		mnv.addAllObjects(dataMap);
+		
+		LOGGER.debug("{}",dataMap);
+		
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+
+
+
+	@RequestMapping(value="/inptnt-list")
+	public ModelAndView inptntList(ModelAndView mnv, HttpSession session) throws Exception{
+		
+		String url = "hspt/inptnt-list";
+		
+		HsptVO loginHspt = (HsptVO) session.getAttribute("loginInst");
+		
+		List<PbhtVO> pbhtList = hsptServiceLKH.getPbhtListByAreaNo(loginHspt.getAreaNo());
+		
+		mnv.addObject("pbhtList", pbhtList);
+		
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+
+	@RequestMapping(value="/dgnss-list")
+	public String dgnssList() {
+		
+		String url = "hspt/dgnss-list";
+		
+//		LOGGER.debug("before");
+//		LOGGER.debug(String.format("page is %d, searchType is %s, keyword is %s, perpageNum is %d", page,
+//				searchType, keyword, perPageNum));
+//		LOGGER.debug("after");
+//		
+//		rttr.addFlashAttribute("page", page);
+//		rttr.addFlashAttribute("perPageNum", perPageNum);
+//		rttr.addFlashAttribute("searchType", searchType);
+//		rttr.addFlashAttribute("keyword", keyword);
+		
+		return url;
+	}
+
+	//병상 등록 및 사용현황 view
+	@RequestMapping(value="/sckbd-modify")
+	public String modify(HttpSession session,HttpServletRequest request) throws Exception {
+		String url = "hspt/sckbdcnt-modify";
+		HsptVO hspt = (HsptVO) session.getAttribute("loginInst");
+		
+
+		// 병원번호
+		String hsptNo = hspt.getHsptNo();
+		
+		//병상현황 = get 잔여병상수, 입원환자수, 총병상수
+		//request.setAttribute("병상현황", 병상현황);
+		//request.setAttribute("입원환자수", 입원환자수);
+		
+		//통계
+		//HsptMainSckbdCommand cmd = statsService.getMainStatsByStatsYmd(hspt.getHsptNo());
+		//request.setAttribute("cmd", cmd);
+		
+		//return url;
+		
+		request.setAttribute("hspt", hspt);
+		HsptMainSckbdCommand cmd = statsService.getMainStatsByStatsYmd(hspt.getHsptNo());
+		int curInptntCnt = hspt.getSckbdCnt() - hspt.getRmndSckbdCnt();
+		cmd.setCurInptntCnt(curInptntCnt);
+		request.setAttribute("cmd", cmd);
+		
+		return url;
+	}
+
+	// 총병상수 수정
+	@RequestMapping(value="/sckbdModifyUpdate")
+	public String sckbdModifyUpdate(HttpSession session,HttpServletRequest request,int inputSckbd) throws Exception {
+		String url = "redirect:hspt/sckbdcnt-modify-success";
+		HsptVO hspt = (HsptVO) session.getAttribute("loginInst");
+		
+		String hsptNo = hspt.getHsptNo();
+		hsptService.getRmndSckbdCnt(hsptNo);
+		hsptService.getSckbdCnt(hsptNo);
+		request.setAttribute("inputSckbd", inputSckbd);
+		
+		
+		//redirect /sckbd-modify
+		return url;
+	}
+	
+	@RequestMapping(value="/req-sckbd-list")
+	public String reqSckbdList() {
+		return "hspt/req-sckbd-list";
+	}
+	@RequestMapping(value="/req-inptnt-list")
+	public String reqInptntList() {
+		return "hspt/req-inptnt-list";
+	}
+	@RequestMapping(value="/notice-list")
+	public String noticeList() {
+		String url="hspt/notice-list";
+
+		return url;
+	}
+	@RequestMapping(value="/notice-detail")
+	public String noticeDetail() {
+		String url="hspt/notice-detail";
+
+		return url;
+	}
+	@RequestMapping(value="/notice-modifyForm")
+	public String noticeModifyForm() {
+		String url="hspt/notice-modifyForm";
+
+		return url;
+	}
+	@RequestMapping(value="/notice-registForm")
+	public String noticeRegistForm() {
+		String url="hspt/notice-registForm";
+
+		return url;
+	}
+	@RequestMapping(value="/emp-manage-list")
+	public String empList() {
+		String url="hspt/emp-manage-list";
+
+		return url;
+	}
+
+	@RequestMapping(value="/emp-manage-registform")
+	public String empRegistForm() {
+		String url="hspt/emp-manage-registform";
+
+		return url;
+	}
+	@RequestMapping(value="/statistics")
+	public String statistics() {
+		String url="hspt/statistics";
+
+		return url;
+	}
+	@RequestMapping("/main-inptnt-list") // inptnt-list-module-work 입원환자
+	public ResponseEntity<Map<String, Object>> inptntList(
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "15") int perPageNum, 
+			@RequestParam(defaultValue = "") String searchType,
+			@RequestParam(defaultValue = "") String keyword, 
+			HttpSession session
+	) throws Exception {
+		ResponseEntity<Map<String, Object>> entity = null;
+		LOGGER.debug(String.format("page is %d, searchType is %s, keyword is %s, perpageNum is %d", page,
+				searchType, keyword, perPageNum));
+
+		
+		InptntListSearchCommand cri = new InptntListSearchCommand(page, perPageNum, searchType, keyword);
+
+		HsptVO hspt = (HsptVO) (session.getAttribute("loginInst"));
+
+		LOGGER.debug("{}",hspt);
+
+		cri.setHsptNo(hspt.getHsptNo());
+
+		LOGGER.debug("{}",cri);
+
+		try {
+			Map<String, Object> dataMap = hsptServiceLKH.getInptntList(cri);
+			
+			List<InptntListVO> inptntList = (List<InptntListVO>) dataMap.get("inptntList");
+			
+			if(inptntList != null && !inptntList.isEmpty()) {
+				InptntListVO firstRecord = inptntList.get(0);
+				
+				dataMap.put("firstRecord", firstRecord);
+			}
+
+			entity = new ResponseEntity<Map<String, Object>>(dataMap, HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return entity;
+	}
+	
+
+}

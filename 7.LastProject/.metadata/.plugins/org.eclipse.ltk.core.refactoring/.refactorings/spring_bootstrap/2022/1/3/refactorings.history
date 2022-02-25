@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ReplyController.java&apos; to &apos;covid_compass/src/main/java/com.spring.compass.controller&apos;&#x0D;&#x0A;- Original project: &apos;spring_bootstrap&apos;&#x0D;&#x0A;- Destination element: &apos;covid_compass/src/main/java/com.spring.compass.controller&apos;&#x0D;&#x0A;- Original element: &apos;kr.or.ddit.controller.ReplyController.java&apos;" description="Copy compilation unit" destination="=covid_compass/src\/main\/java&lt;com.spring.compass.controller" element1="/src\/main\/java&lt;kr.or.ddit.controller{ReplyController.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1642120162665" units="1" version="1.0"/>
+</session>

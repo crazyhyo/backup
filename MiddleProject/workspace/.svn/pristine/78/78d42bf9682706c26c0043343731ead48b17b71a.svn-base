@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="edu">
+	<resultMap class="kr.or.ddit.edu.vo.EduVO" id="EduMap">
+		<result column="EDU_NO" property="eduNo"/>
+		<result column="EDU_CODE_NO" property="eduCodeNo"/>
+		<result column="EDU_SCH_NM" property="eduSchNm"/>
+		<result column="EDU_MAJOR" property="eduMajor"/>
+		<result column="EDU_GRA_TOT" property="eduGraTot"/>
+		<result column="EDU_GRA_AVG" property="eduGraAvg"/>
+	</resultMap>
+	
+	<resultMap class="kr.or.ddit.edu.vo.EduCodeVO" id="EduCodeMap">
+		<result column="EDU_CODE_NO" property="eduCodeNo"/>
+		<result column="EDU_CODE_NM" property="eduCodeNm"/>
+	</resultMap>	
+	<select id="selectEduCodeList" resultMap="EduCodeMap">
+		SELECT * FROM EDU_CODE
+	</select>
+	
+</sqlMap>

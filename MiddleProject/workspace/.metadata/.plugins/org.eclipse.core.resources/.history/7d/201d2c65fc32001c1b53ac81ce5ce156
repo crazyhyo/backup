@@ -1,0 +1,24 @@
+package kr.or.ddit.schedule.service;
+
+import java.util.List;
+
+import kr.or.ddit.edu.dao.IEduDao;
+import kr.or.ddit.edu.dao.EduDaoImpl;
+import kr.or.ddit.edu.vo.EduVO;
+
+public class ScheduleServiceImpl implements IScheduleService{
+
+	private IEduDao dao;
+	private static IScheduleService service;
+	
+	private ScheduleServiceImpl() {
+		dao = EduDaoImpl.getInstance();
+	}
+	public static IScheduleService getInstance() {
+		if(service == null) {
+			service = new ScheduleServiceImpl();
+		}
+		return service;
+	}	
+
+}

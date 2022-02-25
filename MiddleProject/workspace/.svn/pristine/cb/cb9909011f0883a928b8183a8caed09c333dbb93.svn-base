@@ -1,0 +1,74 @@
+$(function () {
+  $('#id').on('keyup', function () {
+    let idVal = $(this).val();
+    console.log(idVal);
+    let idReg = /^([a-z])([a-z0-9_-]){5,20}$/g;
+
+    if(!(idReg.test(idVal))){
+      $('#idMsg').show();
+      $('#idMsg-green').hide();
+    } else {
+      $('#idMsg').hide();
+      $('#idMsg-green').show();
+    }
+    
+    if(idVal === ""){
+      $('#idMsg').hide();
+      $('#idMsg-green').hide();
+    }
+  });
+
+
+  $('#pass').on('keyup', function () {
+    let passVal = $(this).val();
+    console.log(passVal);
+    let passReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/;
+
+
+    !(passReg.test(passVal)) ? $('#pswd1Msg').show() : $('#pswd1Msg').hide();
+    // if(!(passReg.test(passVal))){
+    //   $('#pswd1Msg').show();
+    // } else {
+    //   $('#pswd1Msg').hide();
+    // }
+    
+    if(passVal === ""){
+      $('#pswd1Msg').hide();
+    }
+  });
+
+  $('#name').on('keyup', function () {
+    let nameVal = $(this).val();
+    console.log(nameVal);
+    let nameReg = /^[가-힣a-zA-Z]+$/;
+
+    !(nameReg.test(nameVal)) ? $('#nameMsg').show() : $('#nameMsg').hide();
+    // if(!(nameReg.test(nameVal))){
+    //   $('#nameMsg').show();
+    // } else {
+    //   $('#nameMsg').hide();
+    // }
+    
+    if(nameVal === ""){
+      $('#nameMsg').hide();
+    }
+  });
+
+  $('#email').on('keyup', function () {
+    let emailVal = $(this).val();
+    console.log(emailVal);
+    let emailReg = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
+
+    !(emailReg.test(emailVal)) ? $('#emailMsg').show() : $('#emailMsg').hide();
+    // if(!(nameReg.test(nameVal))){
+    //   $('#nameMsg').show();
+    // } else {
+    //   $('#nameMsg').hide();
+    // }
+    
+    if(emailVal === ""){
+      $('#nameMsg').hide();
+    }
+  });
+
+});

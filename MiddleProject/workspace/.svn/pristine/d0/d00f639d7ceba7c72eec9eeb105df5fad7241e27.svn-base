@@ -1,0 +1,55 @@
+var prod_no = 0;
+
+$(function () {
+  $('#btn1').on('click', function () {
+    prod_no = 1;
+	$.ajax({
+	    type: "post",
+	    url: "/CodePeople/ProdList.do",
+	    data: {"prod_no" : prod_no},
+	    dataType: "json",
+	    success: function (res) {
+	      
+	      window.location.href="../html/kakaoPay.jsp";
+	  
+	    },
+	    error : function (xhr) {
+	     alert("상태 : " + xhr.status + "  text : " + xhr.statusText);
+	    }
+	  });
+  });
+  $('#btn2').on('click', function () {
+    prod_no = 2;
+	$.ajax({
+	    type: "get",
+	    url: "/CodePeople/ProdList.do",
+	    data: {"prod_no" : prod_no},
+	    dataType: "json",
+	    success: function (res) {
+	      
+	      window.location.href="../html/kakaoPay.jsp";
+	  
+	    },
+	    error : function (xhr) {
+	     alert("상태 : " + xhr.status + "  text : " + xhr.statusText);
+	    }
+	  });
+  });
+  $('#btn3').on('click', function () {
+    prod_no = 3;
+	$.ajax({
+	    type: "get",
+	    url: "/CodePeople/ProdList.do",
+	    data: {"prod_no" : prod_no},
+	    dataType: "json",
+	    success: function (res) {
+	      
+	      window.location.href="../html/kakaoPay.jsp";
+	  
+	    },
+	    error : function (xhr) {
+	     alert("상태 : " + xhr.status + "  text : " + xhr.statusText);
+	    }
+	  });
+  });
+});

@@ -1,0 +1,5 @@
+package kr.or.ddit.cmm.service;
+
+public class ComRightCheck {
+
+}

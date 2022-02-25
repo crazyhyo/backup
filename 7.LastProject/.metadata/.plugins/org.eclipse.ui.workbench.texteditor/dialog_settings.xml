@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="InptntList" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="inptntlist"/>
+			<item value="processInptntGo"/>
+			<item value="reject`````"/>
+			<item value="reject"/>
+			<item value="Accept"/>
+			<item value="accept"/>
+			<item value="fnBadge"/>
+			<item value="dgnssGo"/>
+			<item value="oprate"/>
+			<item value="opRate"/>
+			<item value="진료신청"/>
+			<item value="classifySckbdreqColor"/>
+			<item value="statsTest"/>
+			<item value="note"/>
+			<item value="showReqSckbdreqDetail"/>
+		</list>
+		<list key="replacehistory">
+			<item value=""/>
+			<item value=", 0.4"/>
+			<item value="&apos;,&apos;"/>
+			<item value="each-ltctelement"/>
+			<item value="each-ltct-element"/>
+			<item value="&quot;shittr fuckmap each-hspt-element&quot;"/>
+			<item value="shittr fuckmap each-hspt-element"/>
+			<item value="&lt;input name=&quot;pstiPregnanYn&quot; type=&quot;text&quot; class=&quot;form-control&quot;"/>
+			<item value="병상신청"/>
+			<item value="sckbd-request"/>
+			<item value="inptnt"/>
+			<item value="/resources/bootstrap/plugins/"/>
+			<item value="&lt;tr data-psti-no=&quot;${pstiNo }&quot;  onclick=&quot;OpenWindow(&apos;psti-registform?pstiInnb=${pstiReadyListVO.pstiInnb}&apos;,&apos;&apos;,&apos;1200&apos;,&apos;750&apos;);&quot; style=&quot;cursor:pointer;&quot;&gt;"/>
+			<item value="신규"/>
+			<item value="재검"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="449" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="300" key="DIALOG_HEIGHT"/>
+		<item value="1013" key="DIALOG_X_ORIGIN"/>
+		<item value="249" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/d3ee6ce800.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+  
+    </style>
+    
+        <!--  jquery사용 -->	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!--  serializeJSON함수 사용 -->
+	<script src="../js/jquery.serializejson.min.js"></script>
+	<script src="../js/SSPaging.js"></script>
+	
+	<script>
+		window.onload = function(){
+//			boardPaging(3);
+//			companyPaging(1);
+//			jobOpeningPaging(6);
+//			HRPaging(1);
+//			CVPaging(1);
+			JOCardPaging(1);
+		}
+	</script>
+    
+    
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <div id="header">
+        <!-- 헤더 메인 메뉴 바 -->
+        <div id="header-container">
+            <!-- 좌측 메뉴 -->
+            <div id="header-left-menu">
+                <!-- 로고 -->
+                <a href="" id="logo"><i class="fas fa-copyright" style="font-size: 32px;"></i></a>
+                <div class="divider"></div>
+                <!-- 통합 검색창 -->
+                <div id="search-box">
+                    <div id="search-item">
+                        <i class="fas fa-search item" style="width:15.3px; height:19px;"> </i>
+                        <input class="" type="text"
+                            style="height:19px; border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"
+                            placeholder="통합검색">
+                    </div>
+                </div>
+            </div>
+            <!-- 우측 메뉴 -->
+            <div id="header-right-menu">
+                <!-- 메인 메뉴 링크 -->
+                <div id="header-link-box">
+                    <a class="header-link" href="#">인재</a>
+                    <a class="header-link" href="#">기업</a>
+                    <a class="header-link" href="#">채용</a>
+                    <a class="header-link" href="#">커뮤니티</a>
+                    <a class="header-link" href="#">마이페이지</a>
+                </div>
+                <div class="divider"></div>
+                <!-- 로그인버튼 -->
+                <button id="header-login-btn" class="btn btn-primary btn-sm">로그인</button>
+            </div>
+        </div>
+    </div>
+    <!-- 바디 -->
+    <div id="body">
+        <div id="body-container">
+            <!-- 바디 메인 좌측 메뉴바 -->
+            <div class="nav-left-bar" >
+                <div class="nav-sticky">
+                <ul class="list-group">
+                    <li class="list-group-item active">Active item</li>
+                    <li class="list-group-item">Second item</li>
+                    <li class="list-group-item">Third item</li>
+                </ul>
+                </div>
+            </div>
+            <!-- 바디 콘텐츠 -->
+            <div id="content">
+                <!-- 콘텐츠 채용 검색 -->
+                <div class="filter-box content-box jo">
+
+                    <h1 class="h1">채용검색</h1>
+                    <div class="filter-box-dropdowns">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                직군
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h5 class="dropdown-header">직군</h5>
+                                </li>
+                                <li class="dropdown-item">선택내용1</li>
+                                <li class="dropdown-item">선택내용2</li>
+                                <li class="dropdown-item">선택내용3</li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                직무
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h5 class="dropdown-header">직무</h5>
+                                </li>
+                                <li class="dropdown-item">선택내용1</li>
+                                <li class="dropdown-item">선택내용2</li>
+                                <li class="dropdown-item">선택내용3</li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                활동분야
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h5 class="dropdown-header">활동분야</h5>
+                                </li>
+                                <li class="dropdown-item">선택내용1</li>
+                                <li class="dropdown-item">선택내용2</li>
+                                <li class="dropdown-item">선택내용3</li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                보상
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h5 class="dropdown-header">보상</h5>
+                                </li>
+                                <li class="dropdown-item">선택내용1</li>
+                                <li class="dropdown-item">선택내용2</li>
+                                <li class="dropdown-item">선택내용3</li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                지역
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h5 class="dropdown-header">지역</h5>
+                                </li>
+                                <li class="dropdown-item">선택내용1</li>
+                                <li class="dropdown-item">선택내용2</li>
+                                <li class="dropdown-item">선택내용3</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="search-tags"></div>
+                    <div class="input-group mb-3 col-lg-10 search-text">
+                        <input type="text" class="form-control" placeholder="검색어 입력">
+                    </div>
+                    <div class="filter-save-box">
+                        <button type="button" class="btn btn-outline-primary filter-save">검색 조건 저장</button>
+                    </div>
+                </div>
+                <!-- 콘턴츠 검색 결과의 구분은 기존의 클래스와 같고, 유료는 vip를 추가한다. -->
+                <!-- 콘텐츠 채용 검색결과 -->
+                <div class="content-box search-result jo">
+                    <!-- 검색결과 카드 -->
+                    <div id="test"></div>
+                    <div class="card card-jo">
+                        <!-- 카드의 이미지태그는 복사해서 사용할것 src alt값 변경 필-->
+                        <div class="card-left">
+                            <img src="../logo.jpeg" alt="Card image" style="width:64px; height: 64px;">
+                        </div>
+                        <!-- 카드의 정보 -->
+                        <div class="card-body card-right">
+                            <div class="card-top-box">
+                                <h4 class="card-title">${com_nm}</h4>
+                            </div>
+                            <!-- 카드의 회사 소개, 직군 -->
+                            <div class="card-text card-jobs-detail-company-intro"><span class="company-intor">${com_intro}</span></div>
+                            <div class="card-text card-jobs-detail-company-jobgroup"><span class="company-jobgroup">${JG_CODE_NM}</span></div>
+                            <!-- 카드의 채용공고 박스 -->
+                            <div class="card-jobs-detail">
+                                <div class="divider"></div>
+                                <div class="jobs-detail-top">
+                                    <div class="jobs-detail">
+                                        <a href="#" class="card-link"><span class="jo-title">${JO_TITLE}</span></a>&nbsp;&nbsp;
+                                        <span class="jo-salary jo-sm-font">${JO_SAL_TYPE}</span>
+                                        <span class="jo-sm-font">/</span>
+                                        <span class="jo-career jo-sm-font">경력</span>
+                                    </div>
+                                    <div class="dropup">
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-menu"
+                                            data-bs-toggle="dropdown"></button>
+                                        <!-- 카드 메뉴정보 -->
+                                        <ul class="dropdown-menu">
+                                            <!-- 카드 메뉴 헤더 -->
+                                            <li>
+                                                <h5 class="dropdown-header">관심등록</h5>
+                                            </li>
+                                            <!-- 카드 메뉴 옵션 -->
+                                            <li><a class="dropdown-item" href="#">스크랩</a></li>
+                                            <li>
+                                                <h5 class="dropdown-header">알람설정</h5>
+                                            </li>
+                                            <li><a class="dropdown-item" href="#">알람등록</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <span class="card-text jo-sm-font">${JT_CODE_NM}</span>&nbsp;&nbsp;
+                                <span class="jo-start jo-sm-font"><i class="far fa-calendar-alt">&nbsp;</i>10/12
+                                    </span>
+                                    &nbsp;<span class="jo-start jo-sm-font">~</span>&nbsp;
+                                <span class="jo-end jo-sm-font"><i class="far fa-calendar-alt">&nbsp;</i>10/15
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+    <!--  풋터-->
+    <div id="footer">
+        <div id="footer-container"></div>
+    </div>
+
+
+</body>
+
+</html>

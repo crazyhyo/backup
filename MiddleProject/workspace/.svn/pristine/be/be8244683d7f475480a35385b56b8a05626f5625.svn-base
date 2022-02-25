@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/d3ee6ce800.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../js/company.js"></script>
+  <style>
+    .cardSession {
+      display: fle;
+    }
+  </style>
+  <script>
+    comListServer(1);
+  </script>
+</head>
+
+<body>
+  <!-- 헤더 -->
+  <div id="header">
+    <!-- 헤더 메인 메뉴 바 -->
+    <div id="header-container">
+      <!-- 좌측 메뉴 -->
+      <div id="header-left-menu">
+        <!-- 로고 -->
+        <a href="" id="logo"><i class="fas fa-copyright" style="font-size: 32px;"></i></a>
+        <div class="divider"></div>
+        <!-- 통합 검색창 -->
+        <div id="search-box">
+          <div id="search-item">
+            <i class="fas fa-search item" style="width:15.3px; height:19px;"> </i>
+            <input class="" type="text"
+              style="height:19px; border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"
+              placeholder="통합검색">
+          </div>
+        </div>
+      </div>
+      <!-- 우측 메뉴 -->
+      <div id="header-right-menu">
+        <!-- 메인 메뉴 링크 -->
+        <div id="header-link-box">
+          <a class="header-link" href="#">인재</a>
+          <a class="header-link" href="#">기업</a>
+          <a class="header-link" href="#">채용</a>
+          <a class="header-link" href="#">커뮤니티</a>
+          <a class="header-link" href="#">마이페이지</a>
+        </div>
+        <div class="divider"></div>
+        <!-- 로그인버튼 -->
+        <button id="header-login-btn" class="btn btn-primary btn-sm">로그인</button>
+      </div>
+    </div>
+  </div>
+  <!-- 바디 -->
+  <div id="body">
+    <div id="body-container">
+      <!-- 바디 메인 좌측 메뉴바 -->
+      <div class="nav-left-bar">
+        <div class="nav-sticky">
+          <ul class="list-group">
+            <li class="list-group-item active">모든기업 보기</li>
+            <li class="list-group-item" id="write" class="btn btn-outline-primary" data-bs-toggle="modal"
+              data-bs-target="#writeModal">기업 등록</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 마이페이지 좌측 메뉴바 -->
+      <div class="nav-left-bar nav-my" style="display: none;">
+        <div class="nav-sticky">
+          <ul class="list-group">
+            <li class="list-group-item "><a class="nav-link" href="#cv">이력서</a></li>
+            <li class="list-group-item"> <a class="nav-link" href="#fav-company">관심기업</a></li>
+            <li class="list-group-item"><a class="nav-link" href="#fav-jo">관심공고</a></li>
+            <li class="list-group-item"><a class="nav-link" href="#">캘린더</a></li>
+            <li class="list-group-item"><a class="nav-link" href="#">유료서비스</a></li>
+            <li class="list-group-item"><a class="nav-link" href="#">회원정보</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- 바디 콘텐츠 -->
+      <div id="content">
+        <!-- 마이페이지 -->
+        <!-- 콘텐츠 기업 검색-->
+        <div class="filter-box content-box company">
+          <h1 class="h1">기업 정보 검색</h1>
+          <div class="filter-box-dropdowns">
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                직군
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <h5 class="dropdown-header">직군</h5>
+                </li>
+                <li class="dropdown-item">선택내용1</li>
+                <li class="dropdown-item">선택내용2</li>
+                <li class="dropdown-item">선택내용3</li>
+              </ul>
+            </div>
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                직군
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <h5 class="dropdown-header">직군</h5>
+                </li>
+                <li class="dropdown-item">선택내용1</li>
+                <li class="dropdown-item">선택내용2</li>
+                <li class="dropdown-item">선택내용3</li>
+              </ul>
+            </div>
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                인원
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <h5 class="dropdown-header">인원</h5>
+                </li>
+                <li class="dropdown-item">선택내용1</li>
+                <li class="dropdown-item">선택내용2</li>
+                <li class="dropdown-item">선택내용3</li>
+              </ul>
+            </div>
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                지역
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <h5 class="dropdown-header">학력</h5>
+                </li>
+                <li class="dropdown-item">선택내용1</li>
+                <li class="dropdown-item">선택내용2</li>
+                <li class="dropdown-item">선택내용3</li>
+              </ul>
+            </div>
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                평균연봉
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <h5 class="dropdown-header">평균연봉</h5>
+                </li>
+                <li class="dropdown-item">선택내용1</li>
+                <li class="dropdown-item">선택내용2</li>
+                <li class="dropdown-item">선택내용3</li>
+              </ul>
+            </div>
+          </div>
+          <div class="search-tags"></div>
+          <div class="input-group mb-3 col-lg-10 search-text">
+            <input type="text" class="form-control" placeholder="검색어 입력">
+          </div>
+          <div class="filter-save-box">
+            <button type="button" class="btn btn-outline-primary filter-save">검색 조건 저장</button>
+          </div>
+        </div>
+
+
+
+        <!-- 콘턴츠 검색 결과의 구분은 기존의 클래스와 같고, 유료는 vip를 추가한다. -->
+        <!-- 콘텐츠 기업 검색결과 -->
+        <div class="content-box search-result company" id="company-card-list">
+          <!-- 검색결과 카드 -->
+          <div class="card">
+            <!-- 카드의 이미지태그는 복사해서 사용할것 src alt값 변경 필-->
+            <div class="card-left">
+              <img src="../logo.jpeg" alt="Card image" style="width:64px; height: 64px;">
+            </div>
+            <!-- 카드의 정보 -->
+            <div class="card-body card-right">
+              <div class="card-top-box">
+                <h4 class="card-title">대한민국공무원</h4>
+                <div class="dropup">
+                  <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-menu"
+                    data-bs-toggle="dropdown"></button>
+                  <!-- 카드 메뉴정보 -->
+                  <ul class="dropdown-menu">
+                    <!-- 카드 메뉴 헤더 -->
+                    <li>
+                      <h5 class="dropdown-header">관심등록</h5>
+                    </li>
+                    <!-- 카드 메뉴 옵션 -->
+                    <li><a class="dropdown-item" href="#">Link 1</a></li>
+                    <li><a class="dropdown-item" href="#">Link 2</a></li>
+                    <li><a class="dropdown-item" href="#">Link 3</a></li>
+                    <li>
+                      <h5 class="dropdown-header">알람설정</h5>
+                    </li>
+                    <li><a class="dropdown-item" href="#">Another link</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- 별점 박스 스크립트로 구현필요 -->
+              <div class="card-rating-box">
+                <div class="card-rating-star">
+                  <!-- 채우기는 자바스크립트로 -->
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <div class="card-rating-text">(5.0)</div>
+              </div>
+              <!-- 카드의 기업정보 이동링크 -->
+              <a href="#" class="card-link">리뷰</a>
+              <a href="#" class="card-link">게시물</a>
+              <a href="#" class="card-link">연봉</a>
+              <a href="#" class="card-link">채용</a>
+            </div>
+          </div>
+          <!-- 아래는 이미지 시현을 위한 것입니다. 위의 것을 사용해주세요 -->
+        </div>
+
+        <!-- 기업등록 모달 -->
+        <div class="modal" id="writeModal">
+          <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">기업 등록</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+
+              <!-- Modal body -->
+              
+              <div class="modal-body">
+                
+                <form action="/action_page.php">
+                  <div class="mb-3 mt-3">
+                    <label>한글 기업명</label> <br>
+                    <label class="la2" for="email">*&nbsp;주식회사, (주) 등의 표기 없이 입력해주세요</label>
+                    <input type="text" class="form-control" id="name" placeholder="예) 기업명 " name="name">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label>사원 수</label>
+                    <input type="number" class="form-control" id="emp" placeholder="사원 수를 입력해주세요." name="emp">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label>홈페이지 주소</label>
+                    <input type="url" class="form-control" id="company" placeholder="홈페이지 주소를 입력해주세요" name="company">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label>평균 연봉</label>
+                    <input type="text" class="form-control" id="salary" placeholder="평균 연봉을 입력해주세요." name="salary">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label>설립일</label>
+                    <input type="date" class="form-control" id="company-date" placeholder="설립일을 입력해주세요." name="company-date">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label>회사 한줄 소개</label>
+                    <input type="text" class="form-control" id="introdce" placeholder="회사 한줄 소개를 입력해주세요." name="introdce">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label>회사 상세 소개</label> <br>
+                    <textarea style="height: 200px; width: 100%;" type="text" class="form-control" id="introdce"
+                      placeholder="회사 한줄 소개를 입력해주세요." name="introdce"></textarea>
+            
+                  </div>
+                
+                  <div id="search-box">
+                    <!-- <label>직군</label> <br>
+                    <div id="search-item">
+                      <i class="fas fa-search item" style="width:15.3px; height:19px;"> </i>
+                      <input class="form-control" type="text" placeholder="직군 검색">
+                    </div>
+                  </div>
+                
+                  <br> -->
+                   <div class="dropdown">
+                    <label>직군</label> <br>
+                    <label class="la2">*&nbsp;더 많은 사람이 회원님의 기업을 쉽게 찾을 수 있도록 산업 분야를 추가해주세요.</label> <br>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                      직군 선택
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">개발 1</a></li>
+                      <li><a class="dropdown-item" href="#">개발 2</a></li>
+                      <li><a class="dropdown-item" href="#">개발 3</a></li>
+                    </ul>
+                  </div>
+                  <br> 
+                  <div class="mb-3">
+                    <label>사업자 등록 번호</label><br>
+                    <label class="la2">*&nbsp;사업자 등록번호는 기업관리자만 볼 수 있습니다.</label>
+                    <input type="text" class="form-control" id="companynum" placeholder="사업자 등록번호를 입력해주세요." name="companynum">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label>기업 공식 이메일</label> <br>
+                    <label class="la2">*&nbsp;기업 공식 도메인의 이메일(@회사명.com)을 입력해주세요.</label>
+                    <label class="la2">*&nbsp;해당 이메일로 인증 메일을 보내드립니다. 인증 시 기업 회원으로 등록됩니다.</label>
+                    <input type="email" class="form-control" id="companyEmail" placeholder="기업 공식 이메일을 입력해주세요." name="companyEmail">
+                  </div>
+            
+                  <div class="mb-3">
+                    <label>문의 담당자</label><br>
+                    <label class="la2">*&nbsp;기업 페이지를 처음 등록한 분이 문의 담당자로 지정됩니다.</label>
+                    <label class="la2">*&nbsp;변경하려면 기업 등록 후 '기업 프로필>기업 정보'에서 변경 및 삭제해주세요.</label>
+                    <input type="text" class="form-control" id="officer" placeholder="ex)Elon Reeve Musk" name="officer">
+                  </div>
+            
+                  <div class="btn-center-box">
+                    <button type="button" class="btn btn-primary btn-lg">등록하기</button>
+                  </div>
+                </form>
+                <button type="button" id="send" class="btn btn-primary" data-bs-dismiss="modal">작성완료</button>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+
+  </div>
+
+  <!--  풋터-->
+  <div id="footer">
+    <div id="footer-container"></div>
+  </div>
+
+
+</body>
+
+</html>

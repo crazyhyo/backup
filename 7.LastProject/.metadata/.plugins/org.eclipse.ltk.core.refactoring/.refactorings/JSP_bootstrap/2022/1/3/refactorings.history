@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;PageMaker.java&apos; to &apos;covid_compass/src/main/java/com.spring.compass.command&apos;&#x0D;&#x0A;- Original project: &apos;JSP_bootstrap&apos;&#x0D;&#x0A;- Destination element: &apos;covid_compass/src/main/java/com.spring.compass.command&apos;&#x0D;&#x0A;- Original element: &apos;kr.or.ddit.util.PageMaker.java&apos;" description="Copy compilation unit" destination="=covid_compass/src\/main\/java&lt;com.spring.compass.command" element1="/src&lt;kr.or.ddit.util{PageMaker.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1642129865957" units="1" version="1.0"/>
+</session>

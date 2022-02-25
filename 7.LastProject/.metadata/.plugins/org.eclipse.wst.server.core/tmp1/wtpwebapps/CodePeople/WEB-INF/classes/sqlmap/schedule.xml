@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="schedule">
+
+	<resultMap class="kr.or.ddit.schedule.vo.ScheduleVO" id="ScheduleMap">
+		<result property="calTag" column="CAL_TAG"/>
+		<result property="calTagColor" column="CAL_TAG_COLOR"/>
+		<result property="scheSdate" column="SCHE_SDATE"/>
+		<result property="scheEdate" column="SCHE_EDATE"/>
+		<result property="scheCont" column="SCHE_CONT"/>
+		<result property="scheNo" column="SCHE_NO"/>
+	</resultMap>
+	
+	<select id="joScheduleList" resultMap="ScheduleMap">
+		SELECT * FROM V_SCHD_CARD
+	</select>
+			
+</sqlMap>
+
+
+
+
+
+
+
+

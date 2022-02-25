@@ -1,0 +1,36 @@
+package com.spring.compass.command;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+public class PbhtStatsCommand {
+
+	private String inspSmpleCnt;
+	private String pstvCnt;
+	private String ngtvCnt;
+	
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
+	public String getInspSmpleCnt() {
+		return inspSmpleCnt;
+	}
+	public void setInspSmpleCnt(String inspSmpleCnt) {
+		this.inspSmpleCnt = inspSmpleCnt;
+	}
+	public String getPstvCnt() {
+		return pstvCnt;
+	}
+	public void setPstvCnt(String pstvCnt) {
+		this.pstvCnt = pstvCnt;
+	}
+	public String getNgtvCnt() {
+		return ngtvCnt;
+	}
+	public void setNgtvCnt(String ngtvCnt) {
+		this.ngtvCnt = ngtvCnt;
+	}
+
+}

@@ -1,0 +1,17 @@
+function boardPaging(currentPageNo){
+	
+	$.ajax({
+		url : '/CodePeople/BoardPagingList.do',
+		type : 'get',
+		data : { "currentPageNo" : currentPageNo},
+		dataType : 'json',
+		success : function(res){
+			
+		},
+		error : function(err){
+			alert(`status : ${err.status}\ntext : ${err.statusText}`);
+		}
+		
+	})
+	
+}

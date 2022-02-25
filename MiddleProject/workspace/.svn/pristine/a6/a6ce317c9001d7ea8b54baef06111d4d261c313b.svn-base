@@ -1,0 +1,46 @@
+package kr.or.ddit.message.vo;
+
+public class MessageVO {
+	private Integer msg_no;
+	private String msg_cont;
+	private String msg_senddate;
+	private String msg_opendate;
+	private Integer mem_sender_no;
+	private Integer mem_receiver_no;
+	public Integer getMsg_no() {
+		return msg_no;
+	}
+	public void setMsg_no(Integer msg_no) {
+		this.msg_no = msg_no;
+	}
+	public String getMsg_cont() {
+		return msg_cont;
+	}
+	public void setMsg_cont(String msg_cont) {
+		this.msg_cont = msg_cont;
+	}
+	public String getMsg_senddate() {
+		return msg_senddate;
+	}
+	public void setMsg_senddate(String msg_senddate) {
+		this.msg_senddate = msg_senddate;
+	}
+	public String getMsg_opendate() {
+		return msg_opendate;
+	}
+	public void setMsg_opendate(String msg_opendate) {
+		this.msg_opendate = msg_opendate;
+	}
+	public Integer getMem_sender_no() {
+		return mem_sender_no;
+	}
+	public void setMem_sender_no(Integer mem_sender_no) {
+		this.mem_sender_no = mem_sender_no;
+	}
+	public Integer getMem_receiver_no() {
+		return mem_receiver_no;
+	}
+	public void setMem_receiver_no(Integer mem_receiver_no) {
+		this.mem_receiver_no = mem_receiver_no;
+	}
+}

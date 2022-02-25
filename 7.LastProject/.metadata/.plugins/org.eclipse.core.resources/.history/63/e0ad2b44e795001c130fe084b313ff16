@@ -1,0 +1,51 @@
+ackage util;
+
+public enum EnumView {
+	   HOME(false) 				,
+	   LOGIN_SCREEN 		,
+	   LOGIN(false) 				,
+	   JOIN(false) 				,
+	   SHOW_NORMAL			,
+	   SHOW_OWNER			,
+	   SET_REGION(false) 			,
+	   SET_OPTION 			,
+	   LODGE_LIST 			,
+	   ROOM_LIST 			,
+	   ROOM_DETAIL 			,
+	   RESERVATION 			,
+	   PAYCHECK 			,
+	   NOTICE_BOARD_LIST 	,
+	   NOTICE_BOARD_DETAIL 	,
+	   CART_LIST 			,
+	   RESERVATION_INFO(false) 	,
+	   MY_INFO_UPDATE(false) 		,
+	   MY_INFO 				,
+	   MY_LODGE_LIST 		,
+	   LODGE_DETAIL 		,
+	   LODGE_MANAGE 		,
+	   BOOKER_INFO(false) 			,
+	   SALES_MANAGE(false) 		,
+	   ROOM_MANAGE 			,
+	   BOARD_MANAGE 		,
+	   RESERVATION_INFO_NON(false) ,
+	   REVIEW_BOARD_LIST 	,
+	   REVIEW_BOARD_DETAIL 	,
+	   CART_DETAIL 			,
+	   SHOW_NON				,
+	   MY_INFO_OWNER		,
+	   MY_ROOM_DETAIL		,
+	   TEST 				,
+	   EXIT 				,
+	   PAYMENT_GUEST        ,
+	   PAYMENT_ONE(false)          ,
+	   PAYMENT_CART(false)         ;
+	
+	boolean requireInput;
+	
+	EnumView(boolean requireInput){
+		this.requireInput = requireInput;
+	}
+
+}
+
+

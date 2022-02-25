@@ -1,0 +1,79 @@
+h1 {
+  text-align: center;
+}
+
+.btn-center-box {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.formsizing {
+  width: 810px;
+}
+
+.company-register label:first-child {
+  font-size: 1.1em;
+}
+
+.company-register .la2 {
+  font-size: 0.8em;
+  color: darkgray;
+}
+
+.company-register .form-control {
+  margin-top: 4px;
+}
+
+.company-register #search-box {
+  box-sizing: border-box;
+  width: 278px;
+  height: 48px;
+  padding-top: var(--padding-header-ver);
+  padding-bottom: var(--padding-header-ver);
+  padding-left: var(--padding-header-left);
+  padding-right: var(--padding-header-left);
+}
+
+.company-register #search-box #search-item {
+  color: var(--color-lightgray);
+  width: 246px;
+  padding-top: 4px;
+}
+
+.company-register #search-box #search-item input::placeholder {
+  color: var(--color-lightgray);
+}
+
+.company-register #search-box #search-item input:focus {
+  outline: none;
+}
+
+.form-control.zip{
+  width: 50%;
+  margin: 0px;
+  margin-right: 10px;
+}
+
+.zipInput{
+  display: flex;
+}
+
+.container.mt-3.formsizing.company-register{
+  margin-bottom: 60px;
+}
+
+.error_next_box {
+  display: block;
+  margin: 9px 0 -2px;
+  font-size: 12px;
+  line-height: 14px;
+  color: red;
+}
+.error_next_box.green {
+  display: block;
+  margin: 9px 0 -2px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #08a600;
+}

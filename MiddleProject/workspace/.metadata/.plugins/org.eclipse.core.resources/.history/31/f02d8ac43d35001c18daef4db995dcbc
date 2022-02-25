@@ -1,0 +1,35 @@
+// 세션에서 회원이 기업회원임과 등록한 기업이 있다는 것을 확인하여
+// 등록한 기업의 기업번호를 리턴하는 메서드, 등록한 기업이 없다면 0을 반환
+function CheckComRight(){
+	
+	$.ajax({
+		url: '/CodePeople/CheckRight.do',
+		type: 'get',
+		dataType: 'json',
+		success: function(res){
+			return res.comNo;
+		},
+		error: function(err){
+			alert(`status : ${err.status}`);
+		}		
+	})
+	
+}
+
+//세션에서 회원이 기업회원임과 등록한 기업이 있다는 것을 확인하여
+//등록한 기업의 기업번호를 리턴하는 메서드, 등록한 기업이 없다면 0을 반환
+function CheckHrRight(){
+	
+	$.ajax({
+		url: '/CodePeople/CheckRight.do',
+		type: 'get',
+		dataType: 'json',
+		success: function(res){
+			return res.hrNo;
+		},
+		error: function(err){
+			alert(`status : ${err.status}`);
+		}		
+	})
+	
+}

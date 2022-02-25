@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Menu-Mapper.xml&apos; to &apos;covid_compass/src/main/resources/com.spring.compass.mybatis.mappers&apos;&#x0D;&#x0A;- Original project: &apos;spring_bootstrap&apos;&#x0D;&#x0A;- Destination element: &apos;covid_compass/src/main/resources/com.spring.compass.mybatis.mappers&apos;&#x0D;&#x0A;- Original element: &apos;Menu-Mapper.xml&apos;" description="Copy file" destination="=covid_compass/src\/main\/resources&lt;com.spring.compass.mybatis.mappers" element1="src/main/resources/kr/or/ddit/mybatis/mappers/Menu-Mapper.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1641382606868" units="0" version="1.0"/>
+</session>

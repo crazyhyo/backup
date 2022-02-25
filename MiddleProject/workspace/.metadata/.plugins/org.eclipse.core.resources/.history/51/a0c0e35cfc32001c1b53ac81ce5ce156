@@ -1,0 +1,10 @@
+package kr.or.ddit.schedule.service;
+
+import java.util.List;
+
+import kr.or.ddit.edu.vo.EduVO;
+
+public interface IScheduleService {
+
+	public List<EduVO> selectEduCodeList();
+}

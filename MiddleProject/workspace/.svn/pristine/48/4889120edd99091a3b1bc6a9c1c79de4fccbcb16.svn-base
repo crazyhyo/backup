@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="board">
+	<resultMap class="java.util.HashMap" id="BoardListMap">
+		<result property="BOARD_NO" column="BOARD_NO"/>
+		<result property="BOARD_TITLE" column="BOARD_TITLE"/>
+		<result property="BOARD_HIT" column="BOARD_HIT"/>
+		<result property="BOARD_LIKE" column="BOARD_LIKE"/>
+		<result property="BOARD_REPL" column="BOARD_REPL"/>
+		<result property="BOARD_CONT" column="BOARD_CONT"/>
+		<result property="BOARD_DATE" column="BOARD_DATE"/>
+		<result property="MEM_ID" column="MEM_ID"/>
+	</resultMap>
+
+	<resultMap class="kr.or.ddit.board.vo.BoardVO" id="BoardMap">
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="BOARD_CODE_NO" property="boardCodeNo" />
+		<result column="BOARD_TITLE" property="boardTitle" />
+		<result column="BOARD_CONT" property="boardCont" />
+		<result column="MEM_NO" property="memNo" />
+		<result column="BOARD_HIT" property="boardHit" />
+		<result column="BOARD_REPT" property="boardRept" />
+		<result column="BOARD_LIKE" property="boardLike" />
+		<result column="BOARD_REPL" property="boardRepl" />
+		<result column="BOARD_POP" property="boardPop" />
+		<result column="BOARD_DATE" property="boardDate" />
+		<result column="BOARD_ACTIVE" property="boardActive" />
+		<result column="BOARD_HEAD" property="boardHead" />
+		<result column="ATCH_FILE_ID" property="atchFileId" />
+	</resultMap>
+
+
+	<select id="boardPagingList" parameterClass="kr.or.ddit.cmm.vo.BoardPagingVO"
+	        resultMap="BoardMap">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM BOARD
+		                 ORDER BY BOARD_NO DESC) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+	<select id="getTotalBoardCount" resultClass="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+		 WHERE BOARD_ACTIVE = 1
+	</select>
+	
+	<select id="selectAll" resultMap="BoardListMap">
+	
+		SELECT * FROM V_BOARDLIST
+	
+	</select>
+	<!-- BOARD_CODE_NO, MEM_ID는 테스트용 임의의 값 넣은 것 -->
+	<insert id="boardInsert" parameterClass="kr.or.ddit.board.vo.BoardVO">
+	
+		INSERT INTO BOARD(BOARD_NO, BOARD_CODE_NO, BOARD_TITLE, BOARD_CONT, BOARD_DATE, MEM_NO)
+			VALUES(
+				board_seq.nextval,
+				3,
+				#boardTitle#,
+				#boardCont#,
+				sysdate,
+				(SELECT mem_no 
+					FROM member
+					WHERE mem_id = 'test93'))
+	
+	</insert>
+	
+	
+</sqlMap>

@@ -1,0 +1,42 @@
+
+<%@page import="kr.or.ddit.hr.vo.HRCardVO"%>
+
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	List<HRCardVO > list = (List<HRCardVO>) request.getAttribute("hrCardPagingList");
+%>
+
+[
+
+<%
+	for(int i = 0; i < list.size(); i++){
+		if(i > 0){
+			out.print(",");
+		}
+		HRCardVO vo = list.get(i);
+
+		String memNm = vo.getMemNm();
+		String jtCodeNm = vo.getJtCodeNm();
+		String plCodeNm = vo.getPlCodeNm();
+		String hrCurrCom = vo.getHrCurrCom();
+		
+%>
+
+	{
+		"memNm" : "<%=memNm%>",
+		"jtCodeNm" : "<%=jtCodeNm%>",
+		"plCodeNm" : "<%=plCodeNm%>",
+		"hrCurrCom" : "<%=hrCurrCom%>"
+										}
+
+
+<% 
+	}	
+	
+%>
+
+]
+
+

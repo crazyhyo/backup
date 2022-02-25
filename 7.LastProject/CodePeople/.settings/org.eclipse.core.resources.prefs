@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/kr/or/ddit/board/controller/ReplyDelete.java=UTF-8
+encoding//src/kr/or/ddit/board/controller/ReplyUpdate2.java=UTF-8
+encoding//src/kr/or/ddit/board/dao/IBoardDao.java=UTF-8
+encoding//src/kr/or/ddit/board/service/IBoardService.java=UTF-8
+encoding//src/kr/or/ddit/cmm/vo/AtchFileVO.java=UTF-8
+encoding//src/kr/or/ddit/util/FileUploadRequestWrapper.java=UTF-8

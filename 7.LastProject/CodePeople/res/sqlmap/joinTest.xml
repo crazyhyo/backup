@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="test">
+	
+	<resultMap class="kr.or.ddit.vo.member.MemberVO" id="MemberMap">
+		<result column="MEM_IS_API" property="memIsApi"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="MEM_NM" property="memNm"/>
+		<result column="MEM_ID" property="memId"/>
+		<result column="MEM_PW" property="memPw"/>
+		<result column="MEM_EMAIL" property="memEmail"/>
+		<result column="MEM_TEL" property="memTel"/>
+		<result column="PROV_CODE_NO" property="provCodeNo"/>
+		<result column="CITY_CODE_NO" property="cityCodeNo"/>
+		<result column="MEM_CODE" property="memCode"/>
+		<result column="MEM_ACTIVE" property="memActive"/>
+		<result column="MEM_GENDER" property="memGender"/>
+		<result column="MEM_IN_COM" property="memInCom"/>
+		<result column="MEM_BIR" property="memBir"/>
+		<result column="MEM_ORIGNL_PW" property="memOrignlPw"/>
+		<result column="ATCH_FILE_ID" property="atchFileId"/>
+	</resultMap>
+	
+	<select id="checkId" parameterClass="String" resultClass="int">
+		SELECT COUNT(*) FROM MEMBER
+		 WHERE MEM_ID = #memId#
+	</select>
+	
+	<select id="loginCheck" parameterMap="MemberMap"
+			resultClass="int">
+		SELECT MEM_NO
+		  FROM MEMBER
+		 WHERE MEM_ID = #memId#
+		       AND MEM_PW = #memPw#	
+	</select>
+	
+	<insert id="insertIndMem" parameterMap="MemberMap">
+		INSERT INTO MEMBER
+			   (MEM_NO,				MEM_ID,			MEM_PW,		MEM_NM,
+			    MEM_TEL,			MEM_EMAIL,		MEM_BIR,	CITY_CODE_NO,
+			    PROV_CODE_NO,		MEM_ORIGNL_PW,	MEM_ACTIVE,	MEM_CODE,
+			    MEM_IN_COM,			MEM_IS_API)
+		VALUES (MEMBER_SEQ.NEXTVAL,	#memId#,		#memPw#,	#memNm#,
+				#memTel#,			#memEmail#,		#memBir#,	#cityCodeNo#,
+				#provCodeNo#,		#memOrignlPw#,	1,			1,
+				0,					0)
+		
+		<selectKey keyProperty="memId" resultClass="int">
+			SELECT	MEMBER_SEQ.CURRVAL	FROM	DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertHr" parameterClass="int">
+		INSERT INTO HR
+			   (HR_NO,				MEM_NO)
+		VALUES (HR_SEQ.NEXTVAL,		#memNo#)
+	</insert>
+	
+	
+	<insert id="insertEdu" parameterClass="kr.or.ddit.edu.vo.EduVO">
+		INSERT INTO EDU
+			   (EDU_NO,				EDU_CODE_NO,	EDU_SCH_NM,
+			    EDU_MAJOR,			EDU_GRA_TOT,	EDU_GRA_AVG)
+		VALUES (EDU_SEQ.NEXTVAL,	#eduCodeNo#,	#eduSchNm#,
+				#eduMajor#,			#eduGraTot#,	#eduGraAvg#)
+		<selectKey keyProperty="eduNo" resultClass="int">
+			SELECT EDU_NO FROM EDU
+		</selectKey>	
+	</insert>
+	
+	<insert id="insertEduHr" parameterClass="java.util.Map">
+		INSERT INTO EDU_HR
+			   (EDU_NO, 	HR_NO)
+		VALUES (#eduNo#, 	#hrNO#)
+	</insert>
+	
+	
+	
+</sqlMap>

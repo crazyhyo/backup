@@ -1,0 +1,374 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<script type="text/x-handlebars-template" id="dgnss-detail-template">
+<table class="table table-bordered dgnss-detail-info">
+    <thead>
+      <tr style="text-align: center;">
+        <th>성명</th>
+        <td>{{pstiNm}}</td>
+        <th>국적</th>
+        <td>{{nlty}}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="shittr" style="text-align: center;">
+        <th>진료요청일자</th>
+        <td>{{prettifyDate reqYmd}}</td>
+        <th>백신접종</th>
+        <td>{{vacType}}</td>
+      </tr>
+      <tr class="shittr" style="text-align: center;">
+        <th>성별</th>
+        <td>{{gender}}</td>
+        <th>나이</th>
+        <td>{{age}}</td>
+      </tr>
+      <tr class="shittr" style="text-align: center;">
+        <th>확정일자</th>
+        <td>{{prettifyDate resYmd}}</td>
+        <th>결과</th>
+        <td>{{pstvYn}}</td>
+      </tr>
+      <tr class="shittr" style="text-align: center;">
+        <th>발열여부</th>
+        <td>{{feverYn}}</td>
+        <th>임신여부</th>
+        <td>{{pregnYn}}</td>
+      </tr>
+      <tr class="shittr" style="text-align: center;">
+        <th>주민/외국인등록번호</th>
+        <td>{{rrn}}</td>
+        <th>연락처</th>
+        <td>{{pstiTelno}}</td>
+      </tr>
+      <tr class="shittr" style="text-align: center;">
+        <th>주소</th>
+        <td colspan="3">{{pstiAdres}}</td>
+      </tr>
+      <tr class="shittr" style="text-align: center;">
+        <th>증상</th>
+        <td colspan="3">{{symptms}}</td>
+      </tr>
+    </tbody>
+  </table>
+</script>
+
+<script>
+
+var dgnssResultForm = '';
+function reset(){
+	$('select[name="statusCode"]').val("");
+	disableButton();
+}
+function disableButton(){
+	$('button[name="inptnt-button"]').attr('disabled', true);
+	$('button[name="sckbdreq-inptnt-button"]').attr('disabled', true);
+	$('button[name="sckbdreq-isoptnt-button"]').attr('disabled', true);
+	$('button[name="slfptnt-button"]').attr('disabled', true);
+	$('button[name="isoptnt-dgnss-button"]').attr('disabled', true);
+	$('button[name="isoptnt-inptnt-button"]').attr('disabled', true);
+	$('button[name="isoptnt-sckbdreq-inptnt-button"]').attr('disabled', true);
+}
+function enableButton(value){
+	disableButton();
+	
+	if(value){
+		$('button[name="isoptnt-dgnss-button"]').attr('disabled', false);
+		$('button[name="isoptnt-inptnt-button"]').attr('disabled', false);
+		$('button[name="isoptnt-sckbdreq-inptnt-button"]').attr('disabled', false);
+	}
+	
+	if(value == 'D101'){
+		$('button[name="inptnt-button"]').attr('disabled', false);
+		$('button[name="sckbdreq-inptnt-button"]').attr('disabled', false);
+		return;
+	}
+	if(value == 'D102'){
+		$('button[name="sckbdreq-isoptnt-button"]').attr('disabled', false);
+		return;
+	}
+	if(value == 'D103'){
+		$('button[name="slfptnt-button"]').attr('disabled', false);
+		return;
+	}
+}
+
+function openInptntGo(btn, type){
+	$(btn).attr('data-manage-no');
+	$(btn).attr('data-psti-nm');
+	
+	var openUrl = 'sckbdreq-inptnt?manageNo=' +  $(btn).attr('data-manage-no') + '&pstiNm=' + $(btn).attr('data-psti-nm')
+					+ '&type=' + type;
+	
+	OpenWindow(openUrl, '병원 조회', 1260, 715);
+	
+}
+function openIsoptntGo(btn, type){
+	$(btn).attr('data-manage-no');
+	$(btn).attr('data-psti-nm');
+	
+	var openUrl = 'sckbdreq-isoptnt?manageNo=' +  $(btn).attr('data-manage-no') + '&pstiNm=' + $(btn).attr('data-psti-nm')
+					+ '&type=' + type;
+	
+	OpenWindow(openUrl, '생활치료센터 조회', 1260, 715);
+	
+}
+function showDetail(manageNo, dgnssNo, paramType){
+	var typeTemp = $('form[name="processForm"] input[name="type"]').val();
+
+	if(!typeTemp) typeTemp = 'A';
+	
+	if(typeTemp != paramType){
+		
+    	var divShows = $('div.show-element');
+    	var divHiddens = $('div.hidden-element');
+    	
+    	divShows.removeClass('show-element');
+    	divShows.addClass('hidden-element');
+    	
+    	divHiddens.removeClass('hidden-element');
+    	divHiddens.addClass('show-element');
+    	
+	}
+	
+	reset();
+	
+	var trs = $('tr.each-dgnss-element');
+	
+	trs.removeClass('on');
+	
+	var target = $('tr[data-manage-no="'+manageNo+'"]');
+	
+	target.addClass('on');
+	
+	var instNm = $('span[data-inst-nm="'+manageNo+'"]').html();
+	
+	var childNo = target.attr('data-child-no');
+	var type = target.attr('data-type');
+	var dgnssNo = target.attr('data-dgnss-no');
+	var manageNo = target.attr('data-manage-no');
+	//alert($('input[name="instNm"]'));
+	
+	var openInptntbtn = $('button[name="sckbdreq-inptnt-button"]');
+	var openIsoptntbtn = $('button[name="sckbdreq-isoptnt-button"]');
+	
+	$(openInptntbtn).attr('data-manage-no', manageNo);
+	$(openInptntbtn).attr('data-psti-nm', target.attr('data-psti-nm'));
+	$(openIsoptntbtn).attr('data-manage-no', manageNo);
+	$(openIsoptntbtn).attr('data-psti-nm', target.attr('data-psti-nm'));
+	
+	$('form[name="processForm"] input[name="childNo"]').val(childNo);
+	$('form[name="processForm"] input[name="type"]').val(type);
+	$('form[name="processForm"] input[name="dgnssNo"]').val(dgnssNo);
+	$('form[name="processForm"] input[name="manageNo"]').val(manageNo);
+	
+	var url = '<%=request.getContextPath()%>/rest-hspt/dgnss-detail';
+	
+	$.ajax({
+	    url : url,
+	    type : 'post',
+	    data : {
+	    		'manageNo' : manageNo
+	    		},
+	    dataType : 'json',
+	    success : function(dgnssDetailCommand){
+	    	printData(dgnssDetailCommand, $('#dgnss-detail-info-module'), $('#dgnss-detail-template'), '.dgnss-detail-info');
+	    	$('#req-inst-nm').html(instNm);
+	    },
+	    error : function(error){
+	      alert('error' + error.status);
+	    }
+	  });
+}
+
+
+function process_go(type){
+	
+	$('form[name="processForm"] input[name="dgnssResultCode"]').val($('select[name="statusCode"]').val());
+	$('form[name="processForm"] input[name="dgnssNote"]').val($('textarea[name="dgnssNote"]').val());
+	
+	
+	var closeWindow = false;
+	var message = '';
+	
+	if(type == '1'){
+		process_url = '<%=request.getContextPath()%>/rest-hspt/process-dgnss-inptnt';
+		message = '입원처리가 완료되었습니다.';
+	}
+	if(type == '2'){
+		
+		alert('test');
+		
+		process_url = '<%=request.getContextPath()%>/rest-hspt/process-dgnss-sckbdreq-inptnt';
+		closeWindow = true;
+		message = '이원신청이 완료되었습니다.';
+	}
+	if(type == '3'){
+		process_url = '<%=request.getContextPath()%>/rest-hspt/process-dgnss-sckbdreq-isoptnt';
+		closeWindow = true;
+		message = '입소신청이 완료되었습니다.';
+	}
+	if(type == '4'){
+		process_url = '<%=request.getContextPath()%>/rest-hspt/process-dgnss-slfptnt';
+		message = '자가격리처리가 완료되었습니다.';
+	}
+	if(type == '5'){
+		process_url = '<%=request.getContextPath()%>/rest-hspt/process-dgnss-result-isoptnt';
+		message = '검사를 완료했습니다.';
+	}
+	
+	$('form[name="processForm"] input[name="closeWindow"]').val(closeWindow);
+	
+	processForm = $('form[name="processForm"]');
+	
+		$.ajax({
+			url : process_url,
+			type : 'post',
+			data : processForm.serialize(),
+			dataType : 'json',
+			success : function(dataMap) {
+				
+				console.log(dataMap.colseWindow);
+				
+				if(dataMap.msg == 'success'){
+					alert(message);
+				}
+				
+				if(dataMap.colseWindow){
+					window.opener.location.reload(true);		
+					window.close();
+				}else{
+					window.location.reload(true);
+				}
+			},
+			error : function(error) {
+				alert('error' + error.status);
+			}
+		});
+	}
+
+</script>
+<div>
+  <div class="" id="dgnss-detail-info-module">
+    <table class="table table-bordered dgnss-detail-info">
+      <thead>
+        <tr style="text-align: center;">
+          <th>성명</th>
+          <td></td>
+          <th>국적</th>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="shittr" style="text-align: center;">
+          <th>진료요청일자</th>
+          <td></td>
+          <th>백신접종</th>
+          <td></td>
+        </tr>
+        <tr class="shittr" style="text-align: center;">
+          <th>성별</th>
+          <td></td>
+          <th>나이</th>
+          <td></td>
+        </tr>
+        <tr class="shittr" style="text-align: center;">
+          <th>확정일자</th>
+          <td></td>
+          <th>결과</th>
+          <td></td>
+        </tr>
+        <tr class="shittr" style="text-align: center;">
+          <th>발열여부</th>
+          <td></td>
+          <th>임신여부</th>
+          <td></td>
+        </tr>
+        <tr class="shittr" style="text-align: center;">
+          <th>주민/외국인등록번호</th>
+          <td></td>
+          <th>연락처</th>
+          <td></td>
+        </tr>
+        <tr class="shittr" style="text-align: center;">
+          <th>주소</th>
+          <td colspan="3"></td>
+        </tr>
+        <tr class="shittr" style="text-align: center;">
+          <th>증상</th>
+          <td colspan="3"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <table class="table table-bordered">
+      <tbody>
+        <tr class="shittr" style="text-align: center;">
+          <th>진료 결과</th>
+          <td style="padding-top: 4px; padding-botton: 4px;"><select class="form-control col-sm-12" name="statusCode" onchange="enableButton(this.value);">
+              <option value="">진단</option>
+              <option value="D101">중증 및 중등증</option>
+              <option value="D102">미중증 및 경증</option>
+              <option value="D103">무증상</option>
+          </select></td>
+          <th>요청기관</th>
+          <td id="req-inst-nm"></td>
+        </tr>
+        <tr>
+          <td colspan="4" style="padding-bottom: 0px; text-align: center;">
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <label for="inputPassword3" class="control-label text-center" style="padding-top: 7px;">진료 메모</label>
+              </div>
+              <div class="col-sm-10 row" style="margin-top: 5px;" align="right">
+                <div class="col-md-3 show-element">
+                  <button style="background-color: #1a4f72; border-color: #1a4f72;" type="button" name="inptnt-button" class="btn btn-block btn-primary btn-sm" onclick="process_go('1');">입원</button>
+                </div>
+                <div class="col-md-3 show-element">
+                  <button style="background-color: #1a4f72; border-color: #1a4f72;" type="button" name="sckbdreq-inptnt-button" class="btn btn-block btn-primary btn-sm"
+                  		  data-manage-no="" data-psti-nm="" onclick="openInptntGo(this, 'A');">이원</button>
+                </div>
+                <div class="col-md-3 show-element">
+                  <button style="background-color: #1a4f72; border-color: #1a4f72;" type="button" name="sckbdreq-isoptnt-button" class="btn btn-block btn-primary btn-sm"
+                          data-manage-no="" data-psti-nm="" onclick="openIsoptntGo(this, 'A');">생활치료센터</button>
+                </div>
+                <div class="col-md-3 show-element">
+                  <button style="background-color: #1a4f72; border-color: #1a4f72;" type="button" name="slfptnt-button" class="btn btn-block btn-primary btn-sm" onclick="process_go('4');">자가격리</button>
+                </div>
+                <div class="col-md-3 hidden-element">
+                  
+                </div>
+                <div class="col-md-3 hidden-element">
+                  <button style="background-color: #1a4f72; border-color: #1a4f72;" type="button" name="isoptnt-dgnss-button" class="btn btn-block btn-primary btn-sm" onclick="process_go('5');">진료완료</button>
+                </div>
+                <div class="col-md-3 hidden-element">
+                  <button style="background-color: #1a4f72; border-color: #1a4f72;" type="button" name="isoptnt-inptnt-button" class="btn btn-block btn-primary btn-sm" onclick="process_go('1');">입원</button>
+                </div>
+                <div class="col-md-3 hidden-element">
+                  <button style="background-color: #1a4f72; border-color: #1a4f72;" type="button" name="isoptnt-sckbdreq-inptnt-button" class="btn btn-block btn-primary btn-sm" onclick="OpenWindow('sckbdreq-inptnt', '병원 조회', 1250,724)">이원</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <textarea name="dgnssNote" class="form-control" id="inputPassword3" style="height: 207px; width: 97%; margin: 10px; margin-top: 0; margin-bottom: 0;"></textarea>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<form name="processForm" style="display : none;">
+  childNo<input type="text" name="childNo">
+  type<input type="text" name="type">
+  dgnssResultCode<input type="text" name="dgnssResultCode">
+  dgnssNote<input type="text" name="dgnssNote">
+  manageNo<input type="text" name="manageNo">
+  dgnssNo<input type="text" name="dgnssNo">
+  toLtctNo<input type="text" name="toLtctNo">
+  toHsptNo<input type="text" name="toHsptNo">
+  closeWindow<input type="text" name="closeWindow">
+</form>

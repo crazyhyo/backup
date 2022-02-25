@@ -1,0 +1,32 @@
+<%@page import="kr.or.ddit.prov.vo.ProvVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	List<ProvVO> list = (List<ProvVO>) request.getAttribute("list");
+%>
+
+[
+	
+<%
+	for(int i = 0; i < list.size(); i++){
+		if(i > 0){
+			out.print(",");
+		}
+		ProvVO vo = list.get(i);
+%>
+
+		
+			{	
+				"cityCodeNo" : "<%=vo.getCity_code_no() %>",
+				"provCodeNo" : "<%=vo.getProv_code_no() %>",
+				"provCodeNm" : "<%=vo.getProv_code_nm() %>"
+			}
+
+		
+<%		
+		
+	}
+%>
+
+]

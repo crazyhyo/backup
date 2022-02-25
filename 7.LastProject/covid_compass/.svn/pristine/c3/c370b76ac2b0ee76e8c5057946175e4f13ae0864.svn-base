@@ -1,0 +1,89 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="reqsckbd" value="${sckbdreq}" />
+<table class="table table-bordered res-detail-element">
+  <thead>
+    <tr style="text-align: center;">
+      <th>성명</th>
+      <td>${reqsckbd.pstiNm}</td>
+      <th>국적</th>
+      <td>${reqsckbd.nlty}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="shittr"  style="text-align: center;">
+      <th>검사일자</th>
+      <td>${reqsckbd.reqYmd}</td>
+      <th>검사결과</th>
+      <td>${reqsckbd.smplResCode}</td>
+    </tr>
+    <tr class="shittr"  style="text-align: center;">
+      <th>성별</th>
+      <td>${reqsckbd.gender}</td>
+      <th>나이</th>
+      <td>${reqsckbd.age}</td>
+    </tr>
+    <tr class="shittr"  style="text-align: center;">
+      <th>발열여부</th>
+      <td>${reqsckbd.feverYn}</td>
+      <th>임신여부</th>
+      <td>${reqsckbd.pregnYn}</td>
+    </tr>
+    <tr class="shittr"  style="text-align: center;">
+      <th>연락처</th>
+      <td>${reqsckbd.pstiTelno}</td>
+      <th>누적음성수</th>
+      <td>${reqsckbd.ngtvCnt}</td>
+    </tr>
+    <tr class="shittr"  style="text-align: center;">
+      <th>주민/외국인등록번호</th>
+      <td colspan="3">${reqsckbd.rrn}</td>
+    </tr>
+    <tr class="shittr"  style="text-align: center;">
+      <th>주소</th>
+      <td colspan="3">${reqsckbd.pstiAdres}</td>
+    </tr>
+    <tr class="shittr"  style="text-align: center;">
+      <th>증상</th>
+      <td colspan="3">${reqsckbd.symptms}</td>
+    </tr>
+    <tr class="shittr"  style="text-align: center;">
+      <th>확정일자</th>
+      <td colspan="3">${reqsckbd.inYmd}</td>
+    </tr>
+    <tr class="shittr"  style="text-align: center;">
+      <th>확진자 코드</th>
+      <td colspan="3">${reqsckbd.cnfmNo}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="form-group row">
+    <div class="col-md-6"></div>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-block btn-success btn-sm">승인</button>
+    </div>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-block btn-warning btn-sm">반려</button>
+    </div>
+  </div>
+<div class="row">
+				<table class="table table-sm table-bordered">
+                  <thead>
+                    <tr style="text-align: center;">
+                      <th colspan="4" width="175px;">진료메모</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="shittr"  style="text-align: center;">
+                      <td height="210px;">
+	                      <div style="margin-left:10px; margin-right:10px; 
+	                      			  margin-top: 10px; height:198px; border: " class="card">
+	                      		<span></span>
+	                      </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                 </table>
+			</div>	
+  

@@ -1,0 +1,14 @@
+package kr.or.ddit.hr.service;
+
+import java.util.List;
+
+import kr.or.ddit.cmm.vo.HRPagingVO;
+import kr.or.ddit.hr.vo.HRVO;
+
+public interface IHRService {
+	
+	public int getTotalHRCount();
+	
+	public List<HRVO> hrPagingList(HRPagingVO hrPagingVO);
+
+}

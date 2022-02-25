@@ -1,0 +1,19 @@
+<%@page import="kr.or.ddit.cmm.util.SessionCheck"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%
+	if(SessionCheck.isLoginMember(session)){
+		
+		int memCode = SessionCheck.getMemCode(session, request);
+		if(memCode == 1){
+	int hrNo = SessionCheck.getHrNo(session, request);
+		}else if(memCode == 2){
+	int cnt = SessionCheck.hasComNo(session, request);
+	if(cnt > 0){
+		int comNo = SessionCheck.getComNo(session, request);
+	}
+		}
+		
+	};
+%>

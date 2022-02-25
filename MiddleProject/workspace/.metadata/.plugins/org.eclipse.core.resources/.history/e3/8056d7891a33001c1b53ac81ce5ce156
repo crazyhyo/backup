@@ -1,0 +1,37 @@
+package kr.or.ddit.prov.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.prov.service.IProvService;
+import kr.or.ddit.prov.service.ProvServiceImpl;
+
+@WebServlet("/ConvertForm.do")
+public class ConvertForm extends HttpServlet{
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		IProvService provService = ProvServiceImpl.getInstance();
+		
+		String provCodeNm = req.getParameter("provCodeNm") == null?
+				"" : (String) req.getParameter("provCodeNm");
+		
+		String cityCodeNm = req.getParameter("cityCodeNm") == null?
+				"" : (String) req.getParameter("cityCodeNm");
+		
+		int provCodeNo = provService.convertToProvNo(provCodeNm);
+		int cityCodeNo = provService.convertToCityNo(cityCodeNm);
+		
+		req.setAttribute("provCodeNo", provCodeNo);
+		req.setAttribute("cityCodeNo", cityCodeNo);
+		
+		req.getRequestDispatcher("/WEB-INF/jsp/prov.jsp").forward(req, resp);
+		
+	}
+}

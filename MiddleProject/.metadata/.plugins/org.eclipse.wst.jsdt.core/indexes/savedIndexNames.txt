@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+D:\A_TeachingMaterial\MiddleProject\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+4230156137.index
+1190540030.index
+3313453248.index
+4186510918.index
+3035621432.index
+3614146158.index

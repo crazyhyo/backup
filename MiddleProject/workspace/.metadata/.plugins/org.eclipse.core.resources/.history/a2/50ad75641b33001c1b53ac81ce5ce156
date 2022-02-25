@@ -1,0 +1,26 @@
+const insertJobOpening = () => {
+	
+	const joInputs = $('#joForm').serializeJSON();
+	
+	console.log(joInputs);
+	
+//	$.ajax({
+//		url: '/CodePeople/InsertJobOpeining.do',
+//		type: 'post',
+//		data: joInputs,
+//		dataType: 'json',
+//		success: function(res){
+//			
+//		},
+//		error: function(err){
+//			alert(`status : ${err.status}`);
+//		}
+//	})
+	
+}
+
+window.onload = function addCertForm() {
+	
+	
+    
+}

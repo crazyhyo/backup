@@ -1,0 +1,126 @@
+package kr.or.ddit.member.vo;
+
+public class MemberVO {
+	private String 		memApiId;		// 외부로그인 여부
+	private int 		memNo;          // 회원번호
+	private String 		memNm;          // 회원명
+	private String 		memId;          // 아이디
+	private String 		memPw;			// 비밀번호
+	private String 		memEmail;       // 이메일
+	private String 		memTel;         // 전화번호
+	private int 		memZipcode;     // 우편번호
+	private String 		memAddr1;       // 상세주소1
+	private String 		memAddr2;       // 상세주소2
+	private int 		memCode;        // 회원구분코드번호
+	private int 		memActive;      // 활성화여부
+	private int 		memGender;      // 성별
+	private int 		atchFileId;     // 첨부파일아이디
+	private int 		memInCom;       // 재직자구분
+	private String 		memBir;         // 생년월일
+	private String 		memPassOrigl;	// 입력비밀번호
+	
+	public String getMemApiId() {
+		return memApiId;
+	}
+	public void setMemApiId(String memApiId) {
+		this.memApiId = memApiId;
+	}
+	public int getMemNo() {
+		return memNo;
+	}
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+	public String getMemNm() {
+		return memNm;
+	}
+	public void setMemNm(String memNm) {
+		this.memNm = memNm;
+	}
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+	public String getMemPw() {
+		return memPw;
+	}
+	public void setMemPw(String memPw) {
+		this.memPw = memPw;
+	}
+	public String getMemEmail() {
+		return memEmail;
+	}
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
+	}
+	public String getMemTel() {
+		return memTel;
+	}
+	public void setMemTel(String memTel) {
+		this.memTel = memTel;
+	}
+	public int getMemZipcode() {
+		return memZipcode;
+	}
+	public void setMemZipcode(int memZipcode) {
+		this.memZipcode = memZipcode;
+	}
+	public String getMemAddr1() {
+		return memAddr1;
+	}
+	public void setMemAddr1(String memAddr1) {
+		this.memAddr1 = memAddr1;
+	}
+	public String getMemAddr2() {
+		return memAddr2;
+	}
+	public void setMemAddr2(String memAddr2) {
+		this.memAddr2 = memAddr2;
+	}
+	public int getMemCode() {
+		return memCode;
+	}
+	public void setMemCode(int memCode) {
+		this.memCode = memCode;
+	}
+	public int getMemActive() {
+		return memActive;
+	}
+	public void setMemActive(int memActive) {
+		this.memActive = memActive;
+	}
+	public int getMemGender() {
+		return memGender;
+	}
+	public void setMemGender(int memGender) {
+		this.memGender = memGender;
+	}
+	public int getAtchFileId() {
+		return atchFileId;
+	}
+	public void setAtchFileId(int atchFileId) {
+		this.atchFileId = atchFileId;
+	}
+	public int getMemInCom() {
+		return memInCom;
+	}
+	public void setMemInCom(int memInCom) {
+		this.memInCom = memInCom;
+	}
+	public String getMemBir() {
+		return memBir;
+	}
+	public void setMemBir(String memBir) {
+		this.memBir = memBir;
+	}
+	public String getMemPassOrigl() {
+		return memPassOrigl;
+	}
+	public void setMemPassOrigl(String memPassOrigl) {
+		this.memPassOrigl = memPassOrigl;
+	}
+	
+	
+}

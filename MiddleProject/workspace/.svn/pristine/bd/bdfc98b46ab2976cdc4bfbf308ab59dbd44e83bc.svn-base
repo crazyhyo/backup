@@ -1,0 +1,49 @@
+package kr.or.ddit.edu.vo;
+
+public class EduVO {
+	private int edu_no;
+	private int edu_code_no;
+	private String edu_sch_nm;
+	private String edu_major;
+	private double edu_gra_tot;
+	private double edu_gra_avg;
+	
+	public int getEdu_no() {
+		return edu_no;
+	}
+	public void setEdu_no(int edu_no) {
+		this.edu_no = edu_no;
+	}
+	public int getEdu_code_no() {
+		return edu_code_no;
+	}
+	public void setEdu_code_no(int edu_code_no) {
+		this.edu_code_no = edu_code_no;
+	}
+	public String getEdu_sch_nm() {
+		return edu_sch_nm;
+	}
+	public void setEdu_sch_nm(String edu_sch_nm) {
+		this.edu_sch_nm = edu_sch_nm;
+	}
+	public String getEdu_major() {
+		return edu_major;
+	}
+	public void setEdu_major(String edu_major) {
+		this.edu_major = edu_major;
+	}
+	public double getEdu_gra_tot() {
+		return edu_gra_tot;
+	}
+	public void setEdu_gra_tot(double edu_gra_tot) {
+		this.edu_gra_tot = edu_gra_tot;
+	}
+	public double getEdu_gra_avg() {
+		return edu_gra_avg;
+	}
+	public void setEdu_gra_avg(double edu_gra_avg) {
+		this.edu_gra_avg = edu_gra_avg;
+	}
+	
+	
+}

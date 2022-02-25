@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="hr">
+	<resultMap class="kr.or.ddit.hr.vo.HRVO" id="HRMap">
+		<result column="HR_NO" property="hrNo"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="JG_CODE_NO" property="jgCodeNo"/>
+		<result column="JT_CODE_NO" property="jtCodeNo"/>
+		<result column="PL_CODE_NO" property="plCodeNo"/>
+	</resultMap>
+	
+<resultMap class="kr.or.ddit.hr.vo.HRCardVO" id="hrCardMap"> 
+	<result column="MEM_NM" property="memNm"/>
+	<result column="JT_CODE_NM" property="jtCodeNm"/>
+	<result column="PL_CODE_NM" property="plCodeNm"/>
+	<result column="HR_CURR_COM" property="hrCurrCom"/>
+</resultMap>
+	
+	
+	
+
+	
+	<select id="getTotalHRCount" resultClass="int">
+		SELECT COUNT(*)
+		  FROM HR
+	</select>
+	
+	<select id="hrPagingList" parameterClass="kr.or.ddit.cmm.vo.HRPagingVO"
+			resultMap="HRMap">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM HR) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+
+	
+	<select id="hrCardPagingList" parameterClass="kr.or.ddit.cmm.vo.HRPagingVO" resultMap="hrCardMap">
+		SELECT C.MEM_NM AS MEM_NM,
+	           B.JT_CODE_NM AS JT_CODE_NM,
+	           E.PL_CODE_NM AS PL_CODE_NM,
+	           D.HR_CURR_COM AS HR_CURR_COM
+	      FROM V_HR_SEARCH A, JOB_TITLE B, MEMBER C, HR D,  ( SELECT V_HR_SEARCH.HR_NO AS HR_NO,
+	                                                           PROG_LANG.PL_CODE_NM AS PL_CODE_NM                                                         
+	                                                      FROM PROG_LANG, PL_HR, V_HR_SEARCH
+	                                                     WHERE PROG_LANG.PL_CODE_NO = PL_HR.PL_CODE_NO
+	                                                       AND V_HR_SEARCH.HR_NO = PL_HR.HR_NO )E
+		 WHERE A.MEM_NO =  C.MEM_NO
+	  	   AND A.JT_CODE_NO = B.JT_CODE_NO
+	  	   AND A.HR_NO = E.HR_NO
+	  	   AND A.HR_NO = D.HR_NO
+	</select>
+	
+	
+	<select id="hrCardPagingSearchList" parameterClass="kr.or.ddit.hr.vo.HRSearchVO" resultMap="hrCardMap">
+		
+		
+		
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT MEM_NM,
+							   JT_CODE_NM,
+							   PL_CODE_NM,
+						       HR_CURR_COM
+					  	 FROM      (SELECT A.HR_NO AS HR_NO,
+			                               C.MEM_NM AS MEM_NM,
+								           B.JT_CODE_NM AS JT_CODE_NM,
+								           E.PL_CODE_NM AS PL_CODE_NM,
+								           D.HR_CURR_COM AS HR_CURR_COM
+								      FROM V_HR_SEARCH A, JOB_TITLE B, MEMBER C, HR D,  ( SELECT V_HR_SEARCH.HR_NO AS HR_NO,
+								                                                           PROG_LANG.PL_CODE_NM AS PL_CODE_NM                                                         
+								                                                      FROM PROG_LANG, PL_HR, V_HR_SEARCH
+								                                                     WHERE PROG_LANG.PL_CODE_NO = PL_HR.PL_CODE_NO
+								                                                       AND V_HR_SEARCH.HR_NO = PL_HR.HR_NO )E , (SELECT HR_NO
+			                                                                                                                      FROM V_HR_SEARCH
+			                                                                                                                     WHERE 1 = 1
+			                                                                                                                         <isGreaterThan property="jgCodeNo" compareValue="0">                                                                                                                       
+																																		AND JG_CODE_NO = #jgCodeNo#
+																																	</isGreaterThan>
+			                                                                                                                       <isGreaterThan property="plCodeNo" compareValue="0">
+																																		AND PL_CODE_NO = #plCodeNo#
+																																	</isGreaterThan>
+			                                                                                                                       <isGreaterThan property="eduCodeNo" compareValue="0">
+																																		AND EDU_CODE_NO = #eduCodeNo#
+																																	</isGreaterThan>
+			                                                                                                                       <isGreaterThan property="cityCodeNo" compareValue="0">
+																																		AND CITY_CODE_NO = #cityCodeNo#
+																																	</isGreaterThan>
+			                                                                                                                       <isGreaterThan property="provCodeNo" compareValue="0">
+																																		AND PROV_CODE_NO = #provCodeNo#
+																																	</isGreaterThan>
+																																	) F
+									 WHERE A.MEM_NO =  C.MEM_NO
+								  	   AND A.JT_CODE_NO = B.JT_CODE_NO
+								  	   AND A.HR_NO = E.HR_NO
+								  	   AND A.HR_NO = D.HR_NO
+			                           AND A.HR_NO = F.HR_NO)  HRSEARCH )A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	
+	</select>
+
+
+	<select id="getTotalCardSearchCount"
+		parameterClass="kr.or.ddit.hr.vo.HRSearchVO" resultClass="int">
+
+		SELECT COUNT (HR_NO)
+		  FROM V_HR_SEARCH
+		 WHERE 1 = 1
+		          <isGreaterThan property="jgCodeNo" compareValue="0">                                                                                                                       
+																															AND JG_CODE_NO = #jgCodeNo#
+																														</isGreaterThan>
+                                                                                                                       <isGreaterThan property="plCodeNo" compareValue="0">
+																															AND PL_CODE_NO = #plCodeNo#
+																														</isGreaterThan>
+                                                                                                                       <isGreaterThan property="eduCodeNo" compareValue="0">
+																															AND EDU_CODE_NO = #eduCodeNo#
+																														</isGreaterThan>
+                                                                                                                       <isGreaterThan property="cityCodeNo" compareValue="0">
+																															AND CITY_CODE_NO = #cityCodeNo#
+																														</isGreaterThan>
+                                                                                                                       <isGreaterThan property="provCodeNo" compareValue="0">
+																															AND PROV_CODE_NO = #provCodeNo#
+																														</isGreaterThan>
+	</select>
+	
+	
+	
+	
+</sqlMap>

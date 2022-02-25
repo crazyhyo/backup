@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 카카오 로그인 스크립트 -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <title>카카오 로그인 API</title>
+  <style>
+    #result{
+      border: 2px double #f9e000;
+      width: 500px;
+    }
+  </style>
+  
+</head>
+<body>
+  <a id="kakao-login-btn"></a>
+  <button class="api-btn" onclick="kakaoLogout()">앱 탈퇴하기</button>
+  <br><br>
+  <div id="result"></div>
+
+
+  <script>
+    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('582c43c5379e1cd6033238a735875c5f');
+    // SDK 초기화 여부를 판단합니다.
+    console.log(Kakao.isInitialized());
+
+    // 로그인
+
+    Kakao.Auth.createLoginButton({
+      container: '#kakao-login-btn',
+      success: function(resp){
+        Kakao.API.request({
+          url: '/v2/user/me', 
+          success: function(resp){
+            $('#result').append(result);
+            let kakao_account = resp.kakao_account;
+            let properties = resp.properties;
+            $('#result').append(kakao_account);
+
+            let resultdiv = "<h2>로그인 성공</h2>";
+            resultdiv += `<h4>id : ${resp.id}</h4>`;
+            resultdiv += `<h4>connected time : ${resp.connected_at}</h4>`;
+
+            let email = "";
+            let nickname = "";
+            if(typeof kakao_account != 'undefined'){
+              // 변수에 속성 값 넣기
+              email = kakao_account.email;
+              nickname = properties.nickname;
+            }
+
+            resultdiv += `<h4>email : ${email}</h4>`;
+            resultdiv += `<h4>nickname : ${nickname}</h4>`;
+            $('#result').append(resultdiv);
+          },
+          fail: function(error){
+            console.log("error : " + error);
+          }
+        });
+      },
+      fail: function(error){
+        console.log("error : " + error);
+      }
+    });
+
+     
+    // 로그아웃
+    function kakaoLogout(){
+      if(Kakao.Auth.getAccessToken()){
+        Kakao.API.request({
+          url: '/v1/user/unlink',
+          success: function(resp){
+            console.log("logout succeed : " + resp);
+          },
+          fail: function(error){
+            console.log("error : " + error);
+          }
+        });
+        Kakao.Auth.setAccessToken(undefined);
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+<!--
+  1. request를 요청하여 인가코드를 받을 URL를 설정한다.
+  예시) Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+
+  2. 토큰을 할당받아 로그인/로그아웃을 설정한다.
+  로그인이 되면 토큰 값을 서버스 서버로 전달해야 하며,
+  JavaScript SDK를 호출하려면 토큰 할당을 해야한다.
+  로그아웃은 토큰을 만료시켜 더 이상 해당 엑세스 토큰으로 카카오API를 호출할 수
+  없도록 해야 한다.
+  기본적으로 카카오 인증 API는 persistAccessToken 값을 true로 지정할 시(default값)
+  토큰이 만료될 때까지 세션을 유지하고 있다.
+
+  그러므로 엑세스 토큰이 존재하는지를 체크할 수 있고 엑세스 토큰이 존재한다면,
+  로그아웃을 시킨다. 
+  예시1) logoutWithKakao = () => {
+          if(Kakao.Auth.getAccessToken()){
+            console.log('카카오 인증 엑세스 토큰이 존재합니다.', Kakao.Auth.getAccessToken());
+            Kakao.Auth.logout(()=>{
+              console.log('로그아웃 되었습니다..', Kakao.Auth.getAccessToken());
+              this.setState({
+                isLogin:false;
+              });
+            });
+          }
+        }
+
+  예시2) function kakaoLogout() {
+          if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+              url: '/v1/user/unlink',
+              success: function (response) {
+                console.log(response)
+              },
+              fail: function (error) {
+                console.log(error)
+              },
+            })
+            Kakao.Auth.setAccessToken(undefined)
+          }
+        }  
+  주의) 
+    Kakao.Auth.logout 함수는 로그인 시 발급받은 토큰을 만료시키는 함수입니다.
+    카카오계정의 로그아웃이나 서비스의 로그아웃에 영향을 주지 않습니다.
+    서비스의 로그아웃은 직접 구현해야 합니다.(by Kakao developers)
+
+  3. 앱과 사용자의 연결을 끊기 위해서 사용자가 연결 끊기 버튼을 클릭했을 떄,
+  클릭 이벤트 핸들러에 Kakao.API.request함수를 사용해서 연결 끊기를 요청할 수 있다.
+
+  예시) Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+
+  4. 사용자 정보 가져오기 : 현재 로그인한 사용자의 카카오계정 정보를 불러온다.
+  Kakao.API.request함수를 통해 가져오며 사용자 정보 요청 주소는 /v2/user/me로 지정한다.
+  property_keys 파라미터를 통해 특정 사용자 정보만 지정해서 요청할 수 있다.
+
+  예시) Kakao.API.request({ // div #result 존재
+        url: '/v2/user/me', // /v2/user/me 로 고정
+
+        success: function(result) { // API호출이 성공할 때 실행되는 콜백 함수
+          $('#result').append(result);
+          id = result.id
+          connected_at = result.connected_at      // 로그인 시간
+          kakao_account = result.kakao_account    // 로그인한 계정 정보
+          $('#result').append(kakao_account);
+
+          resultdiv="<h2>로그인 성공 !!"
+          resultdiv += '<h4>id: '+id+'<h4>'
+          resultdiv += '<h4>connected_at: '+connected_at+'<h4>'
+          email ="";
+          gender = "";
+          
+          // 로그인한 계정 정보 접근 지정자로 호출
+          if(typeof kakao_account != 'undefined'){
+        	  email = kakao_account.email;         
+        	  gender = kakao_account.gender;
+          }
+          resultdiv += '<h4>email: '+email+'<h4>'
+          resultdiv += '<h4>gender: '+gender+'<h4>'
+          $('#result').append(resultdiv);
+          
+        },
+
+        fail: function(error) { // API 호출이 실패할 때 실행되는 콜백 함수
+          alert(
+            'login success, but failed to request user information: ' +
+              JSON.stringify(error)
+          )
+        },
+      })
+
+  5. 팝업 방식으로 로그인하기 :
+  카카오 로그인 동의 화면을 팝업으로 띄우거나 클라이언트에서 모든 인증 처리를 하고 싶은 경우
+  Kakao.Auth.login 함수를 사용할 수 있다.
+
+-->

@@ -1,0 +1,688 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<head>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=553e55e7a953a05a2adfe2bfc2932452&libraries=services"></script>
+</head>
+<title></title>
+
+<body>
+<h1> test : ${type }</h1>
+	<div style="float: left;">
+		<div class="card" style="margin-left: 10px; margin-top: 1px;">
+			<div class="card-header" style="background-color: #1a4f72">
+				<h3 class="card-title">
+					<span style="color: white">병상 신청</span>
+				</h3>
+        
+			</div>
+			<div class="card-body">
+				<table class="table table-bordered">
+					<tr style="text-align: center;">
+						<th>성명</th>
+						<td id="psti-nm">홍길동</td>
+					</tr>
+				</table>
+			</div>
+			<div id="" class="card-header d-flex p-0">
+				<h3 class="card-title p-3">병원 목록</h3>
+				<ul class="nav nav-pills ml-auto p-2" role="tablist">
+					<li style="margin-right: 8px;">
+						<div id="placeSearch" style="visibility: hidden; height: 30px;">
+							<div class="input-group float-right" style="max-width: 600px; width: 100%;">
+								<!-- search bar -->
+								<select class="form-control " name="searchType" id="searchType">
+									<option value="" ${pageMaker.cri.searchType eq '' ? 'selected':''}>검색</option>
+									<option value="name" ${pageMaker.cri.searchType eq 'name' ? 'selected':''}>병원명</option>
+									<option value="telno" ${pageMaker.cri.searchType eq 'telno' ? 'selected':''}>연락처</option>
+									<option value="areaNo" ${pageMaker.cri.searchType eq 'areaNo' ? 'selected':''}>지역번호</option>
+								</select>
+
+								<!-- keyword -->
+								<input id="keywordId" class="form-control" type="text" name="keyword" value="${pageMaker.cri.keyword }" style="width: 18%; display: inline-block;" /> <span class="input-group-append">
+									<button id="searchBtn" class="btn btn-primary" type="button" style="background: #1a4f72; color: #ffffff; border-color: #5b6f90; display: inline-block; margin-bottom: 4px; margin-left: -7px;" data-card-widget="search"
+									onclick="list_go('<%=request.getContextPath()%>/rest-hspt/sckbdreq-inptnt-bookmark-list', 1, '#hspt-all-list-table-tbody', '#inptnt-list-pagination-ul', '#hspt-all-list-table-tbody');"
+									data-url="<%=request.getContextPath()%>/rest-hspt/sckbdreq-inptnt-bookmark-list">
+										<i class="fa fa-fw fa-search"></i>
+									</button>
+								</span>
+								<!-- end : search bar -->
+							</div>
+						</div>
+					</li>
+					<li class="nav-item"><a onclick="deleteSearch()" class="nav-link active" id="custom-hspt-bookmark-list-tab" data-toggle="pill" href="#custom-hspt-bookmark-list" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">연계기관</a></li>
+					<li class="nav-item"><a onclick="makeSearch()" class="nav-link" id="custom-hspt-all-list-tab" data-toggle="pill" href="#custom-hspt-all-list" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">전체보기</a></li>
+				</ul>
+			</div>
+
+
+
+			<div class="card-body">
+				<div class="tab-content" id="custom-tabs-two-tabContent">
+					<div class='tab-pane fade show active' id="custom-hspt-bookmark-list" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+						<%@ include file="./sckbdreq-inptnt-bookmark-list-work.jsp"%>
+					</div>
+					<div class='tab-pane fade' id="custom-hspt-all-list" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+						<%@ include file="./sckbdreq-inptnt-all-list-work.jsp"%>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer clearfix" style="background: white; text-align: center;">
+				<ul class="pagination justify-content-center m-0" id="inptnt-list-pagination-ul">
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div style="float: left;">
+		<div class="card" style="margin-top: 1px; width: 600px; margin-left: 20px;">
+			<div class="card-header" style="background-color: #1a4f72">
+				<h3 class="card-title">
+					<span style="color: white">병원 정보</span>
+				</h3>
+			</div>
+			<div class="card-body" style="margin-bottom: 20px;" id="mapLocation">
+				<table class="table table-bordered" style="border-bottom-color: white;">
+					<tr style="text-align: center;">
+						<th class="col-md-3">병원명</th>
+						<td id="target-hspt-nm" class="col-md-7"></td>
+						<td class="col-md-2">
+                        <button type="button" style="width: 70%; background: #1a4f72; border: #1a4f72;" id="go-inptnt-btn" data-hspt-no="" data-manage-no="${manageNo }"
+                                class="btn btn-success btn-xs" onclick="process_go('${type eq 'A' ? '2' : '3'}');">이원 신청 + test : ${type} : ${type eq 'A' ? '2' : '3'}</button></td>
+					</tr>
+				</table>
+				<div style="float : right; margin-left : 15px;"><button id="bookmark-btn" type="button" onclick="bookmark_go();" class="btn btn-primary btn-xs" style="visibility: hidden;">연계기관등록</button></div>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<th style="width : 15%"><strong>가동률</strong></th>
+							<td style="width : 20%" id="sckbd-cnt-info"></td>
+							<th style="width : 15%"><strong>연락처</strong></th>
+							<td style="width : 20%" id="sckbdreq-target-telno"></td>
+							<th style="width : 15%"><strong>직원수</strong></th>
+							<td style="width : 15%" id="emp-cnt"></td>
+						</tr>
+
+						<tr>
+							<th><strong>주소</strong></th>
+							<td colspan="5" id="inst_adres"></td>
+						</tr>
+
+					</tbody>
+				</table>
+				<div style="margin-bottom: 7px;"></div>
+
+			</div>
+		</div>
+		<!-- <div id="map"
+					style="width: 651px; height: 600px; margin-left: 19px;">
+			    </div> -->
+	</div>
+
+	<form id="jobForm">
+	<input type='hidden' name="page" value="" /> 
+    <input type='hidden' name="perPageNum" value="" /> 
+    <input type='hidden' name="searchType" value="" /> 
+    <input type='hidden' name="keyword" value="" /> 
+    <input type='hidden' name="typeCode" value="" />
+	</form>
+
+	<!-- /.card-body -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+	<script type="text/x-handlebars-template" id="hspt-bookmark-list-template">
+{{#each .}}
+          <tr
+      		data-hspt-no="{{hsptNo}}" data-inst-no="{{instNo}}" data-inst-nm="{{instNm}}" data-inst-telno="{{instTelno}}" data-emp-cnt="{{empCnt}}"
+			data-rmnd-sckbd-cnt="{{rmndSckbdCnt}}" data-sckbd-cnt="{{sckbdCnt}}" data-op-rate="{{opRate}}" data-inst-adres="{{instAdres}}"
+            onclick="showDetail('{{hsptNo}}', '{{instAdres}}')"
+            class="each-hspt-element">
+            <td>{{instNm}}</td>
+            <td>{{instAdres}}</td>
+            <td style="text-align: center;">{{rmndSckbdCnt}}/{{sckbdCnt}}</td>
+            <td style="text-align: center;">{{opRate}}%</td>
+          </tr>
+{{/each}}
+</script>
+
+	<script type="text/x-handlebars-template" id="inptnt-pagination-template">
+    <li class="page-item each-inptnt-pagination-element"><a class="page-link" href="1"> <i class="fas fa-angle-double-left" style="color:#1a4f72;"></i>
+    </a></li>
+    <li class="page-item each-inptnt-pagination-element"><a class="page-link" href="{{#if prev}}{{prevPageNum}}{{/if}}"> <i class="fas fa-angle-left" style="color:#1a4f72;"></i>
+    </a></li>
+
+{{#each pageNum}}
+    <li class="page-item each-inptnt-pagination-element {{signActive this}}" ><a class="page-link" href="{{this}}" >{{this}}</a></li>
+{{/each}}
+
+    <li class="page-item each-inptnt-pagination-element"><a class="page-link" href="{{#if next}}{{nextPageNum}}{{/if}}"> <i class="fas fa-angle-right" style="color:#1a4f72;"></i>
+    </a></li>
+    <li class="page-item each-inptnt-pagination-element"><a class="page-link" href="{{realEndPage}}"> <i class="fas fa-angle-double-right" style="color:#1a4f72;"></i>
+</a></li>
+</script>
+
+	<script>
+
+Handlebars.registerHelper({
+"prettifyDate" : function(timeValue){
+  var dateObj = new Date(timeValue);
+  var year = dateObj.getFullYear();
+  var month = dateObj.getMonth() + 1;
+  var date = dateObj.getDate();
+  return year + "-" + month + "-" + date;
+},
+"signActive" : function(pageNum){
+  if(pageNum == page) return 'active';
+}
+
+});
+
+function prettyDate(timeValue){
+	  var dateObj = new Date(timeValue);
+	  var year = dateObj.getFullYear();
+	  var month = dateObj.getMonth() + 1;
+	  var date = dateObj.getDate();
+	  return year + "-" + month + "-" + date;
+	}
+
+function addEvnetBookmarkTab() {
+	var bookmarkTab = $('#custom-hspt-bookmark-list-tab');
+	bookmarkTab.on('click', function() {
+		$('#jobForm').find("[name='typeCode']").val("bookmark");
+		targetId = "#hspt-bookmark-list-table-tbody";
+		
+		url = '<%=request.getContextPath()%>/rest-hspt/sckbdreq-inptnt-bookmark-list';
+		
+		page = 1;
+		list_go(url, page, targetId, pagenationId, templateId);
+	})
+}
+function addEvnetAllTab() {
+
+	var allTab = $('#custom-hspt-all-list-tab');
+	allTab.on('click', function() {
+		$('#jobForm').find("[name='typeCode']").val("all");
+		targetId = "#hspt-all-list-table-tbody";
+		
+		url = '<%=request.getContextPath()%>/rest-hspt/sckbdreq-inptnt-all-list';
+		
+		page = 1;
+		list_go(url, page, targetId, pagenationId, templateId);
+	})
+}
+
+var page = 1;
+
+var url = '<%=request.getContextPath()%>/rest-hspt/sckbdreq-inptnt-bookmark-list';
+
+	var targetId = '';
+
+	var pagenationId = '#inptnt-list-pagination-ul';
+
+	var templateId = '#hspt-bookmark-list-template';
+
+	window.onload = function() {
+		
+// 		alert('window.onload');
+		
+		var processForm = $(opener.document).find('form[name="processForm"]');
+		console.log(processForm[0]);
+		console.log(processForm.serialize());
+		
+		var manageNo = processForm.find('input[name="manageNo"]').val();
+		
+		console.log(manageNo);
+		
+		var target = $(opener.document).find('tr[data-manage-no="'+manageNo+'"]');
+		
+		console.log(target[0]);
+		
+		$('#psti-nm').html(target.attr('data-psti-nm'));
+
+		addEvnetBookmarkTab();
+		addEvnetAllTab();
+
+		list_go(url, page);
+		
+		$('ul.pagination').on('click', 'li a', function(event) {
+			if ($(this).attr("href")) {
+				page = $(this).attr("href");
+				getPage(url, make_form(page), targetId, pagenationId, templateId);
+				//			list_go(url, pageParam, targetId, pagenationId);
+			}
+
+			return false;
+		});
+	}
+
+	function make_form(pageParam) {
+
+		var jobForm = $('#jobForm');
+		if (!pageParam)
+			page = 1;
+
+		page = pageParam;
+
+		jobForm.find("[name='page']").val(page);
+		jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+		jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+		jobForm.find("[name='keyword']").val($('#keywordId').val());
+
+// 		console.log('test!!!!!!!');
+// 		console.log(jobForm[0]);
+		
+		return jobForm;
+	}
+
+	function list_go(url, pageParam, targetId, pagenationId, templateId) {
+		getPage(url, make_form(pageParam), targetId, pagenationId, templateId);
+	}
+
+	function getPage(handelbarsProcessingURL, form, targetId, pagenationId, templateId) {
+
+
+		if (!targetId)
+			targetId = '#hspt-bookmark-list-table-tbody';
+
+		if(!templateId)
+			templateId = '#hspt-bookmark-list-template';
+		
+		if(!pagenationId)
+			pagenationId = '#inptnt-list-pagination-ul';
+		
+// 		console.log(form.serialize());
+		
+		$.ajax({
+			url : handelbarsProcessingURL,
+			type : 'get',
+			dataType : 'json',
+			data : form.serialize(),
+			success : function(dataMap) {
+				
+				printData(dataMap.hsptList, $(targetId), $(templateId), '.each-hspt-element');
+				printPagination(dataMap.pageMaker, $(pagenationId), $('#inptnt-pagination-template'), '.each-inptnt-pagination-element');
+				
+				initKakaoMap(dataMap.instAdres);
+				
+			},
+			error : function(error) {
+				alert('error' + error.status);
+			}
+		})
+	}
+
+	function printData(jsonArray, target, templateObject, removeClass) {
+
+		var template = Handlebars.compile(templateObject.html());
+		var html = template(jsonArray);
+		$(removeClass).remove();
+		target.append(html);
+		
+	}
+
+	function printPagination(pageMaker, target, templateObject, removeClass) {
+
+		var pageNum = new Array(pageMaker.endPage - pageMaker.startPage + 1);
+
+		for (var i = 0; i < pageMaker.endPage - pageMaker.startPage + 1; i++) {
+			pageNum[i] = pageMaker.startPage + i;
+		}
+		pageMaker.pageNum = pageNum;
+		pageMaker.prevPageNum = pageMaker.startPage - 1;
+		pageMaker.nextPageNum = pageMaker.endPage + 1;
+
+		var template = Handlebars.compile(templateObject.html());
+		var html = template(pageMaker);
+
+		target.html("").html(html);
+	}
+</script>
+
+	<script>
+
+var target = '';
+
+function showDetail(hsptNo, instAdres){
+	
+	
+	var trs = $('tr.each-hspt-element');
+	
+	trs.removeClass('on');
+	
+	target = $('tr[data-hspt-no="'+hsptNo+'"]');
+	
+	target.addClass('on');	
+	
+	var instNm = target.attr('data-inst-nm');
+
+	if($(opener.document).find('form[name="processForm"]')){
+		
+    	var processForm = $(opener.document).find('form[name="processForm"]');
+    	processForm.find('input[name="toHsptNo"]').val(hsptNo);
+	}
+	
+	$('#target-hspt-nm').html(instNm);
+	$('#go-inptnt-btn').attr('data-hspt-no', hsptNo);
+	
+	var rmndSckbdCnt = target.attr('data-rmnd-sckbd-cnt');
+	var sckbdCnt = target.attr('data-sckbd-cnt');
+	var opRate = target.attr('data-op-rate');
+	var instTelno = target.attr('data-inst-telno');
+	var empCnt = target.attr('data-emp-cnt');
+	
+	$('#sckbd-cnt-info').html(rmndSckbdCnt + '/' + sckbdCnt + '(' + opRate + '%)');
+	$('#sckbdreq-target-telno').html(instTelno);
+	$('#emp-cnt').html(empCnt);
+	$('#inst_adres').html(instAdres);
+	
+	$('#bookmark-btn').attr('data-hspt-no', hsptNo);
+	
+	mapOpen(instAdres);
+}
+
+function process_go(type){
+	
+	var closeWindow = false;
+	var message = '';
+	if(type == '2'){
+		
+		process_url = '<%=request.getContextPath()%>/rest-hspt/process-dgnss-sckbdreq-inptnt';
+		closeWindow = true;
+		message = '이원신청이 완료되었습니다.';
+    	$(opener.document).find('form[name="processForm"] input[name="closeWindow"]').val(closeWindow);
+    	
+    	processForm = $(opener.document).find('form[name="processForm"]');
+		$.ajax({
+			url : process_url,
+			type : 'post',
+			data : processForm.serialize(),
+			dataType : 'json',
+			success : function(dataMap) {
+				
+				console.log(dataMap.colseWindow);
+				
+				if(dataMap.msg == 'success'){
+					alert(message);
+				}
+				
+				if(dataMap.colseWindow){
+					window.opener.location.reload(true);		
+					window.close();
+				}else{
+					window.location.reload(true);
+				}
+			},
+			error : function(error) {
+				alert('error' + error.status);
+			}
+		});
+	}
+	if(type == '3'){
+		
+		process_url = '<%=request.getContextPath()%>/rest-hspt/process-inptnt-sckbdreq-inptnt';
+		
+		$('#go-inptnt-btn').attr('data-hspt-no', hsptNo);
+		
+		var data = 
+		{
+			 manageNo : $('#go-inptnt-btn').attr('data-manage-no')
+			,toHsptNo : $('#go-inptnt-btn').attr('data-hspt-no')
+		};
+		
+		closeWindow = true;
+		message = '이원신청이 완료되었습니다.';
+		$.ajax({
+			url : process_url,
+			type : 'post',
+			data : data,
+			dataType : 'json',
+			success : function(dataMap) {
+				
+				console.log(dataMap.colseWindow);
+				
+				if(dataMap.msg == 'success'){
+					alert(message);
+				}
+				
+				if(dataMap.colseWindow){
+					window.opener.location.reload(true);		
+					window.close();
+				}else{
+					window.location.reload(true);
+				}
+			},
+			error : function(error) {
+				alert('error' + error.status);
+			}
+		});
+	}
+	
+	
+	}
+	
+function bookmark_go(){
+	
+	alert('test');
+	
+	var toInstNo = target.attr('data-hspt-no');
+	var type = "A";
+	
+	$.ajax({
+		url : '<%=request.getContextPath()%>/rest-hspt/regist-bookmark',
+		type : 'post',
+		data : {
+				 toInstNo : toInstNo
+				,type : type
+			   },
+		dataType : 'json',
+		success : function(dataMap) {
+			alert(dataMap.msg);
+		},
+		error : function(error) {
+			alert('error' + error.status);
+		}
+	});
+	
+}
+
+
+</script>
+
+	<script>
+ 	function deleteSearch(){
+	 		//alert("눌림");
+	 		$('#placeSearch').css('visibility','hidden');
+	 		$('#bookmark-btn').css('visibility','hidden');
+	 		
+	 	}
+	 	function makeSearch(){
+	 		//alert("눌림");
+	 		$('#placeSearch').css('visibility','visible');
+	 		$('#bookmark-btn').css('visibility','visible');
+	 	}
+	 
+	 	
+	 	
+	 	
+          	function mapOpen(addr){
+          		
+          	  $('#map').remove();
+          	  var html="<div id='map' style='width: 560px; height: 568px; margin-top: 7px; margin-left: 20px; margin-bottom: 12px;'></div>";
+          	  $('#mapLocation').after(html);
+              var mapContainer=document.getElementById('map');		
+          		var mapOption = {
+          			center : new kakao.maps.LatLng(36.35043075681321,
+          					127.3848294267714), // 지도의 중심좌표
+          			level : 3
+          		// 지도의 확대 레벨
+          		};
+
+          		// 지도를 생성합니다    
+          		var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+          		// 주소-좌표 변환 객체를 생성합니다
+          		var geocoder = new kakao.maps.services.Geocoder();
+          			
+          			// 주소로 좌표를 검색합니다
+          			geocoder.addressSearch(addr,function(result, status) {
+          								// 정상적으로 검색이 완료됐으면 
+          								if (status === kakao.maps.services.Status.OK) {
+          									
+          									// 이동할 위도 경도 위치를 생성합니다 
+          								    var moveLatLon = new kakao.maps.LatLng(result[0].y, result[0].x);
+          								    
+          								    // 지도 중심을 이동 시킵니다
+          								    map.setCenter(moveLatLon);
+
+          									var coords = new kakao.maps.LatLng(
+          											result[0].y, result[0].x);
+          									
+          									// 결과값으로 받은 위치를 마커로 표시합니다
+          									var marker = new kakao.maps.Marker({
+          										map : map,
+          										position : coords
+          									});
+											
+          									/* // 인포윈도우로 장소에 대한 설명을 표시합니다
+          									var infowindow = new kakao.maps.InfoWindow({
+          										content : '<div style="width:150px;text-align:center;padding:6px 0;">'+obj.name+'</div>'
+          									});
+          									
+          									infowindow.open(map, marker); */
+
+          									// 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+          									var iwContent = '<div class="markerInfo" style="width:150px;text-align:center;padding:6px 0;">'
+          											+ target.attr('data-inst-nm') + '<br>병상수:' + target.attr('data-rmnd-sckbd-cnt')
+          											+ '<br><a href="https://map.kakao.com/link/to/33.450701,126.570667" style="color:blue" target="_blank">길찾기</a>'+ '</div>'; 
+
+          									// 인포윈도우를 생성합니다
+          									var infowindow = new kakao.maps.InfoWindow(
+          											{
+          												content : iwContent
+          											});
+
+          									// 마커에 마우스오버 이벤트를 등록합니다
+          									/*  kakao.maps.event.addListener(marker,
+          											'mouseover', function() {
+          												// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+          												infowindow
+          														.open(map, marker);
+          											}); */
+
+          									// 마커에 마우스아웃 이벤트를 등록합니다
+          									/* kakao.maps.event.addListener(marker,
+          											'mouseout', function() {
+          												// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+          												infowindow.close();
+          											}); */
+          									infowindow.open(map, marker); 
+          								}
+          							});
+          		
+
+          		var zoomControl = new kakao.maps.ZoomControl();
+          		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+          			
+          		// 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+          		kakao.maps.event.addListener(map, 'zoom_changed', function() {
+
+          			// 지도의 현재 레벨을 얻어옵니다
+          			var level = map.getLevel();
+
+          			var message = '현재 지도 레벨은 ' + level + ' 입니다';
+          			var resultDiv = document.getElementById('result');
+
+          		});
+          	}
+	</script>
+
+	<script>
+                       
+                       function addToMarker(addrs, geocoder, map) {
+                           // 주소로 좌표를 검색합니다
+                           geocoder.addressSearch(addrs, function(result, status) {
+                              // 정상적으로 검색이 완료됐으면 
+                              if (status === kakao.maps.services.Status.OK) {
+
+                                 var coords = new kakao.maps.LatLng(
+                                    result[0].y, result[0].x);
+
+                                 // 결과값으로 받은 위치를 마커로 표시합니다
+                                 var marker = new kakao.maps.Marker({
+                                    map : map,
+                                    position : coords
+                                 });
+               
+                                 /* // 인포윈도우로 장소에 대한 설명을 표시합니다
+                                 var infowindow = new kakao.maps.InfoWindow({
+                                    content : '<div style="width:150px;text-align:center;padding:6px 0;">'+obj.name+'</div>'
+                                 });
+                                 
+                                      infowindow.open(map, marker); */
+                                 
+                                 // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+                                 var iwContent = '<div class="markerInfo" style="width:150px;text-align:center;padding:6px 0;">'+addrs+'</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+                                 // 인포윈도우를 생성합니다
+                                 var infowindow = new kakao.maps.InfoWindow({
+                                     content : iwContent
+                                 });
+
+                                 // 마커에 마우스오버 이벤트를 등록합니다
+                                 kakao.maps.event.addListener(marker, 'mouseover', function() {
+                                   // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                                     infowindow.open(map, marker);
+                                 });
+
+                                 // 마커에 마우스아웃 이벤트를 등록합니다
+                                 kakao.maps.event.addListener(marker, 'mouseout', function() {
+                                 // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                                 infowindow.close();
+                                 });
+                              }
+                           });
+                        }        
+                       
+                       function initKakaoMap(addrList){
+                       	  $('#map').remove();
+                      	  var html="<div id='map' style='width: 560px; height: 568px; margin-top: 7px; margin-left: 20px; margin-bottom: 12px;'></div>";
+                      	  $('#mapLocation').after(html);                    	   
+	                        var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+	         
+	                        var mapOption = {
+	                           center : new kakao.maps.LatLng(36.35043075681321, 127.3848294267714), // 지도의 중심좌표
+	                           level : 8
+	                        // 지도의 확대 레벨
+	                        };
+	
+	                        // 지도를 생성합니다    
+	                        var map = new kakao.maps.Map(mapContainer, mapOption);
+	                           
+	                        // 주소-좌표 변환 객체를 생성합니다
+	                        var geocoder = new kakao.maps.services.Geocoder();
+	                        
+	                        $.each(addrList, function(idx, addr){
+	                           addToMarker(addr, geocoder, map);
+	                        })
+         
+                        var zoomControl = new kakao.maps.ZoomControl();
+                        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+                        // 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+                        kakao.maps.event.addListener(map, 'zoom_changed', function() {        
+                            
+                            // 지도의 현재 레벨을 얻어옵니다
+                            var level = map.getLevel();
+                            
+                            var message = '현재 지도 레벨은 ' + level + ' 입니다';
+                            var resultDiv = document.getElementById('result');  
+                            
+                        });
+         
+                       }
+                        </script>
+
+</body>
+

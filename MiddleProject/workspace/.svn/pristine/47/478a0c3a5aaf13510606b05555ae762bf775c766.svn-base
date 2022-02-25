@@ -1,0 +1,53 @@
+package kr.or.ddit.prod.vo;
+
+
+public class prodVO {
+
+	private Integer prod_no;
+	private String prod_nm;
+	private Integer prod_price;
+	private Integer prod_period;
+	private Integer prod_type;
+
+	public Integer getProd_no() {
+		return this.prod_no;
+	}
+
+	public void setProd_no(Integer prod_no) {
+		this.prod_no = prod_no;
+	}
+
+	public String getProd_nm() {
+		return this.prod_nm;
+	}
+
+	public void setProd_nm(String prod_nm) {
+		this.prod_nm = prod_nm;
+	}
+
+	public Integer getProd_price() {
+		return this.prod_price;
+	}
+
+	public void setProd_price(Integer prod_price) {
+		this.prod_price = prod_price;
+	}
+
+	public Integer getProd_period() {
+		return this.prod_period;
+	}
+
+	public void setProd_period(Integer prod_period) {
+		this.prod_period = prod_period;
+	}
+
+	public Integer getProd_type() {
+		return this.prod_type;
+	}
+
+	public void setProd_type(Integer prod_type) {
+		this.prod_type = prod_type;
+	}
+
+
+}

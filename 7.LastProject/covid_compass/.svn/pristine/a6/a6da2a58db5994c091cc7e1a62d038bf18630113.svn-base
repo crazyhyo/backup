@@ -1,0 +1,441 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<script type="text/x-handlebars-template" id="isoptnt-detail-template">
+<div class="isoptnt-detail-element">
+	<div class="card pb-0" style="padding: 10px;">
+	  <div class="row">
+	    <div class="form-group col-lg-4">
+		  <div class="row">
+			<label for="pstiNm" class="col-sm-5 control-label text-left">성명</label>
+		  </div>
+		  <div class="row">
+			<div class="col-sm-12" style="padding-left: 5px;">
+			  <input name="pstiNm" type="text" class="form-control" id="slf_pstiNm" value="{{pstiNm}}" readonly="readonly">
+			</div>
+		  </div>
+		</div>
+	    <div class="form-group col-lg-4">
+		  <div class="row">
+			<label for="nlty" class="col-sm-6 control-label text-left" style="padding-top: 0px;">국적</label>
+			  <div class="col-sm-12">
+				<input name="nlty" type="text" class="form-control" id="slf_nlty" value="{{nlty}}" readonly="">
+			  </div>
+			</div>
+		  </div>
+ 	      <div class="form-group col-lg-4">
+			<div class="row">
+			  <div class="col-lg-6">
+				<label for="age" class="col-sm-12 control-label text-left">나이</label>
+				  <div class="row">
+					<div class="col-sm-12">
+					  <input name="age" type="text" class="form-control" id="slf_age" value="{{age}}" readonly="">
+					</div>
+				  </div>
+			  </div>
+			  <div class="col-lg-6">
+				<label for="gender" class="col-sm-12 control-label text-left">성별</label>
+				  <div class="row">
+					<div class="col-sm-12">
+					  <input name="gender" type="text" class="form-control" id="slf_gender" value="{{fnGender gender}}" readonly="">
+					</div>
+				  </div>
+			  </div>
+            </div>
+		  </div>
+		</div>
+
+<div class="row">
+		  <div class="form-group col-lg-4">
+			<div class="row">
+			  <label for="rrn" class="col-sm-12 control-label text-left">주민/외국인등록번호 </label>
+			</div>
+		    <div class="row">
+			  <div class="col-sm-12" style="padding-left: 5px;">
+			    <input name="rrn" id="slf_rrn" type="text" class="form-control" value="{{rrn}}" readonly="">
+			  </div>
+		    </div>
+		  </div>
+        <div class="form-group col-lg-4">
+		  <div class="row">
+			<label for="pstiTelno" class="col-sm-4 control-label text-left">연락처</label>
+			  <div class="col-sm-12">
+				<input name="pstiTelno" type="text" class="form-control" id="slf_pstiTelno" value="{{pstiTelno}}" readonly="readonly">
+			  </div>
+			</div>
+		</div>
+
+		<div class="form-group col-lg-2">
+		  <div class="row">
+			<label for="feverYn" class="col-sm-12 control-label text-left" style="padding-top: 0px;">발열여부</label>
+			  <div class="col-sm-12">
+				<input name="feverYn" type="text" class="form-control" id="slf_feverYn" value="{{feverYn}}" readonly="">
+			  </div>
+		  </div>
+		</div>
+		<div class="form-group col-lg-2">
+		  <div class="row">
+			<label for="pregnYn" class="col-sm-12 control-label text-left" style="padding-top: 0px;">임신여부</label>
+			  <div class="col-sm-12">
+				<input name="pregnYn" type="text" class="form-control" id="slf_pregnYn" value="{{pregnYn}}" readonly="readonly">
+			  </div>
+		  </div>
+		</div>
+
+</div>
+
+<div class="row">
+  <div class="form-group col-lg-12">
+    <div class="row">
+	  <label for="pstiAdres" class="col-sm-12 control-label text-left">주소</label>
+	</div>
+    <div class="row">
+	  <div id="changeclass" class="col-sm-12" style="padding-left: 5px;">
+	    <input name="pstiAdres" type="text" class="form-control" id="slf_pstiAdres" value="{{pstiAdres}}" readonly="readonly">
+	  </div>
+	  <div id="showAdress" class="col-sm-3" style="display: none;">
+	    <button type="button" style="background-color: #1a4f72; border-color: #1a4f72;" onclick="address_go();" class="btn btn-block btn-primary">주소 검색</button>
+	  </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="card" style="padding: 10px;">
+	<div class="row">
+		<div class="form-group col-lg-3">
+			<div class="row">
+				<label for="wrtYmd" class="col-sm-12 control-label text-left">확진일자</label>
+			</div>
+			<div class="row">
+				<div class="col-sm-12" style="padding-left: 5px;">
+					<input name="wrtYmd" type="text" class="form-control" id="slf_reqYmd" value="{{prettifyDate inYmd}}" readonly="">
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group col-lg-3">
+			<div class="row">
+				<label for="rechkdYn" class="col-sm-12 control-label text-left">입소일자</label>
+				<div class="col-sm-12">
+					<input name="rechkdYn" type="text" class="form-control" id="slf_rechkdYn" value="{{prettifyDate isoptntInYmd}}" readonly="">
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-group col-lg-2">
+			<div class="row">
+				<label for="vacCode" class="col-sm-12 control-label text-left" style="padding-top: 0px;">백신접종</label>
+				<div class="col-sm-12">
+					<input name="vacCode" type="text" class="form-control" id="slf_vacCode" value="{{vac}}" readonly="">
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group col-lg-2">
+			<div class="row">
+				<label for="feverYn" class="col-sm-12 control-label text-left" style="padding-top: 0px;">검사결과</label>
+				<div class="col-sm-12">
+					<input name="feverYn" type="text" class="form-control" id="slf_pstvYn" value="{{fnResult inYmd}}" readonly="">
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-lg-2">
+			<div class="row">
+				<label for="pregnYn" class="col-sm-12 control-label text-left" style="padding-top: 0px;">누적음성횟수</label>
+				<div class="col-sm-12">
+					<input name="pregnYn" type="text" class="form-control" id="slf_ngtv_cnt" value="{{ngtvCnt}}" readonly="readonly">
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="row">
+		<div class="form-group col-lg-12">
+			<div class="row">
+				<label for="symptms" class="col-sm-12 control-label text-left">증상</label>
+			</div>
+			<div class="row">
+				<div class="col-sm-12" style="padding-left: 5px;">
+					<input name="symptms" type="text" class="form-control" id="slf_symptms" value="{{symptms}}" readonly="">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="form-group row">
+	<div class="col-md-6"></div>
+	<div class="col-md-3">
+		<button id="modifycancellbutton" onclick="modifycancell();" style="background-color: rgb(26, 79, 114); border-color: rgb(26, 79, 114); display: none;" type="button" class="btn btn-block btn-primary">취소</button>
+	</div>
+	<div class="col-md-3">
+		<button id="modifysubmitbutton" onclick="modifysubmit();" style="background-color: rgb(26, 79, 114); border-color: rgb(26, 79, 114); display: none;" type="button" class="btn btn-block btn-primary">등록</button>
+		<button id="modifybutton" style="background-color: rgb(26, 79, 114);margin-top: 0px; border-color: rgb(26, 79, 114); display: inline;" type="button" onclick="modify();" class="btn btn-block btn-primary">수정</button>
+	</div>
+</div>
+
+<div class="card pb-0" style="padding: 10px;">
+	<table class="table table-bordered">
+		<tbody>
+			<tr class="shittr">
+				<th class="col-md-2">진료병원</th>
+				<td class="col-md-4" id="slf_inst_nm">{{instNm}}</td>
+				<th class="col-md-2">진료결과</th>
+				<td class="col-md-4" id="slf_dgnss_result_code">{{fnDgnssResultCode dgnssResultCode}}</td>
+			</tr>
+			<tr class="shittr" style="text-align: center;">
+				<th rowspan="4" style="vertical-align: middle;">진료메모</th>
+				<td colspan="3" style="height: 111px; vertical-align: middle; text-align: left;" id="slf_dgnss_note">{{dgnssNote}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="row" style="text-align:center">
+	<div class="col-md-12 align-self-center">
+	  <button id="openButton" data-manage-no="{{manageNo}}" data-name="{{pstiNm}}" onclick="proc(this);"  class="btn btn-block btn-primary" style="background: #1a4f72; border: #1a4f72; width:50%; margin:0 auto;">진료신청</button>
+	</div>
+</div>
+</div>
+
+</script>
+<script>
+function showDetail(manageNo){
+	var trs = $('tr.each-isoptnt-element');
+	
+	trs.removeClass('on');
+	
+	var target = $('tr[data-manage-no="'+manageNo+'"]');
+	
+	target.addClass('on');
+
+	var url = '<%=request.getContextPath()%>/rest-ltct/sckbd-detail?manageNo='+manageNo;
+	$.ajax({
+		url : url,
+		type : 'post',
+		dataType : 'json',
+		success : function(basicDetail){
+			printData(basicDetail, $('#isoptnt-detail-module'), $('#isoptnt-detail-template'), '.isoptnt-detail-element')
+		},
+		error : function(error){
+			alert('error' + error.status);
+		}
+	});
+}
+function proc(ele){
+	var manageNo = $('#openButton').attr('data-manage-no');
+	var name = $('#openButton').attr('data-name');
+  	window.open("cnfrm-detail-dgnss-regist?manageNo="+manageNo+"&pstiNm="+name+"", "진료 신청 정보", "width=1260, height=715" );  
+
+
+}
+function modify(){
+	
+}
+</script>
+<div id="isoptnt-detail-module">
+
+<div class="isoptnt-detail-element">
+				<div class="card pb-0" style="padding: 10px;">
+	  <div class="row">
+	    <div class="form-group col-lg-4">
+		  <div class="row">
+			<label for="pstiNm" class="col-sm-5 control-label text-left">성명</label>
+		  </div>
+		  <div class="row">
+			<div class="col-sm-12" style="padding-left: 5px;">
+			  <input name="pstiNm" type="text" class="form-control" id="slf_pstiNm" value="" readonly="readonly">
+			</div>
+		  </div>
+		</div>
+	    <div class="form-group col-lg-4">
+		  <div class="row">
+			<label for="nlty" class="col-sm-6 control-label text-left" style="padding-top: 0px;">국적</label>
+			  <div class="col-sm-12">
+				<input name="nlty" type="text" class="form-control" id="slf_nlty" value="" readonly="">
+			  </div>
+			</div>
+		  </div>
+ 	      <div class="form-group col-lg-4">
+			<div class="row">
+			  <div class="col-lg-6">
+				<label for="age" class="col-sm-12 control-label text-left">나이</label>
+				  <div class="row">
+					<div class="col-sm-12">
+					  <input name="age" type="text" class="form-control" id="slf_age" value="" readonly="">
+					</div>
+				  </div>
+			  </div>
+			  <div class="col-lg-6">
+				<label for="gender" class="col-sm-12 control-label text-left">성별</label>
+				  <div class="row">
+					<div class="col-sm-12">
+					  <input name="gender" type="text" class="form-control" id="slf_gender" value="" readonly="">
+					</div>
+				  </div>
+			  </div>
+            </div>
+		  </div>
+		</div>
+
+<div class="row">
+		  <div class="form-group col-lg-4">
+			<div class="row">
+			  <label for="rrn" class="col-sm-12 control-label text-left">주민/외국인등록번호 </label>
+			</div>
+		    <div class="row">
+			  <div class="col-sm-12" style="padding-left: 5px;">
+			    <input name="rrn" id="slf_rrn" type="text" class="form-control" value="" readonly="">
+			  </div>
+		    </div>
+		  </div>
+        <div class="form-group col-lg-4">
+		  <div class="row">
+			<label for="pstiTelno" class="col-sm-4 control-label text-left">연락처</label>
+			  <div class="col-sm-12">
+				<input name="pstiTelno" type="text" class="form-control" id="slf_pstiTelno" value="" readonly="readonly">
+			  </div>
+			</div>
+		</div>
+
+		<div class="form-group col-lg-2">
+		  <div class="row">
+			<label for="feverYn" class="col-sm-12 control-label text-left" style="padding-top: 0px;">발열여부</label>
+			  <div class="col-sm-12">
+				<input name="feverYn" type="text" class="form-control" id="slf_feverYn" value="" readonly="">
+			  </div>
+		  </div>
+		</div>
+		<div class="form-group col-lg-2">
+		  <div class="row">
+			<label for="pregnYn" class="col-sm-12 control-label text-left" style="padding-top: 0px;">임신여부</label>
+			  <div class="col-sm-12">
+				<input name="pregnYn" type="text" class="form-control" id="slf_pregnYn" value="" readonly="readonly">
+			  </div>
+		  </div>
+		</div>
+
+</div>
+
+<div class="row">
+  <div class="form-group col-lg-12">
+    <div class="row">
+	  <label for="pstiAdres" class="col-sm-12 control-label text-left">주소</label>
+	</div>
+    <div class="row">
+	  <div id="changeclass" class="col-sm-12" style="padding-left: 5px;">
+	    <input name="pstiAdres" type="text" class="form-control" id="slf_pstiAdres" value="" readonly="readonly">
+	  </div>
+	  <div id="showAdress" class="col-sm-3" style="display: none;">
+	    <button type="button" style="background-color: #1a4f72; border-color: #1a4f72;" onclick="address_go();" class="btn btn-block btn-primary">주소 검색</button>
+	  </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="card" style="padding: 10px;">
+	<div class="row">
+		<div class="form-group col-lg-3">
+			<div class="row">
+				<label for="wrtYmd" class="col-sm-12 control-label text-left">확진일자</label>
+			</div>
+			<div class="row">
+				<div class="col-sm-12" style="padding-left: 5px;">
+					<input name="wrtYmd" type="text" class="form-control" id="slf_reqYmd" value="" readonly="">
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group col-lg-3">
+			<div class="row">
+				<label for="rechkdYn" class="col-sm-12 control-label text-left">입소일자</label>
+				<div class="col-sm-12">
+					<input name="rechkdYn" type="text" class="form-control" id="slf_rechkdYn" value="" readonly="">
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-group col-lg-2">
+			<div class="row">
+				<label for="vacCode" class="col-sm-12 control-label text-left" style="padding-top: 0px;">백신접종</label>
+				<div class="col-sm-12">
+					<input name="vacCode" type="text" class="form-control" id="slf_vacCode" value="" readonly="">
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group col-lg-2">
+			<div class="row">
+				<label for="feverYn" class="col-sm-12 control-label text-left" style="padding-top: 0px;">검사결과</label>
+				<div class="col-sm-12">
+					<input name="feverYn" type="text" class="form-control" id="slf_pstvYn" value="" readonly="">
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-lg-2">
+			<div class="row">
+				<label for="pregnYn" class="col-sm-12 control-label text-left" style="padding-top: 0px;">누적음성횟수</label>
+				<div class="col-sm-12">
+					<input name="pregnYn" type="text" class="form-control" id="slf_ngtv_cnt" value="" readonly="readonly">
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="row">
+		<div class="form-group col-lg-12">
+			<div class="row">
+				<label for="symptms" class="col-sm-12 control-label text-left">증상</label>
+			</div>
+			<div class="row">
+				<div class="col-sm-12" style="padding-left: 5px;">
+					<input name="symptms" type="text" class="form-control" id="slf_symptms" value="" readonly="">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="form-group row">
+	<div class="col-md-6"></div>
+	<div class="col-md-3">
+		<button id="modifycancellbutton" onclick="modifycancell();" style="background-color: rgb(26, 79, 114); border-color: rgb(26, 79, 114); display: none;" type="button" class="btn btn-block btn-primary">취소</button>
+	</div>
+	<div class="col-md-3">
+		<button id="modifysubmitbutton" onclick="modifysubmit();" style="background-color: rgb(26, 79, 114); border-color: rgb(26, 79, 114); display: none;" type="button" class="btn btn-block btn-primary">등록</button>
+		<button id="modifybutton" style="background-color: rgb(26, 79, 114);margin-top: 0px; border-color: rgb(26, 79, 114); display: inline;" type="button" onclick="modify();" class="btn btn-block btn-primary">수정</button>
+	</div>
+</div>
+
+<div class="card pb-0" style="padding: 10px;">
+	<table class="table table-bordered">
+		<tbody>
+			<tr class="shittr">
+				<th class="col-md-2">진료병원</th>
+				<td class="col-md-4" id="slf_inst_nm"></td>
+				<th class="col-md-2">진료결과</th>
+				<td class="col-md-4" id="slf_dgnss_result_code"></td>
+			</tr>
+			<tr class="shittr" style="text-align: center;">
+				<th rowspan="4" style="vertical-align: middle;">진료메모</th>
+				<td colspan="3" style="height: 111px; vertical-align: middle; text-align: left;" id="slf_dgnss_note"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="row" style="text-align:center">
+	<div class="col-md-12 align-self-center">
+	  <button id="openButton" data-manage-no="{{manageNo}}" data-name="{{pstiNm}}" onclick="proc(this);"  class="btn btn-block btn-primary" style="background: #1a4f72; border: #1a4f72; width:50%; margin:0 auto;">진료신청</button>
+	</div>
+</div>
+</div>				

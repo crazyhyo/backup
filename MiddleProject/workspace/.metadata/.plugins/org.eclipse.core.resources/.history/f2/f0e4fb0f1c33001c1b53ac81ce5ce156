@@ -1,0 +1,38 @@
+const insertJobOpening = () => {
+	
+	const joInputs = $('#joForm').serializeJSON();
+	
+	console.log(joInputs);
+	
+	let cityCodeNm = joInputs.cityCodeNm;
+	let provCodeNm = joInputs.provCodeNm;
+	
+	$.ajax({
+		url: '/CodePeople/ConvertForm.do',
+		type: 'get',
+		data: {
+			"cityCodeNm" : cityCodeNm,
+			"provCodeNm" : provCodeNm
+		},
+		dataType: 'json',
+		success: function(res){
+			let cityCodeNo = res.cityCodeNo;
+			let provCodeNo = res.provCodeNo;
+		},
+		error: function(err){
+			alert(`status : ${err.status}`);
+		}
+	})
+	
+}
+
+function convertProv(cityCodeNm, provCodeNm){
+	
+	
+}
+
+window.onload = function addCertForm() {
+	
+	
+    
+}

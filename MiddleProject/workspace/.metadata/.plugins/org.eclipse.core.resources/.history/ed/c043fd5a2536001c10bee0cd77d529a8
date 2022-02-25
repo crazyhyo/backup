@@ -1,0 +1,75 @@
+package kr.or.ddit.board.controller;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.board.service.BoardServiceImpl;
+import kr.or.ddit.board.service.IBoardService;
+import kr.or.ddit.board.vo.BoardVO;
+
+/**
+ * Servlet implementation class ReplyList
+ */
+@WebServlet("/ReplyList.do")
+public class ReplyList extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ReplyList() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		IBoardService service = BoardServiceImpl.getInstance();
+		
+		BoardVO bv = new BoardVO();
+		
+		int boardNo = request.getParameter("boardNo") == null ?
+				0 : Integer.parseInt(request.getParameter("boardNo"));
+		int boardCodeNo = request.getParameter("boardCodeNo") == null?
+				0	:	Integer.parseInt(request.getParameter("boardCodeNo"));
+		
+		bv.setBoardNo(boardNo);
+		bv.setBoardCodeNo(boardCodeNo);
+		
+		if (boardCodeNo == 1) {
+			boardCodeNo = 2;
+		} else if (boardCodeNo == 2) {
+			boardCodeNo = 3;
+		} else if (boardCodeNo == 3) {
+			boardCodeNo = 5;
+		} else if (boardCodeNo == 4) {
+			boardCodeNo = 4;
+		} else if (boardCodeNo == 5) {
+			boardCodeNo = 1;
+		}
+		
+		System.out.println("boardNo : " + boardNo);
+		System.out.println("boardCode : " + boardCode);
+		
+		List<Map<String, Object>> list = service.replySelect();
+		
+		request.setAttribute("replyList", list);
+		
+		request.getRequestDispatcher("/WEB-INF/jsp/ReplyList.jsp").forward(request, response);
+		
+	
+	}
+
+	
+
+}

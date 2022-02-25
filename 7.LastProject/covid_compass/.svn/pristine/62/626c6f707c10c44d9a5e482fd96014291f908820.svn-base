@@ -1,0 +1,159 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<script type="text/x-handlebars-template" id="sckbdCountAndStats-template">
+<table class="table table-bordered hold-element">
+	<thead>
+		<tr style="text-align: center; font-weight: bold; background-color: #f5fafc">
+			<th>잔여병상</th>
+			<th>입원환자</th>
+			<th>총 병상</th>
+			<th>가동률</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr style="text-align: center">
+			<td>{{rmndSckbdCnt}}</td>
+			<td>{{fnIsoptntCount rmndSckbdCnt sckbdCnt}}</td>
+			<td>{{sckbdCnt}}</td>
+			<td><span class="badge badge-{{fnBadgeUsePer rmndSckbdCnt sckbdCnt}}">{{fnUsePer rmndSckbdCnt sckbdCnt}}%</span></td>
+		</tr>
+	</tbody>
+</table>
+<table class="table table-bordered hold-element">
+	<thead>
+		<tr style="text-align: center; font-weight: bold; background-color: #f5fafc">
+			<th>진료요청</th>
+			<th>격리인원</th>
+			<th>퇴원인원</th>
+			<th>사망자</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr style="text-align: center">
+			<td>{{reqDgnssCnt}}</td>
+			<td>{{inIsoptntCnt}}</td>
+			<td>{{outIsoptntCnt}}</td>
+			<td>{{deathCnt}}</td>
+		</tr>
+	</tbody>
+	<thead>
+		<tr style="text-align: center; font-weight: bold; background-color: #f5fafc">
+			<th>격리중 인원</th>
+			<th>검사결과 양성</th>
+			<th>검사결과 음성</th>
+			<th>검사요청</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr style="text-align: center">
+			<td>{{totIsoptntCnt}}</td>
+			<td>{{smplePostvCnt}}</td>
+			<td>{{smpleNgtvCnt}}</td>
+			<td>{{reqSmpleCnt}}</td>
+		</tr>
+	</tbody>
+</table>
+</script>
+<script type="text/x-handlebars-template" id="nopeCountAndStats-template">
+<table class="table table-bordered hold-element">
+							<thead>
+								<tr
+									style="text-align: center; font-weight: bold; background-color: #f5fafc">
+									<th>잔여병상</th>
+									<th>입원환자</th>
+									<th>총 병상</th>
+									<th>가동률</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr style="text-align: center">
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td><span class="badge badge-success">0</span></td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-bordered hold-element">
+							<thead>
+								<tr
+									style="text-align: center; font-weight: bold; background-color: #f5fafc">
+									<th>진료요청</th>
+									<th>격리인원</th>
+									<th>퇴원인원</th>
+									<th>사망자</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr style="text-align: center">
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+							</tbody>
+							<thead>
+								<tr
+									style="text-align: center; font-weight: bold; background-color: #f5fafc">
+									<th>격리중 인원</th>
+									<th>검사결과 양성</th>
+									<th>검사결과 음성</th>
+									<th>검사요청</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr style="text-align: center">
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+							</tbody>
+						</table>
+</script>
+<script>
+function getSckbdCountAndStats(){
+	$.ajax({
+		url: '<%=request.getContextPath()%>/rest-ltct/main-sckbdCountAndStats',
+		type : 'post',
+		dataType: 'json',
+		success:function(sckbdCountAndStats){
+			printData(sckbdCountAndStats, $('#res-table'), $('#sckbdCountAndStats-template'), '.hold-element');
+		},
+		error : function(error){
+			alert("등록된 병상이 없습니다. 병상을 등록해주세요.");
+			printData(sckbdCountAndStats, $('#res-table'), $('#nopeCountAndStats-template'), '.hold-element');
+		}
+	})
+}
+</script>
+<div class="card" style="max-height: 308px; min-height: 308px;">
+					<div class="card-header ui-sortable-handle pb-1">
+						<tr role="row">
+							<th tabindex="0" aria-controls="example2" rowspan="1"
+								style="text-align: center;" colspan="1" aria-label="">
+								<div class="col-md-8" style="font-size: 16px;">
+									<b>잔여병상수 <span id="rmndSckbdCount"></span>개</b>
+								</div>
+								<div class="card-tools ">
+									<button type="button" class="btn btn-tool"
+										onclick="OpenWindow('./sckbd-modify','', 800,765)">
+										<i class="fas fa-plus" style="color: black"></i>
+									</button>
+
+								</div>
+							</th>
+						</tr>
+
+					</div>
+					<div class="card-body" id="res-table">
+						<table class="table table-bordered hold-element">
+								<tr style="text-align: center; font-weight: bold; background-color: #f5fafc">
+									<td>페이지 로딩중 입니다.</td>
+								</tr>
+						</table>
+						
+					</div>
+
+
+				</div>

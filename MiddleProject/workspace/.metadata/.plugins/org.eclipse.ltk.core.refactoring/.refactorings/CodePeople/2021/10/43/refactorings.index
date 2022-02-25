@@ -1,0 +1,108 @@
+1634517589025	Rename resource 'joSalTypeList.jsp'
+1634520487258	Rename resource 'IProgLangDao.java'
+1634520494731	Rename resource 'ProgLangDaoImpl.java'
+1634520502120	Rename resource 'IProgLangService.java'
+1634520507712	Rename resource 'ProgLangServiceImpl.java'
+1634522922879	Rename resource 'EduDaoImpl.java'
+1634522927715	Rename resource 'IEduDao.java'
+1634522933382	Rename resource 'EduServiceImpl.java'
+1634522940427	Rename resource 'IEduService.java'
+1634533772655	Rename resource 'address.xml'
+1634534060858	Rename resource 'EduDaoImpl.java'
+1634534067038	Rename resource 'IEduDao.java'
+1634534073954	Rename resource 'EduServiceImpl.java'
+1634534080229	Rename resource 'IEduService.java'
+1634537989255	Rename resource 'jobGroup.jsp'
+1634538016887	Rename resource 'jobTitle.jsp'
+1634538096744	Rename resource 'progLang.jsp'
+1634538284947	Rename resource 'ProgLangTest.java'
+1634538319516	Rename resource 'JobTitleTest.java'
+1634538335007	Rename resource 'JobGroupTest.java'
+1634604572489	Rename resource 'EduDaoImpl.java'
+1634604577456	Rename resource 'IEduDao.java'
+1634604581884	Rename resource 'EduServiceImpl.java'
+1634604589145	Rename resource 'IEduService.java'
+1634606607549	Rename resource 'EduServiceImpl.java'
+1634606619468	Rename resource 'IEduService.java'
+1634606627712	Rename resource 'EduDaoImpl.java'
+1634606635660	Rename resource 'IEduDao.java'
+1634609245597	Rename resource 'BoardPagingTest.html'
+1634618191766	Rename resource 'PagingVO.java'
+1634622777184	Rename resource 'IJobOpeningDao.java'
+1634622783476	Rename resource 'JobOpeningDaoImpl.java'
+1634622789583	Rename resource 'IJobOpeningService.java'
+1634622793884	Rename resource 'JobOpeningServiceImpl.java'
+1634622978876	Rename resource 'HRPaging.java'
+1634628229466	Rename resource 'HRPagingList.java'
+1634628234353	Rename resource 'HRDaoImpl.java'
+1634628238705	Rename resource 'IHRDao.java'
+1634628243120	Rename resource 'HRServiceImpl.java'
+1634628247594	Rename resource 'IHRService.java'
+1634630640058	Rename resource 'mainHr.html'
+1634631480148	Rename resource 'boardPagingList.jsp'
+1634631485183	Rename resource 'provList.jsp'
+1634631488583	Rename resource 'progLangList.jsp'
+1634631491279	Rename resource 'jobTitleList.jsp'
+1634631493190	Rename resource 'jobOpeningPagingList.jsp'
+1634631494926	Rename resource 'jobGroupList.jsp'
+1634631496520	Rename resource 'hrPagingList.jsp'
+1634631498383	Rename resource 'eduTypeList.jsp'
+1634631500151	Rename resource 'cvPagingList.jsp'
+1634631501775	Rename resource 'companyPagingList.jsp'
+1634631504703	Rename resource 'cityList.jsp'
+1634631506302	Rename resource 'certList.jsp'
+1634631557984	Rename resource 'DropDowns.js'
+1634631563695	Rename resource 'Paging.js'
+1634691831477	Rename resource 'main.html'
+1634780381774	Copy file
+1634780781829	Copy file
+1634782490449	Copy file
+1634783987737	Copy file
+1634784056183	Copy file
+1634785403382	Delete element
+1634785570870	Copy file
+1634785695968	Delete element
+1634785705257	Copy file
+1634790109276	Delete elements
+1634790924500	Delete elements
+1634792672731	Delete element
+1634800057444	Copy file
+1634800119773	Rename resource 'registerForm.html'
+1634800970326	Copy file
+1634801331208	Rename resource 'addCrrModal.html'
+1634801347523	Rename resource 'addEduModal.html'
+1634801354142	Rename resource 'addEduModaladdCrrModal.html'
+1634801359688	Rename resource 'addCrrModaladdEduModal.html'
+1634801483070	Copy file
+1634801640117	Copy file
+1634801654678	Rename resource 'addCertModal.html'
+1634801659710	Rename resource 'addCrrModal.html'
+1634801664998	Rename resource 'addEduModal.html'
+1634801718188	Copy file
+1634802973644	Rename resource 'registHrForm.html'
+1634809101545	Copy file
+1634809105398	Delete element
+1634809109143	Copy file
+1634809122799	Delete element
+1634809601658	Delete element
+1634811630698	Copy file
+1634879678007	Delete element
+1634879684061	Copy file
+1634881382754	Delete element
+1634881384048	Delete element
+1634881866952	Copy compilation units
+1634881870627	Copy compilation units
+1634881889284	Rename type 'EduDaoImpl'
+1634881896911	Rename type 'IEduDao'
+1634881928510	Rename type 'EduServiceImpl'
+1634881933626	Rename type 'IEduService'
+1634882226619	Copy file
+1634885871389	Move 'insertJoForm.html' to 'test'
+1634888347175	Delete element
+1634888348632	Copy file
+1634888661541	Copy file
+1634894946219	Copy file
+1634894966730	Rename resource 'prov.jsp'
+1634903781170	Copy file
+1634949683133	Move 'htmltest' to 'images'
+1634949686162	Move 'htmltest' to 'WebContent'

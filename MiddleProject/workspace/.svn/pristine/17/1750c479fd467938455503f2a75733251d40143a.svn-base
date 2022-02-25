@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="company">
+
+	<select id="companyPagingList" parameterClass="kr.or.ddit.cmm.vo.CompanyPagingVO" 
+		    resultClass="kr.or.ddit.company.vo.CompanyVO">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM COMPANY) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+	<select id="getTotalCompanyCount" resultClass="int">
+		SELECT COUNT(*)
+		  FROM COMPANY
+	</select>
+	
+</sqlMap>

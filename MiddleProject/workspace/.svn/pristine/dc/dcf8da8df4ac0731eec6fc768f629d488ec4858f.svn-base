@@ -1,0 +1,34 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.board.vo.BoardVO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<% 
+     List<BoardVO> list = (List<BoardVO>)request.getAttribute("List");
+%>
+
+[
+
+	<%
+		for(int i=0; i<list.size(); i++){
+			BoardVO vo = list.get(i);	
+			if(i>0) out.print(",");
+	%>
+{
+	"board_title" : "<%= vo.getBoard_title() %>"
+	"board_hit"	  : "<%= vo.getBoard_hit() %>"
+	"board_like"  : "<%= vo.getBoard_like() %>"	
+	"board_repl"  : "<%= vo.getBoard_repl() %>"
+	"board_cont"  : "<%= vo.getBoard_cont() %>"
+	"board_date"  : "<%= vo.getBoard_date() %>"
+	"mem_no"      : "<%= vo.getMem_no() %>"
+	"board_no"	  :
+
+
+}
+
+<%
+		}
+
+%>
+]

@@ -1,0 +1,5 @@
+package kr.or.ddit.jobOpening.controller;
+
+public class UpdateJobOpening {
+
+}

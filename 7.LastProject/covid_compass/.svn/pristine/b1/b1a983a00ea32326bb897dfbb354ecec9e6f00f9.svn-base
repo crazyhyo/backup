@@ -1,0 +1,95 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<head></head>
+
+<title></title>
+
+<body>
+<script>
+function submitbutton(){
+	var inputCnt = $('#inputCnt').val();
+	$.ajax({
+		url : '<%=request.getContextPath()%>/rest-insp/registKit',
+		data : {"inputCnt" : inputCnt},
+		type: 'post',
+		success : function(res){
+			alert("키트가 성공적으로 등록되었습니다.");
+			location.reload();
+		},
+		error : function(error){
+			alert('error' + error.status);
+		}
+	})
+}
+</script>
+	<div class="card card-success">
+		<div class="register-card-body pb-0"> 
+		<div class="card-header" style="background-color: #1a4f72; color:white;">
+			<h3 class="card-title">PCR키트 등록</h3>
+		</div>
+		<div class="card-body ">
+				<form>
+			<div class="row">
+				<input class="form-control form-control-lg col-md-4" type="number" name="inputCnt" id="inputCnt" placeholder="kit input" />
+				<button type="button" onclick="submitbutton();" class="btn btn-block btn-primary btn-sm col-md-1" style="height: 40px; background: #1a4f72; color: #ffffff; border-color: #1a4f72;">등록</button>
+				<i class="fas fa-medkit fa-3x" style="margin-left: 130px; color: #1a4f72;"></i> <span class="col-md-2" style="font-size: 34px; color: #6c757d;">${kitCount }</span>
+			</div>
+				</form>
+		</div>
+		<div class="card-header" style="background-color: #1a4f72; color:white;">
+			<h3 class="card-title">사용현황</h3>
+		</div>
+		<div class="card-body pl-0 pr-0">
+			<div class="table-responsive">
+				<table class="table m-0 table-sm" style="text-align: center;">
+					<thead>
+						<tr role="row">
+							<th tabindex="0" aria-controls="example2" rowspan="1" colspan="1" class="col-md-4" aria-label="Browser: activate to sort column ascending">누적수량</th>
+							<th tabindex="0" aria-controls="example2" rowspan="1" colspan="1" class="col-md-4" aria-label="Browser: activate to sort column ascending">사용수량</th>
+							<th tabindex="0" aria-controls="example2" rowspan="1" colspan="1" class="col-md-4" aria-label="Platform(s): activate to sort column ascending">사용률</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${totalKitCount }</td>
+							<td><c:set var="usekit" value="${totalKitCount - kitCount }"/><c:out value="${usekit }"></c:out></td>
+							<td><c:set var="useper" value="${(totalKitCount - kitCount) / totalKitCount *100 }"/><fmt:formatNumber value='${useper }' pattern="0.0"/>%</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="card-header" style="background-color: #1a4f72; color:white;">
+			<h3 class="card-title">History</h3>
+		</div>
+		
+		<div class="card-body pl-0 pr-0">
+			<div class="table-responsive">
+				<table class="table m-0 table-sm" style="text-align: center;">
+					<thead>
+						<tr role="row">
+							<th tabindex="0" aria-controls="example2" rowspan="1" colspan="1" class="col-md-4" aria-label="Browser: activate to sort column ascending">이름</th>
+							<th tabindex="0" aria-controls="example2" rowspan="1" colspan="1" class="col-md-4" aria-label="Platform(s): activate to sort column ascending">수량</th>
+							<th tabindex="0" aria-controls="example2" rowspan="1" colspan="1" class="col-md-4" aria-label="Browser: activate to sort column ascending">등록일</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach items="${kitList }" var="kit">
+						<tr>
+							<td>${kit.mberNm}</td>
+							<td>${kit.inputCnt}</td>
+							<td class="dtr-control sorting_1" tabindex="0"><fmt:formatDate value="${kit.inputYmd }" pattern="yyyy-MM-dd" /></td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- /.card-body -->
+	</div>
+	</div>
+
+</body>

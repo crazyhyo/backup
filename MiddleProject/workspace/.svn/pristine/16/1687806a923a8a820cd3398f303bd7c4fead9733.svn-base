@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+</head>
+<script>
+    var IMP = window.IMP; 
+    IMP.init('imp17469584'); 
+    IMP.request_pay({
+    	pg : "kakaopay",					// 결제브랜드
+        pay_method: "card",					// 결제수단
+        merchant_uid: "ORD20180131-0000121",// 상품ID
+        name: "노르웨이 회전 의자", 				// 플랜이름
+        amount: 64900, 						// 가격
+        buyer_email: "gildong@gmail.com",	// 구매자 이메일
+        buyer_name: "홍길동",					// 구매자 이름
+        buyer_tel: "010-4242-4242",			// 구매자 전화번호
+        buyer_addr: "서울특별시 강남구 신사동",		// 구매자 주소
+        buyer_postcode: "01181",			// 구매자 우편번호
+        m_redirect_url : '../test/main.html'// 리다이렉트 주소
+    }, function(rsp) {
+        if ( rsp.success ) {
+            var msg = '결제가 완료되었습니다.';
+            location.href='../test/main.html'; // 반환 주소
+        } else {
+            var msg = '결제에 실패하였습니다.';
+            rsp.error_msg;
+        }
+    });
+
+
+</script>
+</html>

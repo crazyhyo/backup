@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="jobOpening">
+
+	<select id="joSalaryList" resultClass="int">
+		SELECT FN_GET_SAL_TYPE_JO(JO_NO) AS SAL_TYPE
+  		  FROM JOB_OPENING
+	</select>
+	
+	<select id="joSearch" resultClass="kr.or.ddit.jobOpening.vo.JobOpeningVO">
+		SELECT *
+		  FROM JOB_OPENING
+	</select>
+	
+	<select id="joSearch2" parameterClass="kr.or.ddit.jobOpening.vo.JobOpeningVO" resultClass="kr.or.ddit.jobOpening.vo.JobOpeningVO">
+		SELECT *
+		  FROM JOB_OPENING B
+		 WHERE EXISTS(SELECT JO_NO
+		  			    FROM V_JO_SEARCH A
+		 			   WHERE 1 = 1
+					    <isNotEmpty property="jg_code_no">
+					         AND A.JG_CODE_NO = #jg_code_no# 
+					    </isNotEmpty>
+					    <isNotEmpty property="jt_code_no">
+					         AND A.JT_CODE_NO = #jt_code_no# 
+					    </isNotEmpty>
+					    <isNotEmpty property="pl_code_no">
+					         AND A.PL_CODE_NO = #pl_code_no#
+					    </isNotEmpty>
+					    <isNotEmpty property="jo_sal">
+					         AND A.SAL_TYPE = #jo_sal# 
+					    </isNotEmpty>
+					   		 AND A.JO_NO = B.JO_NO)
+	</select>
+	
+</sqlMap>

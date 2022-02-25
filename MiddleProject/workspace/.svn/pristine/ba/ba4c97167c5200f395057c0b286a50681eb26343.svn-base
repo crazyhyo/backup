@@ -1,0 +1,40 @@
+<%@page import="kr.or.ddit.hr.vo.HRVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	List<HRVO> list = (List<HRVO>) request.getAttribute("hrPagingList");
+%>
+
+[
+	
+<%
+	for(int i = 0; i < list.size(); i++){
+		if(i > 0){
+			out.print(",");
+		}
+		HRVO vo = list.get(i);
+		
+		Integer hrNo = vo.getHrNo();
+		Integer memNo = vo.getMemNo();
+		Integer jgCodeNo = vo.getJgCodeNo();
+		Integer jtCodeNo = vo.getJtCodeNo();
+		Integer plCodeNo = vo.getPlCodeNo();
+%>
+
+		
+			{	
+				"hrNo" : "<%=hrNo%>",
+				"memNo" : "<%=memNo%>",
+				"jgCodeNo" : "<%=jgCodeNo%>",
+				"jtCodeNo" : "<%=jtCodeNo%>",
+				"plCodeNo" : "<%=plCodeNo%>"
+			}
+
+		
+<%		
+		
+	}
+%>
+
+]

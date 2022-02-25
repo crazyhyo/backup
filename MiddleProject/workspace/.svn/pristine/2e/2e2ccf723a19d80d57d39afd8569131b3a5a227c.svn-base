@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+    charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <style>
+    #result{
+      border: 2px double #2DB400;
+      width: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <br><br>
+  <div id="result"></div>
+
+  <script type="text/javascript">
+    var naver_id_login = new naver_id_login("zFXzPH5MbhIUJpBcUHID", "http://127.0.0.1:5500/WebContent/naverCallback.html");
+    // 접근 토큰 값 출력
+    $('#result').append(`<h4>접속토큰 : ${naver_id_login.oauthParams.access_token}</h4>`);
+    
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+    
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+      alert(naver_id_login.getProfileData('email'));
+      alert(naver_id_login.getProfileData('nickname'));
+  
+      const email = naver_id_login.getProfileData('email');
+      const nickname = naver_id_login.getProfileData('nickname');
+  
+      let result = $('#result');
+  
+      result.append('<h2>로그인 성공!</h2>');
+      result.append(`<h4>이메일 : ${email}</h4>`);
+      result.append(`<h4>닉네임 : ${nickname}</h4>`);
+
+      //https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=jyvqXeaVOVmV&client_secret=527300A0_COq1_XV33cf&access_token=c8ceMEJisO4Se7uGCEYKK1p52L93bHXLnaoETis9YzjfnorlQwEisqemfpKHUq2gY&service_provider=NAVER
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
+<head></head>
+
+<title></title>
+
+<body>
+	<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">QR문진표</h3>
+						</div>
+						<div class="card-body">
+							<h1>${insp.instNm }</h1>
+							<div class="row" style="justify-content: center;">
+								<div id="qrcode" class="col-6"></div>
+							</div>
+						</div>
+						<div class="card-footer"></div>
+					</div>
+				</div>
+			</div>
+	</section>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+	<script>
+		window.onload = function() {
+
+			generateQR();
+
+		}
+
+		function generateQR() {
+			
+			var qrcode = new QRCode(document.getElementById("qrcode"));
+			
+			var url = 'http://192.168.143.22<%=request.getContextPath()%>/guest/question';
+			
+			qrcode.makeCode(url);
+
+		}
+
+	</script>
+
+</body>

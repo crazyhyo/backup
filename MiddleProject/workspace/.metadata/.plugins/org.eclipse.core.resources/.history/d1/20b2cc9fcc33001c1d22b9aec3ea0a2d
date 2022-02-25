@@ -1,0 +1,46 @@
+package kr.or.ddit.board.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.cmm.vo.BoardPagingVO;
+
+public interface IBoardService {
+	
+	public int getTotalBoardCount();
+	
+	public List<BoardVO> boardPagingList(BoardPagingVO boardPagingVO);
+	
+	//전체 리스트
+	public List<Map<String, Object>> selectAll();
+	
+	//글쓰기
+	public int boardInsert(BoardVO vo);
+	
+	//글수정
+	public int boardUpdate(BoardVO vo);
+	
+	//글삭제
+	public int boardDelete(Integer boardNo);
+	
+	//댓글 리스트
+	public List<Map<String, Object>> replySelect();
+	
+	public List<Map<String, Object>> QuestionBoardPagingList(BoardPagingVO boardPagingVO);
+	
+	public int countQuestionBoard();
+	public List<Map<String, Object>> LifeBoardPagingList(BoardPagingVO boardPagingVO);
+	
+	public int countLifeBoard();
+	public List<Map<String, Object>> blahBoardPagingList(BoardPagingVO boardPagingVO);
+	
+	public int countBlahBoard();
+	public List<Map<String, Object>> MeetUpBoardPagingList(BoardPagingVO boardPagingVO);
+	
+	public int countMeetUpBoard();
+	public List<Map<String, Object>> CareerBoardPagingList(BoardPagingVO boardPagingVO);
+	
+	public int countCareerBoard();	
+}

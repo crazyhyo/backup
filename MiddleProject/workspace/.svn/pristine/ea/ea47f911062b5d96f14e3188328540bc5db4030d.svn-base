@@ -1,0 +1,53 @@
+package kr.or.ddit.cv.vo;
+
+public class CVVO {
+	private int cv_no;
+	private int hr_no;
+	private int cv_open;
+	private int cv_sal;
+	private String cv_cmt;
+	private int cv_cnt;
+	private int atch_file_id;
+	public int getCv_no() {
+		return cv_no;
+	}
+	public void setCv_no(int cv_no) {
+		this.cv_no = cv_no;
+	}
+	public int getHr_no() {
+		return hr_no;
+	}
+	public void setHr_no(int hr_no) {
+		this.hr_no = hr_no;
+	}
+	public int getCv_open() {
+		return cv_open;
+	}
+	public void setCv_open(int cv_open) {
+		this.cv_open = cv_open;
+	}
+	public int getCv_sal() {
+		return cv_sal;
+	}
+	public void setCv_sal(int cv_sal) {
+		this.cv_sal = cv_sal;
+	}
+	public String getCv_cmt() {
+		return cv_cmt;
+	}
+	public void setCv_cmt(String cv_cmt) {
+		this.cv_cmt = cv_cmt;
+	}
+	public int getCv_cnt() {
+		return cv_cnt;
+	}
+	public void setCv_cnt(int cv_cnt) {
+		this.cv_cnt = cv_cnt;
+	}
+	public int getAtch_file_id() {
+		return atch_file_id;
+	}
+	public void setAtch_file_id(int atch_file_id) {
+		this.atch_file_id = atch_file_id;
+	}
+}

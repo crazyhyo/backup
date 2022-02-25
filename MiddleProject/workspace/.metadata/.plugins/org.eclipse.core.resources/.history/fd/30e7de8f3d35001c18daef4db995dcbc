@@ -1,0 +1,28 @@
+// 세션에서 회원을 뽑아내서 기업회원임과 등록한 기업이 있다는 것을 확인하여
+// 등록한 기업의 기업번호를 리턴하는 메서드
+function CheckRight(){
+	
+	$.ajax({
+		url: '/CodePeople/CheckRight.do',
+		type: 'get',
+		dataType: 'json',
+		success: function(res){
+			
+			$('#cityCodeNo').val(res.cityCodeNo);
+			$('#provCodeNo').val(res.provCodeNo);
+			
+			console.log(res.cityCodeNo, res.provCodeNo);
+		},
+		error: function(err){
+			alert(`status : ${err.status}`);
+		}		
+	})
+	
+}
+
+
+//세션에서 회원을 뽑아내서 개인회원임을 확인하여
+//등록한 기업의 기업번호를 리턴하는 메서드
+function hrRightCheck(){
+	
+}

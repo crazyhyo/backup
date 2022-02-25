@@ -1,0 +1,10 @@
+package kr.or.ddit.cmm.util;
+
+import javax.servlet.http.HttpSession;
+
+public class SessonCheck {
+	
+	public static boolean isLoginMember(HttpSession session) {
+		return session.getAttribute("vo") == null;
+	}
+}

@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<script type="text/x-handlebars-template" id="reqsckbd-template">
+{{#each .}}
+	<tr class="each-reqsckbd-element">
+		<td>{{pstiNm}}</td>
+		<td>{{age}}</td>
+		<td>{{pstiTelno}}</td>
+		<td>{{prettifyDate sckbdreqYmd}}</td>
+		<td>{{hsptNm}}</td>
+		<td><button style="width: 70px; margin-left: 18px;" type="button" class="btn btn-block btn-success btn-xs">승인</button></td>
+		<td><button style="width: 70px; margin-left: 18px;" type="button" class="btn btn-block btn-warning btn-xs">반려</button></td>
+	</tr>
+{{/each}}
+</script>
+<script type="text/x-handlebars-template" id="reqsckbd-pagination-template">
+	<li class="page-item each-reqsckbd-pagination-element">
+		<a class="page-link" href="1">
+			<i class="fas fa-angle-double-left" style="color:#1a4f72;"></i>
+		</a>
+	</li>
+
+	<li class="page-item each-reqsckbd-pagination-element">
+		<a class="page-link" href="{{#if prev}}{{prevPageNum}}{{/if}}">
+			<i class="fas fa-angle-left" style="color:#1a4f72;"></i>
+		</a>
+	</li>
+	
+	{{#each pageNum}}
+		<li class="page-item each-reqsckbd-pagination-element {{reqsckbdSignActive this}}" >
+			<a class="page-link" style="{{reqsckbdStyleActive this}}" href="{{this}}">
+				{{this}}
+			</a>
+		</li>
+	{{/each}}
+	
+	<li class="page-item each-reqsckbd-pagination-element">
+		<a class="page-link" href="{{#if next}}{{nextPageNum}}{{/if}}">
+			<i class="fas fa-angle-right" style="color:#1a4f72;"></i>
+		</a>
+	</li>
+
+	<li class="page-item each-reqsckbd-pagination-element">
+		<a class="page-link" href="{{realEndPage}}">
+			<i class="fas fa-angle-double-right" style="color:#1a4f72;"></i>
+		</a>
+	</li>
+</script>
+<div class="card" style="position: relative; left: 1%; top: 0px; width: 67%;">
+	<div class="card-header ui-sortable-handle">
+		<div class="row">
+			<h3 class="card-title col-sm-10">
+				<i class="ion ion-clipboard mr-1"></i>승인대기 병상목록
+			</h3>
+			<div class="col-sm-2" style="float : right; text-align : right;">
+				<a href="javascript:test();">더보기</a>
+			</div>
+		</div>
+	</div>
+	<div class="card-body" style="padding: 0px;">
+		<div class="table-responsive">
+			<table class="table m-0" style="text-align: center;">
+				<thead>
+					<tr>
+						<th style="width: 10%; text-align: center;">환자이름</th>
+						<th style="width: 10%; text-align: center;">나이</th>
+						<th style="text-align: center;">연락처</th>
+						<th style="text-align: center;">신청일</th>
+						<th style="text-align: center;">요청기관</th>
+						<th style="width: 10%; text-align: center;">승인</th>
+						<th style="width: 10%; text-align: center;">반려</th>
+					</tr>
+				</thead>
+				<tbody id="reqsckbd-table-tbody">
+					<tr class="each-reqsckbd-element">
+						<td colspan="7">페이지 로딩중입니다. 잠시만 기다려주세요.</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+</div>
+				<div class="card-footer" style="text-align: center;">
+					<ul class="reqsckbd-pagination pagination m-0" id="reqsckbd-pagination-ul">
+					</ul>
+									<form id="reqsckbdListForm">
+										<input type='hidden' name="page" value="" />
+										<input type='hidden' name="perPageNum" value="" />
+									</form>
+				</div>
+</div>

@@ -1,0 +1,63 @@
+package kr.or.ddit.board.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.ReplyVO;
+import kr.or.ddit.cmm.vo.BoardPagingVO;
+
+public interface IBoardDao {
+	
+	public int getTotalBoardCount() throws SQLException;
+	
+	public List<BoardVO> boardPagingList(BoardPagingVO boardPagingVO) throws SQLException;
+	
+	//ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Æ®
+	public List<Map<String, Object>> selectAll() throws SQLException;
+	
+	//ï¿½Û¾ï¿½ï¿½ï¿½ 
+	public int boardInsert(BoardVO vo) throws SQLException;
+	
+	//ï¿½Û¼ï¿½ï¿½ï¿½
+	public int boardUpdate(BoardVO vo) throws SQLException;
+	
+	//ï¿½Û»ï¿½ï¿½ï¿½
+	public int boardDelete(Integer boardNo) throws SQLException;
+	
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+	public List<Map<String, Object>> replySelect() throws SQLException;
+	
+<<<<<<< .mine
+||||||| .r193960
+	
+
+=======
+	//´ñ±Û ÀÛ¼º
+	public int replyInsert(ReplyVO vo) throws SQLException;
+	
+
+>>>>>>> .r193964
+	public List<Map<String, Object>> QuestionBoardPagingList(BoardPagingVO boardPagingVO) throws SQLException;
+	
+	public int countQuestionBoard() throws SQLException;
+	
+	public List<Map<String, Object>> LifeBoardPagingList(BoardPagingVO boardPagingVO) throws SQLException;
+	
+	public int countLifeBoard() throws SQLException;
+	
+	public List<Map<String, Object>> blahBoardPagingList(BoardPagingVO boardPagingVO) throws SQLException;
+	
+	public int countBlahBoard() throws SQLException;
+	
+	public List<Map<String, Object>> MeetUpBoardPagingList(BoardPagingVO boardPagingVO) throws SQLException;
+	
+	public int countMeetUpBoard() throws SQLException;
+	
+	public List<Map<String, Object>> CareerBoardPagingList(BoardPagingVO boardPagingVO) throws SQLException;
+	
+	public int countCareerBoard() throws SQLException;
+	
+	public int replyInsert(ReplyVO replyVO) throws SQLException;
+}

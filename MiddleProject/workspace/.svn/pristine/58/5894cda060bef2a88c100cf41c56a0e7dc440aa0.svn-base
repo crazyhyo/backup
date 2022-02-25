@@ -1,0 +1,45 @@
+<%@page import="kr.or.ddit.cv.vo.CVVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	List<CVVO> list = (List<CVVO>) request.getAttribute("cvPagingList");
+%>
+
+[
+	
+<%
+	for(int i = 0; i < list.size(); i++){
+		if(i > 0){
+			out.print(",");
+		}
+		CVVO vo = list.get(i);
+		
+		Integer cv_no = vo.getCv_no();
+		Integer hr_no = vo.getHr_no();
+		Integer cv_open = vo.getCv_open();
+		Integer cv_sal = vo.getCv_sal();
+		String cv_cmt = vo.getCv_cmt();
+		Integer cv_cnt = vo.getCv_cnt();
+		Integer atch_file_id = vo.getAtch_file_id();
+		
+%>
+
+		
+			{	
+				"cv_no" : "<%=cv_no%>",
+				"hr_no" : "<%=hr_no%>",
+				"cv_open" : "<%=cv_open%>",
+				"cv_sal" : "<%=cv_sal%>",
+				"cv_cmt" : "<%=cv_cmt%>",
+				"cv_cnt" : "<%=cv_cnt%>",
+				"atch_file_id" : "<%=atch_file_id%>"
+			}
+
+		
+<%		
+		
+	}
+%>
+
+]

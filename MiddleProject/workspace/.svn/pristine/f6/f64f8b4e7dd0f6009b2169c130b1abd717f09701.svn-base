@@ -1,0 +1,18 @@
+package kr.or.ddit.certification.vo;
+
+public class CertificationVO {
+	private Integer cert_code_no;
+	private String cert_code_nm;
+	public Integer getCert_code_no() {
+		return cert_code_no;
+	}
+	public void setCert_code_no(Integer cert_code_no) {
+		this.cert_code_no = cert_code_no;
+	}
+	public String getCert_code_nm() {
+		return cert_code_nm;
+	}
+	public void setCert_code_nm(String cert_code_nm) {
+		this.cert_code_nm = cert_code_nm;
+	}
+}

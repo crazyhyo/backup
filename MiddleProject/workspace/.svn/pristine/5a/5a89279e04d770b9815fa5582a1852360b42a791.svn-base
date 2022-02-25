@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="board">
+	<resultMap class="java.util.HashMap" id="BoardListMap">
+		<result property="boardNo" column="board_no"/>
+		<result property="boardTitle" column="board_title"/>
+		<result property="boardHit" column="board_hit"/>
+		<result property="boardLike" column="board_like"/>
+		<result property="boardRepl" column="board_repl"/>
+		<result property="boardCont" column="board_cont"/>
+		<result property="boardDate" column="board_date"/>
+		<result property="memId" column="mem_id"/>
+	
+	</resultMap>
+
+	<select id="boardPagingList" parameterClass="kr.or.ddit.cmm.vo.BoardPagingVO"
+	        resultClass="kr.or.ddit.board.vo.BoardVO">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM BOARD
+		                 ORDER BY BOARD_NO DESC) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+	<select id="getTotalBoardCount" resultClass="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+		 WHERE BOARD_ACTIVE = 1
+	</select>
+	
+	<select id="selectAll" resultMap="BoardListMap">
+	
+		select * from v_boardlist
+	
+	
+	</select>
+	
+</sqlMap>

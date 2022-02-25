@@ -1,0 +1,20 @@
+package com.spring.compass.service;
+
+import com.spring.compass.vo.MberVO;
+
+public interface MberService {
+
+	MberVO getMember(String id) throws Exception;
+	
+	MberVO getInfo(MberVO mber) throws Exception;
+	
+	void modifyPwd(MberVO mber) throws Exception;
+	
+	public String getMberSeq() throws Exception;
+	
+	public void registMberRepresent(MberVO mber) throws Exception;
+	
+	public void modifyInfo(MberVO mber) throws Exception;
+	
+	MberVO getDetailByMberNo(String mberNo) throws Exception;
+}

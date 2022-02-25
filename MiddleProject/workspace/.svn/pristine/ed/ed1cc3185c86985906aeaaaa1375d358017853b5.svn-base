@@ -1,0 +1,95 @@
+package kr.or.ddit.member.vo;
+
+public class MemberVO {
+	private Integer mem_is_api;
+	private Integer mem_no;
+	private String mem_nm;
+	private String mem_id;
+	private String mem_pw;
+	private String mem_email;
+	private String mem_tel;
+	private Integer prov_code_no;
+	private Integer city_code_no;
+	private Integer mem_code;
+	private Integer mem_active;
+	private Integer mem_gender;
+	private Integer mem_in_com;
+	public Integer getMem_is_api() {
+		return mem_is_api;
+	}
+	public void setMem_is_api(Integer mem_is_api) {
+		this.mem_is_api = mem_is_api;
+	}
+	public Integer getMem_no() {
+		return mem_no;
+	}
+	public void setMem_no(Integer mem_no) {
+		this.mem_no = mem_no;
+	}
+	public String getMem_nm() {
+		return mem_nm;
+	}
+	public void setMem_nm(String mem_nm) {
+		this.mem_nm = mem_nm;
+	}
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getMem_pw() {
+		return mem_pw;
+	}
+	public void setMem_pw(String mem_pw) {
+		this.mem_pw = mem_pw;
+	}
+	public String getMem_email() {
+		return mem_email;
+	}
+	public void setMem_email(String mem_email) {
+		this.mem_email = mem_email;
+	}
+	public String getMem_tel() {
+		return mem_tel;
+	}
+	public void setMem_tel(String mem_tel) {
+		this.mem_tel = mem_tel;
+	}
+	public Integer getProv_code_no() {
+		return prov_code_no;
+	}
+	public void setProv_code_no(Integer prov_code_no) {
+		this.prov_code_no = prov_code_no;
+	}
+	public Integer getCity_code_no() {
+		return city_code_no;
+	}
+	public void setCity_code_no(Integer city_code_no) {
+		this.city_code_no = city_code_no;
+	}
+	public Integer getMem_code() {
+		return mem_code;
+	}
+	public void setMem_code(Integer mem_code) {
+		this.mem_code = mem_code;
+	}
+	public Integer getMem_active() {
+		return mem_active;
+	}
+	public void setMem_active(Integer mem_active) {
+		this.mem_active = mem_active;
+	}
+	public Integer getMem_gender() {
+		return mem_gender;
+	}
+	public void setMem_gender(Integer mem_gender) {
+		this.mem_gender = mem_gender;
+	}
+	public Integer getMem_in_com() {
+		return mem_in_com;
+	}
+	public void setMem_in_com(Integer mem_in_com) {
+		this.mem_in_com = mem_in_com;
+	}
+}

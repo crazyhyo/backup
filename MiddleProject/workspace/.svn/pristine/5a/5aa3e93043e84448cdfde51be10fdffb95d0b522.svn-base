@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="prov">
+	<resultMap class="kr.or.ddit.prov.vo.ProvVO" id="ProvMap">
+		<result column="PROV_CODE_NO" property="provCodeNo"/>
+		<result column="CITY_CODE_NO" property="cityCodeNo"/>
+		<result column="PROV_CODE_NM" property="provCodeNm"/>
+	</resultMap>
+	<select id="selectCityList" resultMap="ProvMap">
+		SELECT * FROM CITY
+	</select>
+	
+	<select id="selectProvList" resultMap="ProvMap" parameterClass="int">
+		SELECT * FROM PROV
+		 WHERE CITY_CODE_NO = #city_code_no#
+	</select>
+	
+</sqlMap>

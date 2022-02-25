@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="member">
+
+	<resultMap id="memMap" class="memVO">
+		<result property="memApiI"	  		column="MEM_API_ID" 	/>
+		<result property="memNo"    		column="MEM_NO"			/>
+		<result property="memNm"    		column="MEM_NM"			/>
+		<result property="memId"    		column="MEM_ID"			/>
+		<result property="memPw"	 	    column="MEM_PW" 		/>
+		<result property="memEmail" 	    column="MEM_EMAIL" 		/>
+		<result property="memTel" 	    	column="MEM_TEL" 		/>
+		<result property="memZipcode" 	    column="MEM_ZIPCODE" 	/>
+		<result property="memAddr1" 	    column="MEM_ADDR1" 		/>
+		<result property="memAddr2" 	    column="MEM_ADDR2" 		/>
+		<result property="memCode" 	    	column="MEM_CODE" 		/>
+		<result property="memActiv" 	    column="MEM_ACTIVE" 	/>
+		<result property="memGender" 	    column="MEM_GENDER" 	/>
+		<result property="atchFileId" 	    column="ATCH_FILE_ID" 	/>
+		<result property="memInCom" 	    column="MEM_IN_COM" 	/>
+		<result property="memBir" 	    	column="MEM_BIR" 		/>
+		<result property="memPassOrigl" 	column="MEM_PASS_ORIGL" />
+	</resultMap>
+
+
+	<!-- 회원가입 프로토타입 -->
+	<insert id="joinMember" parameterClass="kr.or.ddit.member.vo.MemberVO">
+		INSERT INTO MEMBER (
+			MEM_NO, MEM_NM, MEM_ID,
+			MEM_PW, MEM_EMAIL, MEM_TEL,
+			MEM_ZIPCODE, MEM_ADDR1, MEM_ADDR2,
+			MEM_CODE, MEM_ACTIVE, MEM_GENDER,
+			ATCH_FILE_ID, MEM_IN_COM, MEM_BIR,
+			MEM_PASS_ORIGL, MEM_API_ID
+			)
+		VALUES (
+			#memNo#, #memNm#, #memId#,
+			#memPw#, #memEmail#, #memTel#,
+			#memZipcode#, #memAddr1#, #memAddr2#,
+			#memCode#, #memActive#, #memGender#,
+			#atchFileId#, #memInCom#, #memBir#,
+			#memPassOrigl#, #memApiId#
+			);
+			
+		<!-- 중복되지 않는 속성값을 가지고 selectKey설정을 해준다. -->
+		<selectKey keyProperty="mem_id" resultClass="string">
+			SELECT MEM_ID FROM MEMBER
+			WHERE MEM_ID = #memId#
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- 회원조회 프로토타입 -->
+	<select id="selectMember" parameterClass="String" resultMap="memMap">
+		SELECT *
+		FORM MEMBER
+		WHERE MEM_ID = #memId#
+	</select>
+	
+	
+	<!-- 회원수정 프로토타입 -->
+	<update id="updateMember">
+		UPDATE member
+		  SET
+		    a = b
+		WHERE
+		  MEM_NO 				= #memNo#       
+		  AND   MEM_NM 			= #memNm#       
+		  AND   MEM_ID 			= #memId#       
+		  AND   MEM_PW 			= #memPw#       
+		  AND   MEM_EMAIL 		= #memEmail#    
+		  AND   MEM_TEL 		= #memTel#      
+		  AND   MEM_ZIPCODE 	= #memZipcode#  
+		  AND   MEM_ADDR1 		= #memAddr1#    
+		  AND   MEM_ADDR2 		= #memAddr2#    
+		  AND   MEM_CODE	 	= #memCode#     
+		  AND   MEM_ACTIVE 		= #memActive#   
+		  AND   MEM_GENDER 		= #memGender#   
+		  AND   ATCH_FILE_ID 	= #atchFileId#  
+		  AND   MEM_IN_COM 		= #memInCom#    
+		  AND   MEM_BIR 		= #memBir#      
+		  AND   MEM_PASS_ORIGL 	= #memPassOrigl#
+		  AND   MEM_API_ID 		= #memApiId#
+	</update>
+	
+	<!-- 회원삭제 프로토타입 -->
+	<delete id="deleteMember">
+		DELETE FORM MEMBER
+		WHERE MEM_PW = #memPw#
+	</delete>
+	
+</sqlMap>			
+
+
+
+
+

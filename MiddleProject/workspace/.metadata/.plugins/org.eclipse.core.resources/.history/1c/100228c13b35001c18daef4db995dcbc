@@ -1,0 +1,54 @@
+package kr.or.ddit.cmm.service;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.member.service.MemberServiceImpl;
+import kr.or.ddit.member.vo.MemberVO;
+
+@WebServlet("/CheckRight.do")
+public class CheckRight extends HttpServlet{
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		HttpSession session = req.getSession();
+        MemberVO loginMember = session.getAttribute("MemVO") == null?
+                null : (MemberVO)session.getAttribute("MemVO");
+        
+        if(loginMember == null) {
+            
+            // result.jsp에서 result를 -1로 셋팅해서 보내면
+            // res.memCode 가 0이 나옵니다
+            req.setAttribute("result", 0);
+            
+            req.getRequestDispatcher("/WEB-INF/jsp/CheckRight.jsp").forward(req, resp);
+            
+        }else {
+            
+            int memCode = loginMember.getMemCode();
+            
+            if(memCode == 2) {
+                
+                IMemberService memberService = MemberServiceImpl.getInstance();
+                
+                int memNo = loginMember.getMemNo();
+                
+                int check = memberService.checkRegisterdCorp(memNo);
+                
+                if(check > 0) {
+                    
+                    int comNo = memberService.getComNo(memNo);
+                               
+                }
+            }
+        }
+	}
+}

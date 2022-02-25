@@ -1,0 +1,25 @@
+package kr.or.ddit.prov.vo;
+
+public class ProvVO {
+	private Integer prov_code_no;
+	private Integer city_code_no;
+	private String prov_code_nm;
+	public Integer getProv_code_no() {
+		return prov_code_no;
+	}
+	public void setProv_code_no(Integer prov_code_no) {
+		this.prov_code_no = prov_code_no;
+	}
+	public Integer getCity_code_no() {
+		return city_code_no;
+	}
+	public void setCity_code_no(Integer city_code_no) {
+		this.city_code_no = city_code_no;
+	}
+	public String getProv_code_nm() {
+		return prov_code_nm;
+	}
+	public void setProv_code_nm(String prov_code_nm) {
+		this.prov_code_nm = prov_code_nm;
+	}
+}

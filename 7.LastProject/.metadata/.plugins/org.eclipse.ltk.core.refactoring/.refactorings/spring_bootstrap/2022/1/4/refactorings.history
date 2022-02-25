@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;aop-context.xml&apos; to &apos;covid_compass/src/main/resources/com.spring.compass.context&apos;&#x0D;&#x0A;- Original project: &apos;spring_bootstrap&apos;&#x0D;&#x0A;- Destination element: &apos;covid_compass/src/main/resources/com.spring.compass.context&apos;&#x0D;&#x0A;- Original element: &apos;aop-context.xml&apos;" description="Copy file" destination="=covid_compass/src\/main\/resources&lt;com.spring.compass.context" element1="src/main/resources/kr/or/ddit/context/aop-context.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1642418080045" units="0" version="1.0"/>
+</session>

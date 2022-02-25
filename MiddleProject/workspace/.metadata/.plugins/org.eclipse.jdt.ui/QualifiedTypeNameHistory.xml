@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.security.MessageDigest"/>
+<fullyQualifiedTypeName name="java.math.BigInteger"/>
+<fullyQualifiedTypeName name="javax.jws.WebService"/>
+<fullyQualifiedTypeName name="kr.or.ddit.edu.service.IEduService"/>
+<fullyQualifiedTypeName name="kr.or.ddit.edu.service.EduServiceImpl"/>
+<fullyQualifiedTypeName name="kr.or.ddit.certification.service.ICertService"/>
+<fullyQualifiedTypeName name="kr.or.ddit.certification.service.CertServiceImpl"/>
+<fullyQualifiedTypeName name="kr.or.ddit.prov.vo.CityVO"/>
+<fullyQualifiedTypeName name="kr.or.ddit.prov.vo.ProvVO"/>
+<fullyQualifiedTypeName name="kr.or.ddit.prov.dao.ProvDaoImpl"/>
+<fullyQualifiedTypeName name="kr.or.ddit.jobOpening.service.IJobOpeningService"/>
+<fullyQualifiedTypeName name="kr.or.ddit.jobOpening.service.JobOpeningServiceImpl"/>
+<fullyQualifiedTypeName name="kr.or.ddit.jobOpening.vo.JobOpeningVO"/>
+<fullyQualifiedTypeName name="org.apache.commons.beanutils.BeanUtils"/>
+<fullyQualifiedTypeName name="kr.or.ddit.member.vo.MemberVO"/>
+<fullyQualifiedTypeName name="kr.or.ddit.prov.service.IProvService"/>
+<fullyQualifiedTypeName name="kr.or.ddit.prov.service.ProvServiceImpl"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="kr.or.ddit.board.vo.ReplyVO"/>
+<fullyQualifiedTypeName name="kr.or.ddit.member.service.IMemberService"/>
+<fullyQualifiedTypeName name="kr.or.ddit.member.service.MemberServiceImpl"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+<fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="kr.or.ddit.company.vo.CompanyVO"/>
+<fullyQualifiedTypeName name="kr.or.ddit.jobOpening.vo.JOCardVO"/>
+<fullyQualifiedTypeName name="kr.or.ddit.board.vo.BoardVO"/>
+</qualifiedTypeNameHistroy>

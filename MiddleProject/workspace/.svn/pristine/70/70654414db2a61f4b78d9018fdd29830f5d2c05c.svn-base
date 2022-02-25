@@ -1,0 +1,88 @@
+function boardPaging(currentPageNo){
+	
+	$.ajax({
+		url : '/CodePeople/BoardPagingList.do',
+		type : 'get',
+		data : { "currentPageNo" : currentPageNo},
+		dataType : 'json',
+		success : function(res){
+			
+		},
+		error : function(err){
+			alert(`status : ${err.status}\ntext : ${err.statusText}`);
+		}
+		
+	})
+	
+}
+
+function companyPaging(currentPageNo){
+	
+	$.ajax({
+		url : '/CodePeople/CompanyPagingList.do',
+		type : 'get',
+		data : { "currentPageNo" : currentPageNo},
+		dataType : 'json',
+		success : function(res){
+			
+		},
+		error : function(err){
+			alert(`status : ${err.status}\ntext : ${err.statusText}`);
+		}
+		
+	})
+	
+}
+
+function jobOpeningPaging(currentPageNo){
+	
+	$.ajax({
+		url : '/CodePeople/JobOpeningPagingList.do',
+		type : 'get',
+		data : { "currentPageNo" : currentPageNo},
+		dataType : 'json',
+		success : function(res){
+			
+		},
+		error : function(err){
+			alert(`status : ${err.status}\ntext : ${err.statusText}`);
+		}
+		
+	})
+	
+}
+
+function HRPaging(currentPageNo){
+	
+	$.ajax({
+		url : '/CodePeople/HRPagingList.do',
+		type : 'get',
+		data : { "currentPageNo" : currentPageNo},
+		dataType : 'json',
+		success : function(res){
+			
+		},
+		error : function(err){
+			alert(`status : ${err.status}\ntext : ${err.statusText}`);
+		}
+		
+	})
+	
+}
+function CVPaging(currentPageNo){
+	
+	$.ajax({
+		url : '/CodePeople/CVPagingList.do',
+		type : 'get',
+		data : { "currentPageNo" : currentPageNo},
+		dataType : 'json',
+		success : function(res){
+			
+		},
+		error : function(err){
+			alert(`status : ${err.status}\ntext : ${err.statusText}`);
+		}
+		
+	})
+	
+}

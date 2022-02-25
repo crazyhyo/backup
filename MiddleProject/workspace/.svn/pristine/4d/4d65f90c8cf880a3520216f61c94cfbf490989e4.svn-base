@@ -1,0 +1,19 @@
+package kr.or.ddit.progLang.vo;
+
+public class ProgLangVO {
+	private int pl_code_no;
+	private String pl_code_nm;
+	public int getPl_code_no() {
+		return pl_code_no;
+	}
+	public void setPl_code_no(int pl_code_no) {
+		this.pl_code_no = pl_code_no;
+	}
+	public String getPl_code_nm() {
+		return pl_code_nm;
+	}
+	public void setPl_code_nm(String pl_code_nm) {
+		this.pl_code_nm = pl_code_nm;
+	}
+	
+}

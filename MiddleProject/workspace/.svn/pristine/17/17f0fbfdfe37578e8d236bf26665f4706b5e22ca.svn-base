@@ -1,0 +1,47 @@
+<%@page import="java.util.Map"%>
+<%@page import="kr.or.ddit.jobOpening.vo.JobOpeningVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	List<Map<String, Object>> list = (List<Map<String, Object>>) request.getAttribute("jobOpeningCardPagingList");
+%>
+
+[
+	
+<%
+	for(int i = 0; i < list.size(); i++){
+		if(i > 0){
+	out.print(",");
+		}
+		Map<String, Object> vo = list.get(i);
+		
+		String RNUM = String.valueOf(vo.get("RNUM"));
+		String JO_EDATE = String.valueOf(vo.get("JO_EDATE"));
+		String COM_INTRO = String.valueOf(vo.get("COM_INTRO"));
+		String JO_SDATE = String.valueOf(vo.get("JO_SDATE"));
+		String COM_NM = String.valueOf(vo.get("COM_NM"));
+		String JO_TITLE = String.valueOf(vo.get("JO_TITLE"));
+		String JO_SAL_TYPE_NM = String.valueOf(vo.get("JO_SAL_TYPE_NM"));
+		String JG_CODE_NM = String.valueOf(vo.get("JG_CODE_NM"));
+%>
+
+		
+			{	
+				"RNUM" : "<%=RNUM %>",
+				"JO_EDATE" : "<%=JO_EDATE %>",
+				"COM_INTRO" : "<%=COM_INTRO %>",
+				"JO_SDATE" : "<%=JO_SDATE %>",
+				"COM_NM" : "<%=COM_NM %>",
+				"JO_TITLE" : "<%=JO_TITLE %>",
+				"JO_SAL_TYPE_NM" : "<%=JO_SAL_TYPE_NM %>",
+				"JG_CODE_NM" : "<%=JG_CODE_NM %>"
+			}
+
+		
+<%		
+		
+	}
+%>
+
+]

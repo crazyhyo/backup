@@ -1,0 +1,18 @@
+package kr.or.ddit.edu.vo;
+
+public class EduCodeVO {
+	private Integer edu_code_no;
+	private String edu_code_nm;
+	public Integer getEdu_code_no() {
+		return edu_code_no;
+	}
+	public void setEdu_code_no(Integer edu_code_no) {
+		this.edu_code_no = edu_code_no;
+	}
+	public String getEdu_code_nm() {
+		return edu_code_nm;
+	}
+	public void setEdu_code_nm(String edu_code_nm) {
+		this.edu_code_nm = edu_code_nm;
+	}
+}

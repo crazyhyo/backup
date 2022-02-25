@@ -1,0 +1,334 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<body>
+<div class="wrapper" style="max-width: 1280px; margin: 0 auto;">
+	<div class="row pr-0 pl-0 m-0" style="background: black;">
+	<div class="col-md-4 invoice p-3" style="background: black;">
+		<div style="width: 200px;height: 80px; background-image: url(<%=request.getContextPath()%>/resources/image/logoWhite.png);background-size: cover;"></div>
+	</div>
+	<div class="col-md-5 align-self-center" style="text-align: center;">
+		<h1 style="color: white;"><b>코로나19(COVID-19) 현황판</b></h1>
+	</div>
+	<div class="col-md-3">
+	</div>
+	
+	</div>
+	<div class="invoice p-3 mb-3">
+              <!-- title row -->
+              <div class="row ">
+                <div class="col-12">
+                  <h4  style="text-align: center">
+                       <strong>전체현황</strong>
+                  </h4>
+                </div>
+              </div>
+              
+              <div class="row invoice-info">
+              	<div class="col-sm-1 invoice-col">
+	            </div>
+                <div class="col-sm-2 invoice-col">
+                  <address style="text-align: center;">
+                    <strong style="text-align: right;">${wholeCovidVO.confirm}</strong><br>
+                    <strong>확진자</strong><br>
+                    <br>
+                  </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-2 invoice-col">
+                 <address style="text-align: center;">
+                    <strong style="color: red;">${wholeCovidVO.wholedeath}</strong><br>
+                    <strong>사망자</strong><br>
+                    <br>
+                  </address>
+                </div>
+                <div class="col-sm-2 invoice-col">
+                 	<address style="text-align: center;">
+                 	<strong>${wholeCovidVO.lethality}%</strong><br>
+                    <strong>치명률</strong><br>
+                    <br>
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-2 invoice-col">
+                   	<address style="text-align: center;">
+                 	<strong>${wholeCovidVO.domestic }</strong><br>
+                    <strong>국내발생현황</strong><br>
+                    <br>
+                    </address>
+                </div>
+                
+                <div class="col-sm-2 invoice-col">
+              	<address style="text-align: center;">
+	                    <strong>${wholeCovidVO.overseas}</strong><br>
+	                    <strong>해외유입현황</strong><br>
+	                    <br>
+                    </address>
+                </div>
+                
+                
+                
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+     
+              
+               <div class="row">
+                <div class="col-12">
+                  <h4 style="text-align: center">
+                     <!-- <strong class="float-center">AdminLTE, Inc.</strong> -->
+                    <strong>백신접종현황</strong>
+                    <!-- <small class="float-right">Date: 2/10/2014</small> -->
+                  </h4>
+                </div>
+                <!-- /.col -->
+              </div>
+              
+               <div class="row invoice-info">
+	                <div class="col-sm-2 invoice-col">
+	                  <address style="text-align: center;">
+	                    <strong>${covidInoculation.firstCnt}</strong><br>
+	                    <strong>1차 접종</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	                <!-- /.col -->
+	                <div class="col-sm-2 invoice-col">
+	                  <address style="text-align: center;">
+	                    <strong>${covidInoculation.secondCnt}</strong><br>
+	                    <strong>2차 접종</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                <!-- /.col -->
+	                <div class="col-sm-2 invoice-col">
+	                  <address style="text-align: center;">
+	                    <strong>${covidInoculation.thirdCnt}</strong><br>
+	                    <strong>3차 접종</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                <!-- /.col -->
+	                <div class="col-sm-2 invoice-col">
+	                  <address style="text-align: center;">
+	                    <strong>${covidInoculation.firstCntPrStr}%</strong><br>
+	                    <strong>1차 접종률</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                
+	                <div class="col-sm-2 invoice-col">
+	                  <address style="text-align: center;">
+	                    <strong>${covidInoculation.secondCntPrStr}%</strong><br>
+	                    <strong>2차 접종률</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                
+	                <div class="col-sm-2 invoice-col">
+	                  <address style="text-align: center;">
+	                    <strong>${covidInoculation.thirdCntPrStr}%</strong><br>
+	                    <strong>3차 접종률</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-12">
+                  <h4 style="text-align: center">
+                     <!-- <strong class="float-center">AdminLTE, Inc.</strong> -->
+                    <strong>시도별 현황</strong>
+                    <!-- <small class="float-right">Date: 2/10/2014</small> -->
+                  </h4>
+                </div>
+              </div>
+              
+              <div class="row invoice-info">
+              		<div class="col-sm-3 invoice-col">
+              		</div>
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.seoul}</strong><br>
+	                    <strong>서울</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	                <!-- /.col -->
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.busan}</strong><br>
+	                    <strong>부산</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                <!-- /.col -->
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.daegu}</strong><br>
+	                    <strong>대구</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                <!-- /.col -->
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.incheon}</strong><br>
+	                    <strong>인천</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.gwangju}</strong><br>
+	                    <strong>광주</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.daegeon}</strong><br>
+	                    <strong>대전</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	             </div>
+	             
+	             <div class="row invoice-info">
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.ulsan}</strong><br>
+	                    <strong>울산</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	                <!-- /.col -->
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.sejong}</strong><br>
+	                    <strong>세종</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                <!-- /.col -->
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.gyeonggi}</strong><br>
+	                    <strong>경기</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                <!-- /.col -->
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.gangwon}</strong><br>
+	                    <strong>강원</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.chungbuk}</strong><br>
+	                    <strong>충북</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.chungnam}</strong><br>
+	                    <strong>충남</strong><br>
+	                    <br>
+	                  </address>
+	                </div>
+	                <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.jeonbuk}</strong><br>
+	                    <strong>전북</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	                 <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.jeonnam}</strong><br>
+	                    <strong>전남</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	                 <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.gyeongbuk}</strong><br>
+	                    <strong>경북</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	                 <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.gyeongnam}</strong><br>
+	                    <strong>경남</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	                 <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.jeju}</strong><br>
+	                    <strong>제주</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	                 <div class="col-sm-1 invoice-col">
+	                  <address>
+	                    <strong>${cityVO.gumyeok}</strong><br>
+	                    <strong>검역</strong><br>
+	                    <br>
+	                  </address>
+	                 </div>
+	          </div>
+	          
+	          
+              
+              <div class="col-1" style="margin-left: 93%;">
+              <button type="button" onclick="location.href='<%=request.getContextPath()%>/guest/chart'" class="btn btn-block btn-primary btn-sm ">상세현황</button>
+              </div>
+              
+
+      </div>
+              <!-- this row will not appear when printing -->
+              <div class="row no-print">
+                <div class="col-12">
+                  <button type="button" class="btn btn-success"><i class="fas fa-bookmark" onclick="location.href='<%=request.getContextPath()%>/guest/question'">문진표작성</i></button>
+                  <button type="button" class="btn btn-primary" style="margin-right: 5px;"><i class="fas fa-download" onclick="OpenWindow('testResultCheckForm?backPage=lookup', '확진결과 조회', 500,305)">검사결과조회</i></button>
+                  <button type="button" class="btn btn-info" style="margin-right: 5px;"><i class="fas fa-download" onclick="OpenWindow('testResultCheckForm?backPage=confirmation', '확진결과 조회', 500,305)">확인서발급</i></button>
+                  <button type="button" class="btn btn-warning" style="margin-right: 5px;"><i class="fas fa-bus" onclick="location.href='<%=request.getContextPath()%>/guest/insp-list'">검사소찾기</i></button>
+                  
+                </div>
+              </div>
+              
+          	  <br>
+          	  <br>
+          	  
+        	<div>
+        		<h4 style="text-align : center">[공지사항]</h4>
+        		<div style="text-align:center">
+        		<p>"- 사적모임규제 : 전국 4인, (식당·카페)방역패스 적용하되, 미접종자는 1인 단독이용만 예외 인정<br>
+        		- 운영시간 제한 : 식당·카페, 유흥시설 등 21시까지 / 학원·PC방 등 22시 까지<br>
+        		- ‘영화관·공연장’ 현행 22시 영업제한에서 → 상영·시작시간 기준으로 21시까지 입장 허용으로 변경 - 백화점 및 대형마트도 접종증명·음성확인제(방역패스) 적용 - 대규모 행사·집회 규모 축소 : (50명미만)가능 (50명이상)접종완료자등으로만 구성 299명까지 가능"</p>
+        		</div>
+        		
+        	</div>  	  	
+              
+ </div>
+</body>
+</html>

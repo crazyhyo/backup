@@ -1,0 +1,103 @@
+package kr.or.ddit.jobOpening.vo;
+
+
+public class JobOpeningVO {
+	private Integer jo_no;
+	private String jo_title;
+	private Integer com_no;
+	private String jo_sdate;
+	private String jo_edate;
+	private Integer jg_code_no;
+	private Integer jt_code_no;
+	private Integer jo_sal;
+	private String jo_rank;
+	private String jo_mthd;
+	private String jo_link;
+	private Integer jo_clip;
+	private Integer jo_file;
+	private Integer prov_code_no;
+	public Integer getJo_no() {
+		return jo_no;
+	}
+	public void setJo_no(Integer jo_no) {
+		this.jo_no = jo_no;
+	}
+	public String getJo_title() {
+		return jo_title;
+	}
+	public void setJo_title(String jo_title) {
+		this.jo_title = jo_title;
+	}
+	public Integer getCom_no() {
+		return com_no;
+	}
+	public void setCom_no(Integer com_no) {
+		this.com_no = com_no;
+	}
+	public String getJo_sdate() {
+		return jo_sdate;
+	}
+	public void setJo_sdate(String jo_sdate) {
+		this.jo_sdate = jo_sdate;
+	}
+	public String getJo_edate() {
+		return jo_edate;
+	}
+	public void setJo_edate(String jo_edate) {
+		this.jo_edate = jo_edate;
+	}
+	public Integer getJg_code_no() {
+		return jg_code_no;
+	}
+	public void setJg_code_no(Integer jg_code_no) {
+		this.jg_code_no = jg_code_no;
+	}
+	public Integer getJt_code_no() {
+		return jt_code_no;
+	}
+	public void setJt_code_no(Integer jt_code_no) {
+		this.jt_code_no = jt_code_no;
+	}
+	public Integer getJo_sal() {
+		return jo_sal;
+	}
+	public void setJo_sal(Integer jo_sal) {
+		this.jo_sal = jo_sal;
+	}
+	public String getJo_rank() {
+		return jo_rank;
+	}
+	public void setJo_rank(String jo_rank) {
+		this.jo_rank = jo_rank;
+	}
+	public String getJo_mthd() {
+		return jo_mthd;
+	}
+	public void setJo_mthd(String jo_mthd) {
+		this.jo_mthd = jo_mthd;
+	}
+	public String getJo_link() {
+		return jo_link;
+	}
+	public void setJo_link(String jo_link) {
+		this.jo_link = jo_link;
+	}
+	public Integer getJo_clip() {
+		return jo_clip;
+	}
+	public void setJo_clip(Integer jo_clip) {
+		this.jo_clip = jo_clip;
+	}
+	public Integer getJo_file() {
+		return jo_file;
+	}
+	public void setJo_file(Integer jo_file) {
+		this.jo_file = jo_file;
+	}
+	public Integer getProv_code_no() {
+		return prov_code_no;
+	}
+	public void setProv_code_no(Integer prov_code_no) {
+		this.prov_code_no = prov_code_no;
+	}
+}

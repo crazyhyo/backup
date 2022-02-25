@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="atch_file">
+	<resultMap class="kr.or.ddit.cmm.vo.AtchFileVO" id="atchFileMap">
+		<result property="atchFileId" column="ATCH_FILE_ID"/>             
+		<result property="fileSn" column="FILE_SN"/>                      
+		<result property="fileStrePath" column="FILE_STRE_PATH"/>       
+		<result property="streFileNm" column="STRE_FILE_NM"/>             
+		<result property="orignlFileNm" column="ORIGNL_FILE_NM"/>         
+		<result property="fileExtsn" column="FILE_EXTSN"/>                
+		<result property="fileCn" column="FILE_CN"/>                      
+		<result property="fileSize" column="FILE_SIZE"/>                  
+		<result property="fileUsage" column="FILE_USAGE"/>                  
+	</resultMap>
+	
+	<select id="getAtchFileList" resultMap="atchFileMap" parameterClass="kr.or.ddit.cmm.vo.AtchFileVO">
+		select * from atch_file_detail
+		where atch_file_id = #atchFileId#
+	</select>
+	
+	<select id="getAtchFileDetail" resultMap="atchFileMap" parameterClass="kr.or.ddit.cmm.vo.AtchFileVO">
+		select * from atch_file_detail
+		where atch_file_id = #atchFileId#
+		  and file_sn = #fileSn#
+	</select>
+	
+	<insert id="insertAtchFile" parameterClass="kr.or.ddit.cmm.vo.AtchFileVO">
+		  
+		  <selectKey keyProperty="atchFileId" resultClass="Integer">
+		  	select atch_file_seq.nextval from dual
+		  </selectKey>
+		  
+			INSERT INTO atch_file (
+			    atch_file_id,
+			    creat_dt,
+			    use_at
+			) VALUES (
+			    #atchFileId#,
+			    sysdate,
+			    'Y'
+			)
+		  
+	</insert>
+	
+	<insert id="insertAtchFileDetail" parameterClass="kr.or.ddit.cmm.vo.AtchFileVO">
+		  
+		INSERT INTO atch_file_detail (
+		    atch_file_id,
+		    file_sn,
+		    file_stre_path,
+		    stre_file_nm,
+		    orignl_file_nm,
+		    file_extsn,
+		    file_cn,
+		    file_size,
+		    file_usage
+		) VALUES (
+		    #atchFileId#,
+			(select nvl(max(file_sn), 0) + 1
+			   from atch_file_detail
+			  where atch_file_id = #atchFileId#),
+			#fileStrePath#,
+			#streFileNm#,
+			#orignlFileNm#,
+			#fileExtsn#,
+			#fileCn#,
+			#fileSize#,
+			#fileUsage#
+		)
+		  
+	</insert>
+</sqlMap>			
+
+
+
+
+

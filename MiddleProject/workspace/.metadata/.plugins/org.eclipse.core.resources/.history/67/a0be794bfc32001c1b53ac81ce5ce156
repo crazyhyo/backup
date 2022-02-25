@@ -1,0 +1,10 @@
+package kr.or.ddit.schedule.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import kr.or.ddit.edu.vo.EduVO;
+
+public interface IScheduleDao {
+	
+}

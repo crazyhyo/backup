@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="hr">
+	<resultMap class="kr.or.ddit.hr.vo.HRVO" id="HRMap">
+		<result column="HR_NO" property="hrNo"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="JG_CODE_NO" property="jgCodeNo"/>
+		<result column="JT_CODE_NO" property="jtCodeNo"/>
+		<result column="PL_CODE_NO" property="plCodeNo"/>
+	</resultMap>
+	<select id="getTotalHRCount" resultClass="int">
+		SELECT COUNT(*)
+		  FROM HR
+	</select>
+	
+	<select id="hrPagingList" parameterClass="kr.or.ddit.cmm.vo.HRPagingVO"
+			resultMap="HRMap">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS RNUM, A.*  
+		          FROM (SELECT *
+		                  FROM HR) A) AA
+		 WHERE AA.RNUM BETWEEN #firstRecNo# AND #lastRecNo#
+	</select>
+	
+</sqlMap>

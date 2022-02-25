@@ -1,0 +1,59 @@
+<%@page import="kr.or.ddit.board.vo.BoardVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	List<BoardVO> list = (List<BoardVO>) request.getAttribute("boardPagingList");
+%>
+
+[
+	
+<%
+	for(int i = 0; i < list.size(); i++){
+		if(i > 0){
+			out.print(",");
+		}
+		BoardVO vo = list.get(i);
+		
+		int board_no = vo.getBoard_no();
+		int board_code_no = vo.getBoard_code_no();
+		String board_title = vo.getBoard_title();
+		String board_cont = vo.getBoard_cont();
+		int mem_no = vo.getMem_no();
+		int board_hit = vo.getBoard_hit();
+		int board_rept = vo.getBoard_rept();
+		int board_like = vo.getBoard_like();
+		int board_repl = vo.getBoard_repl();
+		int board_pop = vo.getBoard_pop();
+		String board_date = vo.getBoard_date();
+		int board_active = vo.getBoard_active();
+		String board_head = vo.getBoard_head();
+		int atch_file_id = vo.getAtch_file_id();
+		
+%>
+
+		
+			{	
+				"board_no" : "<%=board_no%>",
+				"board_code_no" : "<%=board_code_no%>",
+				"board_title" : "<%=board_title%>",
+				"board_cont" : "<%=board_cont%>",
+				"mem_no" : "<%=mem_no%>",
+				"board_hit" : "<%=board_hit%>",
+				"board_rept" : "<%=board_rept%>",
+				"board_like" : "<%=board_like%>",
+				"board_repl" : "<%=board_repl%>",
+				"board_pop" : "<%=board_pop%>",
+				"board_date" : "<%=board_date%>",
+				"board_active" : "<%=board_active%>",
+				"board_head" : "<%=board_head%>",
+				"atch_file_id" : "<%=atch_file_id%>"
+			}
+
+		
+<%		
+		
+	}
+%>
+
+]
