@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;board.vo.BoardChoiceVO.process(...)&apos; to &apos;afterInput&apos;&#x0D;&#x0A;- Original project: &apos;boardWithoutStatus&apos;&#x0D;&#x0A;- Original element: &apos;board.vo.BoardChoiceVO.process(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;board.vo.BoardChoiceVO.afterInput(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;process&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;board.vo{BoardChoiceVO.java[BoardChoiceVO~process~QBoardVO;" name="afterInput" references="true" stamp="1631795716335" version="1.0"/>
+</session>

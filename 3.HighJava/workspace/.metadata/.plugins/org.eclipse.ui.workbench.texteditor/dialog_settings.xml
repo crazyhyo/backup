@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.wst.html.ui.internal.preferences.ui.HTMLTemplatePreferencePage$HTMLEditTemplateDialog_dialogBounds">
+		<item value="1037" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="655" key="DIALOG_HEIGHT"/>
+		<item value="255" key="DIALOG_X_ORIGIN"/>
+		<item value="104" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="form" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="&#x09;&#x09;&#x09;req.setAttribute(&quot;member&quot;, member);"/>
+			<item value="form"/>
+			<item value="mulipart-form"/>
+			<item value="inser"/>
+			<item value="insert"/>
+			<item value="&lt;servlet&gt;"/>
+			<item value="default"/>
+			<item value="board."/>
+			<item value="boardint"/>
+			<item value="format("/>
+			<item value="format"/>
+			<item value="getName"/>
+			<item value=", Arrays.asList(&quot;지역설정&quot;,&quot;숙박시설종류 설정&quot;,&quot;평점필터&quot;,&quot;가격필터&quot;,&quot;날짜설정&quot;,&quot;조건확정&quot;)"/>
+			<item value="View."/>
+			<item value="compareTo"/>
+		</list>
+		<list key="replacehistory">
+			<item value=", Arrays.asList(&quot;지역설정&quot;,&quot;숙박시설종류&quot;)"/>
+			<item value="EnumView."/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="288" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="391" key="DIALOG_HEIGHT"/>
+		<item value="1330" key="DIALOG_X_ORIGIN"/>
+		<item value="177" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

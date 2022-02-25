@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="WorkbenchPreferenceDialogSettings">
+		<item value="284" key="DIALOG_X_ORIGIN"/>
+		<item value="99" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item value="-1" key="dialogHeight"/>
+		<item value="-1" key="dialogWidth"/>
+		<list key="textEntries">
+		</list>
+		<list key="orderedElements">
+		</list>
+		<list key="orderedProviders">
+		</list>
+		<list key="textArray">
+		</list>
+	</section>
+	<section name="PreferencesImportWizard">
+		<item value="C:\Users\PC-22\Desktop\myThema.epf" key=""/>
+		<list key="WizardPreferencesExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\PC-22\Desktop\myThema.epf"/>
+		</list>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.wst.xml.ui.internal.wizards.NewXMLWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.jpt.dbws"/>
+			<item value="org.eclipse.emf.codegen.ecore.ui.wizardCategory"/>
+			<item value="com.tomato.exerd.ui.newWizards.category"/>
+			<item value="org.eclipse.jst.ws.ui.new"/>
+			<item value="org.eclipse.wst.XMLCategory"/>
+			<item value="org.eclipse.ui.Examples"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.internal.dialogs.WorkbenchEditorsDialog">
+		<item value="0" key="sort"/>
+		<item value="false" key="allPersp"/>
+		<list key="columns">
+			<item value="252"/>
+			<item value="504"/>
+		</list>
+		<list key="bounds">
+			<item value="656"/>
+			<item value="155"/>
+			<item value="798"/>
+			<item value="553"/>
+		</list>
+	</section>
+	<section name="ImportExportAction">
+		<item value="org.eclipse.ui.wizards.export.ZipFile" key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID"/>
+		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+	</section>
+	<section name="PreferencesExportWizard">
+		<item value="C:\Users\PC-22\Desktop\myTemplete.epf" key=""/>
+		<item value="false" key="WizardPreferencesExportPage1.STORE_OVERWRITE_EXISTING_FILES_ID"/>
+		<item value="true" key="WizardPreferencesExportPage1.EXPORT_ALL_PREFERENCES_ID"/>
+		<list key="WizardPreferencesExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\PC-22\Desktop\myTemplete.epf"/>
+		</list>
+	</section>
+	<section name="ZipFileExportWizard">
+		<item value="true" key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID"/>
+		<item value="true" key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
+		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\PC-22\Desktop\reboard.zip"/>
+			<item value="C:\Users\PC-22\Desktop\서블릿 게시판.zip"/>
+			<item value="C:\Users\PC-22\Desktop\java.zip"/>
+			<item value="C:\Users\PC-22\Desktop\whisper.zip"/>
+			<item value="C:\Users\PC-22\Desktop\boardWithoutStatus.zip"/>
+			<item value="C:\Users\PC-22\Desktop\boardAssn.zip"/>
+			<item value="C:\Users\PC-22\Desktop\assn.zip"/>
+			<item value="C:\Users\PC-22\Desktop\JDBCTest.zip"/>
+			<item value="C:\Users\PC-22\Desktop\viewControlWithEnum.zip"/>
+			<item value="C:\Users\PC-22\Desktop\HotelManageJDBC.zip"/>
+			<item value="C:\Users\PC-22\Desktop\HotelManage.zip"/>
+			<item value="C:\Users\PC-22\Desktop\TulipsCopy.zip"/>
+			<item value="C:\Users\PC-22\Desktop\ThreadGame.zip"/>
+			<item value="C:\Users\PC-22\Desktop\HorseRaceRefactoring.zip"/>
+			<item value="C:\Users\PC-22\Desktop\HorseRace.zip"/>
+			<item value="C:\Users\PC-22\Desktop\PlanetArea.zip"/>
+			<item value="C:\Users\PC-22\Desktop\SetMethods and HotelManage.zip"/>
+			<item value="C:\Users\PC-22\Desktop\ListSort.zip"/>
+			<item value="C:\Users\PC-22\Desktop\Lotto.zip"/>
+			<item value="ListSort.zip"/>
+		</list>
+	</section>
+</section>

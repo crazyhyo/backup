@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="member">
+
+	<resultMap id="memMap" class="kr.or.ddit.member.vo.MemberDTO">
+		<result property="id" column="ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="picture" column="PICTURE"/>
+		<result property="enabled" column="ENABLED"/>
+		<result property="regdate" column="REGDATE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="name" column="NAME"/>
+		<result property="register" column="REGISTER"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="authority" column="AUTHORITY"/>
+	</resultMap>
+
+	<select id="getMember" parameterClass="String"
+			resultMap="memMap">
+		SELECT *
+		  FROM MEMBER
+		 WHERE ID = #id#			
+	</select>
+	
+	<select id="getMemberList" resultMap="memMap">
+		SELECT *
+		  FROM MEMBER
+	</select>
+	
+	<insert id="registerMember" parameterClass="kr.or.ddit.member.vo.MemberDTO">
+		INSERT  INTO MEMBER
+		        (ID,        PWD,        EMAIL,
+		         PHONE,      NAME,      ADDRESS)
+		VALUES  (#id#,          #pwd#,      #email#,
+		         #phone#,    #name#,        #address#)		
+	</insert>
+	
+	<update id="updateMember" parameterClass="kr.or.ddit.member.vo.MemberDTO">
+		UPDATE MEMBER
+		   SET PWD      = #pwd#,
+		       EMAIL    = #email#, 
+		       PHONE    = #phone#,
+		       NAME     = #name#,
+		       ADDRESS  = #address#
+		 WHERE ID = #id#
+	</update>
+	
+	<delete id="deleteMember" parameterClass="String">
+		DELETE FROM MEMBER
+		 WHERE ID = #id#		
+	</delete>
+	
+    <select id="searchMember" parameterClass="kr.or.ddit.member.vo.MemberDTO" resultMap="memMap">
+		SELECT *
+		  FROM MEMBER
+		 WHERE 1 = 1
+		        <isNotEmpty property="memId">
+		            AND NAME = #name# 
+		        </isNotEmpty>
+		        <isNotEmpty property="memId">
+		            AND ID = #id# 
+		        </isNotEmpty>
+		        <isNotEmpty property="memId">
+		            AND PHONE = #phone# 
+		        </isNotEmpty>
+		        <isNotEmpty property="memId">
+		            AND EMAIL = #email# 
+		        </isNotEmpty>  
+    </select>	
+	
+</sqlMap>			
+
+
+
+
+

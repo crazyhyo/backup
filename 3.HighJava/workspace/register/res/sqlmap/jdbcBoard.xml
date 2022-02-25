@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="jdbcBoard">
+
+<!--   <resultMap class="jdbcBoardVO" id="jdbcBoardMap">
+    <result property="memAddr" column="mem_addr"/>
+  </resultMap> -->
+  
+  
+  <insert id="insertBoard" parameterClass="jdbcBoardVO">
+    insert into jdbc_board 
+    (BOARD_NO, BOARD_TITLE, BOARD_WRITER, BOARD_DATE, BOARD_CONTENT)
+    values (board_seq.nextVal, #board_title#, #board_writer#, sysdate, #board_content#)
+  </insert>
+  
+  <select id="chkBoard" parameterClass="int" resultClass="int">
+    select count(*) as cnt from jdbc_board
+    where BOARD_NO = #board_no#
+  </select>
+
+  <select id="selectBoard" parameterClass="int" resultClass="jdbcBoardVO">
+    select * from jdbc_board
+    where BOARD_NO = #board_no#
+  </select>
+
+	<select id="getMaxNo" resultClass="int">
+		select max(board_no) from jdbc_board
+	</select>
+
+
+  <update id="updateBoard" parameterClass="jdbcBoardVO">
+    update jdbc_board
+    set BOARD_TITLE = #board_title#,
+    BOARD_CONTENT = #board_content#
+    where BOARD_NO = #board_no#
+  </update>
+
+  <delete id="deleteBoard" parameterClass="int">
+
+    delete jdbc_board where BOARD_NO = #board_no#
+
+  </delete>
+
+  <select id="searchBoard" parameterClass="jdbcBoardVO" resultClass="jdbcBoardVO">
+    SELECT * FROM jdbc_board 
+    WHERE 1 = 1
+    <isNotEmpty property="board_title">
+      AND BOARD_TITLE LIKE '%' || #board_title# || '%' 
+    </isNotEmpty>
+    <isNotEmpty property="board_writer">
+      AND BOARD_WRITER LIKE '%' || #board_writer# || '%' 
+    </isNotEmpty>
+    <isNotEmpty property="board_content">
+      AND BOARD_CONTENT LIKE '%' || #board_content# || '%' 
+    </isNotEmpty>
+  </select>
+  
+  <select id="selectAllBoard" resultClass="jdbcBoardVO">
+    select * from jdbc_board
+    order by BOARD_NO desc
+  </select>
+  
+  
+</sqlMap>			
+
+
+
+
+

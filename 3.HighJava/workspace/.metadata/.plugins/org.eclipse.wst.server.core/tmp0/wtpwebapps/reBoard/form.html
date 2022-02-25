@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--  jquery사용 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>Insert title here</title>
+
+<style>
+
+
+/* .gray{
+	background-color: rgb(240,240,240);
+}
+.spanned{
+	background-color: lime;
+}
+.data{
+	background-color: aliceblue;
+	width: 200px;
+}
+
+div{
+	display: flex;
+	
+} */
+
+</style>
+
+</head>
+<body>
+
+<div class="header">
+	<h1>회원관리 카드</h1>
+	<hr>
+</div>
+
+<div class="content">
+
+	<div class="picture">
+		<h4>[사진]</h4>
+		<img src="" alt="noimage.jpg">
+	</div>
+
+	<table border="1">
+		<tr>
+			<td colspan="4"></td>
+		</tr>
+		<tr>
+			<td class="gray">이름</td>
+			<td colspan="3" class="spanned">가가</td>
+		</tr>
+		<tr>
+			<td class="gray">아이디</td>
+			<td class="data">zzzzzzzz</td>
+			<td class="gray">비밀번호</td>
+			<td class="data">zzzzzzzz</td>
+		</tr>
+		<tr>
+			<td class="gray">권한</td>
+			<td class="data">ROLE_USER</td>
+			<td class="gray">등록자</td>
+			<td class="data">mimi</td>
+		</tr>
+		<tr>
+			<td class="gray">주소</td>
+			<td colspan="3" class="spanned">대전 대흥동</td>
+		</tr>
+		<tr>
+			<td class="gray">입사일</td>
+			<td class="data">2021/11/11</td>
+			<td class="gray">재직여부</td>
+			<td class="data">재직</td>
+		</tr>
+		<tr>
+			<td class="gray">전화번호</td>
+			<td colspan="3" class="spanned">010-1234-1234</td>
+		</tr>
+		<tr>
+			<td class="gray">이메일</td>
+			<td colspan="3" class="spanned">zzzzzzzz@naver.com</td>
+		</tr>
+	</table>
+</div>
+
+<div class="nav">
+	<ul>
+		<li>수정하기</li>
+		<li>삭제하기</li>
+	</ul>
+</div>
+
+<form id="update" method="post" action="">
+	<table border="1">
+		<tr>
+			<td colspan="4"></td>
+		</tr>
+		<tr>
+			<td class="gray">이름</td>
+			<td colspan="3" class="spanned"><input type="text" name="name" id="name"></td>
+		</tr>
+		<tr>
+			<td class="gray">아이디</td>
+			<td class="data"><input type="text" name="id" value="" id="id" readonly required></td>
+			<td class="gray">비밀번호</td>
+			<td class="data"><input type="password" name="pwd" id="pwd" required></td>
+		</tr>
+		<tr>
+			<td class="gray">권한</td>
+			<td class="data">
+				<select name="authority" id="authority">
+					<option value="ROLE_USER" selected>ROLE_USER</option>
+					<option value="ROLE_ADMIN">ROLE_ADMIN</option>
+				</select>
+			</td>
+			<td class="gray">등록자</td>
+			<td class="data"><input type="text" name="register" value="" readonly></td>
+		</tr>
+		<tr>
+			<td class="gray">주소</td>
+			<td colspan="3" class="spanned"><input type="text" name="address" value=""></td>
+		</tr>
+		<tr>
+			<td class="gray">입사일</td>
+			<td class="data"><input type="date" name="regdate" value=""></td>
+			<td class="gray">재직여부</td>
+			<td class="data">
+				<select name="enabled" id="enabled">
+					<option value="0">퇴사</option>
+					<option value="1" selected>재직</option>
+					<option value="2">휴직</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="gray">전화번호</td>
+			<td colspan="3" class="spanned">
+			<input type="text" name="phone" id="phone" value=""></td>
+		</tr>
+		<tr>
+			<td class="gray">이메일</td>
+			<td colspan="3" class="spanned"><input type="text" name="email" id="email" value="" required></td>
+		</tr>
+	</table>	
+	<input type="submit" value="제출">
+	<input type="button" value="유효성검사" id="regcheck">
+</form>
+
+<script>
+	window.onload = function(){
+		
+		$('#name').on('keyup', function(){
+			let nameVal = $('#name').val();
+			let nameReg = /^[가-힣]{2,5}$/;
+			if(nameReg.test(nameVal)){
+				$('#name').css("border","");
+			}else{
+				$('#name').css("border","4px solid red");
+			}
+		})
+		$('#pwd').on('keyup', function(){
+			let pwdVal = $('#pwd').val();
+			let pwdReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,12}$/;
+			if(pwdReg.test(pwdVal)){
+				$('#pwd').css("border","");
+			}else{
+				$('#pwd').css("border","4px solid red");
+			}
+		})
+		$('#id').on('keyup', function(){
+			let idVal = $('#id').val();
+			let idReg = /^([0-9a-zA-Z_-]).{4,20}$/;
+			if(idReg.test(idVal)){
+				$('#id').css("border","");
+			}else{
+				$('#id').css("border","4px solid red");
+			}
+		})
+		$('#email').on('keyup', function(){
+			let emailVal = $('#email').val();
+			let emailReg = /^([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			if(emailReg.test(emailVal)){
+				$('#email').css("border","");
+			}else{
+				$('#email').css("border","4px solid red");
+			}
+		})
+		$('#phone').on('keyup', function(){
+			let phoneVal = $('#phone').val();
+			let phoneReg = /\d{2,3}-?\d{3,4}-?\d{4}$/;
+			if(phoneReg.test(phoneVal)){
+				$('#phone').css("border","");
+			}else{
+				$('#phone').css("border","4px solid red");
+			}
+		})
+		
+		
+
+	}
+</script>
+
+</body>
+</html>

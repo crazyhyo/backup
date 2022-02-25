@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+	<servlet>
+		<servlet-name>DeleteMember</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.DeleteMember</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DeleteMember</servlet-name>
+		<url-pattern>/delete</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>IdCheck</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.IdCheck</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>IdCheck</servlet-name>
+		<url-pattern>/idCheck</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MemberDetail</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.MemberDetail</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>MemberDetail</servlet-name>
+		<url-pattern>/detail</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MemberList</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.MemberList</servlet-class>
+        <init-param>
+            <param-name>jspPath.properties</param-name>
+            <param-value>jspPath.properties</param-value>
+        </init-param>
+        <init-param>
+            <param-name>urlPatterns.properties</param-name>
+            <param-value>urlPatterns.properties</param-value>
+        </init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>MemberList</servlet-name>
+		<url-pattern>/list</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Register</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.Register</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Register</servlet-name>
+		<url-pattern>/regist</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SearchMember</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.SearchMember</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SearchMember</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UpdateMember</servlet-name>
+		<servlet-class>kr.or.ddit.member.controller.UpdateMember</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateMember</servlet-name>
+		<url-pattern>/update</url-pattern>
+	</servlet-mapping>
+
+
+</web-app>

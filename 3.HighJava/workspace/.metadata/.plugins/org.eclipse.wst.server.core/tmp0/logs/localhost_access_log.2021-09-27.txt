@@ -1,0 +1,10 @@
+127.0.0.1 - - [27/Sep/2021:12:40:27 +0900] "GET / HTTP/1.1" 404 1074
+192.168.43.141 - - [27/Sep/2021:12:40:48 +0900] "GET /servletTest/T05_ServletCookieTest HTTP/1.1" 404 1111
+192.168.43.141 - - [27/Sep/2021:12:40:48 +0900] "GET /favicon.ico HTTP/1.1" 404 1085
+127.0.0.1 - - [27/Sep/2021:12:41:37 +0900] "GET / HTTP/1.1" 404 1074
+192.168.43.141 - - [27/Sep/2021:12:41:47 +0900] "GET /servletTest/T05_ServletCookieTest HTTP/1.1" 200 220
+192.168.43.141 - - [27/Sep/2021:12:41:47 +0900] "GET /favicon.ico HTTP/1.1" 404 1085
+127.0.0.1 - - [27/Sep/2021:12:42:19 +0900] "GET / HTTP/1.1" 404 1074
+192.168.43.141 - - [27/Sep/2021:12:42:26 +0900] "GET /servletTest/T05_ServletCookieTest HTTP/1.1" 200 245
+192.168.43.141 - - [27/Sep/2021:12:42:30 +0900] "GET /servletTest/T05_ServletCookieTest HTTP/1.1" 200 169
+192.168.43.141 - - [27/Sep/2021:12:42:32 +0900] "GET /servletTest/T05_ServletCookieTest HTTP/1.1" 200 169

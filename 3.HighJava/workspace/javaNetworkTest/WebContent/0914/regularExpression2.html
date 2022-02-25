@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/formCheck.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    form{
+      border: 2px dotted blue;
+      width: 350px;
+      padding: 10px;
+    }
+    label{
+      display: inline-block;
+      width: 120px;
+      height: 30px;
+    }
+  </style>
+  <script>
+    function proc1(){
+      res = formCheck();
+      if(res){
+        alert('correct input!');
+      }
+    }
+
+    function proc2(){
+
+      //  전방검색 /w+(?=찾는 문자열)/ : 찾는 문자열을 기준으로 앞의 문자나 숫자를 검색
+      let href = "http://www.daum.net";
+
+      let regTest = /.+(?=:)/;
+
+      let testResult = href.match(regTest);
+
+      alert(testResult);
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>RegularExpression</h3>
+    regularExpressionPattern.test(value) : boolean<br>
+
+    <form name="form">
+      <label>ID : </label><input type="text" id="ID" name="ID"><br>
+      <label>PW : </label><input type="password" id="password" name="password"><br>
+      <label>confirm : </label><input type="password" id="pconfirm" name="pconfirm"><br>
+      <label>Name : </label><input type="text" id="name" name="name"><br>
+      <label>Gender : </label><input type="radio" class="gender" name="gender" value="male" checked="checked">male
+                <input type="radio" class="gender" name="gender" value="female">female<br>
+      <label>Tel : </label><input type="text" id="tel" name="tel"><br>
+      <label>email : </label><input type="text" id="email" name="email"><br>
+
+      <input type="button" value="submit" onclick="proc1()">
+      <input type="reset" value="reset" id="reset">
+    </form>
+
+      <input type="button" value="test" onclick="proc2()">
+    <div id="result1"></div>
+  </div>
+</body>
+</html>

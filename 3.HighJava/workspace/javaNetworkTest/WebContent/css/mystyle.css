@@ -1,0 +1,25 @@
+pre{
+
+	border : 1px dotted orange;
+	background-color : lightblue;
+	font-size : 2.0em;
+
+}
+.box{
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid gray;
+	background-color: #f3fada;
+	width: 80%;
+}
+.box div{
+	border: 1px dotted orange;
+	padding: 10px;
+}
+.box input[type="button"], .box input[type=reset]{
+	border-radius: 10px;
+	width: 100px;
+	height: 30px;
+	background-color: blueviolet;
+	color: whitesmoke;
+}
