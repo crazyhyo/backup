@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    window.onload = () =>{
+      vdiv = document.getElementsByTagName("div")[0];
+
+      //es6 - 첫번째를 검색
+      vdiv = document.querySelector("div");
+
+      //모든 div를 검색
+      // vidv = document.querySelectorAll("div");
+  
+      let firstNum = parseInt(prompt("첫 번째 수를 입력하세요"));
+      let secondNum = parseInt(prompt("두 번째 수를 입력하세요"));
+  
+      let sum = firstNum + secondNum;
+  
+      vdiv.innerHTML = `첫번째 수 : ${firstNum} <br>`;
+      vdiv.innerHTML += `두번째 수 : ${secondNum}<br>`;
+      vdiv.innerHTML += `합계 : ${sum}<br>`;
+    };
+  </script>
+</head>
+<body>
+  <pre>
+    prompt를 이용한 입력
+    결과 리턴값은 문자열이다.
+
+
+  </pre>
+  <br>
+  <div></div>
+</body>
+</html>

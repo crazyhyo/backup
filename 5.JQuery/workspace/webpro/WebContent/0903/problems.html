@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    proc2 = () => {
+      let sum = 0;
+      let str ="";
+      while(true){
+        invalue = parseInt(prompt("수를 입력"));
+
+        if(invalue == 0) break;
+
+        sum += invalue;
+        str += invalue + "&nbsp;&nbsp;"
+      }
+      document.getElementById("result2").innerHTML += str;
+      document.getElementById("result2").innerHTML += sum;
+    };
+
+    proc4 = () => {
+      let sum = 0;
+      let str = "";
+      for(let i = 1; i <= 10; i++){
+        for(let j = 1; j <= 10; j++){
+          if(((i + j) % 3) == 0){
+            str += `i의 값은 ${i}, j의 값은 ${j}로 i + j는 3의 배수입니다.<br>`;
+          }
+          continue;
+        }
+      }
+      document.getElementById("prob4").innerHTML = str;
+    };
+    proc5 = () => {
+      let str = "";
+      for(let i = 1; i <= 100; i++){
+        if(i % 2 == 0 && i % 3 == 0){
+          str += `${i} `
+        }
+      }
+      document.getElementById("prob5").innerHTML = str;
+    };
+    proc6 = () => {
+      let str = "";
+      let str2 = "";
+      while(true){
+        let first = prompt("first : ");
+        let second = prompt("second : ");
+
+        let sum = parseInt(first) + parseInt(second);
+
+        if(sum >= 100){
+          str += `${first} + ${second} = ${sum}<br>`
+          
+        }else if(sum < 100 && !(first == "0" && second == "0")){
+          str2 += `${first} + ${second} = ${sum}<br>`
+        }else if(first == "0" && second == "0"){
+          break;
+        }
+      }
+      str = `100이상의 입력된 수 <br>` + str + "<br>";
+      document.getElementById("prob6").innerHTML += str;
+      str2 = `100미만의 입력된 수 <br>` + str2 + "<br>";
+      document.getElementById("prob6").innerHTML += str2;
+    };
+  </script>
+</head>
+<body>
+  <input type="button" onclick="proc4()" value="4번">
+  <div id="prob4"></div>
+  <input type="button" onclick="proc5()" value="5번">
+  <div id="prob5"></div>
+  <input type="button" onclick="proc6()" value="6번">
+  <div id="prob6"></div>
+</body>
+</html>

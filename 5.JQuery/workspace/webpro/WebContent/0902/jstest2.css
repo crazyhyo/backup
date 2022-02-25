@@ -1,0 +1,7 @@
+@charset "UTF-8";
+div{
+  height: auto;
+  width: 80%;
+  border: 1px solid purple; 
+  overflow: auto;
+}

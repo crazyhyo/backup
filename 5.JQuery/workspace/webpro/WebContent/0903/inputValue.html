@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function proc(){
+      let first = parseInt(document.getElementById("first").value);
+      let second = parseInt(document.getElementById("second").value);
+
+      let sum = eval(`${first}+${second}`);
+
+      // sum = first + second;
+
+      let result = document.getElementById("sum");
+      result.value = sum;
+
+      alert(sum);
+    }
+  </script>
+</head>
+<body>
+  <pre>
+    -----------value사용하기--------------
+    input요소, select option, textarea에서 사용
+    value : 값을 얻기
+    value = 값 : 값을 출력
+
+    1. html요소에서 입력받은 값을 script로 값 전달하기
+    2. script에서 계산된 값을 html input요소에 출력하기
+
+    textContent, textContent = "내용"
+    innerHTML, innerHTML = "내용"
+  </pre>
+  <form action="">
+    <label>첫 번째 수 : <input type="text" id="first"></label><br>
+    <label>두 번째 수 : <input type="text" id="second"></label><br>
+    <input type="button" value="계산" onclick="proc()"><br>
+    <label>결과 : <input type="text" id="sum"></label><br>
+  </form>
+</body>
+</html>

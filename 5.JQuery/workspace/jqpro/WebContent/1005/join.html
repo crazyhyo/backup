@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="../js/jquery.serializejson.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style>
+		h2{
+			margin-top : 30px;
+			margin-left : 30px;
+		}
+	</style>
+	<script>
+		function regular_check(id, regex){
+			document.getElementById(id).addEventListener('keyup', function(e){
+
+				var target = e.target.value.trim();
+				var target_reg = regex;
+
+				if(target_reg.test(target)){
+					e.target.style.color = 'blue';
+				}else{
+					e.target.style.color = 'red';
+				}
+			})
+		}
+		window.onload = function(){
+				$('#id').on('keyup', function(){
+					let	idvalue = $(this).val();
+
+					 let idreg = /^[a-z][a-zA-Z0-9]{3,11}$/;
+					 if(idvalue.length == 0){
+						 $('#idspan').html(' ').css('border','0px dotted black');
+					 }
+					 if(idvalue.length < 4 || idvalue.length > 12){
+						 $('#idspan').html('id는 4~12자 입니다.').css('color','red');
+						 $('#idcheck').prop('disabled',true);
+						}else{
+							 $('#idspan').html(' ');
+						 $('#idcheck').prop('disabled',false);
+						 }
+					 if(idreg.test(idvalue)){
+						 $(this).css('border', '3px solid blue');
+						 $('#idcheck').prop('disabled',false);
+					 }else{
+						 $(this).css('border','3px solid red');
+						 $('#idcheck').prop('disabled',true);
+					 }
+				})
+
+				document.getElementById('name').addEventListener('keyup', function(e){
+					var name = document.getElementById('name').value.trim();
+					let name_reg = /^[가-힣]{2,10}$/;
+
+					if(name_reg.test(name)){
+						e.target.style.color = 'blue';
+					}else{
+						document.getElementById('name').style.color = 'red';
+					}
+				})
+				document.getElementById('pwd').addEventListener('keyup', function(e){
+					var pwd = e.target.value.trim();
+					let pwd_reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+					if(pwd_reg.test(pwd)){
+						e.target.style.color = 'blue';
+					}else{
+						e.target.style.color = 'red';
+					}
+				})
+				document.getElementById('mail').addEventListener('keyup', function(e){
+					var mail = e.target.value.trim();
+					let mail_reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+
+					if(mail_reg.test(mail)){
+						e.target.style.color = 'blue';
+					}else{
+						e.target.style.color = 'red';
+					}
+				})
+				document.getElementById('hp').addEventListener('keyup', function(e){
+					var hp = e.target.value.trim();
+					let hp_reg = /^\d{3}-\d{3,4}-\d{4}$/;
+
+					if(hp_reg.test(hp)){
+						e.target.style.color = 'blue';
+					}else{
+						e.target.style.color = 'red';
+					}
+				})
+				
+			document.getElementById('idcheck').addEventListener('click', function(){
+					let	idvalue = $('#id').val();
+					$.ajax({
+						url : "/jqpro/IDCheck.do",
+						type : "get",
+						data : {"idvalue" : idvalue},
+						dataType: "json",
+						success: function(res){
+							 $('#idspan').html(res.vailidId).css('color','red');
+						},
+						error: function(err){
+							alert("type : " + err.status + "\n text :" + err.statusText);
+						}
+					})
+			})
+			
+			document.getElementById('zipbtn').addEventListener('click', function(){
+				
+				window.open('zipsearch.html', "우편번호찾기", 'width=500 height=500');
+			})
+			
+
+			$('#result1').on('click', 'p',function(){
+				
+				let zip = $('.s1', this).text();
+				let addr = $('.s2', this).text();
+
+				$('#zip').val(zip);
+				$('#add1').val(addr);
+
+				$('#zipModal').modal('hide');
+			})
+
+			document.getElementById('zipbtn2').addEventListener('click', function(){
+				let add2_value = document.getElementById('addr2').value.trim();
+
+				if(add2_value.length < 1){
+					alert('동을 입력하세요');
+					return false;
+				}
+
+				$.ajax({
+					url : '/jqpro/searchAdd2.do',
+					type : 'post',
+					data : {"add2_value": add2_value},
+					dataType: 'json',
+					success : function (res) {
+						let code = "";
+						res.forEach(element =>{
+							code += `<p> <span class="s1">${element.zipcode}</span> <span class="s2">${element.addr}</span> ${element.bunji}</p>`;
+						})
+						document.getElementById('result1').innerHTML = code;
+					},
+					error: function(err){
+						alert('type : ' + err.status + '\n text : ' + err.statusText);
+					}
+				})
+			})
+
+			document.getElementById('send').addEventListener('click', function(){
+
+				//alert('click');
+
+			})
+			//$('#send').on('click',function(){}) : input type='button' / input type='sumbit'일때만 됨, 지금은 button type='submit'이라 안됨
+			
+			$('form').on('submit',function(){
+				let form_data = $('form').serialize();
+				let form_data2 = $('form').serializeArray();
+				let form_data3 = $('form').serializeJSON();
+				console.log(form_data);
+				console.log(form_data2);
+				console.log(form_data3);
+
+				$.ajax({
+					url: '/jqpro/MemberJoin.do',
+					type: 'post',
+					data: form_data,
+					dataType: 'json',
+					success: function(res){
+						$('#joinspan').html(res.flag);
+					},
+					error: function(err){
+						alert(`type : ${err.status} \n text : ${err.statusText}`);
+					}
+
+				})
+			
+			})
+		}
+	</script>
+</head>
+<body>
+	<br><br>
+	<h2>회원가입</h2>
+	<br><br>
+	<form class="form-horizontal" onsubmit="return false;">
+	  <div class="form-group">
+	    <label class="control-label col-sm-2" for="id">아이디:</label>
+	    <div class="col-sm-3">
+	      <input type="text" name="mem_id" class="form-control" id="id" placeholder="Enter id">
+	    </div>
+	    <input type="button" class="btn btn-info" id="idcheck" value="중복검사">
+	    <span id="idspan"></span>
+	  </div>
+	  <div class="form-group">
+	    <label class="control-label col-sm-2" for="email">이름:</label>
+	    <div class="col-sm-3">
+	      <input type="text" name="mem_name"  class="form-control" id="name" placeholder="Enter name">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="control-label col-sm-2" for="email">생년월일:</label>
+	    <div class="col-sm-3">
+	      <input type="date" name="mem_bir"  class="form-control" id="bir" placeholder="1999 04 15">
+	    </div>
+	  </div>
+	 	<div class="form-group">
+	    <label class="control-label col-sm-2" for="pwd">비밀번호:</label>
+	    <div class="col-sm-3">
+	      <input type="password" name="mem_pass"  class="form-control" id="pwd" placeholder="Enter password">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="control-label col-sm-2" for="email">휴대폰 번호:</label>
+	    <div class="col-sm-3">
+	      <input type="text" name="mem_hp"  class="form-control" id="hp" placeholder="010-1234-5678">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="control-label col-sm-2" for="email">이메일:</label>
+	    <div class="col-sm-3">
+	      <input type="text" name="mem_mail"  class="form-control" id="mail" placeholder="abc123@email.com">
+	    </div>
+	  </div>
+		<div class="form-group">
+	    <label class="control-label col-sm-2" for="email">우편번호:</label>
+	    <div class="col-sm-3">
+	      <input type="text" name="mem_zip"  class="form-control" id="zip" placeholder="Enter zip">
+	    </div>
+	    <input id="zipbtn" type="button" class="btn btn-info" value="우편번호검색">
+	    <input data-toggle="modal" data-target="#zipModal" id="zipbtn" type="button" class="btn btn-info" value="번호검색">
+	    <span id="zipspan"></span>
+	  </div>
+	  <div class="form-group">
+	    <label class="control-label col-sm-2" for="email">주소:</label>
+	    <div class="col-sm-5">
+	      <input type="text" name="mem_add1"  class="form-control" id="add1" placeholder="Enter add1">
+	    </div>
+	  </div>
+		<div class="form-group">
+	    <label class="control-label col-sm-2" for="email">상세주소:</label>
+	    <div class="col-sm-5">
+	      <input type="text" name="mem_add2"  class="form-control" id="add2" placeholder="Enter add2">
+	    </div>
+	  </div>
+	  
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-2">
+	      <button type="submit" id='send' class="btn btn-primary">Submit</button>
+	      <span id="joinspan"></span>
+	    </div>
+	  </div>
+	</form>
+
+<!-- Modal -->
+<div id="zipModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <br><br>
+				<h3>우편번호 찾기</h3>
+				<br><br>
+				
+				동 이름을 입력하세요<br>
+				<input type="text" id="addr2">
+				<input type="button" value="확인" id='zipbtn2'>
+			    
+				<div id="result1">
+				</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link href="../css/mystyle.css" rel="stylesheet">
+  <link href="dynamicStyle.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/stylescript.js"></script>
+  <script>
+    window.onload = function(){
+      vdiv = document.getElementsByTagName("div")[0];
+    }
+  </script>
+</head>
+<body>
+<pre>
+  외부 스크립트 사용
+  &lt;script src="../js/stylescript.js">&lt;/script>
+</pre>
+
+  <div>Hello World</div>
+  <br><br>
+  <input id="a1" type="button" value="border" onclick="changeBorder()">
+  <input id="a2" type="button" value="color" onclick="changeColor()">
+  <input id="a3" type="button" value="size" onclick="changeSize()">
+  <input id="a4" type="button" value="border-radius" onclick="changeBorderRadius()">
+</body>
+</html>

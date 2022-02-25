@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+		table{
+			width: 300px;
+			height: 50px;
+			border-collapse: collapse;
+			border: 3px solid blue;
+			text-align: center;
+		}
+		th{
+			background-color: aliceblue;
+		}
+		tr:nth-child(even){
+			background-color: white;
+		}
+		
+  </style>
+  <script>
+  $(function () {
+      $('#lprodList').on('click', function () {
+ 					$.ajax({
+ 						type : "get",
+ 						url : "lprodList.jsp",
+ 						dataType : "json",
+ 						success: function(res){
+ 							let text = "";
+ 							let code = "";
+ 							code += "<table border=\"1\"><tr><th>No</th><th>Code</th><th>Prod</th></tr>";
+ 							
+ 							res.forEach(element => {
+ 								code += "<tr>";
+ 								code += "<td>" + element.lprod_id + "</td>";
+ 								code += "<td>" + element.lprod_gu + "</td>";
+ 								code += "<td>" + element.lprod_nm + "</td>";
+ 								code += "</tr>";
+ 								
+ 								text += "Lprod_ID : " + element.lprod_id + "<br>";
+ 								text += "Lprod_GU : " + element.lprod_gu + "<br>";
+ 								text += "Lprod_NM : " + element.lprod_nm + "<br>";
+ 								text += "<hr>"
+ 							})
+ 							code += "</table>";
+ 							
+ 							$('#result1').html(code);
+ 							$('#result2').html(text);
+ 						},
+ 						error: function(xhr){
+ 							alert(xhr.status + "\n text : " + xhr.statusText);
+ 						}
+ 					})
+        });
+      });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>ajax</h3>
+    <input type="button" value="lprodList" id="lprodList">
+
+    <div id="result1">
+
+    </div>
+    <div id="result2">
+
+    </div>
+  </div>
+</body>
+</html>

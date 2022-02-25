@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>document</title>
+  <style>
+    img{
+      width: 150px;
+      height: 150px;
+    }
+  </style>
+  <script>
+    $(function() {
+      $('#btn1').on('click',function(){
+        $('#result1 img').attr('title', 'test');
+      })
+      $('#btn2').on('click',function(){
+
+        $('#result2 img').attr('title', function(){
+
+          let src = $(this).attr('src');
+
+          let start = src.lastIndexOf('/');
+          let end = src.lastIndexOf('.');
+
+          let title = src.substring(start + 1, end);
+
+          return title;
+
+        })
+
+      })
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>method</h3>
+    <input type="button" value="btn1" id="btn1">
+    <input type="button" value="btn2" id="btn2">
+    <div id="result1">
+      <img src="../images/ajaxin.jpg" alt="ajaxin.jpg">
+      <img src="../images/circle-dot-o.png" alt="circle-dot-o.png">
+      <img src="../images/Desert.jpg" alt="Desert.jpg">
+      <img src="../images/Jellyfish.jpg" alt="Jellyfish.jpg">
+    </div>
+    <div id="result2">
+      <img src="../images/ajaxin.jpg" alt="ajaxin.jpg">
+      <img src="../images/circle-dot-o.png" alt="circle-dot-o.png">
+      <img src="../images/Desert.jpg" alt="Desert.jpg">
+      <img src="../images/Jellyfish.jpg" alt="Jellyfish.jpg">
+    </div>
+  </div>
+</body>
+</html>

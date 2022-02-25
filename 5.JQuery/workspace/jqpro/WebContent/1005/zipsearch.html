@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="http://localhost/jqpro/css/mystyle.css">
+  <script src="http://localhost/jqpro/js/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style>
+/* 	 #result1 p:hover{
+		 background-color: cornflowerblue;
+		 border: 2px solid lime;
+		 color : rgb(219, 186, 186);
+		} */
+	</style>
+	<script>
+		
+		
+		window.onload = function(){
+
+			document.addEventListener('mouseover', function (e) {
+					if(e.target.tagName == 'P'){
+						e.target.style.border = '3px solid lime';
+						e.target.firstChild.border = '1px solid black';
+					}
+			  })
+			document.addEventListener('mouseout', function (e) {
+					if(e.target.tagName == 'P'){
+						e.target.style.removeProperty('border');
+					}
+			  })
+			
+			
+			// $('#result1').on('click', 'p',function(){
+				
+			// 	let zip = $('.s1', this).text();
+			// 	let addr = $('.s2', this).text();
+
+			// 	$('#zip', opener.document).val(zip);
+			// 	$('#add1', opener.document).val(addr);
+
+			// 	window.close();
+			// })
+			
+			
+			document.getElementById('zipbtn').addEventListener('click', function(){
+				let add2_value = document.getElementById('add2').value;
+				add2_value.trim();
+
+				if(add2_value.length < 1){
+					alert('동을 입력하세요');
+					return false;
+				}
+
+				$.ajax({
+					url : '/jqpro/searchAdd2.do',
+					type : 'post',
+					data : {"add2_value": add2_value},
+					dataType: 'json',
+					success : function (res) {
+						let code = "";
+						res.forEach(element =>{
+							code += `<p> <span class="s1">${element.zipcode}</span> <span class="s2">${element.addr}</span> ${element.bunji}</p>`;
+						})
+						document.getElementById('result1').innerHTML = code;
+					},
+					error: function(err){
+						alert('type : ' + err.status + '\n text : ' + err.statusText);
+					}
+				})
+			})
+		}
+	</script>
+</head>
+<body>
+	
+	
+<div class="box box1">
+	<br><br>
+	<h3>우편번호 찾기</h3>
+	<br><br>
+	
+	동 이름을 입력하세요<br>
+	<input type="text" id="add2">
+	<input type="button" value="확인" id='zipbtn'>
+		<div id="result1">
+		</div>
+  </div>
+</body>
+</html>

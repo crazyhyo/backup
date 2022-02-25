@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>title</title>
+<link rel="stylesheet" href="../css/mystyle.css">
+<style>
+  form{
+    width : 70%;
+    margin : 50px;
+    border : 1px dotted orange;
+    padding : 20px;
+  }
+  label{
+    width : 150px;
+    height : 30px;
+    display : inline-block;
+  }
+</style>
+</head>
+<body>
+<pre>
+input type="radio" name="gender"> :
+여러개 중에 한개의 값을 선택한다. 여러개의 요소의 name속성은 모두 같아야한다.
+input type="checkbox" name="food"> :
+여러개 중에 한개 또는 여러개의 값을 선택한다. 여러개의 요소의 name속성은 모두 같아야한다.
+</pre>
+  <form action="radiocheck.jsp" method="post">
+    <label>아이디</label>
+    <input type="text" name="id" value="asdf"><br>
+    <label>이름</label>
+    <input type="text" name="name"><br>
+    <label>주소</label>
+    <input type="text" name="addr"><br>
+    <label>성별</label>
+    <input type="radio" value="남자" name="gender">남자
+    <input type="radio" value="여자" name="gender">여자<br>
+    <label>좋아하는 음식</label>
+    <input type="checkbox" value="치킨" name="food">치킨
+    <input type="checkbox" value="떡볶이" name="food">떡볶이
+    <input type="checkbox" value="잡채" name="food">잡채
+    <input type="checkbox" value="피자" name="food">피자
+    <input type="checkbox" value="만두" name="food">만두
+    <input type="checkbox" value="피자" name="food">피자
+    <input type="checkbox" value="김밥" name="food">김밥
+    <input type="checkbox" value="불고기" name="food">불고기<br>
+    <input type="submit" name="전송">
+  </form>
+
+</body>
+</html>

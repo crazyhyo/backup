@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    $(function() {
+
+      $("#btn1").on('click', function(){
+        let select = $(this).val();
+        $(select).css({'border':'7px solid lime'});
+      });
+      $("#btn2").on('click', function(){
+        let select = $(this).val();
+        $(select).css({'border':'7px solid yellow'});
+      });
+      $("#btn3").on('click', function(){
+        let select = $(this).val();
+        $(select).css({'border':'7px solid green'});
+      });
+      $("#btn4").on('click', function(){
+        let select = $(this).val();
+        $(select).css({'border':'7px solid red'});
+      });
+      $("#btn5").on('click', function(){
+        let select = $(this).val();
+        $(select).css({'border':'7px solid pink'});
+      });
+      $("#btn6").on('click', function(){
+        let select = $(this).val();
+        $(select).css({'border':'7px solid blue'});
+      });
+      $("#btn7").on('click', function(){
+        let select = $(this).val();
+        $(select).css({'border':'7px solid aliceblue'});
+      });
+      $("#btn8").on('click', function(){
+        let select = $(this).val();
+        $(select).css({'border':'7px solid purple'});
+      });
+      // $(".box2 > input[type=button]").on("click", function(){
+      //   let select = $(this).val();
+
+        // $(select).css({'border':'3px solid lime'});
+      // });
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>jquery</h3>
+
+    <div id="result1">
+      <form action="asdf.jsp" method="post" onsubmit="return false;"> 
+        Text : <input type="text"/><br> 
+        Password : <input type="password" /><br><br> 
+        Radio : <input type="radio" name="radioGroup" id="radioA" value="A"/> A 
+        <input type="radio" name="radioGroup" id="radioB" value="B"/> B<br><br> 
+        Checkbox : <input type="checkbox" name="checkboxes" id="checkbox1" value="1"/> 1 
+        <input type="checkbox" name="checkboxes" id="checkbox2" value="2"/> 2<br><br> 
+        Textarea : <br> <textarea rows="15" cols="50" id="myTextarea" id="myTextarea"></textarea><br><br> 
+        Image : <input type="image" src="../images/image.1.jpg"><br><br> 
+        File : <input type="file"><br><br> 
+        Buttons : <button type="button" id="normalButton">Normal</button> 
+        <button type="submit" id="submitButton">Submit</button> 
+        <button type="reset" id="resetButton">Reset</button> <br><br>
+        <input type="button" value="일반버튼"> 
+        <input type="submit" value="전송버튼"> 
+        <input type="reset" value="초기화버튼"> <br><br>
+      </form>
+    </div>
+  </div>
+<div class="box box2">
+    <h3>jquery</h3>
+
+    <input type="button" value="a[href^=mailto]" id="btn1">
+    <input type="button" value="img[id!=img1]" id="btn2">
+    <input type="button" value="img[src$=png]" id="btn3">
+    <input type="button" value="input[type=text]" id="btn4">
+    <input type="button" value="img[title~=named]" id="btn5">
+    <input type="button" value="a[href*=power2c]" id="btn6">
+    <input type="button" value="img[id|=little]" id="btn7">
+    <input type="button" value="img[alt]" id="btn8">
+
+    <div>
+    <a href="http://www.ddit.or.kr">(재)대덕 인재 개발원</a><br><br>
+    <a href="mailto:power2c@ddit.or.kr">빠워에게 메일보내기</a><br><br>
+    </div>
+    <div><label>Some images:</label></div>
+    <div>
+      <img src="../images/image.1.jpg" id="img1" alt="Hibiscus">
+      <img src="../images/image.2.jpg" id="little-Bear" title="A dog named little Bear">
+      <img src="../images/image.3.jpg" id="verbena" alt="Verbena">
+      <img src="../images/image.4.jpg" id="cozmo" title="A puppy named Cozmo">
+      <img src="../images/image.5.jpg" id="tigerLily" alt="Tiger Lily">
+      <img src="../images/image.6.jpg" id="little" title="coffeePot">
+      <img src="../images/산.png">
+    </div>
+    <div id="someDiv">이곳은 ID속성이 <tt>someDiv</tt>인 &lt;div&gt;태그 입니다. </div>
+    <form>
+      <div>
+        <label>Text:</label> <input type="text" id="aTextField" name="someTextField" />
+      </div>
+      <button type="submit" id="submitButton">Submit</button><input type="button" value="click">
+    </form>
+    <div id="result2"></div>
+  </div>
+
+</body>
+</html>

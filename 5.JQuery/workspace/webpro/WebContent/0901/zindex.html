@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+div{
+	width : 200px;
+	height : 200px;
+	position : absolute;
+}
+#d1{
+	background : yellow;
+	top : 200px;
+	left : 50px;
+	z-index : 5;
+}
+#d2{
+	background : blue;
+	top : 50px;
+	left : 0px;
+	z-index : 4;
+}
+#d3{
+	background : green;
+	top : 0px;
+	left : 100px;
+	z-index : 7;
+}
+#d4{
+	background : red;
+	top : 100px;
+	left : 150px;
+	z-index : 100;
+}
+p{
+	position : absolute;
+	z-index : 200;
+}
+hr{
+	position : relative;
+	top : 400px;
+}
+img{
+	position : absolute;
+	top : 600px;
+}
+</style>
+</head>
+<body>
+<div id="d1"></div>
+<div id="d2"></div>
+<div id="d3"></div>
+<div id="d4"></div>
+<hr>
+<p>asdfasdfasdfasdfasdfasdf</p>
+<img src="../images/ccc.jpg" alt="asdf">
+</body>
+</html>

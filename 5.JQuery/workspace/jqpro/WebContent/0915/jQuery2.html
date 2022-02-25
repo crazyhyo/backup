@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+  /*window.onload = function(){
+    $("#result1").html(<h1>hello</h1>);
+  }*/
+  $(document).ready(function(){
+    $(".box1 input[type=button]").on("click", function(){
+      
+      $('#result1').html("<h1>bye</h1>");
+    })});
+
+    $(document).ready(function(){
+      $(".box2 input[type=button]").on("click", function () {
+        $('#result2').css("background", "yellow");
+        $("#para").css("color","blue");
+        $(".sample").css("color","pink");
+      }
+      )
+    });
+
+    $(document).ready(function () {
+      $(".box1 input[type=button]").on("click", function () {
+
+        $('#result1').html("<h1>bye</h1>");
+      })
+    }
+    );
+
+    $(document).ready(function(){
+      $("#result4 > h2").on("click", function () {
+        $(this).hide();
+
+        if( $("#result4 > h2:visible").length < 1){
+
+          $("#result4 input").show();
+        }
+      }
+      
+      )
+    });
+
+  function proc3(hTag){
+
+    $(hTag).css("display","none");
+  };
+
+  $(document).ready(function(){
+    $("#result4 input").on("click", function(){
+      $("#result4 > h2").show();
+
+      $("#result4 > input").hide();
+    })
+  });
+</script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>jquery</h3>
+    <br>
+    <input type="button" value="jquery1">
+    <div id="result1"></div>
+  </div>
+  <div class="box box2">
+    <h3>jquery</h3>
+    <br>
+    <input type="button" value="jquery2">
+    <div id="result2">
+      <h1>Title</h1>
+      <h2 id="para">para</h2>
+      <h2 class="sample">sample</h2>
+    </div>
+  </div>
+
+    
+  <div class="box box3">
+    <h3>jquery</h3>
+    <br>
+    <div id="result3">
+      <h2 onclick="proc3(this)">it disappares once it clicked1!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked2!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked3!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked4!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked5!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked6!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked7!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked8!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked9!</h2>
+      <h2 onclick="proc3(this)">it disappares once it clicked10!</h2>
+    </div>
+  </div>
+
+  <div class="box box4">
+    <h3>jquery</h3>
+    <br>
+    <div id="result4">
+      <h2>it disappares once it clicked1!</h2>
+      <h2>it disappares once it clicked2!</h2>
+      <h2>it disappares once it clicked3!</h2>
+      <h2>it disappares once it clicked4!</h2>
+      <h2>it disappares once it clicked5!</h2>
+      <h2>it disappares once it clicked6!</h2>
+      <h2>it disappares once it clicked7!</h2>
+      <h2>it disappares once it clicked8!</h2>
+      <h2>it disappares once it clicked9!</h2>
+      <h2>it disappares once it clicked10!</h2>
+      <input type="button" value="visible" style="display : none">
+    </div>
+  </div>
+</body>
+</html>

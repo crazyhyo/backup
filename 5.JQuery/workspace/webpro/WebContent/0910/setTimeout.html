@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>winsub</title>
+  <script>
+
+    function proc1() {
+      setTimeout(function(){
+        document.querySelector("#result1").style.background = "aliceblue";
+      }, 500)
+    };
+    function proc2() {
+      gbutton2 = document.getElementById("button2");
+      gbutton3 = document.getElementById("button3");
+      gbutton3.style.display = "inline";
+      gbutton2.style.display = "none";
+
+      a = setInterval(() => {
+        console.log(a);
+        let r = Math.random() * 256;
+        let g = Math.random() * 256;
+        let b = Math.random() * 256;
+        document.querySelector('body').style.background = `rgb(${r},${g},${b})`;
+        
+      }, 500);
+    };
+    function proc3(){
+      gbutton2 = document.getElementById("button2");
+      gbutton3 = document.getElementById("button3");
+      clearInterval(a);
+      gbutton2.style.display = "inline";
+
+      gbutton3.style.display = "none";
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>setTimeout(fn, millisec)</h3>
+    excute fn after millesec<br>
+    <input type="button" value="bom&dom1" onclick="proc1()">
+    <br><br>
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>setInterval</h3>
+    <input type="button" value="ColorChange" id="button2" onclick="proc2()">
+    <input type="button" value="Stop" id="button3" style="display:none" onclick="proc3()">
+    <br><br>
+    <div id="result2"></div>
+  </div>
+</body>
+</html>

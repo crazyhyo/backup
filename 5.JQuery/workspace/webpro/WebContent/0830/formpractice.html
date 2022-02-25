@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>title</title>
+<style>
+label{
+  display : inline-block;
+  width : 100px;
+}
+form{
+  border : 2px solid blue;
+  width : 80%;
+  padding : 10px;
+}
+h3{
+  text-align : center;
+  width : 80%;
+}
+input{
+  background : lightblue;
+}
+input[type=text]{
+  background : white;
+}
+input[type=reset]{
+  background : yellow;
+}
+#f2 input[name=addr]{
+  border : 2px solid blue;
+}
+</style>
+<script>
+  function proc2(){
+    alert("asdf!")
+  }
+</script>
+</head>
+<body>
+  <h2>연습1</h2>
+  <h3>이메일 전송화면</h3>
+  <form id="f1" action="" onsubmit="proc2()">
+     <label>이름</label><input type="text" title="name" placeholder="홍길동" name="name"><br>
+     <label>이메일</label><input type="text" title="email" placeholder="example@asdf.asd" name="email"><br>
+     <label>내용</label><br>
+     <textarea name="content" rows="9" cols="50"></textarea><br>
+     <input type="submit" value="전송">
+    <input type="reset" value="재설정">
+  </form>
+  <h2>연습2</h2>
+  <h3>회원 가입 화면</h3>
+  <form id="f2" action="" onsubmit="proc2()">
+     <label>이름</label><input type="text" title="name" placeholder="홍길동" name="name"><br>
+     <label>주소</label><input type="text" title="addr" name="addr"><br>
+     <label>이메일</label><input type="text" title="email" placeholder="example@asdf.asd" name="email"><br>
+     <input type="radio" value="Male" name="gender"><label>Male</label><br>
+     <input type="radio" value="Female" name="gender"><label>Female</label><br>
+     <input type="submit" value="Send">
+    <input type="reset" value="원래대로">
+  </form>
+
+</body>
+</html>
+

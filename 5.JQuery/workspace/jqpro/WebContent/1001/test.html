@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게시글 목록</title>
+
+<script src="../js/jquery-3.6.0.min.js"></script>
+
+<script>
+	window.onload = function(){
+		
+		let frmView = document.getElementById('frmView');
+		
+		frmView.style.display = 'none';
+		
+		let btnView = document.getElementById('btnView');
+		
+		btnView.addEventListener('click',function(){
+			let frmView = document.getElementById('frmView');
+			
+			frmView.style.display = 'inline';
+			
+		})
+		
+	}
+</script>
+
+</head>
+<body>
+	<h1>게시판 이름</h1>
+	<table border="1">
+		<tr>
+			<th>BOARD_NO</th>
+			<th>BOARD_TITLE</th>
+			<th>BOARD_WRITER</th>
+			<th>BOARD_DATE</th>
+			<th>BOARD_CONTENT</th>
+		</tr>
+
+	</table>
+	
+	<div>
+		<input type="button" value="조회" id="btnView">&nbsp;&nbsp;
+		<input type="button" value="등록" id="btnInsert">&nbsp;&nbsp;
+		<input type="button" value="검색" id="btnSearch">
+	</div>
+	
+	<form id="frmView" method="post" action="/view.do">
+		<label id="lblBoardNo">게시글 번호</label>
+		<input type="text" name="boardNo" id="boardNo">
+		<input type="submit" value="제출">
+	</form>
+	
+</body>
+</html>

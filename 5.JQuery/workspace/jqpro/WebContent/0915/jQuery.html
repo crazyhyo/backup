@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.0.min.js">
+  function proc1(){
+
+    document.getElementById("result1").innerHTML = "Hello<br>";
+
+    $('#result1').html("Hello!<br>");
+  }
+</script>
+</head>
+<body>
+  <div class="box">
+    <h3>jQuery</h3>
+    &lt;script src="../js/jquery-3.6.0.min.js"> &lt;/script><br>
+
+    <br>
+    innerHTML - html() / html(내용)<br>
+    textContent - text() / text(내용)<br>
+    value : input, textarea, selectoption // val() / val(내용)<br>
+    <br>
+    <input type="button" value="jQuery1" onclick="proc1()">
+    <div id="result1"></div>
+  </div>
+</body>
+</html>

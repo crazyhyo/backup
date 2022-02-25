@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    $(function(){
+      // $("#btn1").on("click", function(){
+      //   let ptag = $("<p id='p1' onclick='alert(\"asdf\")'>Hello</p>");
+
+      //   ptag.appendTo($("#result1"));
+      // });
+
+      $("#btn2").on("click", function(){
+        let ptag = $("<p></p>", {
+
+          "text" : "asdf",
+          "id"  : "p2",
+          "click" : function(){
+            alert("asdf");
+          }
+        }).appendTo($("#result2"));
+        // ptag.appendTo($("#result2"));
+
+        // let ptag = $("<p></p>", {
+
+        //   "text" : "asdf",
+        //   "id"  : "p2",
+        //   "click" : function(){
+        //     alert("asdf");
+        //   }
+        //});
+        //ptag.appendTo($("#result2"));
+      })
+    });
+
+    window.onload = function(){
+      document.getElementById("btn1").addEventListener('onclick', function(){
+        let ptag = document.createElement("p");
+        ptag.setAttribute("id","p1");
+        ptag.addEventListener('onclick',function(){ alert("asdf"); });
+        let text = document.createTextNode("asdf");
+
+        ptag.appendChild(text);
+        document.getElementById("result1").appendChild(ptag);
+      })
+    }
+    function proc1(){
+
+    }
+
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>jquery</h3>
+    <!--<input type="button" value="jquery1" onclick="proc1()">-->
+    <input type="button" value="jquery1" id="btn1">
+    <div id="result1"></div>
+  </div>
+  <div class="box box2">
+    <h3>jquery</h3>
+    <!--<input type="button" value="jquery1" onclick="proc1()">-->
+    <input type="button" value="jquery2" id="btn2">
+    <div id="result2"></div>
+  </div>
+</body>
+</html>

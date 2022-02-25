@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .siblings * { 
+      display: block;
+      border: 2px solid lightgrey;
+      color: lightgrey;
+      padding: 5px;
+      margin: 15px;
+    }
+    .ancestors * { 
+      display: block;
+      border: 2px solid lightgrey;
+      color: lightgrey;
+      padding: 5px;
+      margin: 15px;
+    }
+    </style>
+  <script>
+    $(function() {
+
+      $("#next").on("click", function(){
+        $("#result1 li.start").next().css("background", "blue");
+      })
+      $("#nextAll").on("click", function(){
+        $("#result1 li.start").nextAll().css("background", "green");
+      })
+      $("#nextUntil").on("click", function(){
+        $("#result1 li.start").nextUntil("li.stop").css("background", "red");
+      })
+      $("#prev").on("click", function(){
+        $("#result2 li.start").prev().css("background", "blue");
+      })
+      $("#prevAll").on("click", function(){
+        $("#result2 li.stop").prevAll().css("background", "green");
+      })
+      $("#prevUntil").on("click", function(){
+        $("#result2 li.stop").prevUntil("li.start").css("background", "red");
+      })
+      $("#parent").on("click", function(){
+        $("#result3 li.start").parent().css("background", "blue");
+      })
+      $("#parents").on("click", function(){
+        $("#result3 li.stop").parents().css("background", "green");
+      })
+      $("#parentsSel").on("click", function(){
+        $("#result3 li.stop").parentsSel().css("background", "green");
+      })
+      $("#parentUntil").on("click", function(){
+        $("#result3 li.stop").parentUntil("li.start").css("background", "red");
+      })
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>method</h3>
+    <input type="button" value="next" id="next">
+    <input type="button" value="nextAll" id="nextAll">
+    <input type="button" value="nextUntil" id="nextUntil">
+    <br>
+    <input type="button" value="prev" id="prev">
+    <input type="button" value="prevAll" id="prevAll">
+    <input type="button" value="prevUntil" id="prevUntil">
+    <br>
+    <input type="button" value="parent" id="parent">
+    <input type="button" value="parents" id="parents">
+    <input type="button" value="parentsSel" id="parentsSel">
+    <input type="button" value="parentsUntil" id="parentsUntil">
+    <div id="result1">
+      <div style="width:500px;" class="siblings">
+        <ul>ul (parent)  
+          <li>li (sibling)</li>
+          <li>li (sibling)</li>
+          <li class="start">li (sibling with class name "start")</li>
+          <li>li (the next sibling of li with class name "start")</li>
+          <li>li (the next sibling of li with class name "start")</li>
+          <li>li (the next sibling of li with class name "start")</li>
+          <li class="stop">li (sibling with class name "stop")</li>
+        </ul>   
+      </div>
+    </div>
+    <div id="result2">
+      <div style="width:500px;" class="siblings">
+        <ul>ul (parent)  
+          <li>li (sibling)</li>
+          <li>li (sibling)</li>
+          <li class="start">li (sibling with class name "start")</li>
+          <li>li (the next sibling of li with class name "start")</li>
+          <li>li (the next sibling of li with class name "start")</li>
+          <li>li (the next sibling of li with class name "start")</li>
+          <li class="stop">li (sibling with class name "stop")</li>
+        </ul>   
+      </div>
+    </div>
+    <div id="result3">
+      <div class="ancestors">body (great-great-grandparent)
+        <div style="width:500px;">div (great-grandparent)
+          <ul>ul (grandparent)  
+            <li>li (direct parent)
+              <span>span</span>
+            </li>
+          </ul>   
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

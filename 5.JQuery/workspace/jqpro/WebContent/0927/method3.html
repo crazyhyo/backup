@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+  </style>
+  <script>
+    $(function() {
+      $('#all').on('change',function(){
+
+        let all = $('#all').prop('checked');
+        $('#result1 .chk').prop('checked', all);
+
+      })
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>method</h3>
+    <input type="button" value="next" id="next">
+    <div id="result1">
+      <input type="checkbox" id="all">전체선택
+      <input type="checkbox" class="chk">1
+      <input type="checkbox" class="chk">2
+      <input type="checkbox" class="chk">3
+      <input type="checkbox" class="chk">4
+      <input type="checkbox" class="chk">5
+    </div>
+    <div id="result2">
+      <form>
+        체크박스(라디오버튼) : <input type="checkbox" id="checkTest" checked><br><br>
+        리스트박스(select객체) :
+        <select id="selTest">
+          <option value="1">하나</option>
+          <option value="2">둘</option>
+          <option value="3" selected>셋</option>
+          <option value="4">넷</option>
+        </select><br><br>
+        text객체 (readonly) : <input type="text" value="가나다" id="txtTest"><br><br>
+        button객체(disabled) :
+        <input type="button" value="실행" id="runBtn">
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+@charset "UTF-8";
+body{
+  width:1280px;
+}
+nav a, table a{
+  text-decoration: none;
+  color: white;
+}
+a:hover{
+  color: black;
+}
+h3{
+  font-size: 1.5em;
+}
+aside#left > h3{
+  margin-top: 100px;
+}
+header{
+  width: 100%;
+  height: 80px;
+  background-color: rgb(255, 214, 92);
+  border-radius: 50px;
+  float: left;
+  margin-bottom: 10px;
+}
+header > h1{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+header > h1 > img{
+  width: 50px;
+  height: 50px;
+}
+body > nav{
+  width: 100%;
+  height: 60px;
+  float: left;
+  background-color: rgb(209, 179, 224);
+  margin-bottom: 10px;
+  border-radius: 50px;
+}
+body > nav > ul li{
+  list-style-type: none;
+  float : left;
+  width: 18%;
+  text-align: center;
+  font-size: 1.4em;
+}
+body > div#mid {
+  width: 100%;
+  display: flex;
+  height: 700px;
+  justify-content: space-between;
+}
+body > div > aside{
+  background-color: rgb(250, 235, 235);
+  border-radius: 50px;
+  width: 18%;
+  text-align: center;
+}
+
+body > div > aside#left > table tr{
+  height: 59px;
+}
+body > div > aside#left > table td{
+  width: 150px;
+  background-color: rgb(230, 179, 179);
+  font: bold 18px "돋움",dotum;
+}
+body > div > section{
+  width: 60%;
+}
+body > div > aside#left > table{
+  height: 60%;
+  display: flex;
+  justify-content: center;
+}
+
+table a{
+  text-align: left;
+}
+
+body > div > section > iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+body > div > aside#right{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#secondArticle > form{
+  text-align: left;
+  padding-left: 20px;
+}
+
+body > footer{
+  clear: both;
+  background-color: rgb(204, 204, 242);
+  border-radius: 50px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}

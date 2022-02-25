@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    $(function() {
+      $('#btnview').on('click', function(){
+        let str = "";
+        str += `${$('#user').val()}\n`;
+
+//        $('input[type=radio]').each(function(){
+//          if($(this).prop('checked')){
+            // str += $(this).val() + "\n";
+//          }
+//        })
+
+        str += $("#gend:checked").val() + "\n";
+        str += `${$('#intro').val()}\n`;
+        let text = $('#intro').val().replace(/\r/g,"").replace(/\n/g,"<br>");
+        // $('#work option').each(function(){
+        //   if($(this).prop('selected')){
+        //     str += $(this).val() + "\n";
+        //   }
+        // })
+
+        str += $("#work option:selected").val() + "\n";
+        alert(str);
+      })
+
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>method</h3>
+    <div id="result1">
+      <form>
+        <label for="user">이름</label>
+      <input type="text" id="user" value="korea"><br>
+      <label >성별</label> 
+        <input type="radio" id="gend" name="gend" value="남자" checked >남자
+        <input type="radio" id="gend" name="gend" value="여자"  >여자<br>
+        <label for="intro">소개</label> 
+      <textarea id="intro" cols="40" rows="4"></textarea> <br>
+      <label for="work">직업</label>
+      <select id="work">
+        <option value="programmer">프로그래머</option>
+        <option value="progammer">프로게이머</option>
+        <option value="whitehand">백수</option>
+      </select><br>
+      <button type="button" id="btnview">조사하기 </button>
+      <button type="button" id="btnchange">이름변경 </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    str = "test String is here you can use it to test";
+
+    function proc1(){
+
+      let a = str.charAt(4);
+      let b = str.charCodeAt(4);
+
+      let result = "";
+
+      result += `str.charAt(4) is ${a}<br>`;
+      result += `str.charCodeAt(4) is ${b}<br>`;
+
+      document.getElementById("result1").innerHTML = result;
+    };
+    function proc2(){
+
+      let input = prompt('input the charcter to find');
+
+      let result = "";
+
+      result += `str.indexOf(input) is : ${str.indexOf(input)}<br>`;
+      result += `str.lastIndexOf(input) is : ${str.lastIndexOf(input)}<br>`;
+
+      document.getElementById("result2").innerHTML = result;
+    };
+    function proc3(){
+
+      let text = document.getElementById("area").value;
+
+      text = text.replace(/\r/g,"").replace(/\n/g,"<br>");
+
+      document.getElementById("result3").innerHTML = text;
+    };
+    function proc4(){
+
+
+      let temp = str.match(test/g);
+
+      let res = str + "<br>";
+
+      res += `str.match(test/g) ${temp} <br>`;
+
+      document.getElementById("result4").innerHTML = res;
+
+    };
+    function proc5(){
+
+      strvalue = str.substring(3,8);
+      strvalue2 = str.slice(3,8);
+
+      let res = `${str}<br>`;
+      res += `$str.substring(3,8) : ${strvalue}<br>`;
+      res += `$str.slice(3,8) : ${strvalue2}<br>`;
+
+      document.getElementById("result5").innerHTML = res;
+    };
+    function proc6(){
+
+      let arr = str.split(" ");
+      let res = "";
+
+      for(let i = 0; i <arr.length; i++){
+        res += `${i}th text : ${arr[i]}<br>`;
+      }
+
+      document.getElementById("result6").innerHTML = res;
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>String</h3>
+    <input type="button" value="string1" onclick="proc1()">
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>String</h3>
+    <input type="button" value="string2" onclick="proc2()">
+    <div id="result2"></div>
+  </div>
+  <div class="box">
+    <h3>String</h3>
+    <textarea id="area" cols="30" rows="10"></textarea><br><br>
+    <input type="button" value="string3" onclick="proc3()">
+    <div id="result3"></div>
+  </div><div class="box">
+    <h3>string</h3>
+    <input type="button" value="string4" onclick="proc4()">
+    <div id="result4"></div>
+  </div><div class="box">
+    <h3>string</h3>
+    <input type="button" value="string5" onclick="proc5()">
+    <div id="result5"></div>
+  </div><div class="box">
+    <h3>string</h3>
+    <input type="button" value="string6" onclick="proc6()">
+    <div id="result6"></div>
+  </div>
+</body>
+</html>

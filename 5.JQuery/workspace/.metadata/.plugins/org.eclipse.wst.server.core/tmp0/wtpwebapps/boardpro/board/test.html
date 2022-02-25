@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../js/jquery.serializejson.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="../js/board.js"></script>
+  <style>
+    .p1 {
+      width : 75%;
+      float : left;
+    }
+    .p2 {
+      width : 20%;
+      float : right;
+    }
+    .p3 {
+      clear : both;
+    }
+    .p4 input[type=button]{
+      height : 40px;
+      vertical-align: top;
+    }
+    #accordion{
+        padding : 10px;
+    }
+    h2{
+        margin-left : 10%;
+    }
+    .plist{
+    		margin-left : 20%;
+    }
+    
+    .plist ul{
+    	width : 200px;
+    	float : left;
+    }
+   .plist ul.pagination{
+   			width : 400px;
+   } 
+   
+   #write{
+   	margin-left: 10%;
+   }
+   #writeModal label, #updateModal label{
+    width : 150px;
+   }
+   .rep{
+       border: 1px solid blue;
+   }
+   .panel-heading:hover{
+   	background: aliceblue;
+   }
+   #modiForm{
+   	display: none;
+   }
+   .hidden{
+   	display: none;
+   }
+  </style>
+  <script>
+
+			var currentPage = 1;
+			var reply = {}; // 객체, BeanUtils.populate(bv[값을 넣을 빈 VO객체], req.getParameterMap()[VO와 같은 컬럼명/db와 같은 컬럼명을 저장한 parameter]) 로 이용가능?
+			let vidx = 0;
+			window.onload = function() {
+				
+				//"use strict";
+				
+				listPageServer(1);
+				$(document).on('click', '.pagination li a', function() {
+					currentPage = $(this).text();
+					listPageServer(currentPage);
+				})
+				$(document).on('click', '.next a', function() {
+					if ($('#modiForm').css('display') != 'none') {
+						//  replyReset(modifycont); // 초기상태 반환
+						replyReset(); // 초기상태 반환
+					}
+					let cpage = ($('.pagination li a').last().text());
+					currentPage = parseInt(cpage) + 1;
+					listPageServer(currentPage);
+				})
+				$(document).on('click', '.previous a', function() {
+					if ($('#modiForm').css('display') != 'none') {
+						//  replyReset(modifycont); // 초기상태 반환
+						replyReset(); // 초기상태 반환
+					}
+					let cpage = ($('.pagination li a').first().text());
+					currentPage = parseInt(cpage) - 1;
+					listPageServer(currentPage);
+				})
+
+				$('#send')
+						.on(
+								'click',
+								function() {
+
+									//var fdata = $('form').serializeJSON();
+									var fdata = $('#writeModal form').serializeJSON();
+									$
+											.ajax({
+												url : '/boardpro/Insert.do',
+												type : 'post',
+												data : fdata,
+												dataType : 'json',
+												success : function(res) {
+													listPageServer(1);
+													$('#writeModal').modal(
+															'hide');
+													$('#writeModal .modalInput')
+															.val('');
+												},
+												error : function(err) {
+													alert(`status : ${err.status} \n text: ${err.statusText}`);
+												}
+
+											})
+
+								})
+								
+				$('#sendUpdate')
+						.on(
+								'click',
+								function() {
+									//var fdata = $('form').serializeJSON();
+									formData = $('#updateModal form').serializeJSON();
+									
+									target = $(this);
+									
+									console.log(formData);
+									
+									updateBoardServer();
+									
+									$('#updateModal .modalInput').val('');
+									$('#updateModal').modal('hide');
+								})
+
+				// 수정, 삭제, 등록버튼, 제목에 대한 이벤트
+
+				$(document).on(
+						'click',
+						'.action',
+						function() {
+
+							var vname = $(this).attr('name');
+							vidx = $(this).attr('idx');
+							console.log(vidx);
+
+							if (vname == 'modify') {
+									
+								// $('#modiBoard').show();
+									let parent = $(this).parents('.panel');
+									
+									let subject = $(parent).find('a').html();
+									let name = $(parent).find('.name').html();
+									let email = $(parent).find('.email').html();
+									// let writer = $(parent).find('.writer').html();
+									let content = $(parent).find('.p3').html().trim();
+									
+									$('#updateModal .subject').val(subject);
+									$('#updateModal .mail').val(email);
+									$('#updateModal .writer').val(name);
+									$('#updateModal .content').val(content);
+									$('#updateModal .num').val(vidx);
+									
+//									console.log(subject, name, email, writer, content);
+									console.log(subject, name, email, content);
+									
+									$('#updateModal').modal('show');
+							} else if (vname == 'delete') {
+								
+								deleteBoardServer();
+								
+							} else if (vname == 'reply') {
+								if ($('#modiForm').css('display') != 'none') {
+									replyReset(modifycont); // 초기상태 반환
+									
+								}
+
+								var content = $(this).parent().find('textarea')
+										.val();
+								var name1 = String
+										.fromCharCode(Math.random() * 26 + 65);
+								var name2 = String
+										.fromCharCode(Math.random() * 26 + 97);
+								var name = name1 + name2;
+								reply.cont = content;
+								reply.name = name;
+								reply.bonum = vidx;
+
+								//비동기를 이용한 서버전송 [replyServer가 종료되기 전에 replyListServer가 실행될 수 있음]
+								replySaveServer(this); //this는 등록버튼
+
+								$(this).parent().find('textarea').val('');
+
+							} else if (vname == 'list') {
+								
+								
+								console.log($(this).parents('.panel').attr('class'));
+								// let hit1 = $(this).parents('.panel').find('.collapse').attr('class');
+								// let hit2 = $(this).parents('.panel').find('.collapse').attr('aria-expanded');
+								
+								let hit1 = $(this).parents('.panel-default').find('.panel-collapse').attr('class');
+						    let hit2 = $(this).parents('.panel-default').find('.panel-collapse').attr('aria-expanded');								
+								console.log(hit1, hit2);
+								
+//								if(hit2 != 'true'){
+								if(hit2 == 'true'){
+									// alert('조회수증가');
+									
+									let hvalue = $(this).parents('.panel').find('.hit').text().trim();
+									hvalue = parseInt(hvalue) + 1;
+									
+									$(this).parents('.panel').find('.hit').text(hvalue);
+									updateHitServer();
+								}
+									replyListServer(this);
+								
+							} else if (vname == 'rmodify') {
+
+								//let modifycont = $(this).parents('.rep').find('.p3').html();
+								console.log($('#modiForm').css('display'));
+								if ($('#modiForm').css('display') != 'none') {
+									//  replyReset(modifycont); // 초기상태 반환
+									replyReset(); // 초기상태 반환
+								}
+								// 댓글 원본을 가져오기
+								// <br> 을 \n으로 변경
+								let modifycont = $(this).parents('.rep')
+										.find('.p3').html();
+								modifycont = modifycont.replace(/<br>/g, "\n")
+										.trim();
+
+								$('#modiForm textarea').val(modifycont);
+
+								// 댓글 수정 폼 띄우기
+								$(this).parents('.rep').find('.p3').empty()
+										.append($('#modiForm'));
+								$('#modiForm').show();
+
+							} else if (vname == 'rdelete') {
+								replyDelete(this);
+							}
+						})
+
+				function replyReset() {
+					let p3 = $('#modiForm').parent(); // calss = p3
+					$('body').append($('#modiForm'));
+					$('#modiForm').hide();
+
+					let modifycont = modifycont.replace(/\r/g, "").replace(/\n/g,
+							"<br>");
+
+					$(p3).html(modifycont);
+
+				}
+				$('#btnreset').on('click', function() {
+					replyReset();
+				})
+				$('#btnok').on(
+						'click',
+						function() {
+							let modifycont = $('#modiForm textarea').val();
+							let p3 = $('#modiForm').parent();
+							$('body').append($('#modiForm'));
+							$('#modiForm').hide();
+
+							modifycont = modifycont.replace(/\r/g, "").replace(
+									/\n/g, "<br>");
+							$(p3).html(modifycont);
+							reply.cont = modifycont;
+							reply.renum = vidx;
+
+							replyUpdateServer();
+
+						});
+				// replyReset = function(modifycont){
+				//   let p3 = $('#modiForm').parent(); // calss = p3
+
+				//   $(p3).html(modifycont);
+
+				// }
+				
+			}
+		</script>
+</head>
+<body>
+
+<div id="modiForm">
+	<textarea rows="5" cols="30" name="modiForm"></textarea>
+	<input type="button" id="btnok" value="확인">
+	<input type="button" id="btnreset" value="취소">
+</div>
+
+<div class="container">
+  <h2>게시판</h2>
+  <div class="box" id="accordion">
+	
+  </div>
+  <button id="write" data-toggle="modal" data-target="#writeModal" class="btn btn-primary" type="button">글쓰기</button>
+  <div id="pageBar"></div>
+</div>
+<!-- Modal -->
+	<div id="writeModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+					<h3>글쓰기</h3>
+					<form>
+						<label>제목</label>
+						<input class="modalInput" type="text" name="subject"><br>
+						<label>작성자</label>
+						<input class="modalInput" type="text" name="writer"><br>
+						<label>메일</label>
+						<input class="modalInput" type="text" name="mail"><br>
+						<label>비밀번호</label>
+						<input class="modalInput" type="password" name="password"><br>
+						<label>내용</label>
+						<textarea class="modalInput" rows="10" cols="50" name="content"></textarea>
+						<br>
+						<button type="button" id="send" class="btn btn-info">전송</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<div id="updateModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+					<h3>수정하기</h3>
+					<form>
+						<label>제목</label>
+						<input class="modalInput subject" type="text" name="subject"><br>
+						<label>작성자</label>
+						<input class="modalInput writer" type="text" name="writer" disabled><br>
+						<label>메일</label>
+						<input class="modalInput mail" type="text" name="mail"><br>
+						<label>비밀번호</label>
+						<input class="modalInput password" type="password" name="password" ><br>
+						<label>내용</label>
+						<textarea class="modalInput content" rows="10" cols="50" name="content"></textarea>
+						<br>
+						<input type="hidden" name="num" class="num">
+						<button type="button" id="sendUpdate" class="btn btn-info">전송</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

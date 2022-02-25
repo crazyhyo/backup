@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+  </style>
+  <script>
+    document.onload = function(){
+      document.getElementsByClassName('.box2')
+    }
+  $(function () {
+    // $('#btn2').on('click', function () {
+    //   alert('asdf');
+    // })
+
+    $('.box2 form').on('submit',function(){
+      let serializedData = $('.box2 form').serialize();
+      console.log(serializedData);
+
+      $.ajax({
+        url : 'submit.jsp',
+        type : 'post',
+        data : serializedData,
+        success : function(result){
+          $('#result2').html(result);
+        },
+        error : function(ex){
+          alert(ex.status);
+        },
+        dataType : 'html'
+      })
+    });
+  });
+
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>ajax</h3>
+
+    <form action="submit.jsp" method="post">
+      ID : <input type="text" name="id" id="id">
+      name : <input type="text" name="name" name="name">
+      tel : <input type="text" name="tel" tel="tel">
+      addr : <input type="text" name="addr" addr="addr">
+      <input type="submit" value="btn1" id="btn1">
+    </form>
+
+    <div id="result1"></div>
+    
+  </div>
+  <div class="box box2">
+    <h3>ajax</h3>
+
+    <form action="submit.jsp" method="post" onsubmit="return false;">
+      ID : <input type="text" name="id" id="id">
+      name : <input type="text" name="name" name="name">
+      tel : <input type="text" name="tel" tel="tel">
+      addr : <input type="text" name="addr" addr="addr">
+      <input type="submit" value="btn2" id="btn2">
+    </form>
+
+    <div id="result2"></div>
+    
+  </div>
+</body>
+</html>

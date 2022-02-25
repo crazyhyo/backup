@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function proc1(){
+      let str = "";
+
+      while(true){
+
+        let num = parseInt(prompt("input your number"));
+        if(num == 0 || isNaN(num)) {
+          alert('다시 입력하세요');
+          continue;
+        }
+
+        str += `<br>---${num}단---<br>`;
+
+        for(let k=1; k<10; k++){
+          str += ` ${num} * ${k} = ${num * k}<br>`;
+        }
+        cont = confirm("continue?");
+        if(!cont) break;
+      }
+
+      document.getElementById("result1").innerHTML = str;
+
+    };
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>수를 입력한다 - prompt를 이용</h3>
+    구구단을 출력<br>
+    계속 실행 여부를 입력한다 - confirm을 이용
+    <input type="button" value="확인" onclick="proc1()">
+    <div id="result1">
+    </div>
+  </div>
+  
+</body>
+</html>

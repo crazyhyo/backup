@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    $(function() {
+
+      $('#filter1').on('click', function(){
+        $('span:contains(jQuery)').css({'border':'3px solid lime'});
+      });
+      $('#filter2').on('click', function(){
+        $('span:not(:contains(jQuery))').css({'border':'3px solid red'});
+      });
+      $('#filter3').on('click', function(){
+        $('#result1 div:has(span)').css({'border':'3px solid blue'});
+      });
+      $('#filter4').on('click', function(){
+        $('div:empty').css({'border':'3px solid yellow'});
+      });
+      $('#filter5').on('click', function(){
+        $('span:contains(jQuery)').css({'border':'3px solid lime'});
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>filter</h3>
+
+    <div id="result1">
+      <div></div>
+      <div>hello~~
+            <span>today</span>
+      </div>
+      <p>Hello jQuery! <span>Thanks, jQuery!</span></p>
+      <div class="myClass">jQuery!</div>
+      <span class="notMyClass">easy jQuery~~!</span>
+    </div>
+    <input type="button" value="filter1" id="filter1">
+    <input type="button" value="filter2" id="filter2">
+    <input type="button" value="filter3" id="filter3">
+    <input type="button" value="filter4" id="filter4">
+    <input type="button" value="filter5" id="filter5">
+  </div>
+</body>
+</html>
+

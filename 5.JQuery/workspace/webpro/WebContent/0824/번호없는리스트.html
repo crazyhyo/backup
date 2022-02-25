@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../css/mystyle.css">
+    <style>
+    ul{
+      border : 2px solid blue;
+    }
+    li{
+      border : 2px solid purple;
+    }
+    div{
+        border : 1px dotted orange;
+        width : 200px;
+/*        display : inline;*/
+        float : left;
+        margin-left : 20px;
+/*      margin : 20px 50px [100px 60px]*/
+        /*두개 있을 때는 상하에 첫번째 값, 좌우에 두번째 값*/
+        /*세개 있을 때는 위에 첫번째 값, 좌우에 두번째 값, 아래에 세번째 값*/
+        /*네개 있을 때는 상우하좌의 순으로*/
+    }
+    .d2{
+        float : right;
+    }
+
+    hr{
+        clear : both;
+    }
+    img{
+        width : 50px;
+        height : 50px;
+    }
+    #circle{
+        list-style-type : circle;
+        list-style-position : inside;
+    }
+    #square{
+        list-style-type : square;
+    }
+    #typeimg{
+	        list-style-image : url('../images/check.png')
+    }
+    </style>
+    </head>
+
+    <body>
+        <pre>
+        번호없는 리스트
+        ul : unordered list
+        li : list item
+            ●(disk) ○(circle) ■(square)
+        </pre>
+        <div class = "d1">
+            <ul>
+                <li>에스프레소</li>
+                <li>아메리카노</li>
+                <li>카페라떼</li>
+                <li>카푸치노</li>
+            </ul>
+        </div>
+        <div class = "d1">
+            <ul>
+                <li><img src = "../images/에스프레소.jpg" alt = "에스프레소.jpg"></li>
+                <li><img src = "../images/아메리카노.jpg" alt = "아메리카노.jpg"></li>
+                <li><img src = "../images/카페라떼.jpg" alt = "카페라떼.jpg"></li>
+                <li><img src = "../images/카푸치노.jpg" alt = "카푸치노.jpg"></li>
+            </ul>
+        </div>
+        <div class = "d1">
+            <ul>
+                <li><a target="_blank" href="../images/에스프레소.jpg">에스프레소</a></li>
+                <li><a target="_blank" href="../images/아메리카노.jpg">아메리카노</a></li>
+                <li><a target="_blank" href="../images/카페라떼.jpg">카페라떼</a></li>
+                <li><a target="_blank" href="../images/카푸치노.jpg">카푸치노</a></li>
+            </ul>
+        </div>
+        <hr>
+        <div class = "d2">
+            <ul>
+                <li><a target="_blank" href="../images/에스프레소.jpg"><img src = "../images/에스프레소.jpg" alt = "에스프레소.jpg"></a></li>
+                <li><a target="_blank" href="../images/아메리카노.jpg"><img src = "../images/아메리카노.jpg" alt = "아메리카노.jpg"></a></li>
+                <li><a target="_blank" href="../images/카페라떼.jpg"><img src = "../images/카페라떼.jpg" alt = "카페라떼.jpg"></a></li>
+                <li><a target="_blank" href="../images/카푸치노.jpg"><img src = "../images/카푸치노.jpg" alt = "카푸치노.jpg"></a></li>
+            </ul>
+        </div>
+        <div class = "d2">
+            <ul>
+                <li>에스프레소
+                    <ul>
+                        <li>신맛</li>
+                        <li>구수한맛
+                            <ol>
+                                <li>큰거</li>
+                                <li>보통</li>
+                                <li>작은거</li>
+                            </ol>
+                        </li>
+                        <li>쓴맛</li>
+                    </ul>
+                </li>
+                <li>아메리카노</li>
+                <li>카페라떼</li>
+                <li>카푸치노</li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class = "d1">
+            <h3>list-style-type : disk</h3>
+            <ul>
+                <li>에스프레소</li>
+                <li>아메리카노</li>
+                <li>카페라떼</li>
+                <li>카푸치노</li>
+            </ul>
+        </div>
+        <div class = "d1">
+            <h3>list-style-type : circle</h3>
+            <ul id = "circle" >
+                <li>에스프레소</li>
+                <li>아메리카노</li>
+                <li>카페라떼</li>
+                <li>카푸치노</li>
+            </ul>
+        </div>
+        <div class = "d1">
+            <h3>list-style-type : square</h3>
+
+            <ul id = "square" >
+                <li>에스프레소</li>
+                <li>아메리카노</li>
+                <li>카페라떼</li>
+                <li>카푸치노</li>
+            </ul>
+        </div>
+        <div class = "d1">
+            <h3>list-style-image :</h3>
+            <ul id = "typeimg" >
+                <li>에스프레소</li>
+                <li>아메리카노</li>
+                <li>카페라떼</li>
+                <li>카푸치노</li>
+            </ul>
+        </div>
+    </body>
+
+</html>

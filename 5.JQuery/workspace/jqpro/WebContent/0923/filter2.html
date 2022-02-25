@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+
+    $(function(){
+      $('#btn1').on('click', function(){
+        let str1 = "";
+
+        $('#result1 p:hidden').each(function(){
+          str1 += $(this).text() + "<br>";
+        })
+
+        $('#res1').html(str1);
+      })
+      $('#btn2').on('click', function(){
+        let str2 = "";
+
+        $('#result1 p:visible').each(function(){
+          str2 += $(this).text() + "<br>";
+        })
+
+        $('#res2').html(str2);
+      })
+      $('#btn3').on('click', function(){
+        let str2 = "";
+
+        $('#result2 form *:hidden').each(function(){
+          if(this.tagName == 'INPUT'){
+            str2 += $(this).attr('name') + " : ";
+            str2 += $(this).val() + "<br>";
+          }else{
+            str2 += this.tagName + " : ";
+            str2 += $(this).text() + "<br>";
+          }
+        })
+
+        $('#res3').html(str2);
+      })
+      $('#btn4').on('click', function(){
+        let str1 = "";
+        let str2 = "";
+        let vtype = "";
+
+        $('#result2 form *:visible').each(function(){
+
+          vtype = $(this).attr('type');
+
+          if(this.tagName == 'INPUT'){
+            if(vtype == "radio"){
+              if($(this).prop('checked')){
+                str2 += $(this).attr('name') + " : ";
+                str2 += $(this).val() + "<br>";
+              }
+            }else{
+              str2 += $(this).attr('name') + " : ";
+              str2 += $(this).val() + "<br>";
+            }
+          }else if(this.tagName == 'SPAN'){
+            str1 += $(this).text();
+          }
+        })
+
+        str2 += str1;
+        $('#res4').html(str2);
+      })
+    })
+  </script>
+</head>
+<body>
+
+  <div class="box box1">
+    <h3>filter</h3>
+    <input type="button" value="btn1" id="btn1">
+    <input type="button" value="btn2" id="btn2">
+    <div id='result1'>
+      <p> 보이는 문단</p>
+      <p style="visibility:hidden;">숨겨진 문단</p>
+      <p style="display:none;"> 자리를 차지 하지 못한 문단 </p>
+      <p style="opacity:0;"> 투명한 문단</p>
+      <hr/>
+    </div>
+    <div id='res1'></div>
+    <div id='res2'></div>
+  </div>
+  <div class="box box2">
+    <h3>filter</h3>
+    <input type="button" value="btn3" id="btn3">
+    <input type="button" value="btn4" id="btn4">
+    <div id='result2'>
+      <form id="testForm"> 
+        <input type="hidden" name="userAge" value="33">
+        <input type="hidden" name="userCity" value="대전">
+        I D : <input type="text" name="userID" value="hong">  
+        <span style="display:none">ID가 중복됩니다. </span> <br>  
+        이름 : <input type="text" name="userName" value="홍길동">   
+        <span style="visibility:hidden">이름을 입력하세요</span><br>  
+        성별 : <input type="radio" name="sung" value="남" checked>남자  
+        <input type="radio" name="sung" value="여">여자  
+      </form>
+    </div>
+    <div id='res3'></div>
+    <div id='res4'></div>
+  </div>
+</body>
+</html>

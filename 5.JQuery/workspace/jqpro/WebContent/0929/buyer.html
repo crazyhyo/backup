@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+		table{
+			width: 100%;
+			height: 50px;
+			border-collapse: collapse;
+			border: 3px solid blue;
+			text-align: center;
+		}
+		th{
+			background-color: aliceblue;
+		}
+		#detail{
+			width: 70%;
+		}
+		tr:nth-child(even){
+			background-color: white;
+		}
+		p:hover{
+			background-color: lime;
+		}
+  </style>
+  <script>
+		$(function () {
+			$('#buyerList').on('click', function () {
+				$.ajax({
+					url: "/jqpro/BuyerName.do",
+					type: "get",
+					dataType: "json",
+					success: function (res) {
+						let str = "";
+						res.forEach(element => {
+							str += `<p id="${element.id}">${element.name}</p>`;
+						})
+						$('#names').html(str);
+					},
+					error: function (err) {
+						alert(err.status + "\n text : " + err.statusText);
+					}
+
+				})
+			});
+			$(document).on('click','p',function(){
+				let id = $(this).attr('id');
+
+				$.ajax({
+					type: 'get',
+					url: 'buyerDetail.jsp',
+					data: {"id" : id},
+					dataType: 'json',
+					success: function(res){
+						
+						let str = "";
+						
+						str += `id : ${res[0].id}<br>`;
+						str += `name : ${res[0].name}<br>`;
+						str += `add1 : ${res[0].add1}<br>`;
+						str += `add2 : ${res[0].add2}<br>`;
+						str += `zip : ${res[0].zip}<br>`;
+						str += `bank : ${res[0].bank}<br>`;
+						str += `bankName : ${res[0].bankName}<br>`;
+						str += `bankNo : ${res[0].bankNo}<br>`;
+						str += `charger : ${res[0].charger}<br>`;
+						str += `comtel : ${res[0].comtel}<br>`;
+						str += `fax : ${res[0].fax}<br>`;
+						str += `lgu : ${res[0].lgu}<br>`;
+						str += `mail : ${res[0].mail}<br>`;
+						str += `telext : ${res[0].telext}<br>`;
+						
+						str += `<table border='1'>`;
+						
+						str += `<tr><td>id</td>`;
+						str += `<td>${res.id}</td></tr>`;
+						
+						str += `<tr><td>name</td>`;
+						str += `<td>${res[0].name}</td></tr>`;
+						
+						str += `<tr><td>add1</td>`;
+						str += `<td>${res.add1}</td></tr>`;
+						
+						str += `<tr><td>add2</td>`;
+						str += `<td>${res[0].add2}</td></tr>`;
+						
+						str += `<tr><td>zip</td>`;
+						str += `<td>${res[0].zip}</td></tr>`;
+						
+						str += `<tr><td>bank</td>`;
+						str += `<td>${res[0].bank}</td></tr>`;
+						
+						str += `<tr><td>bankName</td>`;
+						str += `<td>${res[0].bankName}</td></tr>`;
+						
+						str += `<tr><td>bankNo</td>`;
+						str += `<td>${res[0].bankNo}</td></tr>`;
+						
+						str += `<tr><td>charger</td>`;
+						str += `<td>${res[0].charger}</td></tr>`;
+						
+						str += `<tr><td>comtel</td>`;
+						str += `<td>${res[0].comtel}</td></tr>`;
+						
+						str += `<tr><td>fax</td>`;
+						str += `<td>${res[0].fax}</td></tr>`;
+						
+						str += `<tr><td>lgu</td>`;
+						str += `<td>${res[0].lgu}</td></tr>`;
+						
+						str += `<tr><td>mail</td>`;
+						str += `<td>${res[0].mail}</td></tr>`;
+						
+						str += `<tr><td>telext</td>`;
+						str += `<td>${res[0].telext}</td></tr>`;
+						
+						str += `</table>`;
+						
+						$('#detail').html(str);
+					},
+					error: function (err) { alert(err.status + "\n text : " + err.statusText); }
+
+				})
+			})
+		});
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>ajax</h3>
+    <input type="button" value="buyerList" id="buyerList">
+
+    <div id="result1">
+			<table border="1">
+				<tr>
+					<th>거래처 이름</th>
+					<th>거래처 상세정보</th>
+				</tr>
+				<tr>
+					<td id="names">a</td>
+					<td id="detail">b</td>
+				</tr>
+			</table>
+    </div>
+  </div>
+</body>
+</html>

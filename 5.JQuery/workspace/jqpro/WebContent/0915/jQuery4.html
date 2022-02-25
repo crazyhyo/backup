@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+  window.onload = function(){
+    $("#btn1").on("click",function(){
+
+//      let result1 = document.getElementById("result1");
+//      result1.style.background = "lime";
+//      $(result1).text("hello");
+      let result1 = $("#result1");
+
+      result1.css("background", "lime");
+      result1.text("hello");
+    })
+  }
+</script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>jquery</h3>
+    <br>
+    <input id="btn1" type="button" value="jquery1">
+    <div id="result1"></div>
+  </div>
+</body>
+</html>

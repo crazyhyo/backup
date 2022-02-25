@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div{
+	width : 50%;
+	border : 1px solid green;
+	padding : 20px;
+	margin : 20px;
+}
+#d1{
+	word-wrap : break-word;
+}
+#d2{
+	word-wrap : break-word;
+}
+</style>
+<script>
+
+//let cnt = 0;
+
+	function proc(){
+		//클릭할 때마다 id가 d2인 div에 Hello문자를 추가한다.
+		//id가 d2인 요소 접근
+		let vd2 = document.getElementById("d2");
+		//vd2에 값 hello문자 추가
+		//cnt++;		
+		//vd2.textContent = "Hello" + cnt;
+		//vd2.innerHTML = "<h3>Hello" + cnt + "</h3>";
+		
+		//.append()를 사용
+		
+		let child = document.createTextNode('hello');
+		vd2.append(child);
+	}
+</script>
+</head>
+<body>
+<div>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+</div>
+<div id="d1">
+<h2>word-wrap : break-word</h2>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+</div>
+<div id="d2">
+<h2>word-wrap : break-word</h2>
+</div>
+<input type="button" onclick="proc()" value="확인">
+</body>
+</html>

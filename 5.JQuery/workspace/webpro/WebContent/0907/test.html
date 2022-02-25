@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    fruits = ["apple", "pitch", "banana", "apple", "watermelon", "pineapple", "apple", "apple"];
+
+    function proc1(){
+      let item = prompt('input fruitname');
+      let idx = fruits.indexOf(item);
+      let str = "";
+
+      str += `fruitName : ${item}<br>`;
+      if(idx != -1){
+        str += `index : ${idx}<br>`;
+      }else{
+        str += `fruits does not contains ${item}<br>`;
+      }
+      document.getElementById("result1").innerHTML = str;
+    };
+    function proc2(){
+      let item = prompt('input fruitname');
+      let idx = fruits.lastIndexOf(item);
+      let str = "";
+
+      str += `fruitName : ${item}<br>`;
+      if(idx != -1){
+        str += `index : ${idx}<br>`;
+      }else{
+        str += `fruits does not contains ${item}<br>`;
+      }
+      document.getElementById("result2").innerHTML = str;
+    };
+    function proc3(){
+      let item = prompt('input fruitname');
+      let idx = 0; 
+      let str = "";
+
+      str += `fruitName : ${item}<br>`;
+      idx = fruits.indexOf(item);
+      if(idx != -1){
+        str += `index : ${idx}<br>`;
+
+        while(true){
+          idx = fruits.indexOf(item, idx+1);
+
+          if(idx != -1){
+            str += `index : ${idx}<br>`;
+          }else{
+            str += `found all ${item}<br>`;
+            break;
+          }
+        }
+      }else{
+        str += `fruits does not contains ${item}<br>`;
+
+      }
+
+      document.getElementById("result3").innerHTML = str;
+    };
+    function proc4(){
+      let fruit = prompt('fruitName to add');
+
+      fruits.push(fruit);
+
+      let str = "";
+
+      for(let i=0; i<fruits.length; i++){
+        str += `${fruits[i]}&nbsp;&nbsp;`;
+      }
+      document.getElementById("result4").innerHTML = str;
+    };
+    function proc5(){
+
+      fruits.pop();
+      let str = "";
+
+      for(let i=0; i<fruits.length; i++){
+        str += `${fruits[i]}&nbsp;&nbsp;`;
+      }
+      document.getElementById("result5").innerHTML = str;
+    };
+    function proc6(){
+      let str = `before : ${fruits}<br>`;
+
+      let substr = fruits.slice(4,6);
+
+      str += `substr : ${substr}<br>`;
+      document.getElementById("result6").innerHTML = str;
+    };
+    function proc7(){
+      document.getElementById("result7").innerHTML =`before : ${fruits}<br>`;
+      let str = `before : ${fruits}<br>`;
+
+      fruits.splice(3,3,"banana","grape");
+
+      str += `after : ${fruits}<br>`;
+      document.getElementById("result7").innerHTML = str;
+    };
+    function proc9(){
+      str = `before : ${fruits}<br>`;
+      str += `count : ${fruits.length}<br>`;
+
+      join = fruits.join("/");
+
+      str += `after : ${join}<br>`;
+      str += `count : ${join.length}<br>`;
+
+      document.getElementById("result9").innerHTML = str;
+    }
+    function proc10(){
+
+      str = `before : ${fruits}<br>`;
+      fruits.reverse();
+      str += `after : ${fruits}<br>`;
+      document.getElementById("result10").innerHTML = str;
+    };
+    function proc11(){
+      str = `before : ${fruits}<br>`;
+      fruits.sort();
+      str += `after : ${fruits}<br>`;
+      document.getElementById("result11").innerHTML = str;
+    };
+    function proc12(){
+
+      let numArr = [10,80,26,33,456,41,50,200];
+
+      str = `before : ${numArr}<br>`;
+      numArr.sort()
+      str += `after1 : ${numArr}<br>`;
+      numArr.sort(function(a,b){return a-b;});
+      str += `after2: ${numArr}<br>`;
+      numArr.sort(function(a,b){return -a+b;});
+      str += `after3: ${numArr}<br>`;
+      document.getElementById("result12").innerHTML = str;
+    };
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>배열메서드</h3>
+    <input type="button" value="indexOf" onclick="proc1()">
+    <input type="button" value="lastIndexOf" onclick="proc2()">
+    <input type="button" value="start" onclick="proc3()">
+    <div id="result1"></div>
+    <div id="result2"></div>
+    <div id="result3"></div>
+  </div>
+  <div class="box">
+    <h3>ArrayMethod</h3>
+    <input type="button" value="push" onclick="proc4()">
+    <input type="button" value="pop" onclick="proc5()">
+    <div id="result4"></div>
+    <div id="result5"></div>
+  </div>
+  <div class="box">
+    <h3>ArrayMethod</h3>
+    <p>slice(start, end) : start ~ end  범위의 요소를 따로 떼어내어 새로운 배열을 만든다.</p>
+    <p>
+      let substr = fruits.slice(4,6);
+    </p>
+    <p>splice(index, n, a, b, c, …) : 배열 일부를 수정한다. 일정 범위를 삭제하고 새로운 요소를 삽입힌다.</p>
+    <p>
+      fruits.splice(3,3,"banana","grape");
+    </p>
+    <input type="button" value="slice" onclick="proc6()">
+    <input type="button" value="splice" onclick="proc7()">
+    <div id="result6"></div>
+    <div id="result7"></div>
+  </div>
+  <div class="box">
+    <h3>ArrayMethod</h3>
+    <input type="button" value="concat" onclick="proc8()">
+    <input type="button" value="join" onclick="proc9()">
+    <div id="result8"></div>
+    <div id="result9"></div>
+  </div>
+  <div class="box">
+    <h3>ArrayMethod</h3>
+    <p>reverse : change the direction of target array</p>
+    <p>sort : sort elements in the array by lexical order</p>
+    <input type="button" value="reverse" onclick="proc10()">
+    <input type="button" value="sort" onclick="proc11()">
+    <div id="result10"></div>
+    <div id="result11"></div>
+  </div>
+  <div class="box">
+    <h3>ArrayMethod</h3>
+    <input type="button" value="sort" onclick="proc12()">
+    <input type="button" value="sort" onclick="proc13()">
+    <div id="result12"></div>
+    <div id="result13"></div>
+  </div>
+</body>
+</html>

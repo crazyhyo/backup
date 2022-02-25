@@ -1,0 +1,34 @@
+@charset "UTF-8";
+html, body{
+	margin : 0px;
+	padding : 0px;
+}
+header{
+		margin : 0px;
+	padding : 0px;
+	background : yellow;
+	height : 20vh;
+}
+nav{
+		margin : 0px;
+	padding : 0px;
+	background : red;
+	height : 60vh;
+	width : 20vw;
+	float : left;
+}
+section{
+		margin : 0px;
+	padding : 0px;
+	background : lightgreen;
+	height : 60vh;
+	width : 78vw;
+	float : left;
+}
+footer{
+		margin : 0px;
+	padding : 0px;
+	background : pink;
+	height : 20vh;
+	clear : both;
+}

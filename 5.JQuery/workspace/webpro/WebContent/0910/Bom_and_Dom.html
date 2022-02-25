@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function proc1() {
+      a = window.open("../0909/string.html","theName", "width = 500px, height = 500px");
+      a.moveTo(700,200);
+    };
+    function proc2() {
+      a.moveBy(100,100);
+    };
+    function proc3() {
+      a.resizeBy(300,300);
+    };
+    function proc4() {
+      a.resizeTo(600,600);
+    };
+    function proc5(){
+
+      a.scrollBy(100,200);
+    }
+    function proc6(){
+
+      a.scrollTo(100,100);
+    }
+    function proc7(){
+      window.open("winsub.html", "width : 500 height : 400");
+    }
+
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>Bom & Dom</h3>
+    <input type="button" value="bom&dom1" onclick="proc1()">
+    <input type="button" value="bom&dom2" onclick="proc2()">
+    <input type="button" value="bom&dom3" onclick="proc3()">
+    <input type="button" value="bom&dom4" onclick="proc4()">
+    <input type="button" value="bom&dom5" onclick="proc5()">
+    <input type="button" value="bom&dom6" onclick="proc6()">
+    <br><br>
+    <div id="result1"></div>
+  </div><div class="box">
+    <h3>Bom & Dom</h3>
+    opener: 새로운 창인 자식창에 현재창인 부모창으로 접근하고자 할 때 부모창을 지칭하는 속성
+    <input type="button" value="bom&dom7" onclick="proc7()">
+    <br><br>
+    <div id="result7"></div>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>title</title>
+<style>
+label{
+  display : inline-block;
+  width : 80px;
+  height : 20px;
+}
+form{
+  border : 2px dotted orange;
+  width : 80%;
+  margin : 10px;
+  padding : 10px;
+}
+fieldset{
+  border : 1px dotted pink;
+  width : 95%;
+  margin : 10px;
+  padding : 10px;
+}
+.gend{
+  width : 50px;
+}
+div{
+  float : left;
+  width : 100px;
+  margin-right : 20px;
+}
+</style>
+    <script>
+      function proc1(){
+              alert("asdf")
+            }
+    </script>
+</head>
+<body>
+  <form action="aa.jsp" onsubmit="return false;">
+    <fieldset>
+      <legend>인적사항 입력</legend>
+      <label>이름</label> <input autofocus required type="text" name="name" placeholder="ex)홍길동"><br>
+      <label>주소</label> <input readonly value="대전" type="text" name="addr" placeholder="ex)시구동"><br>
+      <label>전화번호</label> <input type="text" name="tel" title="asdf" pattern="\d{3}-\d{4}-\d{4}"><br>
+      <label>성별</label>
+      <input type="radio" name="gender1" value="남자">남자
+      <input type="radio" name="gender1" value="여자">여자<br>
+      <hr>
+
+      <div>
+        <label class="gend">남자</label>
+        <input type="radio" name="gender2" value="남자">
+      </div>
+      <div>
+        <label class="gend">여자</label>
+        <input type="radio" name="gender2" value="여자">
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>경력사항 입력</legend>
+      <label>회사이름</label> <input type="text" name="name"><br>
+      <label>기간</label> <input type="text" name="addr"><br>
+      <label>전화번호</label> <input type="text" name="tel"><br>
+    </fieldset>
+
+    <fieldset>
+      <legend>봉사활동 입력</legend>
+      <label>봉사단체</label> <input type="text" name="name"><br>
+      <label>기간</label> <input type="text" name="addr"><br>
+      <label>전화번호</label> <input type="text" name="tel"><br>
+      <img src="../images/coffee1.jpg" alt="asdf" title="asdf">
+    </fieldset>
+    <input type="button" onclick="proc1()" value="확인">
+    <input type="submit" onclick="proc1()" value="확인">
+  </form>
+
+</body>
+</html>
+

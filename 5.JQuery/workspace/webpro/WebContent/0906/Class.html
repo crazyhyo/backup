@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function Rect(width, height) {
+      this.width = width;
+      this.height = height;
+      
+      this.getArea = function() { return this.width * this.height; }
+      this.getCircum = function() { return (this.width + this.height) * 2; }
+
+    };
+    let rect = {
+      width : 10,
+      height : 5,
+      getArea : function() { return this.width * this.height;},
+      getCircum : function() { return (this.width + this.height) * 2;}
+    };
+    function proc1(){
+      let width = parseInt(prompt('input width:'));
+      let height = parseInt(prompt('input height:'));
+
+      rect = new Rect(width, height);
+      let str = "";
+
+
+      str += `width is : ${rect.width}<br>`;
+      str += `height is : ${rect.height}<br>`;
+      str += `area is : ${rect.getArea()}<br>`;
+      str += `circum is : ${rect.getCircum()}<br>`;
+
+      document.getElementById("result1").innerHTML = str;
+    };
+
+    function Circle(radius){
+      this.radius = radius;
+      this.getArea = function() { return this.radius * this.radius * Math.PI; }
+      this.getCircum = function() { return Math.PI * 2 * this.radius; }
+    }
+
+    function proc2(){
+      let radius = parseFloat(prompt('input radius:'));
+      let myCir = new Circle(radius);
+
+      let str = "";
+
+      str += `radius is ${myCir.radius}<br>`;
+      str += `Area is ${myCir.getArea()}<br>`;
+      str += `circum is ${myCir.getCircum()}<br>`;
+
+      document.getElementById("result2").innerHTML = str;
+    }
+
+    
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>rect객체 생성</h3>
+    속성 : width / height<br>
+    메서드 : 면적구하기 / 둘레구하기
+    <input type="button" value="확인" onclick="proc1()">
+    <div id="result1"></div>
+
+
+
+  </div>
+  <div class="box">
+    <h3>circle 객체 생성</h3>
+    속성 : radius<br>
+    메서드 : 면적구하기 / 둘레구하기
+    <input type="button" value="확인" onclick="proc2()">
+  <div id="result2"></div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+section{
+  width: auto;
+  height: 680px;
+  display: flex;
+  justify-content: space-around; 
+}
+section > article{
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+img{
+  width: 230px;
+  height: 300px;
+}
+p{
+  height: 200px;
+  width: 230px;
+  overflow-y: auto;
+  word-break: break-all;
+}
+input{ 
+  clear: both;
+}

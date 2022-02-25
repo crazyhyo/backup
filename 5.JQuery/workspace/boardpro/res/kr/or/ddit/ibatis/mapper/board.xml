@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="board">
+
+	<select id="selectAll" resultClass="kr.or.ddit.board.vo.BoardVO">
+			select * from board1 order by num desc
+	</select>
+	
+	<select id="selectByPage" parameterClass="map" resultClass="kr.or.ddit.board.vo.BoardVO">
+	<![CDATA[
+	select b.*
+		from (select rownum as rnum, a.*
+		        from (select *
+		                from board1
+		               order by num desc) a
+		       where rownum <= #end#) b
+	 where rnum >= #start#
+		 
+	]]>
+	</select>
+	
+	<select id="getTotalCount" resultClass="int">
+		select count(*) from board1
+	</select>
+	
+	<insert id="insertBoard" parameterClass="kr.or.ddit.board.vo.BoardVO">
+		insert into board1
+		values(
+			board1_num_seq.nextval,
+			#subject#,
+			#writer#,
+			#mail#,
+			#password#,
+			#content#,
+			0,
+			#wip#,
+			sysdate
+		)
+
+		<selectKey keyProperty="num" resultClass="int">
+			select board1_num_seq.currval from dual
+		</selectKey>
+	</insert>
+	
+	<update id="updateHit" parameterClass="int">
+		update board1
+		set
+			hit = hit + 1
+		where
+			num = #num#
+	</update>
+	
+	<delete id="deleteBoard" parameterClass="int">
+		delete board1
+		 where num = #num#
+	</delete>
+	
+	<update id="updateBoard" parameterClass="kr.or.ddit.board.vo.BoardVO">
+		update board1
+		set
+			content = #content#,
+			subject = #subject#,
+			wip = #wip#,
+			password = #password#,
+			mail = #mail#,
+			wdate = sysdate
+		where
+		 	num = #num#
+	</update>
+</sqlMap>			

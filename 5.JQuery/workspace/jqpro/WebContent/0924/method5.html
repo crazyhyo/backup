@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>document</title>
+
+  <style>
+    .sample{
+      background-color: teal;
+    }
+    .fontcolor{
+      color: thistle;
+    }
+    .fontsize{
+      font-size: 2.0em;
+    }
+    .border{
+      border: 3px solid lime;
+    }
+  </style>
+  <script>
+    $(function() {
+      $('p').on('mouseover',function(){
+        $(this).addClass('fontcolor');
+      })
+      $('p').on('mouseout',function(){
+        $(this).removeClass('fontcolor');
+      })
+      $('p').on('click',function () {
+        $(this).toggleClass('fontsize');
+
+        if($(this).hasClass('fontsize')){
+          $(this).addClass('border');
+        }else {
+          $(this).removeClass('border');
+        }
+      })
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>method</h3>
+    <input type="button" value="clone" id="clone">
+    <div id="result1">
+      <p class="sample" id="p1">ptag1</p>
+      <p id="p2">ptag2</p>
+      <p id="p3">ptag3</p>
+      <p id="p4">ptag4</p>
+    </div>
+  </div>
+</body>
+</html>

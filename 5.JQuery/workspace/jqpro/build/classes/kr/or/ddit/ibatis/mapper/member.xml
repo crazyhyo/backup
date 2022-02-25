@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="member">
+
+<!-- 	<typeAlias alias="memVO" type="kr.or.ddit.member.vo.MemberVO"/> -->
+	
+	<select id="selectAllMember" resultClass="memVO">
+			select * from member
+	</select>
+	
+	<select id="selectByMemId" resultClass="String" parameterClass="String">
+		select mem_id from member where mem_id = #mem_id#
+	</select>
+	
+	<select id="selectZipCode" resultClass="kr.or.ddit.member.vo.ZipVO" parameterClass="String">
+		select * from ziptb where dong like #dong# || '%'
+	</select>
+	
+	<insert id="insertMember" parameterClass="kr.or.ddit.member.vo.MemberVO">
+		INSERT INTO member (
+	    mem_id,
+	    mem_pass,
+	    mem_name,
+	    mem_bir,
+	    mem_zip,
+	    mem_add1,
+	    mem_add2,
+	    mem_hp,
+	    mem_mail
+		) VALUES (
+	    #mem_id#,
+	    #mem_pass#,
+	    #mem_name#,
+	    #mem_bir#,
+	    #mem_zip#,
+	    #mem_add1#,
+	    #mem_add2#,
+	    #mem_hp#,
+	    #mem_mail#			
+		)
+		<selectKey keyProperty="mem_id" resultClass="String">
+			select mem_id 
+			  from member
+			 where mem_id = #mem_id# 
+		</selectKey>
+	</insert>
+</sqlMap>			
+
+
+
+
+

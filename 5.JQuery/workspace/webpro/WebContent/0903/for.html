@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid blue;
+      background: aliceblue;
+    }
+    .box div{
+      border: 2px dotted orange;
+      padding: 10px;
+      word-break: break-all;
+    }
+    table,td{border: 1px solid black;}
+  </style>
+  <script>
+    proc1 = function(){
+      let res = "";
+      for(i=1; i<=10; i++){
+        res += i + "&nbsp;&nbsp;";
+      }
+      document.getElementById("result1").innerHTML = res;
+    };
+    proc2 = function(){
+      let res = "";
+      let sum = 0;
+      for(i=1; i<=100; i++){
+        res += i + "&nbsp;&nbsp;";
+        sum += i;
+      }
+      document.getElementById("result2").innerHTML = res;
+      document.getElementById("result2").innerHTML += `<br>총 합계는 ${sum}입니다`
+    };
+    proc2 = function(){
+      let res ="";
+      res +=`<h1>구구단표</h1>`;
+      res += `<table>`;
+        for(let i=1;i<=9;i++){
+          res += `<tr>`;
+          res += `<td>${i}</td>`;
+          for(let j=2;j<=9;j++){
+            res += `<td>${i*j}</td>`;
+          }
+          res += `</tr>`;
+        }
+        res += `</table>`;
+        document.getElementById("result3").innerHTML = res;
+    };
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>1~10까지 출력</h3>
+    <br>
+    <input type="button" value="확인" onclick="proc1()">
+    <br><br>
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>1~100까지 출력</h3>
+    <br>
+    <input type="button" value="확인" onclick="proc2()">
+    <br><br>
+    <div id="result2"></div>
+  </div>
+  <div class="box">
+    <h3>구구단</h3>
+    <br>
+    <input type="button" value="확인" onclick="proc3()">
+    <br><br>
+    <div id="result3"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <title>Document</title>
+  <style>
+  </style>
+  <script>
+		$(function () {
+			$(document).on('click','#lprodList',function(){
+        $.ajax({
+          type: 'get',
+          dataType: 'html',
+          url: '/jqpro/LprodList.do',
+          success: function(res){
+						$('#lprodCbo').html(res);
+						$('#lprodCbo').trigger('change');
+          },
+          error: function(err){
+            alert('type : ' + err.status + '\n text : ' + err.statusText);
+          }
+        })
+      })
+      
+      $(document).on('change','#lprodCbo',function(){
+    	  let prod_lgu = $(this).val();
+    	  
+    	  $.ajax({
+    		  url: '/jqpro/prod.do',
+    		  type: 'get',
+    		  data: { "prod_lgu" : prod_lgu },
+    		  dataType: 'json',
+    		  success: function(res){
+    			  let datasTest = res.datas;
+    			  let code1 = "";
+    			  let cnt = 0;
+    			  if(res.flag == "true"){
+    				  
+    				  datasTest.forEach(element => {
+    					  code1 += `<option value="${element.id}">${element.nm}</option>`;
+	    			  });
+    				  
+    			  }else{
+    				  code1 = `<option value='0'>데이터가 없습니다.</option>`;
+    				  let noImage = $("<img src='../images/noImage.png' alt='noImage.png' width='200px' height='200px'>");
+    				  $('#detail').html(noImage);
+    			  }
+    			  	
+    				  $('#prodCbo').html(code1);
+    				  $('#prodCbo').trigger('change');
+    		  },
+    		  error: function(err){
+    			  alert('type : ' + err.status + '\n text : ' + err.statusText);
+    		  }
+    	  })
+      })
+      
+      $(document).on('change','#prodCbo',function(){
+    	  let prod_id = $(this).val();
+    	  
+    	  if(prod_id != 0){
+    		  
+  
+    		 let code = "";
+	    	  $.ajax({
+	    		  url: '/jqpro/prod.do',
+	    		  type: 'post',
+	    		  data: {'prod_id' : prod_id},
+	    		  dataType: 'json',
+	    		  success: function(res){
+	    			  
+	    			  code += "<table class='table table-striped'>";
+	    			  code += "<tr>";
+	    			  code += "<th>항목</th>";
+	    			  code += "<th>내용</th>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodId</td>";
+	    			  code += "<td>" + res.prodId + "</td>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodName</td>";
+	    			  code += "<td>" + res.prodName + "</td>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodLGU</td>";
+	    			  code += "<td>" + res.prodLGU + "</td>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodBuyer</td>";
+	    			  code += "<td>" + res.prodBuyer + "</td>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodCost</td>";
+	    			  code += "<td>" + res.prodCost + "</td>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodPrice</td>";
+	    			  code += "<td>" + res.prodPrice + "</td>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodSale</td>";
+	    			  code += "<td>" + res.prodId + "</td>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodSize</td>";
+	    			  code += "<td>" + res.prodId + "</td>";
+	    			  code += "</tr>";
+	    			  code += "<tr>";
+	    			  code += "<td>prodColor</td>";
+	    			  code += "<td>" + res.prodId + "</td>";
+	    			  code += "</tr>";
+	    			  code += "</table>";
+
+
+	    			  $('#detail').html(code);
+	    		  },
+	    		  error: function(err){
+	    			  alert('type : ' + err.status + '\n text : ' + err.statusText);
+	    		  }
+	    	  })
+    	  }
+      })
+		});
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>ajax</h3>
+    <input type="button" value="lprodList" id="lprodList">
+		<div id="result1">
+			<!--       <select name="lprod" id="lprodCbo">
+      </select>
+      <select name="prod" id="prodCbo">
+      </select> -->
+			<div class="container">
+				<h2>Form control: select</h2>
+				<p>The form below contains two dropdown menus (select lists):</p>
+				<form>
+					<div class="form-group">
+						<label for="sel1">lprodList</label>
+						<select class="form-control" id="lprodCbo">
+						</select> <br>
+						
+						<label for="sel1">prodList</label>
+						<select	class="form-control" id="prodCbo">
+						</select> <br>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="detail"></div>
+  </div>
+</body>
+</html>

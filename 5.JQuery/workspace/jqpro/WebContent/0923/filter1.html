@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    $(function() {
+
+      $('#enabled').on('click', function(){
+        $('#result1 form *:enabled').css({'border':'3px solid lime'});
+
+        let str = "";
+
+        $('#result1 form *:enabled').each(function(index, value){
+
+          let vtype = $(this).attr('type');
+          let vname = $(this).attr('name');
+
+          if(vname != undefined) str += `${vtype} ${vname}\n`;
+
+        })
+
+        alert(str);
+      });
+
+      $('#disabled').on('click', function(){
+        $('#result1 form *:disabled').css({'border':'3px solid blue'});
+
+        let vtype = $('#result1 form *:disabled').attr('type');
+        let vname = $('#result1 form *:disabled').attr('name');
+
+        alert(vtype + " " + vname);
+
+      });
+
+      $('#click').on('click', function(){
+        let str = "";
+        //$('input[type=checkbox]:checked');
+        $('#result2 input:checkbox:checked').each(function(){
+          str += $(this).val() + " ";
+        })
+
+        alert(str);
+      });
+
+      $('#btn3').on('click', function(){
+        let str = "";
+        //$('input[type=checkbox]:checked');
+        //$('#result3 input:radio:checked').each(function(){ str += $(this).val() + " "; })
+
+        str += $('#result3 input:radio:checked').val();
+        alert(str);
+      });
+      $('#spring').on('change', function(){
+        let str = "";
+        // $('#result4 select option:selected').each(function(){
+        //   str += $(this).val() + " ";
+        // })
+
+        // str += $('option:selected', this).val() + "\n";
+
+        $('option:selected', this).each(function(){
+          str += $(this).val() + "\n";
+        })
+        alert(str);
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>filter</h3>
+    <input type="button" value="enabled" id="enabled">
+    <input type="button" value="disabled" id="disabled">
+
+    <div id="result1">
+      <form> 
+      <input type="text" name="id" ><br>
+      <input type="password" name="pass" disabled><br>
+
+      <select name="disSelect" disabled>
+            <option name="option1">Option1</option>
+            <option>Option2</option>
+            <option>Option3</option>
+            <option>Option4</option>
+      </select>
+      <br>
+      <textarea name="enTextarea" rows=10 cols=20 ></textarea><br>
+      <input type="button" value="확인" onclick="alert('hello')" disabled> <br>
+
+      </form>
+    </div>
+    <input type="button" value="filter1" id="filter1">
+  </div>
+  <div class="box box2">
+    <h3>filter</h3>
+
+    prop('checked') prop('selected') prop('disabled') prop('multiple')
+    <br>
+    attribute checked, selected, disabled, multiple 등은 boolean값을 가진다
+    <br>
+    prop('attribute')명은 해당 attribute의 boolean값을 반환한다.
+    <br>
+    단, prop('attribute','boolean값')은 해당 attribute의 값을 입력한 boolean으로 설정한다는 것이다.
+
+    <input type="button" value="click" id="click">
+
+    <div id="result2">
+      <form>
+      취 미 :
+      <input type="checkbox" name="hobby" value="여행" checked>여행
+      <input type="checkbox" name="hobby" value="장기">장기
+      <input type="checkbox" name="hobby" value="바둑">바둑
+      <input type="checkbox" name="hobby" value="독서">독서
+      <input type="checkbox" name="hobby" value="낚시">낚시<br><br>
+      <input type="button" value="전송">
+      </form>
+   </div>
+  </div>
+  <div class="box box3">
+    <h3>filter</h3>
+    <input type="button" value="btn3" id="btn3">
+
+    <div id="result3">
+      <form>
+      취 미 :
+      <input type="radio" name="rhobby" value="여행">여행
+      <input type="radio" name="rhobby" value="장기">장기
+      <input type="radio" name="rhobby" value="바둑">바둑
+      <input type="radio" name="rhobby" value="독서">독서
+      <input type="radio" name="rhobby" value="낚시" checked>낚시<br><br>
+      <input type="button" value="전송">
+      </form>
+   </div>
+   
+  </div>
+  <div class="box box4">
+    <h3>filter</h3>
+    <input type="button" value="btn4" id="btn4">
+
+    <div id="result4">
+      <form>
+      봄소식 : <select name="spring" id="spring" multiple size="6">
+        <option>개나리</option>
+        <option selected>진달래</option>
+        <option>민들레</option>
+        <option selected>벚꽃</option>
+        <option>목련</option>
+        <option>철쭉</option>
+      </select>
+      </form>
+   </div>
+      
+  </div>
+</body>
+</html>
+

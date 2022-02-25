@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function proc1(){
+
+      let input = prompt("input reagister number");
+
+      let result = "";
+
+      let criterior = true;
+      let flag = parseInt(input.substr(7,1));
+      let year = parseInt(input.substr(0,2));
+      let month = parseInt(input.substr(2,2));
+      let day = parseInt(input.substr(4,2));
+
+      let birth = `생일 : `;
+      let gender = `성별 : `;
+      let now = new Date();
+      if(flag == 1){
+        gender += `남자<br>`;
+      }else if(flag == 2){
+        gender += `여자<br>`;
+      }else if(flag == 3){
+        gender += `남자<br>`;
+        criterior = false;
+      }else if(flag == 4){
+        gender += `여자<br>`;
+        criterior = false;
+      }
+
+      if(criterior){
+        birth += `19${year}년 ${month}월 ${day}일<br>`;
+      }else{
+        birth += `20${year}년 ${month}월 ${day}일<br>`;
+      }
+
+      result += birth;
+      result += gender;
+      let birthDate = new Date(birth.substr(5,4)+","+month+","+day);
+      let age = `나이 : ${Math.floor((now - birthDate)/(1000 * 60 * 60 * 24 * 365))}세<br>`;
+      result += age;
+      document.getElementById("result1").innerHTML = result;
+    };
+
+    function proc2(){
+      let input = prompt("input reagister number");
+      let arr = input.split("-");
+      let front = 0;
+      for(let i = 0; i < 6; i++){
+        front += arr[0].charAt(i) * (i + 2);
+      }
+      for(let i = 0; i < 2; i++){
+        front += arr[1].charAt(i) * (i + 8);
+      }
+      for(let i = 2; i < 6; i++){
+        front += arr[1].charAt(i) * i;
+      }
+
+      let remainder = front % 11;
+      let temp = 11 - remainder;
+      let last = temp;
+      if(temp == 10){
+        last = 0;
+      }else if(temp == 11){
+        last = 1;
+      }
+
+      let result = false;
+      if(last == arr[1].charAt(6)){
+        result = true;
+      }
+
+      document.getElementById("result2").innerHTML = result;
+
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>string</h3>
+    <input type="button" value="string1" onclick="proc1()">
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>string</h3>
+    <input type="button" value="string2" onclick="proc2()">
+    <div id="result2"></div>
+  </div>
+</body>
+</html>

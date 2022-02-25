@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    $(function(){
+      $("#btn2").on("click", function(){
+        $("#result2 :input").css("background","pink");
+        $("#result2 :text").css("background","yellow");
+        $("#result2 :button").css("background","lime");
+        $("#result2 input").css({'border' : '3px solid black'});
+        $("#result2 :submit").css({'border' : '3px solid green'});
+        $("#result2 :reset").css({'background' : 'yellow'});
+        $("#result2 :file, :image").css({'border' : '3px solid red'});
+      });
+    });
+
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>jquery</h3>
+    <input type="button" value="asdf" id="btn1">
+    <div id="result1"></div>
+  </div>
+  <div class="box box1">
+    <h3>jquery</h3>
+    <input type="button" value="asdf" id="btn2">
+    <div id="result2">
+      <form action="asdf.jsp" method="post" onsubmit="return false;"> 
+        Text : <input type="text"/><br> 
+        Password : <input type="password" /><br><br> 
+        Radio : <input type="radio" name="radioGroup" id="radioA" value="A"/> A 
+        <input type="radio" name="radioGroup" id="radioB" value="B"/> B<br><br> 
+        Checkbox : <input type="checkbox" name="checkboxes" id="checkbox1" value="1"/> 1 
+        <input type="checkbox" name="checkboxes" id="checkbox2" value="2"/> 2<br><br> 
+        Textarea : <br> <textarea rows="15" cols="50" id="myTextarea" id="myTextarea"></textarea><br><br> 
+        Image : <input type="image" src="../images/image.1.jpg"><br><br> 
+        File : <input type="file"><br><br> 
+        Buttons : <button type="button" id="normalButton">Normal</button> 
+        <button type="submit" id="submitButton">Submit</button> 
+        <button type="reset" id="resetButton">Reset</button> <br><br>
+        <input type="button" value="일반버튼"> 
+        <input type="submit" value="전송버튼"> 
+        <input type="reset" value="초기화버튼"> <br><br>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

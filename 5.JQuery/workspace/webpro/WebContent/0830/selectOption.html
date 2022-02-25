@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>title</title>
+<link href="../css/mystyle.css" rel="stylesheet">
+<style>
+span{
+  border-bottom : 3px solid red;
+}
+</style>
+</head>
+<body>
+  <h2>한개의 항목을 선택</h2>
+  <form action="select.jsp" method="get">
+    <select name="car1">
+      <option value="bmw">BMW</option>
+      <option value="소나타" selected>소나타</option>
+      <option value="랜드로바">랜드로바</option>
+      <option value="제네시스">제네시스</option>
+      <option value="그랜저">그랜저</option>
+    </select>
+
+    <button type="submit">전송</button>
+  </form>
+
+  <pre>
+    &lt;select name="car2" <span>multiple="multiple" size="5"</span>>
+  </pre>
+  <h2>여러개의 항목을 선택</h2>
+  <form action="select.jsp" method="get">
+    <select name="car2" multiple="multiple" size="5">
+      <option value="bmw">BMW</option>
+      <option value="소나타" selected>소나타</option>
+      <option value="랜드로바">랜드로바</option>
+      <option value="제네시스" selected>제네시스</option>
+      <option value="그랜저">그랜저</option>
+    </select>
+
+    <button type="submit">전송</button>
+  </form>
+
+</body>
+</html>
+

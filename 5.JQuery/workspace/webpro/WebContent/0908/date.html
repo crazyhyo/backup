@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function proc1() {
+
+      let date1 = new Date();
+      date2 = new Date(222);
+      date3 = new Date("2010. 04. 22");
+      date4 = new Date(2020, 4, 4);
+
+      let str = date1.toLocalDateString() + "<br>";
+      str += date2.toLocalDateString() + "<br>";
+      str += date3.toLocalDateString() + "<br>";
+      str += date4.toLocalDateString() + "<br>";
+
+      document.getElementById("result1").innerHTML = str;
+    };
+
+    function proc2(){
+
+      let date = new Date()
+      let day = date.getDay();
+      let str = date.toLocaleDateString();
+
+      switch(day){
+        case 0: str += "일요일"; break;
+        case 1: str += "월요일"; break;
+        case 2: str += "화요일"; break;
+        case 3: str += "수요일"; break;
+        case 4: str += "목요일"; break;
+        case 5: str += "금요일"; break;
+        case 6: str += "토요일"; break;
+      }
+      document.getElementById("result2").innerHTML = str;
+    };
+    function proc3(){
+
+      let date = new Date()
+      let arr = ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
+      let day = date.getDay();
+      let str = date.toLocaleDateString();
+      str += arr[day];
+
+      document.getElementById("result3").innerHTML = str;
+    };
+    function proc4(){
+
+      let targetDate = new Date("2021. 01. 01");
+      let now = new Date();
+
+      let a = targetDate.getTime();
+      let b = now.getTime();
+
+      let diff = b - a;
+
+      let result = diff / (1000 * 60 * 60 * 24 * 365);
+      let str = result;
+
+      document.getElementById("result4").innerHTML = str;
+    };
+    function proc5(){
+
+      let day100 = 1000 * 60 * 60 * 24 * 100;
+      console.log(day100);
+      let today = new Date().getTime();
+      console.log(today);
+
+      let millis = day100 + today;
+
+      let newday = new Date(millis);
+      let str = newday.toLocaleDateString() + "<br>";
+
+      document.getElementById("result5").innerHTML = str;
+    };
+    function proc6(){
+
+      let date = document.getElementById("date").value;
+      date = new Date(date).getTime();
+      let today = new Date().getTime();
+      let diff = (today - date) / (1000 * 60 * 60 * 24 * 7);
+
+      let str;
+      if(diff < 1){
+        str = "7일 미만"
+      }else{
+        str = "7일 초과"
+      }
+
+      document.getElementById("result6").innerHTML = str;
+    };
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>Date</h3>
+    <input type="button" value="date1" onclick="proc1()">
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>Date</h3>
+    <input type="button" value="date2" onclick="proc2()">
+    <div id="result2"></div>
+  </div>
+  <div class="box">
+    <h3>Date</h3>
+    <input type="button" value="date3" onclick="proc3()">
+    <div id="result3"></div>
+  </div><div class="box">
+    <h3>Date</h3>
+    <input type="button" value="date4" onclick="proc4()">
+    <div id="result4"></div>
+  </div>
+  <div class="box">
+    <h3>Date</h3>
+    <input type="button" value="date5" onclick="proc5()">
+    <div id="result5"></div>
+  </div>
+  <div class="box">
+    <h3>Date</h3>
+    <input type="date" id="date">
+    <input type="button" value="date6" onclick="proc6()">
+    <div id="result6"></div>
+  </div>
+</body>
+</html>

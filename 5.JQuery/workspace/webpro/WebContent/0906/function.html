@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function calc(op){
+      let result = "";
+      let x = parseInt(document.getElementById("x").value);
+      let y = parseInt(document.getElementById("y").value);
+      let z;
+      switch(op){
+        case '+' : z = x + y; result = `x + y = ${z}`;   break;
+        case '-' : z = x - y; result = `x - y = ${z}`;   break;
+        case '*' : z = x * y; result = `x * y = ${z}`;   break;
+        case '/' : z = x / y; result = `x / y = ${z}`;   break;
+      }
+      document.getElementById("result").value = result;
+      document.getElementById("sp1").innerHTML = x;
+      document.getElementById("sp2").innerHTML = y;
+      document.getElementById("sp3").innerHTML = z;
+    };
+
+    function proc1(){
+      // 1 ~ 100사이의 랜덤 5개
+      let str = "";
+
+      for(let i=0; i<5; i++){
+        str += Math.floor(Math.random() * 100 + 1) + "<br>";
+      }
+
+      document.getElementById("result2").innerHTML = str;
+      
+    };
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>function</h3>
+    first : <input type="text" id="x"><br>
+    second : <input type="text" id="y"><br>
+    result : <input type="text" id="result"><br>
+    <input type="button" value="+" onclick="calc('+')">
+    <input type="button" value="-" onclick="calc('-')">
+    <input type="button" value="*" onclick="calc('*')">
+    <input type="button" value="/" onclick="calc('/')">
+    <div id="result1">
+      <p>첫번째 값 :<span id="sp1"></span> </p>
+      <p>두번째 값 :<span id="sp2"></span> </p>
+      <p>결과 :<span id="sp3"></span> </p>	  
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>function</h3>
+    <input type="button" value="확" onclick="proc1()">
+    <div id="result2">
+    </div>
+  </div>
+</body>
+</html>

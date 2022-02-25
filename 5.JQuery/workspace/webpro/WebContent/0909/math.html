@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function proc1(){
+      let rnd = Math.floor(Math.random() * 100 + 1);
+      let count = 0;
+      let hint = "";
+
+      do{
+        count++;
+        let input = parseInt(prompt("input your guess number"));       
+        if(rnd > input){
+          hint = "UP!!";
+
+          alert(hint);
+
+        }else if(rnd < input){
+          hint = "DOWN!!";
+
+          alert(hint);
+        }else{
+          hint = "correct!";
+          hint += `total count is ${count}`;
+          alert(hint);
+          break;
+        }
+      }while(true)
+
+    }
+    function proc2(){
+      let arr = [`sissors`,`rock`,`paper`];
+      let rnd = Math.floor(Math.random() * 3);
+      let str = `computer : ${arr[rnd]}<br>`;
+      let input = 0;
+      let reg = new RegExp("0|1|2");
+      do{
+        input = parseInt(prompt('input 0 ~ 2(0 means rock, 1 means sissors, 2 means paper'));
+      }while(!reg.test(input))
+
+      str += `you : ${arr[input]}<br>`;
+
+      let result = ((rnd - input) % 3 + 3) % 3;
+
+      if(result == 0){
+        str += `result : Draw!<br>`;
+      }else if(result == 2){
+        str += `result : Win!<br>`;
+      }else if(result == 1){
+        str += `result : Lose!<br>`;
+      }
+
+      document.getElementById("result2").innerHTML = str;
+    }
+
+    function proc3(){
+
+      let rnd = 0;
+      let arr = new Array();
+      let count = 0;
+
+      let str = `array is : `;
+      do{
+        rnd = Math.floor(Math.random() * 44 + 1);
+        if(arr.indexOf(rnd) == -1){
+          arr[count++] = rnd;
+        }
+      }while(count != 6)
+
+      str = arr.join(", ");
+
+      document.getElementById("result3").innerHTML = str;
+
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>Math</h3>
+    <input type="button" value="prob1" onclick="proc1()">
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>Math</h3>
+    <input type="button" value="prob2" onclick="proc2()">
+    <div id="result2"></div>
+  </div>
+  <div class="box">
+    <h3>Math</h3>
+    <input type="button" value="prob3" onclick="proc3()">
+    <div id="result3"></div>
+  </div>
+</body>
+</html>

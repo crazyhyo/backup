@@ -1,0 +1,53 @@
+@charset "UTF-8";
+header{
+	height: 150px;
+	background-color: pink;
+	width: 100%;
+	text-align: center;
+}
+h1{
+	position: relative;
+	top : 50px;
+}
+#p1{
+	position: relative;
+	top : 50px;
+}
+nav{
+	position: relative;
+	left: 20px;
+}
+aside{
+	height: 400px;
+	width: 25%;
+	background-color: gold;
+	float: left;
+}
+section{
+	height: 400px;
+	float: right;
+	width: 75%;
+	background-color: yellow;
+}
+section article{
+	height: 150px;
+	margin: 10px;
+	position: relative;
+	top: 30px;
+	left: 10px;
+}
+img{
+	height: 100px;
+	width: 100px;
+}
+footer{
+	height: 75px;
+	background-color: lightblue;
+	clear: both;
+	text-align: center;
+}
+#footer{
+	color: white;
+	position: relative;
+	top: 25px;
+}

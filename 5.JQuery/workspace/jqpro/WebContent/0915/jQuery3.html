@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+  $(function(){
+
+    $(".box1 input[type=button]").on("click", function(){
+      
+      $('#result1 > p').css("color", "blue");
+    });
+
+    $(".box2 input[type=button]").on("click", function(){
+
+      $("p", document.forms[0]).css("color", "blue").css("font-size", "2.0em");
+    });
+
+    $(".box div").on("click", function(){
+
+      $("p", this).css("background", "lime");
+    });
+  });
+</script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>jquery</h3>
+    <p>test Ptag here</p>
+    <br>
+    <input type="button" value="jquery1">
+    <div id="result1">
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+    </div>
+  </div>
+  <div class="box box2">
+    <h3>jquery</h3>
+    <p>test Ptag here</p>
+    <br>
+    <input type="button" value="jquery2">
+    <div id="result2">
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+      <p>asdf!!</p>
+    </div>
+    <form>
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>4</p>
+    </form>
+  </div>
+</body>
+</html>

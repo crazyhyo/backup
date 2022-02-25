@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link href="dynamicStyle.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    window.onload = function(){
+      vdiv = document.getElementsByTagName("div")[0];
+    }
+
+    function changeBorder(){
+      // let vdiv = document.getElementsByTagName("div");
+
+      let width = parseInt(Math.random() * 10);
+
+      let red = parseInt(Math.random() * 256);
+      let green = parseInt(Math.random() * 256);
+      let blue = parseInt(Math.random() * 256);
+
+      let type = ["solid", "dashed", "dotted", "inset", "outset", "double"];
+      let num = parseInt(Math.random() * type.length);
+
+      vdiv.style.border = `${width}px ${type[num]} rgb(${red},${green},${blue})`;
+
+
+    }
+    function changeColor(){
+      // let vdiv = document.getElementsByTagName("div");
+
+      //0~255의 난수 발생
+      let red = parseInt(Math.random() * 256);
+      let green = parseInt(Math.random() * 256);
+      let blue = parseInt(Math.random() * 256);
+      vdiv.style.color = `rgb(${red},${green},${blue})`;
+    }
+    function changeSize(){
+      // let vdiv = document.getElementsByTagName("div");
+
+      let fSize = (Math.random() * 5 + 5);
+
+      vdiv.style.fontSize = `${fSize}em`;
+    }
+
+    changeBorderRadius = ()=>{
+      // let vdiv = document.getElementsByTagName("div");
+
+      let borderR = (Math.random() * 50 + 10)
+      vdiv.style.borderRadius = `${borderR}px`;
+    }
+
+  </script>
+</head>
+<body>
+<pre>
+  변수선언
+  var 변수명 : 함수영역에서 선언시 지역변수
+  let 변수명 : 함수영역 또는 함수 블럭영역에서의 지역변수
+  const 변수명 : 값을 변경할 수 없는 변수 -es6
+  변수명; 전역변수
+
+  템플릿리터럴
+  백틱`을 이용한 문자열
+</pre>
+
+  <div>Hello World</div>
+  <br><br>
+  <input id="a1" type="button" value="border" onclick="changeBorder()">
+  <input id="a2" type="button" value="color" onclick="changeColor()">
+  <input id="a3" type="button" value="size" onclick="changeSize()">
+  <input id="a4" type="button" value="border-radius" onclick="changeBorderRadius()">
+</body>
+</html>

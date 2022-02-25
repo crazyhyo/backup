@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box, .imgbox, img{
+      box-sizing: border-box;
+      width: 100%;
+    }
+    #result1{
+      /* display: flex; */
+      height: 250px;
+    }
+    .imgbox{
+      padding: 1px;
+      margin: 1px;
+      height: 100px;
+      width: calc(20% - 1%);
+      float: left;
+    }
+    img{
+      width: 100%;
+      height: 80%;
+    }
+    #result2 img{
+      width: 110px;
+      height: 90px;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      let imgbox = document.getElementsByClassName("imgbox");
+      for(let i = 0; i < imgbox.length; i++){
+        imgbox[i].addEventListener("click", proc1);
+        //  proc1: 함수명, addEventListener의 파라미터로 쓰일 때는 함수명만 쓰인다.
+      }
+    }
+  
+    function proc1(){
+
+      // let pbox = document.getElementsByTagName("p");
+      // for(let i = 0; i < pbox.length; i++){
+      //   pbox[i].remove();
+      // }    // 첫번째 방법
+      let pbox = document.getElementById("sale");
+      if(pbox != null){
+        pbox.remove();
+      }   //  두번째 방법
+      let str = "";
+      let rnd = Math.floor(Math.random() * 6 + 5);
+
+      str = `할인율 : ${rnd}`;
+      let ptag = document.createElement("p");
+      let text = document.createTextNode(str);
+      ptag.id = "sale"; //  두번째 방법
+
+      ptag.appendChild(text);
+
+      this.appendChild(ptag);
+
+    }
+    function proc2(){
+
+      let startButton = document.getElementById("startButton");
+      startButton.style.display = "none";
+
+      let stopButton = document.getElementById("stopButton");
+      stopButton.style.display = "inline";
+
+      let result2 = document.getElementById("result2");
+
+      a = setInterval(() => {
+        let firstChild = result2.getElementsByTagName("img")[0];
+
+        result2.appendChild(firstChild);
+      }, 500);
+    }
+    function proc3() {
+      clearInterval(a);
+
+      let startButton = document.getElementById("startButton");
+      startButton.style.display = "inline";
+
+      let stopButton = document.getElementById("stopButton");
+      stopButton.style.display = "none";
+    } 
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>DomTree</h3>
+
+    <div id="result1">
+      <div class="imgbox">
+        <img src="../images/chopa.jpg" alt="chopa.jpg">
+      </div>
+      <div class="imgbox">
+        <img src="../images/cloud03.jpg" alt="cloud03.jpg">
+      </div>
+      <div class="imgbox">
+        <img src="../images/Desert.jpg" alt="Desert.jpg">
+      </div>
+      <div class="imgbox">
+        <img src="../images/gsj.png" alt="gsj.png">
+      </div>
+      <div class="imgbox">
+        <img src="../images/Lighthouse.jpg" alt="Lighthouse.jpg">
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>DomTree</h3>
+
+    부모노드.appendChild(자식노드)<br>
+    기존의 childnode를 부모노드에 append할 때는 기존의 child노드를 제거하는 작업도 수행한다.
+    <br>
+    <input type="button" value="start" id="startButton" onclick="proc2()">
+    <input type="button" value="stop" id="stopButton" onclick="proc3()" style="display: none;">
+    <br>
+
+    <div id="result2">
+        <img src="../images/chopa.jpg" alt="chopa.jpg">
+        <img src="../images/cloud03.jpg" alt="cloud03.jpg">
+        <img src="../images/Desert.jpg" alt="Desert.jpg">
+        <img src="../images/gsj.png" alt="gsj.png">
+        <img src="../images/Lighthouse.jpg" alt="Lighthouse.jpg">
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    arr = ["Hello", "World", "Good", "Morning", "Waldo", "Strong", "Powerful"];
+    str = "";
+    function proc1() {
+
+      let rnd = Math.floor(Math.random() * arr.length);
+
+      let textNode = document.createTextNode(arr[rnd]);
+
+      let ptag = document.createElement("p");
+
+      ptag.appendChild(textNode);
+
+      document.getElementById("result1").appendChild(ptag);
+    }
+    function proc2() {
+      
+      let parent = document.getElementById("result1");
+      let lastChild = parent.lastChild;
+
+      if(lastChild != null){
+        parent.removeChild(lastChild);
+      }
+    }
+    function proc3() {
+      
+      let rnd = Math.floor(Math.random() * arr.length);
+
+      let textNode = document.createTextNode(arr[rnd]);
+
+      let ptag = document.createElement("p");
+
+      let inputtag = document.createElement("input");
+
+      inputtag.type = "button";
+
+      inputtag.value = "remove";
+
+      inputtag.setAttribute('onclick', 'proc4(this)')
+      // inputtag.onclick = function(){
+      //   this.parentNode.remove();
+      // }
+
+      ptag.appendChild(textNode);
+      ptag.appendChild(inputtag);
+
+      document.getElementById("result2").appendChild(ptag);
+
+    }
+
+    function proc4(t){
+      t.parentNode.remove();
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>DomTree</h3>
+
+    <input type="button" value="add" onclick="proc1()">
+    <input type="button" value="remove" onclick="proc2()">
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>DomTree</h3>
+
+    <input type="button" value="append" onclick="proc3()">
+    <div id="result2"></div>
+  </div>
+</body>
+</html>

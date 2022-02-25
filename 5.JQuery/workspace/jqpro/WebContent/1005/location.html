@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function proc1() {
+      let str = "";
+      str += `href=${location.href}<br>`;
+      str += `protocol : ${location.protocol}<br>`;
+      str += `host : ${location.host}<br>`;
+      str += `hostname : ${location.hostname}<br>`;
+      str += `port : ${location.port}<br>`;
+      str += `pathname : ${location.pathname}<br>`;
+      document.getElementById("result1").innerHTML = str;
+    };
+    function proc2(){
+      location.href="test.jsp";
+    };
+    procReplace = (str) => {
+      location.replace(str);
+    };
+    procReload = () => {
+      let arr = ["Hello","world","java","jquery"];
+      let rnd = Math.floor(Math.random()*arr.length);
+      let str = `<h1>${arr[rnd]}</h1>`;
+      document.getElementById("result2").innerHTML = str;
+      document.getElementById("result2").style.color = "red";
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>Location</h3>
+    <input type="button" value="bom&dom1" onclick="proc1()">
+    <br><br>
+    <div id="result1"></div>
+  </div><div class="box">
+    <h3>Location</h3>
+
+    <input type="button" value="bom&dom2" onclick="proc2()">
+    <br><br>
+    using javascript function in a tag<br>
+    <a href="javascript:proc2()">Notice List</a><br>
+    get방식으로 button에서 사용<br>
+    <button onclick="location.href='test.jsp'">Notice List</button><br>
+    replace(url) - 현재 문서로 되돌아 올 수 없음<br>
+    <button onclick="procReplace('test.jsp')">Notice List</button><br>
+    reload current page // button type = submit / button : form에서는 필수요소, default는 submit<br>
+    <button type="button" onclick="procReload()">페이지 호출</button>
+    <div id="result2"></div>
+  </div>
+  
+</body>
+</html>

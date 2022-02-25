@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="../css/mystyle.css">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	form{
+		border : 2px solid orange;
+		margin : 20px;
+	}
+	span, label{
+		width : 100px;
+		height : 30px;
+		display: inline-block;
+	}
+</style>
+<script>
+	function proc(){
+		//입력받은 값을 가져온다 - html의 요소에 접근하는 방법
+		//html요소의 id를 이용하여 접근하는 방법
+    var em = document.getElementById("email");
+    var col = document.getElementById("color");
+
+    //접근한 요소의 값을 가져오기 - value
+    alert(em.value + "  " + col.value);
+    // 브라우저에서 보이는,html이 실행된 문서를 document객체라고 부름. 내장객체
+    // request도 내장객체
+    // id가 f2인 form요소로 접근
+    var f = document.getElementById("f2");
+    // 배경색을 변겅
+    f.style.background = col.value;
+          
+  }
+	
+</script>
+</head>
+<body>
+	<pre>
+		입력요소 input type의 종류
+		text 	 : 기본 입력 요소, 문자, 숫자, 날짜 등 모든 형식의 데이터 입력가능
+		password : 비밀번호 입력
+		date 	 : 날짜 형식의 데이터
+		submit 	 : 전송, 제출
+		button	 : 초기 기능은 없고 원하는 기능을 부여하기 위해서 javascript가 필요 
+	</pre>
+<form action="input.jsp" method="post">
+    <label>이메일</label><input type="text" name="email" value=123@124><br>
+    <label>URL</label><input type="url" name="url"><br>
+    <label>전화번호</label><input type="text" name="tel"><br>
+    <label>색상</label><input type="color" name="color"><br>
+    <label>월</label><input type="month" name="month"><br>
+    <label>날짜</label><input type="date" name="date"><br>
+    <label>주</label><input type="week" name="week"><br>
+    <label>시간</label><input type="time" name="time"><br>
+    <label>지역 시간</label><input type="datetime-local" name="localdatetime"><br>
+    <label>숫자</label><input type="number" name="number" min="1" max="10" step="2"><br>
+    <label>범위</label><input type="range" name="range" min="1" max="10" step="2"><br>
+    <input type="file" name="file" value="12345678">
+    <input type="hidden" name="pass" value="12345678">
+    <input type="image" src="../images/check.png">
+    <input type="submit" value="제출">
+    <input type="reset" value="초기화">
+</form>
+
+<pre>
+	&lt;input type="button" value="제출1" onclick="alert('Hello!')">
+	&lt;input type="button" value="제출2" onclick="proc()">
+    
+    //id가 color인 input요소로 접근
+    var col = document.getElementById("color");
+
+    //접근한 요소의 값을 가져오기 - value
+    alert(col.value);
+
+
+    // id가 f2인 form요소로 접근
+    var f = document.getElementById("f2");
+    // 배경색을 변겅
+    f.style.background = col.value;
+</pre>
+
+<form id="f2" action="input.jsp" method="post">
+    <span>이메일</span><input type="text" id="email" name="email"><br>
+    <span>URL</span><input type="url" name="url"><br>
+    <span>전화번호</span><input type="text" name="tel"><br>
+    <span>색상</span><input type="color" id="color" name="color"><br>
+    <span>월</span><input type="month" name="month"><br>
+    <span>날짜</span><input type="date" name="date"><br>
+    <span>주</span><input type="week" name="week"><br>
+    <span>시간</span><input type="time" name="time"><br>
+    <span>지역 시간</span><input type="datetime-local" name="localdatetime"><br>
+    <span>숫자</span><input type="number" name="number" min="1" max="10" step="2"><br>
+    <span>범위</span><input type="range" name="range" min="1" max="10" step="2"><br>
+    <input type="button" value="제출1" onclick="alert('Hello!')">
+    <input type="button" value="제출2" onclick="proc()">
+</form>
+</body>
+</html>

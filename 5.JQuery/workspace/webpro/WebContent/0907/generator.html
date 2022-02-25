@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function Rect(width, height){
+      this.width = width;
+      this.height = height;
+      this.getArea = function() { return this.width * this.height; }
+      this.getCircum = function() { return (this.width + this.height) * 2; }
+    };
+
+    /*function Circle(radius){
+
+      this.radius = radius;
+      this.getArea = function() { return this.radius * this.radius * Math.PI; }
+      this.getCircum = function() { return 2 * this.radius * Math.PI; }
+    }*/
+    function proc1(){
+
+      let width = parseInt(prompt('input width'));
+      let height = parseInt(prompt('input height'));
+
+      let rect = new Rect(width, height);
+      let str = "";
+
+      str += `width : ${rect.width}<br>`;
+      str += `height : ${rect.height}<br>`;
+      str += `area : ${rect.getArea()}<br>`;
+      str += `circum : ${rect.getCircum()}<br>`;
+
+      document.getElementById("result1").innerHTML = str;
+
+    };
+    function proc2(){
+
+      let radius = parseFloat(prompt('input radius'));
+
+      let circle = new Circle(radius);
+      let str = "";
+
+      circle.name = "circle";
+
+      circle.getRadius = function() { return this.radius; };
+
+
+      str += `name : ${circle.name}<br>`;
+      str += `radius : ${circle.radius}<br>`;
+      str += `radius with method : ${circle.getRadius()}<br>`;
+      str += `area : ${circle.getArea()}<br>`;
+      str += `round() : ${Math.round(circle.getArea())}<br>`;
+      str += `circum : ${circle.getCircum()}<br>`;
+      str += `round() : ${Math.round(circle.getCircum())}<br>`;
+
+      document.getElementById("result2").innerHTML = str;
+
+    };
+    class Circle{
+
+      constructor(radius){
+        this.radius = radius;
+      }
+
+      getArea = function() { return this.radius * this.radius * Math.PI; }
+      getCircum = function() { return 2 * this.radius * Math.PI; }
+    };
+  </script>
+</head>
+<body>
+
+  <div class="box">
+    <h3>rectangular</h3>
+    <input type="button" value="확인" onclick="proc1()"><br>
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>circle</h3>
+    <input type="button" value="확인" onclick="proc2()"><br>
+    <div id="result2"></div>
+  </div>
+  
+</body>
+</html>

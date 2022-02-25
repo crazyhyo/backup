@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      height: 500px;
+    }
+
+    .box div {
+      width: 300px;
+      height: auto;
+      margin: 2px;
+      padding: 3px;
+      float: left;
+    }
+  </style>
+  <script>
+    $(function () {
+      $('#btn1').on('click', function () {
+        $.ajax({
+          type: "get",
+          url: "text.jsp",
+          dataType: "text",
+          success: function (response) {
+
+            let arr = response.split('/');
+
+            //alert(arr);
+
+            let code = '<ul>';
+            // $.each(arr, function(i,v){
+            arr.forEach(element => {
+              code += `<li>${element}</li>\n`;
+            });
+            // })
+            code += '</ul>';
+
+            $('#result1').html(code);
+          },
+          error: function (asdf) {
+
+          }
+        });
+      })
+      $('#btn2').on('click', function () {
+
+        $.ajax({
+          type: "get",
+          url: "jsonArr.jsp",
+          success: function (response) {
+        	  
+        	  //alert(response);
+        	  
+            let code = '<ol>';
+            //$.each(response, function(i,v){
+              //code += `<li>${v}</li>`;
+            //})
+            response.forEach(element => {
+            	code += `<li>${element}</li>`;
+            })
+            code += '</ol>';
+            $('#result2').html(code);
+          },
+          error: function (asdf) {
+
+          },
+          dataType: 'json'
+        })
+      })
+        $('#btn3').on('click', function () {
+          $.ajax({
+            type: "get",
+          url: "jsonObj.jsp",
+          success: function (response) {
+
+        	  let code = '';
+            code += '이름 : ' + response.name + '<br>';
+            code += '주소 : ' + response.addr + '<br>';
+            code += '전화 : ' + response.tel + '<br>';
+            
+            $('#result3').html(code);
+          },
+          error: function (asdf) {
+
+          },
+          dataType: 'json'
+          });
+        })
+        $('#btn4').on('click', function () {
+          $.ajax({
+            type: "get",
+            url: "jsonObjArr.jsp",
+          success: function (response) {
+        	  let code = '';
+            let cnt = 1;
+            response.forEach(element => {
+              code += cnt + '번째 회원 자료<br>';
+              code += '이름 : ' + element.name + '<br>';
+              code += '주소 : ' + element.addr + '<br>';
+              code += '전화 : ' + element.tel + '<br><br>';
+              cnt++;
+            })
+            
+            
+            $('#result4').html(code);
+          },
+          error: function (asdf) {
+
+          },
+          dataType: 'json'
+        })
+      })
+    });
+  </script>
+</head>
+
+<body>
+  <div class="box box1">
+    <h3>ajax</h3>
+    <input type="button" value="btn1" id="btn1">
+    <input type="button" value="btn2" id="btn2">
+    <input type="button" value="btn3" id="btn3">
+    <input type="button" value="btn4" id="btn4">
+    <br>
+    <div id="result1">
+    </div>
+    <div id="result2">
+    </div>
+    <div id="result3">
+    </div>
+    <div id="result4">
+    </div>
+  </div>
+</body>
+
+</html>

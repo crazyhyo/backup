@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+  </style>
+  <script>
+    $(function() {
+      $('input[value=reset]').on('click',function(){
+
+        $('.button').off('click');
+
+      });
+      $(document).on('click','.button',function(){
+        let newInput = $('<input>',{
+          'type' : 'button',
+          'class' : 'button',
+          'value' : 'new'
+        });
+
+        if($(this).val() == 'btn1'){
+          newInput.appendTo('#result2');
+        }else if($(this).val() == 'btn2'){
+          newInput.appendTo('#result3');
+        }
+      })
+    });
+  </script>
+</head>
+<body>
+  <div class="box box1">
+    <h3>method</h3>
+
+    $(document).on('click','selector', funciton(){});
+    <div id="result1">
+      <input type="button" class="button" value="btn1" id="btn1">
+      <input type="button" class="button" value="btn2" id="btn2">
+    </div>
+    
+    <input type="button" value="reset">
+    
+    <div id='result2'></div>
+    <div id='result3'></div>
+
+  </div>
+</body>
+</html>

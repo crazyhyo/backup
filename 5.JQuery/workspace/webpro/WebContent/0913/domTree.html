@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="../css/mystyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img{
+      width: 50px;
+      height: 50px;
+    }
+  </style>
+  <script>
+    function proc1() {
+      let ultag = document.getElementsByTagName("ul")[0];
+
+      let liList = ultag.getElementsByTagName("li");
+
+      let str = "";
+      
+      for(let i=0; i < liList.length; i++){
+
+        str += (liList[i].firstChild.data) + "<br>";
+
+      }
+
+      document.getElementById("result1").innerHTML = str;
+    }
+    function proc2(t) {
+      
+      let text = document.createTextNode(t);
+
+      let parent = document.getElementById("result1");
+
+      parent.appendChild(text);
+    }
+    function proc3() {
+      let ultag = document.getElementsByTagName("ul")[1];
+
+      let liList = ultag.getElementsByTagName("li");
+
+      let str = "";
+      
+      for(let i=0; i < liList.length; i++){
+
+        let imgtag = document.createElement("img");
+        imgtag.src = `../images/${liList[i].firstChild.data}.png`;
+        imgtag.alt = "asdf";
+
+        liList[i].appendChild(imgtag);
+
+      }
+
+      document.getElementById("result3").innerHTML = str;
+
+    }
+    function proc4(t){
+
+      let imgtag = document.createElement("img");
+
+        imgtag.src = `../images/${t.firstChild.data}.png`;
+        imgtag.alt = "asdf";
+
+        t.appendChild(imgtag);
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h3>DomTree</h3>
+
+    <ul>
+      <li>List item 1</li>
+      <li>List item 2</li>
+      <li>List item 3</li>
+      <li>List item 4</li>
+      <li>List item 5</li>
+    </ul>
+
+    <input type="button" value="DomTree1" onclick="proc1()">
+    <div id="result1"></div>
+  </div>
+  <div class="box">
+    <h3>DomTree</h3>
+    <input type="button" value="DomTree2" onclick="proc2('asdf')">
+    <div id="result2"></div>
+  </div>
+  <div class="box">
+    <h3>DomTree</h3>
+
+    <ul>
+      <li>check</li>
+      <li>spongebob</li>
+      <li>circle-dot-o</li>
+      <li>noImage</li>
+      <li>Coca-Cola-logo</li>
+    </ul>
+
+    <input type="button" value="DomTree3" onclick="proc3('asdf')">
+    <div id="result3"></div>
+  </div>
+  <div class="box">
+    <h3>DomTree</h3>
+
+    <ul>
+      <li onclick="proc4(this)">check</li>
+      <li onclick="proc4(this)">spongebob</li>
+      <li onclick="proc4(this)">circle-dot-o</li>
+      <li onclick="proc4(this)">noImage</li>
+      <li onclick="proc4(this)">Coca-Cola-logo</li>
+    </ul>
+
+  </div>
+
+</body>
+</html>
