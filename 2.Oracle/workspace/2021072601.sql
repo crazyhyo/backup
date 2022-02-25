@@ -1,0 +1,192 @@
+2021-0726-01)
+사용예)2005년 4~6월 모든 분류별 매입현황을 조회하시오.
+      ALIAS는 분류코드, 분류명, 매입수량, 매입금액
+
+SELECT A.LPROD_ID AS "분류코드",
+       A.LPROD_NM AS "분류명",
+       NVL(SUM(C.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(C.BUY_QTY * B.PROD_COST),0) AS "매입금액"
+  FROM LPROD A
+  LEFT OUTER JOIN PROD B ON(A.LPROD_GU = B.PROD_LGU)
+  LEFT OUTER JOIN BUYPROD C ON(B.PROD_ID = C.BUY_PROD
+       AND C.BUY_DATE BETWEEN TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601')))
+ GROUP BY A.LPROD_ID, A.LPROD_NM
+ ORDER BY 1;
+ 
+SELECT B.LPROD_ID AS "분류코드",
+       B.LPROD_NM AS "분류명",
+       NVL(A.QTY,0) AS "매입수량",
+       NVL(A.CST,0) AS "매입금액"
+  FROM (SELECT A.PROD_LGU AS PGU,
+               SUM(B.BUY_QTY) AS QTY,
+               SUM(B.BUY_QTY * A.PROD_COST) AS CST
+          FROM PROD A, BUYPROD B
+         WHERE B.BUY_PROD = A.PROD_ID
+               AND B.BUY_DATE BETWEEN  TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601'))
+               GROUP BY A.PROD_LGU) A, LPROD B
+ WHERE A.PGU(+) = B.LPROD_GU
+ ORDER BY 1;
+
+(일반외부조인<-서브쿼리 사용해야 함)
+SELECT B.LPROD_ID AS "분류코드",
+       B.LPROD_NM AS "분류명",
+       NVL(SUM(A.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(A.BUY_QTY * C.PROD_COST),0) AS "매입금액"
+  FROM BUYPROD A, LPROD B, PROD C
+ WHERE A.BUY_PROD(+) = C.PROD_ID
+       AND C.PROD_LGU(+) = B.LPROD_GU
+       AND A.BUY_DATE BETWEEN TO_DATE('20050401') AND TO_DATE('20050630')
+ GROUP BY B.LPROD_ID, B.LPROD_NM
+ ORDER BY 1;
+
+SELECT D.LPROD_ID AS 분류코드,
+       D.LPROD_NM AS 분류명,
+       NVL(TBLA.BCNT,0) AS 매입수량,
+       NVL(TBLA.BAMT,0) AS 매입금액
+  FROM (SELECT B.LPROD_GU AS BID,
+               SUM(A.BUY_QTY) AS BCNT,
+               SUM(A.BUY_QTY * C.PROD_COST) AS BAMT
+          FROM BUYPROD A, LPROD B, PROD C
+         WHERE A.BUY_PROD(+) = C.PROD_ID
+               AND C.PROD_LGU(+) = B.LPROD_GU
+               AND A.BUY_DATE BETWEEN TO_DATE('20050401') AND TO_DATE('20050630')
+         GROUP BY B.LPROD_GU) TBLA,
+       LPROD D
+ WHERE D.LPROD_GU = TBLA.BID(+)
+ ORDER BY 1;
+
+(ANSI외부조인)       
+SELECT A.LPROD_ID AS "분류코드",
+       A.LPROD_NM AS "분류명",
+       NVL(SUM(C.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(C.BUY_QTY * B.PROD_COST),0) AS "매입금액"
+  FROM BUYPROD C
+ RIGHT OUTER JOIN PROD B ON(B.PROD_ID = C.BUY_PROD
+       AND C.BUY_DATE BETWEEN TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601')))
+ RIGHT OUTER JOIN LPROD A ON(B.PROD_LGU = A.LPROD_GU)
+ GROUP BY A.LPROD_ID, A.LPROD_NM
+ ORDER BY 1;       
+
+사용예)2005년 4~6월 모든 분류별 매출현황을 죄회하시오
+      ALIAS는 분류코드, 분류명, 매출수량, 매출금액
+
+SELECT C.LPROD_ID AS "분류코드",
+       C.LPROD_NM AS "분류명",
+       NVL(SUM(A.CART_QTY),0) AS "매출수량",
+       NVL(SUM(A.CART_QTY * B.PROD_PRICE),0) AS "매출금액"
+  FROM CART A
+ RIGHT OUTER JOIN PROD B ON(A.CART_PROD = B.PROD_ID
+       AND SUBSTR(A.CART_NO,1,6) BETWEEN '200504' AND '200506')
+ RIGHT OUTER JOIN LPROD C ON(B.PROD_LGU = C.LPROD_GU)
+ GROUP BY C.LPROD_ID, C.LPROD_NM
+ ORDER BY 1;
+
+SELECT C.LPROD_ID AS "분류코드",
+       C.LPROD_NM AS "분류명",
+       NVL(TBLA.QTY,0) AS "매출수량",
+       NVL(TBLA.AMT,0) AS "매출금액"
+  FROM (SELECT B.PROD_LGU AS BID,
+               SUM(A.CART_QTY) AS QTY,
+               SUM(A.CART_QTY * B.PROD_PRICE) AS AMT
+          FROM CART A, PROD B
+         WHERE A.CART_PROD = B.PROD_ID
+               AND SUBSTR(A.CART_NO,1,6) BETWEEN '200504' AND '200506'
+         GROUP BY B.PROD_LGU) TBLA,
+       LPROD C
+ WHERE TBLA.BID(+)=C.LPROD_GU
+ ORDER BY 1;
+ 
+       
+ 
+시퀀스 : 차례대로 부여되는 숫자값을 한 테이블에 종속시키지 않고 다른 테이블에서 조회할 수 있는 객체, 테이블 밖에서 자동증가 가능
+다른 DBMS에는 시퀀스가 제공되지 않으나 AUTO INCREASEMENT를 YES로 해두면 기본키를 만드는데 유용함, 한 테이블에서만 사용가능
+BETWEEN이 문자열을 읽을 때는 문자열을 아스키코드로 변환하여서 범위를 구하므로, %는 쓰지 않는 것이 좋다.
+
+사용예)2005년 4~6월 모든 분류별 매입/매출현황을 조회하시오.
+      ALIAS는 분류코드, 분류명, 매입수량, 매입금액, 매출수량, 매출금액
+      
+SELECT C.LPROD_ID AS "분류코드",
+       C.LPROD_NM AS "분류명",
+       NVL(SUM(D.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(D.BUY_QTY * B.PROD_COST),0) AS "매입금액",
+       NVL(SUM(A.CART_QTY),0) AS "매출수량",
+       NVL(SUM(A.CART_QTY * B.PROD_PRICE),0) AS "매출금액"
+  FROM CART A
+ RIGHT OUTER JOIN PROD B ON(A.CART_PROD = B.PROD_ID
+       AND SUBSTR(A.CART_NO,1,6) BETWEEN '200504' AND '200506')
+ RIGHT OUTER JOIN LPROD C ON(B.PROD_LGU = C.LPROD_GU)
+  LEFT OUTER JOIN BUYPROD D ON(B.PROD_ID = D.BUY_PROD
+       AND D.BUY_DATE BETWEEN TO_DATE('20050401') AND TO_DATE('20050630'))
+ GROUP BY C.LPROD_ID, C.LPROD_NM
+ ORDER BY 1;
+ 
+ 
+SELECT A.LPROD_ID AS "분류코드",
+       A.LPROD_NM AS "분류명",
+       NVL(SUM(C.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(C.BUY_QTY * B.PROD_COST),0) AS "매입금액",
+       NVL(SUM(D.CART_QTY),0) AS "매출수량",
+       NVL(SUM(D.CART_QTY * B.PROD_PRICE),0) AS "매출금액"
+  FROM LPROD A
+  LEFT OUTER JOIN PROD B ON(A.LPROD_GU = B.PROD_LGU)
+  LEFT OUTER JOIN BUYPROD C ON(B.PROD_ID = C.BUY_PROD
+       AND C.BUY_DATE BETWEEN TO_DATE('20050401') AND TO_DATE('20050630'))
+  LEFT OUTER JOIN CART D ON(B.PROD_ID = D.CART_PROD
+       AND SUBSTR(D.CART_NO,1,6) BETWEEN '200504' AND '200506')
+ GROUP BY A.LPROD_ID, A.LPROD_NM
+ ORDER BY 1;
+
+SELECT B.LPROD_ID AS "분류코드",
+       B.LPROD_NM AS "분류명",
+       NVL(TBLA.CQTY,0) AS "매출수량",
+       TBLA.CAMT AS "매출금액",
+       TBLA.BQTY AS "매입수량",
+       TBLA.BAMT AS "매입금액"
+  FROM (SELECT B.PROD_LGU AS PGU,
+              SUM(A.CART_QTY) AS CQTY,
+              SUM(A.CART_QTY * B.PROD_PRICE) AS CAMT,
+              SUM(C.BUY_QTY) AS BQTY,
+              SUM(C.BUY_QTY * B.PROD_COST) AS BAMT
+         FROM CART A, PROD B, BUYPROD C
+        WHERE A.CART_PROD = B.PROD_ID
+              AND B.PROD_ID = C.BUY_PROD
+              AND SUBSTR(A.CART_NO,1,6) BETWEEN '200504' AND '200506'
+              AND C.BUY_DATE BETWEEN TO_DATE('20050401') AND TO_DATE('20050630')
+        GROUP BY B.PROD_LGU) TBLA,
+       LPROD B
+ WHERE TBLA.PGU(+) = B.LPROD_GU
+ ORDER BY 1;
+--해결하려면 서브쿼리를 각각 써야 함.
+
+사용예)2005년 4~6월 모든 상품별 매입현황/매출현황
+      ALIAS는 상품코드, 상품명, 매입수량, 매입금액, 매출수량, 매출금액
+      
+SELECT B.PROD_ID AS "상품코드",
+       B.PROD_NAME AS "상품명",
+       NVL(SUM(C.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(C.BUY_QTY * B.PROD_COST),0) AS "매입합계",
+       NVL(SUM(A.CART_QTY),0) AS "매출수량",
+       NVL(SUM(A.CART_QTY * B.PROD_PRICE),0) AS "매출금액"
+  FROM CART A
+ RIGHT OUTER JOIN PROD B ON(A.CART_PROD = B.PROD_ID
+       AND SUBSTR(A.CART_NO,1,6) BETWEEN '200504' AND '200506')
+  LEFT OUTER JOIN BUYPROD C ON(C.BUY_PROD = B.PROD_ID
+       AND C.BUY_DATE BETWEEN TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601')))
+ GROUP BY B.PROD_ID, B.PROD_NAME
+ ORDER BY 1;
+       
+SELECT A.PROD_ID AS "상품코드",
+       A.PROD_NAME AS "상품명",
+       NVL(SUM(B.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(B.BUY_QTY * A.PROD_COST),0) AS "매입합계"
+--       NVL(SUM(C.CART_QTY),0) AS "매출수량",
+--       NVL(SUM(C.CART_QTY * A.PROD_PRICE),0) AS "매출금액"
+  FROM PROD A
+--  LEFT OUTER JOIN CART C ON(C.CART_PROD = A.PROD_ID
+--       AND SUBSTR(C.CART_NO,1,6) BETWEEN '200504' AND '200506')
+  LEFT OUTER JOIN BUYPROD B ON(B.BUY_PROD = A.PROD_ID
+       AND B.BUY_DATE BETWEEN TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601')))
+ GROUP BY A.PROD_ID, A.PROD_NAME
+ ORDER BY 1; 
+
+--이것도 매입이 2배씩 나온다 / 내일 설명할 것임

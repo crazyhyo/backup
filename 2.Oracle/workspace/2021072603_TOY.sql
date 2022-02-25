@@ -1,0 +1,128 @@
+사용예)사원테이블에서 직원의 수가 10명 이상이 되는 부서의 부서코드, 부서명을 출력
+
+(결합: IN)  
+SELECT C.DEPARTMENT_ID AS "부서코드",
+       C.DEPARTMENT_NAME AS "부서명"
+  FROM (SELECT A.DID AS DID
+          FROM (SELECT DEPARTMENT_ID AS DID,
+                       COUNT(EMPLOYEE_ID) AS CNT
+                  FROM HR.EMPLOYEES
+                 GROUP BY DEPARTMENT_ID
+                HAVING COUNT(EMPLOYEE_ID) >= 10) A) B,
+       HR.DEPARTMENTS C
+ WHERE C.DEPARTMENT_ID IN B.DID;
+        
+
+(결합: =ANY(=SOME))
+SELECT C.DEPARTMENT_ID AS "부서코드",
+       C.DEPARTMENT_NAME AS "부서명"
+  FROM (SELECT A.DID AS DID
+          FROM (SELECT DEPARTMENT_ID AS DID,
+                       COUNT(EMPLOYEE_ID) AS CNT
+                  FROM HR.EMPLOYEES
+                 GROUP BY DEPARTMENT_ID
+                HAVING COUNT(EMPLOYEE_ID) >= 10) A) B,
+       HR.DEPARTMENTS C
+ WHERE C.DEPARTMENT_ID = ANY(B.DID);
+
+(결합: EXISTS - 반드시 뒤에 서브쿼리가 온다)
+SELECT C.DEPARTMENT_ID AS "부서코드",
+       C.DEPARTMENT_NAME AS "부서명"
+  FROM HR.DEPARTMENTS C
+ WHERE EXISTS (SELECT A.DID
+                 FROM (SELECT DEPARTMENT_ID AS DID,
+                              COUNT(EMPLOYEE_ID) AS CNT
+                         FROM HR.EMPLOYEES
+                        GROUP BY DEPARTMENT_ID
+                       HAVING COUNT(EMPLOYEE_ID) >= 10) A
+                 WHERE A.DID = C.DEPARTMENT_ID)
+
+사용예)2005년 4~6월 모든 분류별 매입현황을 죄회하시오
+      ALIAS는 분류코드, 분류명, 매입수량, 매입금액
+SELECT A.LPROD_ID AS "분류코드",
+       A.LPROD_NM AS "분류명",
+       NVL(SUM(C.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(C.BUY_QTY * B.PROD_COST),0) AS "매입금액"
+  FROM LPROD A
+  LEFT OUTER JOIN PROD B ON(A.LPROD_GU = B.PROD_LGU)
+  LEFT OUTER JOIN BUYPROD C ON(C.BUY_PROD = B.PROD_ID
+       AND C.BUY_DATE BETWEEN TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601')))
+ GROUP BY A.LPROD_ID, A.LPROD_NM
+ ORDER BY 1;
+ 
+SELECT B.LPROD_GU AS "분류코드",
+       B.LPROD_NM AS "분류명",
+       NVL(A.PCNT,0) AS "매입수량",
+       NVL(A.PAMT,0) AS "매입금액"
+  FROM (SELECT A.PROD_LGU AS PGU,
+               SUM(B.BUY_QTY) AS PCNT,
+               SUM(B.BUY_QTY * A.PROD_COST) AS PAMT
+          FROM PROD A, BUYPROD B
+         WHERE A.PROD_ID = B.BUY_PROD
+               AND B.BUY_DATE BETWEEN TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601'))
+         GROUP BY A.PROD_LGU) A,
+       LPROD B
+ WHERE A.PGU(+) = B.LPROD_GU
+ ORDER BY 1;
+
+
+사용예)2005년 4~6월 모든 분류별 매출현황을 죄회하시오
+      ALIAS는 분류코드, 분류명, 매출수량, 매출금액
+SELECT C.LPROD_ID AS "분류코드",
+       C.LPROD_NM AS "분류명",
+       NVL(SUM(A.CART_QTY),0) AS "매출수량",
+       NVL(SUM(A.CART_QTY * B.PROD_PRICE),0) AS "매출금액"
+  FROM CART A
+ RIGHT OUTER JOIN PROD B ON(A.CART_PROD = B.PROD_ID
+       AND SUBSTR(CART_NO,1,6) BETWEEN '200504' AND '200506')
+ RIGHT OUTER JOIN LPROD C ON(B.PROD_LGU = C.LPROD_GU)
+ GROUP BY C.LPROD_ID, C.LPROD_NM
+ ORDER BY 1;
+
+
+사용예)2005년 4~6월 모든 분류별 매입/매출현황을 조회하시오.
+      ALIAS는 분류코드, 분류명, 매입수량, 매입금액, 매출수량, 매출금액      
+
+SELECT C.LPROD_ID AS "분류코드",
+       C.LPROD_NM AS "분류명",
+       NVL(SUM(D.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(D.BUY_QTY * B.PROD_COST),0) AS "매입금액",
+       NVL(SUM(A.CART_QTY),0) AS "매출수량",
+       NVL(SUM(A.CART_QTY * B.PROD_PRICE),0) AS "매출금액"
+  FROM CART A
+ RIGHT OUTER JOIN PROD B ON(A.CART_PROD = B.PROD_ID
+       AND SUBSTR(A.CART_NO,1,6) BETWEEN '200504' AND '200506')
+ RIGHT OUTER JOIN LPROD C ON(C.LPROD_GU = B.PROD_LGU)
+  LEFT OUTER JOIN BUYPROD D ON(D.BUY_PROD = B.PROD_ID
+       AND D.BUY_DATE BETWEEN TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601')))
+ GROUP BY C.LPROD_ID, C.LPROD_NM
+ ORDER BY 1;
+
+사용예)2005년 4~6월 모든 상품별 매입현황/매출현황
+      ALIAS는 상품코드, 상품명, 매입수량, 매입금액, 매출수량, 매출금액  
+SELECT B.PROD_ID AS "상품코드",
+       B.PROD_NAME AS "상품명",
+       NVL(SUM(C.BUY_QTY),0) AS "매입수량",
+       NVL(SUM(C.BUY_QTY * B.PROD_COST),0) AS " 매입금액",
+       NVL(SUM(A.CART_QTY),0) AS "매출수량",
+       NVL(SUM(A.CART_QTY * B.PROD_PRICE),0) AS "매출금액"
+  FROM CART A
+ RIGHT OUTER JOIN PROD B ON(A.CART_PROD = B.PROD_ID
+       AND SUBSTR(A.CART_NO,1,6) BETWEEN '200504' AND '200506')
+  LEFT OUTER JOIN BUYPROD C ON(B.PROD_ID = C.BUY_PROD
+       AND C.BUY_DATE BETWEEN TO_DATE('20050401') AND LAST_DAY(TO_DATE('20050601')))
+ GROUP BY B.PROD_ID, B.PROD_NAME
+ ORDER BY 1;
+      
+      
+사용예)80번 부서에 급여가 부서 평균 이상인 사원을 조회하시오
+SELECT EMPLOYEE_ID AS "사원번호",
+       EMP_NAME AS "사원명",
+       SALARY AS "급여"
+FROM HR.EMPLOYEES
+WHERE SALARY > (SELECT AVG(SALARY)
+                  FROM HR.EMPLOYEES
+                 WHERE DEPARTMENT_ID = 80)
+     AND DEPARTMENT_ID = 80;
+ 
+ 
