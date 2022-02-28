@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.springmvc.board.dao.AttachFileMapper">
+	<insert id="create">
+		<selectKey keyProperty="sequenceNo" resultType="String" order="BEFORE">
+			SELECT sequenceNo+1
+			FROM (
+			SELECT 0 sequenceNo FROM DUAL
+			UNION ALL
+			SELECT MAX(SEQUENCE_NO) sequenceNo FROM TB_ATTACH_FILE
+			WHERE BOARD_SN = #{boardSn}
+			GROUP BY BOARD_SN
+			ORDER BY sequenceNo DESC)
+			WHERE ROWNUM = 1
+		</selectKey>
+		INSERT INTO TB_ATTACH_FILE (
+				     BOARD_SN
+				   , SEQUENCE_NO
+				   , FILE_PATH
+				   , FILE_SAVE_NAME
+				   , FILE_SRC_NAME) 
+				VALUES ( #{boardSn}
+				   , #{sequenceNo}
+				   , #{filePath}
+				   , #{fileSaveName}
+				   , #{fileSrcName} )
+	</insert>
+	
+	<select id="retrieve" resultType="kr.or.ddit.springmvc.board.vo.AttachFileVO">
+		<include refid="retrieveSelect" />
+	   WHERE BOARD_SN = #{boardSn}
+	     AND SEQUENCE_NO = #{sequenceNo}
+	</select>
+	
+	<select id="retrieveList" resultType="kr.or.ddit.springmvc.board.vo.AttachFileVO">
+		<include refid="retrieveSelect" />
+		WHERE BOARD_SN = #{boardSn}
+		ORDER BY SEQUENCE_NO ASC
+	</select>
+	
+	<sql id="retrieveSelect">
+		SELECT 
+			BOARD_SN 
+		   , SEQUENCE_NO 
+		   , FILE_PATH 
+		   , FILE_SAVE_NAME 
+		   , FILE_SRC_NAME 
+		FROM TB_ATTACH_FILE
+	</sql>
+</mapper>

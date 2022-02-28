@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.springmvc.board.dao.BoardMapper">
+
+	<insert id="create">
+		<selectKey keyProperty="boardSn" resultType="String" order="BEFORE">
+			SELECT SEQ_BOARD_SN.nextval FROM DUAL
+		</selectKey>
+			INSERT INTO TB_BOARD (
+					   BOARD_SN
+					 , TITLE
+					 , CONTENTS
+					 , WRITER
+					 , USER_PASSWORD
+					 , OPEN_YN) 
+					VALUES (#{boardSn}
+					 ,#{title}					 
+					 ,#{contents}					 
+					 ,#{writer}					 
+					 ,#{userPassword}					 
+					 ,#{openYn}		 
+					  )
+
+	</insert>
+
+	<update id="update">
+		UPDATE TB_BOARD
+		SET    
+		       TITLE         = #{title},
+		       CONTENTS      = #{contents},
+		       WRITER        = #{writer},
+		       USER_PASSWORD = #{userPassword},
+		       OPEN_YN       = #{openYn}
+		WHERE  BOARD_SN      = #{boardSn}
+	</update>
+
+	<delete id="delete">
+			DELETE FROM TB_BOARD
+			WHERE BOARD_SN      = #{boardSn}
+	</delete>
+
+	<select id="retrieve" resultType="kr.or.ddit.springmvc.board.vo.BoardVO">
+		<include refid="retrieveSelect"/>
+		WHERE BOARD_SN      = #{boardSn}
+	</select>
+
+	<select id="retrieveList" resultType="kr.or.ddit.springmvc.board.vo.BoardVO">
+			<include refid="retrieveSelect"/>
+			<include refid="retrieveListWhere"/>
+			ORDER BY BOARD_SN desc			
+	</select>
+	
+	<select id="retrievePagingList" resultType="kr.or.ddit.springmvc.board.vo.BoardVO">
+			SELECT A.*
+			  FROM (
+			  	SELECT ROWNUM RNUM
+			  	     , S.*
+			  	  FROM (
+			  	  	<include refid="retrieveSelect"/>
+					<include refid="retrieveListWhere"/>
+					ORDER BY BOARD_SN desc			  	  
+			  	  ) S
+			  ) A
+			  <![CDATA[WHERE RNUM <= #{lastIndex} AND RNUM > #{firstIndex}]]>
+						
+	</select>  
+	
+	<select id="retrievePagingListCnt" resultType="int">
+			SELECT COUNT(*) totcnt
+			  FROM TB_BOARD
+			<include refid="retrieveListWhere"/>
+						
+	</select>
+	
+	<sql id="retrieveListWhere">
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0">
+						AND	TITLE LIKE '%' || #{searchKeyword} || '%'
+					</when>
+		            <when test="searchCondition == 1">
+						AND	CONTENTS LIKE '%' || #{searchKeyword} || '%'
+					</when>
+				</choose>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="retrieveSelect">
+		SELECT 
+		   BOARD_SN
+		 , TITLE
+		 , CONTENTS
+		 , WRITER
+		 , USER_PASSWORD
+		 , OPEN_YN
+		FROM TB_BOARD
+	</sql>
+
+</mapper>

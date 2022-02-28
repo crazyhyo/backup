@@ -1,0 +1,21 @@
+alter session set "_ORACLE_SCRIPT"=true; 
+
+
+CREATE USER springmvc
+IDENTIFIED BY springmvc
+DEFAULT TABLESPACE USERS
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT UNLOCK;
+
+grant create session to springmvc;
+
+grant connect, resource to springmvc;
+
+GRANT  
+ CREATE SESSION
+,CREATE TABLE
+,CREATE SEQUENCE
+,CREATE VIEW to springmvc;
+
+alter user springmvc default tablespace users quota unlimited on users;
